@@ -199,5 +199,3 @@ npm start
 [![Yuji-XDev 𓆩⚡ ✞ 𝑺𝒉𝒂𝒅𝒐𝒘 𝒐𝒇𝒇𝒊𝒄𝒊𝒂𝒍 🍧𓆪](https://avatars.githubusercontent.com/u/196103894?v=4)]()
 
 >  **[Yuji-XDev 𓆩⚡ ✞ 𝑺𝒉𝒂𝒅𝒐𝒘 𝒐𝒇𝒇𝒊𝒄𝒊𝒂𝒍 🍧𓆪](https://github.com/Yuji-XDev)**
-
-# MiyukiBot-MD
