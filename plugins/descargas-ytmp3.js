@@ -31,20 +31,6 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
       return conn.reply(m.chat, '❌ No se pudo obtener el audio.', m)
     }
 
-    await conn.sendMessage(m.chat, {
-      text: textoInfo,
-      contextInfo: {
-        externalAdReply: {
-          title: "Descargando audio",
-          body: meta.title,
-          thumbnailUrl: meta.thumbnail,
-          sourceUrl: meta.url,
-          mediaType: 1,
-          renderLargerThumbnail: true
-        }
-      }
-    }, { quoted: fkontak })
-
     const audioBuffer = await (await fetch(meta.dl)).buffer()
     await conn.sendMessage(m.chat, {
       audio: audioBuffer,
