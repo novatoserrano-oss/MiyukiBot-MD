@@ -25,13 +25,13 @@ Publicado 🗓️ : *${ago}*
 Link 🔗 : *${url}*`
 const thumb = (await conn.getFile(thumbnail)).data
 await conn.sendMessage(m.chat, { image: thumb, caption: info }, { quoted: m })
-if (['play', 'mp3', '', 'playaudio'].includes(command)) {
+if (['play', 'mp3', 'playaudio'].includes(command)) {
 const audio = await getAud(url)
 if (!audio?.url) throw '⚠️ No se pudo obtener el audio.'
 m.reply(`> ✅ *Audio procesado. Servidor:* \`${audio.api}\``)
 await conn.sendMessage(m.chat, { audio: { url: audio.url }, fileName: `${title}.mp3`, mimetype: 'audio/mpeg' }, { quoted: m })
 await m.react('✔️')
-} else if (['play2', 'mp4', ''].includes(command)) {
+} else if (['play2', 'mp4'].includes(command)) {
 const video = await getVid(url)
 if (!video?.url) throw '⚠️ No se pudo obtener el video.'
 m.reply(`> ✅ *Vídeo procesado. Servidor:* \`${video.api}\``)
@@ -43,7 +43,7 @@ await m.react('✖️')
 return conn.reply(m.chat, typeof e === 'string' ? e : '⚠️ Se ha producido un problema.\n> Usa *' + usedPrefix + 'report* para informarlo.\n\n' + e.message, m)
 }}
 
-handler.command = handler.help = ['play', 'mp3', 'play2', '', '', 'mp4']
+handler.command = handler.help = ['play', 'mp3', 'play2', 'mp4']
 handler.tags = ['descargas']
 handler.group = true
 
