@@ -307,10 +307,6 @@ if (plugin.private && m.isGroup) {
 fail("private", m, this)
 continue
 }
-if (plugin.register == true && _user.registered == false) { 
-fail('unreg', m, this)
-continue
-}
 m.isCommand = true
 m.exp += plugin.exp ? parseInt(plugin.exp) : 10
 let extra = {
@@ -383,15 +379,6 @@ group: `『✦』El comando *${comando}* solo puede ser usado en grupos.`,
 private: `『✦』El comando *${comando}* solo puede ser usado al chat privado del bot.`,
 admin: `『✦』El comando *${comando}* solo puede ser usado por los administradores del grupo.`, 
 botAdmin: `『✦』Para ejecutar el comando *${comando}* debo ser administrador del grupo.`,
-unreg: `  ⬣〔 🚫 𝐀𝐂𝐂𝐄𝐒𝐎 𝐃𝐄𝐍𝐄𝐆𝐀𝐃𝐎 ❗ 〕⬣  
-  
-> Para usar el comando *${comando} debes estar registrado* 
-
-🔐 *¿𝐂Ó𝐌𝐎 𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐀𝐑𝐓𝐄?*  
-🌴 Usa: *.reg nombre.edad*  
- 
-☄️ 𝐔𝐓𝐈𝐋𝐈𝐙𝐀 𝐑Á𝐏𝐈𝐃𝐎:  
- ➥ *#reg Shadow.16*`,
 restrict: `『✦』Esta caracteristica está desactivada.`
 }[type]
 if (msg) return conn.reply(m.chat, msg, m, rcanal).then(_ => m.react('✖️'))
