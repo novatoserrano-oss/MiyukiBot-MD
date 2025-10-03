@@ -3,13 +3,13 @@ let handler = async (m, { conn, usedPrefix, command, isOwner }) => {
   let media = m.quoted ? m.quoted : m;
   let mime = (media.msg || media).mimetype || '';
   if (!/image\/(jpe?g|png)/i.test(mime)) {
-    return conn.reply(m.chat, `📸 Envía o responde una imagen con el comando:\n\n*${usedPrefix + command}*`, m, fake);
+    return conn.reply(m.chat, `📸 Envía o responde una imagen con el comando:\n\n*${usedPrefix + command}*`, m);
   }
 
   try {
     let img = await media.download();
     await conn.updateProfilePicture(conn.user.jid, img);
-    await conn.reply(m.chat, '✅ Foto de perfil actualizada con éxito.', m, fake);
+    await conn.reply(m.chat, '✅ Foto de perfil actualizada con éxito.', m);
   } catch (e) {
     console.error(e);
     await conn.reply(m.chat, '❌ Ocurrió un error al actualizar la foto de perfil.', m);
