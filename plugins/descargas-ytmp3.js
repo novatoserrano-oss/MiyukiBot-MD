@@ -31,24 +31,26 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
       return conn.reply(m.chat, '❌ No se pudo obtener el audio.', m)
     }
 
-    const audioBuffer = await (await fetch(meta.dl)).buffer()
+    let meta = json.result
+    const audioBuffer = await (await fetch(meta.download.url)).buffer()
+
     await conn.sendMessage(m.chat, {
       audio: audioBuffer,
-      fileName: `${meta.title}.mp3`,
+      fileName: `${meta.title || 'audio'}.mp3`,
       mimetype: "audio/mpeg",
       ptt: false,
       contextInfo: {
         externalAdReply: {
-          title: meta.title,
-          body: `Duración: [${meta.duration}] • Calidad: [${meta.quality}]`,
-          mediaUrl: meta.url,
-          sourceUrl: meta.url,
+          title: meta.title || 'YouTube Music',
+          body: `Duración: ${meta.duration || '-'} • Calidad: ${meta.quality || '92kbps'}`,
+          mediaUrl: meta.url || url,
+          sourceUrl: meta.url || url,
           thumbnailUrl: meta.thumbnail,
           mediaType: 1,
           renderLargerThumbnail: true
         }
       }
-    }, { quoted: fkontak })
+    }, { quoted: m })
 
     await conn.sendMessage(m.chat, {
       react: { text: "✔️", key: m.key }
