@@ -44,16 +44,6 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
       dl: json.result.download?.url
     }
 
-    const textoInfo = `🍂 *Título:* ${meta.title}
-⏱️ *Duración:* ${meta.duration}
-🌱 *Canal:* ${meta.author}
-🚀 *Vistas:* ${meta.views}
-🌷 *Calidad:* ${meta.quality}
-🧪 *Publicado:* ${meta.ago}
-💨 *Link:* ${meta.url}
-
-> *≡ Enviando, espera un momento...*`
-
     await conn.sendMessage(m.chat, {
       text: textoInfo,
       contextInfo: {
