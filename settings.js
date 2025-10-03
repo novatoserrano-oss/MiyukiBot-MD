@@ -16,6 +16,7 @@ global.owner = [
 ["51927303598", "🜲 Propietario", true],
 ["51965763942"],
 ['51919199620'],
+['59892681750'], 
 
 // <-- Número @lid -->
 ["80754461647013", "Shadow", true],
@@ -37,12 +38,12 @@ global.yukiJadibts = true
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.botname = "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸"
+global.botname = "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿"
 global.textbot = "𝙼𝚒𝚢𝚞𝚔𝚒𝙱𝚘𝚝-𝙼𝙳 | © 𝙿𝚘𝚠𝚎𝚛𝚎𝚍 𝙱𝚢 𝙾𝚖𝚊𝚛𝙶𝚛𝚊𝚗𝚍𝚊"
 global.dev = "© Powered By OmarGranda"
 global.author = "Omar Granda"
-global.etiqueta = "ShadowCore"
-global.currency = "¥enes"
+global.etiqueta = "OmarGranda"
+global.currency = "Soles"
 global.banner = "https://d.uguu.se/GmSLPtrU.png"
 //global.icono = "https://h.uguu.se/UGUwjmCs.jpg"
 global.catalogo = fs.readFileSync('./lib/catalogo.jpg')
