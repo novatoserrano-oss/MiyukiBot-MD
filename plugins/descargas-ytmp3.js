@@ -32,20 +32,23 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
     }
 
     let meta = json.result
-    const audioBuffer = await (await fetch(meta.download.url)).buffer()
+    let info = meta.metadata
+    let dl = meta.download
+
+    const audioBuffer = await (await fetch(dl.url)).buffer()
 
     await conn.sendMessage(m.chat, {
       audio: audioBuffer,
-      fileName: `${meta.title || 'audio'}.mp3`,
+      fileName: `${dl.filename || 'audio'}.mp3`,
       mimetype: "audio/mpeg",
       ptt: false,
       contextInfo: {
         externalAdReply: {
-          title: meta.title || 'YouTube Music',
-          body: `Duración: ${meta.duration || '-'} • Calidad: ${meta.quality || '92kbps'}`,
-          mediaUrl: meta.url || url,
-          sourceUrl: meta.url || url,
-          thumbnailUrl: meta.thumbnail,
+          title: info.title || 'YouTube Music',
+          body: `🎶 Duración: ${info.duration?.timestamp || '-'} • 📊 Calidad: ${dl.quality || '92kbps'}`,
+          mediaUrl: info.url || url,
+          sourceUrl: info.url || url,
+          thumbnailUrl: info.image || info.thumbnail,
           mediaType: 1,
           renderLargerThumbnail: true
         }
