@@ -32,7 +32,7 @@ let handler = async (m, { conn }) => {
 │ 🕸 *\`RAM usada:\`* ${usedRAM} MB
 │ 🍧 *\`Uptime:\`* ${uptimeFormatted}
 │ ⏰ *\`Fecha/Hora:\`* ${fechaHora}
-╰━━━〔 🪷 𝙍𝙞𝙣 𝙄𝙩𝙤𝙨𝙝𝙞 〕━━⬣
+╰━━━〔 🪷 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩 〕━━⬣
 \`\`\`
 ${sysInfo.trim()}
 \`\`\``;
@@ -42,7 +42,7 @@ ${sysInfo.trim()}
       mentions: [m.sender],
       contextInfo: {
         externalAdReply: {
-          title: '🍄 Rɪɴ Iᴛᴏsʜɪ ᴍᴅ 🌹 | 🪾 ʙʏ ᴅᴠ.sʜᴀᴅᴏᴡ 🪴',
+          title: '𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿',
           body: club,
           thumbnailUrl: await (await fetch(icono)).buffer(),
           sourceUrl: redes,
