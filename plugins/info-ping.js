@@ -1,4 +1,4 @@
-let handler = async (m, { conn }) => {
+, let handler = async (m, { conn }) => {
     const start = new Date().getTime();
 await m.react('🚀')
     const { key } = await conn.sendMessage(m.chat, {text: `Cargando Datos 📡`}, {quoted: m});
@@ -24,10 +24,28 @@ await m.react('🚀')
 ╰━〔 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 〕━⬣
 
  © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`;
-        await m.react('✅')
-        await conn.sendMessage(m.chat, { text: response, edit: key, mentions: [m.sender] }, { quoted: m });
-    }, latency);
-};
+        \`\`\`
+${sysInfo.trim()}
+\`\`\``;
+
+    await m.react('✅')
+    await conn.sendMessage(m.chat, {
+      text: response,
+      mentions: [m.sender],
+      contextInfo: {
+        externalAdReply: {
+          title: '𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿',
+          body: club,
+          thumbnailUrl: await (await fetch(icono)).buffer(),
+          sourceUrl: redes,
+          mediaType: 1,
+          renderLargerThumbnail: true
+        }
+      }
+    }, { quoted: m });
+  });
+}
+
 
 handler.help = ['ping']
 handler.tags = ['info']
