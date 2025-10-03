@@ -19,8 +19,7 @@ await m.react('🚀')
     const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2); // en MB
 
     setTimeout(async () => {
-        let response =
-`╭━━━〔 🍄 𝙎𝙩𝙖𝙩𝙪𝙨 𝙋𝙞𝙣𝙜 🪴 〕━━⬣
+        let response = `╭━━━〔 🍄 𝙎𝙩𝙖𝙩𝙪𝙨 𝙋𝙞𝙣𝙜 🪴 〕━━⬣
 │ 📌 *\`Ping:\`* ${latency} ms
 │ 🍁 *\`Latencia:\`* ${latensi.toFixed(4)} ms
 │ 🕸 *\`RAM usada:\`* ${usedRAM} MB
@@ -29,6 +28,7 @@ await m.react('🚀')
 ╰━━━〔 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸 〕━━⬣
 
  © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`;
+
         await m.react('✅')
         await conn.sendMessage(m.chat, { text: response, edit: key, mentions: [m.sender] }, { quoted: m });
     }, latency);
