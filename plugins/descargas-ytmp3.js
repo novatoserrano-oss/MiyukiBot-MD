@@ -10,7 +10,7 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
         m
       )
     }
-
+  const textoInfo = ``
     await conn.sendMessage(m.chat, {
       react: { text: "⏳", key: m.key }
     })
