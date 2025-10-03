@@ -1,9 +1,7 @@
-// > © Powered By OmarGranda - https://github.com/OmarGranda
+// by dv.shadow - https://github.com/Yuji-XDev
 
 import { proto } from '@whiskeysockets/baileys'
 import PhoneNumber from 'awesome-phonenumber'
-
-const fotoPerfil = icono
 
 const name = "OmarGranda"
 const empresa = "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿"
@@ -50,7 +48,7 @@ let handler = async (m, { conn }) => {
           title: "Contacto De Mi Creador 👑",
           body: "",
           mediaType: 1,
-          thumbnailUrl: fotoPerfil,
+          thumbnailUrl: 'https://files.catbox.moe/r1qp16.jpg',
           renderLargerThumbnail: true,
           sourceUrl: web
       }
