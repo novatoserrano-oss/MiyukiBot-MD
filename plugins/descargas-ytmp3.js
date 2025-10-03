@@ -35,22 +35,29 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
     const audioBuffer = await (await fetch(meta.download.url)).buffer()
 
     await conn.sendMessage(m.chat, {
+      image: { url: meta.thumbnail },
+      caption: textoInfo,
+      ...(await rcanal())
+    }, { quoted: m })
+
+    const audioBuffer = await (await fetch(downloadUrl)).buffer()
+    await conn.sendMessage(m.chat, {
       audio: audioBuffer,
-      fileName: `${meta.title || 'audio'}.mp3`,
+      fileName: `${meta.title}.mp3`,
       mimetype: "audio/mpeg",
       ptt: false,
       contextInfo: {
         externalAdReply: {
-          title: meta.title || 'YouTube Music',
-          body: `Duración: ${meta.duration || '-'} • Calidad: ${meta.quality || '92kbps'}`,
-          mediaUrl: meta.url || url,
-          sourceUrl: meta.url || url,
+          title: meta.title,
+          body: `Duración: ${meta.duration} min | Calidad: 128kbps | Peso: ${meta.size}`,
+          mediaUrl: meta.url,
+          sourceUrl: meta.url,
           thumbnailUrl: meta.thumbnail,
           mediaType: 1,
           renderLargerThumbnail: true
         }
       }
-    }, { quoted: m })
+    }, { quoted: fkontak }) 
 
     await conn.sendMessage(m.chat, {
       react: { text: "✔️", key: m.key }
