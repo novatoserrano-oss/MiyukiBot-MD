@@ -34,7 +34,7 @@ global.vs = "^1.8.2|Latest"
 global.nameqr = "MiyukiBot-MD"
 global.sessions = "Sessions/Principal"
 global.jadi = "Sessions/SubBot"
-global.yukiJadibts = true
+global.MiyukiJadibts = true
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
@@ -43,7 +43,7 @@ global.textbot = "𝙼𝚒𝚢𝚞𝚔𝚒𝙱𝚘𝚝-𝙼𝙳 | © 𝙿𝚘�
 global.dev = "© Powered By OmarGranda"
 global.author = "Omar Granda"
 global.etiqueta = "OmarGranda"
-global.currency = "$oles"
+global.currency = "¥enes"
 global.banner = "https://d.uguu.se/GmSLPtrU.png"
 //global.icono = "https://h.uguu.se/UGUwjmCs.jpg"
 global.catalogo = fs.readFileSync('./lib/catalogo.jpg')
