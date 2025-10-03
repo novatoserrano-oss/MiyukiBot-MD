@@ -19,8 +19,8 @@ global.owner = [
 ['59892681750'], 
 
 // <-- Número @lid -->
-["80754461647013", "Shadow", true],
-["106820853043217", "Dhadow2", true]
+["235510823915591", "OmarGranda", true],
+["235510823915591", "OmarGranda", true]
 ]
 
 global.mods = []
