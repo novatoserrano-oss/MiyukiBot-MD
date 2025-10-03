@@ -38,7 +38,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
           title: '♡  ͜ ۬︵࣪᷼⏜݊᷼𝘿𝙚𝙨𝙘𝙖𝙧𝙜𝙖𝙨⏜࣪᷼︵۬ ͜ ',
           body: dev,
           previewType: 0, 
-          thumbnail: avatar,
+          thumbnail: icono,
           sourceUrl: redes
         }
       }
