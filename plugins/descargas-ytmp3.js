@@ -50,7 +50,7 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
           renderLargerThumbnail: true
         }
       }
-    }, { quoted: frontak })
+    }, { quoted: m })
 
     await conn.sendMessage(m.chat, {
       react: { text: "✔️", key: m.key }
