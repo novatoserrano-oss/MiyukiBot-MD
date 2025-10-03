@@ -31,19 +31,6 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
       return conn.reply(m.chat, '❌ No se pudo obtener el audio.', m)
     }
 
-    const meta = {
-      title: json.result.metadata?.title || "Sin título",
-      duration: json.result.metadata?.duration?.timestamp || "Desconocida",
-      url: json.result.metadata?.url || url,
-      author: json.result.metadata?.author?.name || "Desconocido",
-      views: json.result.metadata?.views?.toLocaleString('es-PE') || "0",
-      ago: json.result.metadata?.ago || "Desconocido",
-      thumbnail: json.result.metadata?.thumbnail,
-      size: json.result.download?.filesize || "Desconocido",
-      quality: json.result.download?.quality || "92kbps",
-      dl: json.result.download?.url
-    }
-
     await conn.sendMessage(m.chat, {
       text: textoInfo,
       contextInfo: {
