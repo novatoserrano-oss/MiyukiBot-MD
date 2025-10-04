@@ -7,7 +7,7 @@ const youtubeRegexID = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-z
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   
 try {
-if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombre o link del archivo a descargar.*`, m)
+if (!text.trim()) return conn.reply(m.chat, `📢 *Por favor, ingresa el nombre o link del archivo a descargar.*`, m)
 
     let videoIdMatch = text.match(youtubeRegexID)
     let search = await yts(videoIdMatch ? 'https://youtu.be/' + videoIdMatch[1] : text)
@@ -15,7 +15,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
       ? search.all.find(v => v.videoId === videoIdMatch[1]) || search.videos.find(v => v.videoId === videoIdMatch[1])
       : search.videos?.[0]
 
-    if (!video) return conn.reply(m.chat, '✧ No se encontraron resultados para tu búsqueda.', m)
+    if (!video) return conn.reply(m.chat, '❌ *No se encontraron resultados para tu búsqueda.*', m)
 
     const { title, thumbnail, timestamp, views, ago, url, author } = video
     const vistas = formatViews(views)
@@ -24,7 +24,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
     const infoMessage = 
     `*🎵 Titulo:* ${title}
     
-> *📺 Canal:* ${canal}
+> *🎬 Canal:* ${canal}
      
 > *👀 Vistas:* ${vistas}
      
@@ -59,7 +59,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
         const res = await fetch(`https://api.vreden.my.id/api/v1/download/youtube/audio?url=${url}&quality=128`)
         const json = await res.json()
         
-        if (!json.result?.download?.url) throw '*⚠ No se obtuvo un enlace válido.*'
+        if (!json.result?.download?.url) throw '*⚠️ No se obtuvo un enlace válido.*'
 
         await conn.sendMessage(m.chat, {
           audio: { url: json.result.download.url },
@@ -80,7 +80,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
 
         await m.react('✅')
       } catch (e) {
-        return conn.reply(m.chat, '*⚠︎ No se pudo enviar el audio. El archivo podría ser demasiado pesado o hubo un error en la generación del enlace.*', m)
+        return conn.reply(m.chat, '*❌ No se pudo enviar el audio. El archivo podría ser demasiado pesado o hubo un error en la generación del enlace.*', m)
       }
     }
     
@@ -89,7 +89,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
         const res = await fetch(`https://api.stellarwa.xyz/dow/ytmp4?url=${url}&apikey=Diamond`)
         const json = await res.json()
 
-        if (!json.status || !json.data?.dl) throw '⚠ No se obtuvo enlace de video.'
+        if (!json.status || !json.data?.dl) throw '⚠️ *No se obtuvo enlace de video.*'
         const data = json.data
 
         const size = await getSize(data.dl)
@@ -109,7 +109,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
 
         await m.react('✅')
       } catch (e) {
-        return conn.reply(m.chat, '⚠︎ No se pudo enviar el video. El archivo podría ser muy pesado o hubo un error en el enlace.', m)
+        return conn.reply(m.chat, '⚠️ *No se pudo enviar el video. El archivo podría ser muy pesado o hubo un error en el enlace.*', m)
       }
     }
 
@@ -118,7 +118,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
     }
 
   } catch (err) {
-    return m.reply(`⚠︎ Ocurrió un error:\n${err}`)
+    return m.reply(`❌ *Ocurrió un error* \n${err}`)
   }
 }
 
