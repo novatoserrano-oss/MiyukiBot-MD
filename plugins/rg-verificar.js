@@ -41,7 +41,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
     ];
 
     return await conn.sendMessage(m.chat, {
-      image: { url: 'https://files.catbox.moe/eml66k.jpg' },
+      image: { url: 'https://files.catbox.moe/v8at70.jpg' },
       caption: texto,
       mentions: [m.sender],
       footer: dev,
