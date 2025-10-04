@@ -22,8 +22,10 @@ await m.react('🚀')
         let response = `╭━━━〔 *Info Bot* 〕━━⬣
 │ Hola 👋 @${m.sender.split('@')[0]}. 
 │ 📍 \`Ping:\` ${latency} ms
+│ 🔔 *\`Latencia:\`* ${latensi.toFixed(4)} ms
 │ 🎌 \`Uptime:\` [ ${uptimeFormatted} ]
 │ 💾 \`RAM usada:\` ${usedRAM} MB
+│ ⏰ *\`Fecha/Hora:\`* ${fechaHora}
 ╰━〔 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 〕━⬣
 
  © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`;
