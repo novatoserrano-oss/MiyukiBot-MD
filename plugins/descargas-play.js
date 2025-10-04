@@ -14,20 +14,24 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
       ? search.all.find(v => v.videoId === videoIdMatch[1]) || search.videos.find(v => v.videoId === videoIdMatch[1])
       : search.videos?.[0]
 
-    if (!video) return conn.reply(m.chat, '❌ *No se encontraron resultados para tu búsqueda*
-Por favor vuelva a intentarlo.', m)
+    if (!video) return conn.reply(m.chat, '✧ No se encontraron resultados para tu búsqueda.', m)
 
     const { title, thumbnail, timestamp, views, ago, url, author } = video
     const vistas = formatViews(views)
     const canal = author?.name || 'Desconocido'
     
     const infoMessage = 
-`🌷 `Titulo:`  *<${title || 'Desconocido'}>*\n\n` +
-      `> 📺 `Canal` » *${canal}*\n` +
-      `> 👁️ `Vistas` » *${vistas || 'Desconocido'}*\n` +
-      `> ⏱ `Duración` » *${timestamp || 'Desconocido'}*\n` +
-      `> 📆 `Publicado` » *${ago || 'Desconocido'}*\n` +
-      `> 🔗 `Link` » ${url}`
+    `Titulo: *${title}*
+    
+     > 📺 Canal: *${canal}*
+     
+     > 👀 Vistas: *${vistas}*
+     
+     > Duración: *${timestamp}*
+     
+     > 📆 Publicado: *${ago}*
+     
+     > 🔗 Link : *${url}*`
 
     const thumb = (await conn.getFile(thumbnail))?.data
     const external = {
@@ -52,8 +56,7 @@ Por favor vuelva a intentarlo.', m)
         const res = await fetch(`https://api.vreden.my.id/api/v1/download/youtube/audio?url=${url}&quality=128`)
         const json = await res.json()
         
-        if (!json.result?.download?.url) throw '⚠️ *Enlace inválido.*
-Porfavor intente nuevamente'
+        if (!json.result?.download?.url) throw '*⚠ No se obtuvo un enlace válido.*'
 
         await conn.sendMessage(m.chat, {
           audio: { url: json.result.download.url },
@@ -89,7 +92,7 @@ Porfavor intente nuevamente'
         const size = await getSize(data.dl)
         const sizeStr = size ? await formatSize(size) : 'Desconocido'
 
-        let caption =
+        let caption = 
 `> ✦ *Título:* ${data.title}
 > ❏ *Canal:* ${canal}
 > ⌬ *Duración:* ${timestamp || 'Desconocido'}
