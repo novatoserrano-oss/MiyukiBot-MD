@@ -53,7 +53,7 @@ Por favor vuelva a intentarlo.', m)
         const json = await res.json()
         
         if (!json.result?.download?.url) throw '⚠️ *Enlace inválido.*
-> Porfavor intente nuevamente '
+Porfavor intente nuevamente'
 
         await conn.sendMessage(m.chat, {
           audio: { url: json.result.download.url },
