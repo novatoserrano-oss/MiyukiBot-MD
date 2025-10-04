@@ -40,7 +40,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
       contextInfo: {
         externalAdReply: {
           title: title,
-          body: '🎶 Descarga en curso...',
+          body: 'Descarga en curso...',
           mediaType: 1,
           previewType: 0,
           mediaUrl: url,
