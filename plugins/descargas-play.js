@@ -90,9 +90,20 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
 
         if (!json.status || !json.data?.dl) throw '⚠ No se obtuvo enlace de video.'
         const data = json.data
-
+await m.react('🎬')
         const size = await getSize(data.dl)
         const sizeStr = size ? await formatSize(size) : 'Desconocido'
+
+        let caption = 
+`> ✦ *Título:* ${data.title}
+> ❏ *Canal:* ${canal}
+> ⌬ *Duración:* ${timestamp || 'Desconocido'}
+> ✧ *Calidad:* HD
+> ⨳ *Tamaño:* ${sizeStr}
+> 🜸 *Vistas:* ${vistas}
+> ❖ *Publicado:* ${ago || 'Desconocido'}
+> ⌭ *Enlace:* ${url}
+        `.trim()
 
         await conn.sendFile(
           m.chat,
