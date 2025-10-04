@@ -21,7 +21,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
     const canal = author?.name || 'Desconocido'
     
     const infoMessage = 
-    `*🎵 Titulo: ${title}
+    `🎵 Titulo: *${title}*
     
 > *📺 Canal:* ${canal}
      
@@ -58,7 +58,8 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
         const res = await fetch(`https://api.vreden.my.id/api/v1/download/youtube/audio?url=${url}&quality=128`)
         const json = await res.json()
         
-        if (!json.result?.download?.url) throw '*⚠ No se obtuvo un enlace válido.*'
+        if (!json.result?.download?.url) throw '* ❌ No se obtuvo un enlace válido.*
+> Por favor intentelo nuevamente'
 
         await conn.sendMessage(m.chat, {
           audio: { url: json.result.download.url },
@@ -67,7 +68,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
           contextInfo: {
             externalAdReply: {
               title: title,
-              body: 'ძᥱsᥴᥲrgᥲs rіᥒ і𝗍᥆sһі ᥙᥣ𝗍rᥲ',
+              body: 'Archivo descargado',
               mediaType: 1,
               thumbnail: thumb,
               mediaUrl: url,
@@ -79,7 +80,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
 
         await m.react('✅')
       } catch (e) {
-        return conn.reply(m.chat, '*⚠︎ No se pudo enviar el audio. El archivo podría ser demasiado pesado o hubo un error en la generación del enlace.*', m)
+        return conn.reply(m.chat, '*⚠️ No se pudo enviar el audio. El archivo podría ser demasiado pesado o hubo un error en la generación del enlace.*', m)
       }
     }
     
