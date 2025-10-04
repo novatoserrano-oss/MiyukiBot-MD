@@ -92,9 +92,9 @@ export async function before(m, { conn, participants, groupMetadata }) {
 > 💔 Te esperamos pronto de regreso.
 > 🌸 Usa _#help_ para ver la lista de comandos.`
 
-  const welcomeApi = `https://api-nv.eliasaryt.pro/api/generate/welcome-image?username=${encodeURIComponent(numeroUsuario)}&guildName=${encodeURIComponent(groupMetadata.subject)}&memberCount=${groupSize}&avatar=${encodeURIComponent(ppUrl)}&background=https://i.ibb.co/4YBNyvP/images-76.jpg&guildIcon=${encodeURIComponent('https://github.com/Neveloopp.png')}&key=hYSK8YrJpKRc9jSE`
+  const welcomeApi = `https://api-nv.eliasaryt.pro/api/generate/welcome-image?username=${encodeURIComponent(numeroUsuario)}&guildName=${encodeURIComponent(groupMetadata.subject)}&memberCount=${groupSize}&avatar=${encodeURIComponent(ppUrl)}&background=https://i.ibb.co/4YBNyvP/images-76.jpg&guildIcon=${encodeURIComponent('https://github.com/OmarGranda.png')}&key=hYSK8YrJpKRc9jSE`
 
-  const byeApi = `https://api-nv.eliasaryt.pro/api/generate/welcome-image?username=${encodeURIComponent(numeroUsuario)}&guildName=${encodeURIComponent(groupMetadata.subject)}&memberCount=${groupSize}&avatar=${encodeURIComponent(ppUrl)}&background=https://i.ibb.co/4YBNyvP/images-76.jpg&guildIcon=${encodeURIComponent('https://github.com/Neveloopp.png')}&key=hYSK8YrJpKRc9jSE`
+  const byeApi = `https://api-nv.eliasaryt.pro/api/generate/welcome-image?username=${encodeURIComponent(numeroUsuario)}&guildName=${encodeURIComponent(groupMetadata.subject)}&memberCount=${groupSize}&avatar=${encodeURIComponent(ppUrl)}&background=https://i.ibb.co/4YBNyvP/images-76.jpg&guildIcon=${encodeURIComponent('https://github.com/OmarGranda.png')}&key=hYSK8YrJpKRc9jSE`
 
   if (chat?.welcome && m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_ADD) {
     await conn.sendMessage(m.chat, {
