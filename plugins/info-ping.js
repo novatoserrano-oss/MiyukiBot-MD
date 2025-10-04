@@ -28,23 +28,6 @@ await m.react('🚀')
 
  © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`;
 
-await conn.sendMessage(m.chat, {
-      text: response,
-      mentions: [m.sender],
-      contextInfo: {
-        externalAdReply: {
-          title: '🍄 Rɪɴ Iᴛᴏsʜɪ ᴍᴅ 🌹 | 🪾 ʙʏ ᴅᴠ.sʜᴀᴅᴏᴡ 🪴',
-          body: club,
-          thumbnailUrl: await (await fetch(icono)).buffer(),
-          sourceUrl: redes,
-          mediaType: 1,
-          renderLargerThumbnail: true
-        }
-      }
-    }, { quoted: m });
-  });
-}
-
         await m.react('✅')
         await conn.sendMessage(m.chat, { text: response, edit: key, mentions: [m.sender] }, { quoted: m });
     }, latency);
