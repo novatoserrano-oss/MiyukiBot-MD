@@ -37,8 +37,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
 ✦₊˚ 🎀 𓂃 ₊˚⊹♡ ₊˚ 🎀 ✦`;
 
     const botones = [
-      { buttonId: `${usedPrefix}ping`, buttonText: { displayText: '🔥 Velocidad' }, type: 1 },
-      { buttonId: `${usedPrefix}unreg`, buttonText: { displayText: '🍁 Eliminar Registro' }, type: 1 },
+      { buttonId: `${usedPrefix}unreg`, buttonText: { displayText: '🚯 Eliminar Registro' }, type: 1 },
     ];
 
     return await conn.sendMessage(m.chat, {
