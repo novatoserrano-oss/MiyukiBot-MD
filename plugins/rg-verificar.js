@@ -121,9 +121,9 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
   let sn = createHash('md5').update(m.sender).digest('hex').slice(0, 20)
   
 
-  let regbot = `≡══════════════════════════≡
-✿⊹⊱⋆彡 𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐎 • 𝐂𝐎𝐌𝐏𝐋𝐄𝐓𝐎 彡⋆⊰⊹✿
-≡══════════════════════════≡
+  let regbot = `≡═══════════════════════≡
+彡 𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐎 • 𝐂𝐎𝐌𝐏𝐋𝐄𝐓𝐎 彡
+≡════════════════════════≡
 
 ╭━━━━━ ˚₊· ͟͟͞͞➳❥
 │ *🍓ɴᴏᴍʙʀᴇ:* ${name}
@@ -138,7 +138,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
 ╰━━━━━ ˚₊· ͟͟͞͞➳❥
 
 🤗 *¡Bienvenido ${name}!*
-Tu registro ha sido completado exitosamente en el libro celestial ✅`
+Tu registro ha sido completado exitosamente ✅`
 
   await m.react?.('📩')
 
