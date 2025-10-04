@@ -21,17 +21,19 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
     const canal = author?.name || 'Desconocido'
     
     const infoMessage = 
-    `Titulo: *${title}*
+    `*🎵 Titulo: ${title}
     
-     > 📺 Canal: *${canal}*
+> *📺 Canal:* ${canal}
      
-     > 👀 Vistas: *${vistas}*
+> *👀 Vistas:* ${vistas}
      
-     > Duración: *${timestamp}*
+> *⏳ Duración:* ${timestamp}
      
-     > 📆 Publicado: *${ago}*
+> *📆 Publicado:* ${ago}
      
-     > 🔗 Link : *${url}*`
+> *🔗 Link:* ${url}
+
+𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`
 
     const thumb = (await conn.getFile(thumbnail))?.data
     const external = {
