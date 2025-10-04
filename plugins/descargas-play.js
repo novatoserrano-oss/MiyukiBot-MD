@@ -41,7 +41,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
       contextInfo: {
         externalAdReply: {
           title: title,
-          body: ,
+          body: 'Descargando archivo',
           mediaType: 1,
           previewType: 0,
           mediaUrl: url,
@@ -68,7 +68,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
           contextInfo: {
             externalAdReply: {
               title: title,
-              body: ,
+              body: 'Archivo descargado' ,
               mediaType: 1,
               thumbnail: thumb,
               mediaUrl: url,
