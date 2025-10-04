@@ -27,11 +27,8 @@ await m.react('🚀')
 ╰━〔 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 〕━⬣
 
  © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`;
-\`\`\`
-${sysInfo.trim()}
-\`\`\``;
 
-    await conn.sendMessage(m.chat, {
+await conn.sendMessage(m.chat, {
       text: response,
       mentions: [m.sender],
       contextInfo: {
