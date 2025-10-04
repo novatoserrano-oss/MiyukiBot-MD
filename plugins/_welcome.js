@@ -5,7 +5,6 @@ export async function before(m, { conn, participants, groupMetadata }) {
   if (!m.messageStubType || !m.isGroup) return true
 
   const chat = global.db.data.chats[m.chat]
-  if (!chat?.welcome) return true
 
   const getPais = (numero) => {
     const paises = {
@@ -24,35 +23,18 @@ export async function before(m, { conn, participants, groupMetadata }) {
     return "🌎 Desconocido"
   }
 
-  const usuarioJid = m.messageStubParameters?.[0] || m.key.participant
+  const usuarioJid = m.messageStubParameters[0] || m.key.participant
   const numeroUsuario = usuarioJid.split('@')[0]
   const pais = getPais(numeroUsuario)
 
-  const generarImagenUrl = async (tipo) => {
-    const username = numeroUsuario
-    const guildName = groupMetadata.subject
-    const memberCount = participants.length
-    const avatar = await conn.profilePictureUrl(usuarioJid, 'image').catch(_ => 'https://i.ibb.co/1s8T3sY/48f7ce63c7aa.jpg')
-    const background = 'https://files.catbox.moe/ui7df6.jpg'
-    const guildIcon = 'https://qu.ax/zaeMX.jpg'
+  const ppUrl = await conn.profilePictureUrl(usuarioJid, 'image')
+    .catch(_ => 'https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745522645448.jpeg')
 
-    const url = `https://api-nv.eliasaryt.pro/api/generate/welcome-image?username=${encodeURIComponent(username)}&guildName=${encodeURIComponent(guildName)}&memberCount=${memberCount}&avatar=${encodeURIComponent(avatar)}&background=${encodeURIComponent(background)}&guildIcon=${encodeURIComponent(guildIcon)}&key=hYSK8YrJpKRc9jSE&type=${tipo}`
-
-    try {
-      const res = await fetch(url)
-      if (!res.ok) throw new Error('API no responde')
-      return url
-    } catch {
-      return background
-    }
-  }
-
-  const thumbUrl = Array.isArray(icono) ? icono[Math.floor(Math.random() * icono.length)] : icono
-  const thumbBuffer = await fetch(thumbUrl).then(res => res.buffer())
+  const thumbBuffer = await fetch(icono).then(res => res.buffer())
 
   const fkontak = {
-    key: { participants: "0@s.whatsapp.net", remoteJid: m.chat, fromMe: false, id: "Halo" },
-    message: { locationMessage: { name: " 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 ⭐", jpegThumbnail: thumbBuffer } },
+    key: { participants: "0@s.whatsapp.net", remoteJid: "status@broadcast", fromMe: false, id: "Halo" },
+    message: { locationMessage: { name: "☆ MayukiBot-MD ☆ 🌸", jpegThumbnail: thumbBuffer } },
     participant: "0@s.whatsapp.net"
   }
 
@@ -70,21 +52,23 @@ export async function before(m, { conn, participants, groupMetadata }) {
       externalAdReply: {
         title: botname,
         body: dev,
+        mediaUrl: null,
+        description: null,
         previewType: "PHOTO",
-        thumbnailUrl: thumbUrl,
-        sourceUrl: "https://instagram.com",
-        mediaType: 1
+        thumbnailUrl: "https://files.catbox.moe/crdknj.jpg",
+        sourceUrl: "https://WhatsApp.com",
+        mediaType: 1,
+        renderLargerThumbnail: false
       }
     }
   }
 
   const welcomeMessage = `┏ • 〇〇 • - • - • - • - • - ┓
-🍓⏤͟͟͞͞Ｗ 𝐸 𝐿 𝐶 𝑂 𝑀 𝐸⏤͟͟͞͞🍁
+🍓⏤͟͟͞͞ＶＩＥＮＶＥＮＩＤ＠⏤͟͟͞͞🍁
 ┗┳┳• - • - • - • - • ┳┳ ┛
 
 ✿ вιєиνєи∂ισ α *_${groupMetadata.subject}_*
 ♧ _𝐔𝐬𝐮𝐚𝐫𝐢𝐨:_ @${numeroUsuario}
-${global.welcom1}
 ● ${groupMetadata.desc?.slice(0, 200) || "Sin descripción."}
 ❏ αнσяα ѕσмσѕ *${groupSize}* мιєивяσѕ
 ❍ _𝐅𝐞𝐜𝐡𝐚:_ ${dia}, ${fecha}
@@ -93,8 +77,10 @@ ${global.welcom1}
 
 > *➮ Puedes usar _#help_ para ver la lista de comandos. ૮₍｡˃ ᵕ ˂ ｡₎ა*`
 
-  const byeMessage = `✿ α∂ισѕ ∂є *_${groupMetadata.subject}_*
- ${global.welcom2}
+  const byeMessage = `┏ • 〇〇 • - • - • - • - • - ┓
+🍓⏤͟͟͞͞ＡＤＩＯＳ⏤͟͟͞͞🍁
+┗┳┳• - • - • - • - • ┳┳ ┛
+✿ α∂ισѕ ∂є *_${groupMetadata.subject}_*
 ♧ _𝐔𝐬𝐮𝐚𝐫𝐢𝐨:_ @${numeroUsuario}
 ❏ _𝐌𝐢𝐞𝐦𝐛𝐫𝐨𝐬:_ ${groupSize}
 ❍ _𝐅𝐞𝐜𝐡𝐚:_ ${dia}, ${fecha}
@@ -106,25 +92,22 @@ ${global.welcom1}
 
 *🍓＊✿❀»»——>♡<——««❀✿＊🍁*`
 
-  if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_ADD) {
-    const imgWelcome = await generarImagenUrl('welcome')
+  if (chat?.welcome && m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_ADD) {
     await conn.sendMessage(m.chat, { 
-      image: { url: imgWelcome }, 
+      image: { url: ppUrl }, 
       caption: welcomeMessage, 
       ...fakeContext, 
-      footer: club,
+      footer: "☆ MiyukiBot-MD ☆", 
       headerType: 4
     }, { quoted: fkontak })
   }
 
-  if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_LEAVE || m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_REMOVE) {
-    const imgBye = await generarImagenUrl('bye')
+  if (chat?.welcome && (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_LEAVE || m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_REMOVE)) {
     await conn.sendMessage(m.chat, { 
-      image: { url: imgBye }, 
+      image: { url: ppUrl }, 
       caption: byeMessage, 
       ...fakeContext, 
-      footer: club,
-      headerType: 4
+      footer: "☆ MiyukiBot-MD ☆", 
     }, { quoted: fkontak })
   }
 }
