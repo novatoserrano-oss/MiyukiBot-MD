@@ -58,8 +58,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
         const res = await fetch(`https://api.vreden.my.id/api/v1/download/youtube/audio?url=${url}&quality=128`)
         const json = await res.json()
         
-        if (!json.result?.download?.url) throw '* ❌ No se obtuvo un enlace válido.*
-> Por favor intentelo nuevamente'
+        if (!json.result?.download?.url) throw '* ❌ No se obtuvo un enlace válido.*'
 
         await conn.sendMessage(m.chat, {
           audio: { url: json.result.download.url },
