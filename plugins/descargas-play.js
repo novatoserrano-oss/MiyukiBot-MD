@@ -5,7 +5,8 @@ import axios from "axios";
 const youtubeRegexID = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
-  try {
+  
+try {
 if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombre o link del archivo a descargar.*`, m)
 
     let videoIdMatch = text.match(youtubeRegexID)
@@ -21,7 +22,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
     const canal = author?.name || 'Desconocido'
     
     const infoMessage = 
-    `🎵 Titulo: *${title}*
+    `*🎵 Titulo:* ${title}
     
 > *📺 Canal:* ${canal}
      
@@ -40,7 +41,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
       contextInfo: {
         externalAdReply: {
           title: title,
-          body: 'Descarga en curso...',
+          body: ,
           mediaType: 1,
           previewType: 0,
           mediaUrl: url,
@@ -58,7 +59,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
         const res = await fetch(`https://api.vreden.my.id/api/v1/download/youtube/audio?url=${url}&quality=128`)
         const json = await res.json()
         
-        if (!json.result?.download?.url) throw '* ❌ No se obtuvo un enlace válido.*'
+        if (!json.result?.download?.url) throw '*⚠ No se obtuvo un enlace válido.*'
 
         await conn.sendMessage(m.chat, {
           audio: { url: json.result.download.url },
@@ -67,7 +68,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
           contextInfo: {
             externalAdReply: {
               title: title,
-              body: 'Archivo descargado',
+              body: ,
               mediaType: 1,
               thumbnail: thumb,
               mediaUrl: url,
@@ -79,7 +80,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
 
         await m.react('✅')
       } catch (e) {
-        return conn.reply(m.chat, '*⚠️ No se pudo enviar el audio. El archivo podría ser demasiado pesado o hubo un error en la generación del enlace.*', m)
+        return conn.reply(m.chat, '*⚠︎ No se pudo enviar el audio. El archivo podría ser demasiado pesado o hubo un error en la generación del enlace.*', m)
       }
     }
     
@@ -90,7 +91,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
 
         if (!json.status || !json.data?.dl) throw '⚠ No se obtuvo enlace de video.'
         const data = json.data
-await m.react('🎬')
+
         const size = await getSize(data.dl)
         const sizeStr = size ? await formatSize(size) : 'Desconocido'
 
