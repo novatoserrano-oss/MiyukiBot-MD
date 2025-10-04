@@ -94,15 +94,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
         const size = await getSize(data.dl)
         const sizeStr = size ? await formatSize(size) : 'Desconocido'
 
-        let caption = 
-`> ✦ *Título:* ${data.title}
-> ❏ *Canal:* ${canal}
-> ⌬ *Duración:* ${timestamp || 'Desconocido'}
-> ✧ *Calidad:* HD
-> ⨳ *Tamaño:* ${sizeStr}
-> 🜸 *Vistas:* ${vistas}
-> ❖ *Publicado:* ${ago || 'Desconocido'}
-> ⌭ *Enlace:* ${url}
+        let caption =
         `.trim()
 
         await conn.sendFile(
