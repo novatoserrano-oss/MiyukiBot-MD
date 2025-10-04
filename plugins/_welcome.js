@@ -5,6 +5,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
   if (!m.messageStubType || !m.isGroup) return true
 
   const chat = global.db.data.chats[m.chat]
+  if (!chat?.welcome) return true
 
   const getPais = (numero) => {
     const paises = {
@@ -51,7 +52,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
 
   const fkontak = {
     key: { participants: "0@s.whatsapp.net", remoteJid: m.chat, fromMe: false, id: "Halo" },
-    message: { locationMessage: { name: "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸", jpegThumbnail: thumbBuffer } },
+    message: { locationMessage: { name: " 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 ⭐", jpegThumbnail: thumbBuffer } },
     participant: "0@s.whatsapp.net"
   }
 
@@ -71,17 +72,19 @@ export async function before(m, { conn, participants, groupMetadata }) {
         body: dev,
         previewType: "PHOTO",
         thumbnailUrl: thumbUrl,
-        sourceUrl: "https:// WhatsApp.com",
+        sourceUrl: "https://instagram.com",
         mediaType: 1
       }
     }
   }
+
   const welcomeMessage = `┏ • 〇〇 • - • - • - • - • - ┓
-🍓⏤͟͟͞͞ＶＩＥＮＶＥＮＩＤ＠⏤͟͟͞͞🍁
+🍓⏤͟͟͞͞Ｗ 𝐸 𝐿 𝐶 𝑂 𝑀 𝐸⏤͟͟͞͞🍁
 ┗┳┳• - • - • - • - • ┳┳ ┛
 
 ✿ вιєиνєи∂ισ α *_${groupMetadata.subject}_*
 ♧ _𝐔𝐬𝐮𝐚𝐫𝐢𝐨:_ @${numeroUsuario}
+${global.welcom1}
 ● ${groupMetadata.desc?.slice(0, 200) || "Sin descripción."}
 ❏ αнσяα ѕσмσѕ *${groupSize}* мιєивяσѕ
 ❍ _𝐅𝐞𝐜𝐡𝐚:_ ${dia}, ${fecha}
@@ -90,10 +93,8 @@ export async function before(m, { conn, participants, groupMetadata }) {
 
 > *➮ Puedes usar _#help_ para ver la lista de comandos. ૮₍｡˃ ᵕ ˂ ｡₎ა*`
 
-  const byeMessage = `┏ • 〇〇 • - • - • - • - • - ┓
-🍓⏤͟͟͞͞ＡＤＩＯＳ⏤͟͟͞͞🍁
-┗┳┳• - • - • - • - • ┳┳ ┛
-✿ α∂ισѕ ∂є *_${groupMetadata.subject}_*
+  const byeMessage = `✿ α∂ισѕ ∂є *_${groupMetadata.subject}_*
+ ${global.welcom2}
 ♧ _𝐔𝐬𝐮𝐚𝐫𝐢𝐨:_ @${numeroUsuario}
 ❏ _𝐌𝐢𝐞𝐦𝐛𝐫𝐨𝐬:_ ${groupSize}
 ❍ _𝐅𝐞𝐜𝐡𝐚:_ ${dia}, ${fecha}
@@ -105,22 +106,24 @@ export async function before(m, { conn, participants, groupMetadata }) {
 
 *🍓＊✿❀»»——>♡<——««❀✿＊🍁*`
 
-  if (chat?.welcome && m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_ADD) {
+  if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_ADD) {
+    const imgWelcome = await generarImagenUrl('welcome')
     await conn.sendMessage(m.chat, { 
-      image: { url: ppUrl }, 
+      image: { url: imgWelcome }, 
       caption: welcomeMessage, 
       ...fakeContext, 
-      footer: "☆ MiyukiBot-MD ☆", 
-      headerType: 4
+      footer: club, 
     }, { quoted: fkontak })
   }
 
-  if (chat?.welcome && (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_LEAVE || m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_REMOVE)) {
+  if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_LEAVE || m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_REMOVE) {
+    const imgBye = await generarImagenUrl('bye')
     await conn.sendMessage(m.chat, { 
-      image: { url: ppUrl }, 
+      image: { url: imgBye }, 
       caption: byeMessage, 
       ...fakeContext, 
-      footer: "☆ MiyukiBot-MD ☆", 
+      footer: club,
+      headerType: 4
     }, { quoted: fkontak })
   }
 }
