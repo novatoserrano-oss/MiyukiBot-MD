@@ -95,10 +95,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
         const size = await getSize(data.dl)
         const sizeStr = size ? await formatSize(size) : 'Desconocido'
 
-        let caption = 
-`> 🎬 *Título:*
-${data.title}
-       `.trim()
+        let caption = ``.trim()
 
         await conn.sendFile(
           m.chat,
