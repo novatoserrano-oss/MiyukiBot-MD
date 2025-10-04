@@ -15,7 +15,7 @@ if (!text.trim()) return conn.reply(m.chat, `✍️ *Por favor, ingresa el nombr
       : search.videos?.[0]
 
     if (!video) return conn.reply(m.chat, '❌ *No se encontraron resultados para tu búsqueda*
-> Por favor vuelva a intentarlo.', m)
+Por favor vuelva a intentarlo.', m)
 
     const { title, thumbnail, timestamp, views, ago, url, author } = video
     const vistas = formatViews(views)
