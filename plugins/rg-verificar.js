@@ -129,7 +129,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
 │ *🍓ɴᴏᴍʙʀᴇ:* ${name}
 │ *💫 ᴜsᴇʀ:*  ${name2}
 │ *📱ɴᴜᴍᴇʀᴏ:* ${PhoneNumber('+' + who.replace('@s.whatsapp.net', '')).getNumber('international')}
-│ *🐰ᴇᴅᴀᴅ:* ${age} añitos ฅ^•ﻌ•^ฅ
+│ *🐰ᴇᴅᴀᴅ:* ${age} años
 │ *🕸️ ʙɪᴏ:* ${bio}
 ├────────────
 │ *📖 ғᴇᴄʜᴀ:* ${fecha}
@@ -137,9 +137,8 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
 │ *🌙 ᴅɪᴀ:* ${dia}
 ╰━━━━━ ˚₊· ͟͟͞͞➳❥
 
-🕊️ ¡Bienvenido *${name}!*
-Tu esencia ha sido registrada en el libro celestial ✨
-Que los astros guíen tu camino 🌌`
+🤗 *¡Bienvenido ${name}!*
+Tu registro ha sido completado exitosamente en el libro celestial ✅`
 
   await m.react?.('📩')
 
@@ -157,8 +156,8 @@ Que los astros guíen tu camino 🌌`
           newsletterName: channelRD.name
         },
         externalAdReply: {
-          title: '❁︩︪•°ֺ໋۪݊🌱 ʀᴇɢɪsᴛʀᴏ - ʀɪɴ ɪᴛᴏsʜɪ ᴜʟᴛʀᴀ ⚡°໋•︪︩❁',
-          body: '꒰🍃꒱ ᴛᴜ ᴄᴜᴇɴᴛᴀ ʜᴀ ꜱɪᴅᴏ ᴀᴄᴛɪᴠᴀᴅᴀ ᴄᴏɴ ᴇxɪᴛᴏ `☯︎ ʙʏ: 𝑺𝒉𝒂𝑫𝒐𝒘•𝑪𝒐𝒓𝒆',
+          title: 'Registro MiyukiBot-MD',
+          body: 'Tu cuenta a sido registrada',
           mediaType: 1,
           thumbnailUrl: 'https://files.catbox.moe/1npzmw.jpg',
           mediaUrl: redes,
