@@ -23,18 +23,35 @@ export async function before(m, { conn, participants, groupMetadata }) {
     return "🌎 Desconocido"
   }
 
-  const usuarioJid = m.messageStubParameters[0] || m.key.participant
+  const usuarioJid = m.messageStubParameters?.[0] || m.key.participant
   const numeroUsuario = usuarioJid.split('@')[0]
   const pais = getPais(numeroUsuario)
 
-  const ppUrl = await conn.profilePictureUrl(usuarioJid, 'image')
-    .catch(_ => 'https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745522645448.jpeg')
+  const generarImagenUrl = async (tipo) => {
+    const username = numeroUsuario
+    const guildName = groupMetadata.subject
+    const memberCount = participants.length
+    const avatar = await conn.profilePictureUrl(usuarioJid, 'image').catch(_ => 'https://i.ibb.co/1s8T3sY/48f7ce63c7aa.jpg')
+    const background = 'https://files.catbox.moe/ui7df6.jpg'
+    const guildIcon = 'https://qu.ax/zaeMX.jpg'
 
-  const thumbBuffer = await fetch(icono).then(res => res.buffer())
+    const url = `https://api-nv.eliasaryt.pro/api/generate/welcome-image?username=${encodeURIComponent(username)}&guildName=${encodeURIComponent(guildName)}&memberCount=${memberCount}&avatar=${encodeURIComponent(avatar)}&background=${encodeURIComponent(background)}&guildIcon=${encodeURIComponent(guildIcon)}&key=hYSK8YrJpKRc9jSE&type=${tipo}`
+
+    try {
+      const res = await fetch(url)
+      if (!res.ok) throw new Error('API no responde')
+      return url
+    } catch {
+      return background
+    }
+  }
+
+  const thumbUrl = Array.isArray(icono) ? icono[Math.floor(Math.random() * icono.length)] : icono
+  const thumbBuffer = await fetch(thumbUrl).then(res => res.buffer())
 
   const fkontak = {
-    key: { participants: "0@s.whatsapp.net", remoteJid: "status@broadcast", fromMe: false, id: "Halo" },
-    message: { locationMessage: { name: "☆ MayukiBot-MD ☆ 🌸", jpegThumbnail: thumbBuffer } },
+    key: { participants: "0@s.whatsapp.net", remoteJid: m.chat, fromMe: false, id: "Halo" },
+    message: { locationMessage: { name: "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸", jpegThumbnail: thumbBuffer } },
     participant: "0@s.whatsapp.net"
   }
 
@@ -52,17 +69,13 @@ export async function before(m, { conn, participants, groupMetadata }) {
       externalAdReply: {
         title: botname,
         body: dev,
-        mediaUrl: null,
-        description: null,
         previewType: "PHOTO",
-        thumbnailUrl: "https://files.catbox.moe/crdknj.jpg",
-        sourceUrl: "https://WhatsApp.com",
-        mediaType: 1,
-        renderLargerThumbnail: false
+        thumbnailUrl: thumbUrl,
+        sourceUrl: "https:// WhatsApp.com",
+        mediaType: 1
       }
     }
   }
-
   const welcomeMessage = `┏ • 〇〇 • - • - • - • - • - ┓
 🍓⏤͟͟͞͞ＶＩＥＮＶＥＮＩＤ＠⏤͟͟͞͞🍁
 ┗┳┳• - • - • - • - • ┳┳ ┛
