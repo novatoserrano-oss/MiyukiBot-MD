@@ -112,7 +112,8 @@ ${global.welcom1}
       image: { url: imgWelcome }, 
       caption: welcomeMessage, 
       ...fakeContext, 
-      footer: club, 
+      footer: club,
+      headerType: 4
     }, { quoted: fkontak })
   }
 
