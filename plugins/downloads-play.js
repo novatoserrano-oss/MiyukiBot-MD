@@ -28,13 +28,11 @@ await conn.sendMessage(m.chat, { image: thumb, caption: info }, { quoted: m })
 if (['play', 'mp3'].includes(command)) {
 const audio = await getAud(url)
 if (!audio?.url) throw '⚠️ No se pudo obtener el audio.'
-m.reply()
 await conn.sendMessage(m.chat, { audio: { url: audio.url }, fileName: `${title}.mp3`, mimetype: 'audio/mpeg' }, { quoted: m })
 await m.react('✔️')
 } else if (['play2', 'mp4'].includes(command)) {
 const video = await getVid(url)
 if (!video?.url) throw '⚠️ No se pudo obtener el video.'
-m.reply()
 await conn.sendFile(m.chat, video.url, `${title}.mp4`, `ＹＯＵＴＵＢＥ - ＰＬＡＹ
 > 🎬 ${title}`, m)
 await m.react('✔️')
