@@ -30,11 +30,11 @@ export async function before(m, { conn, participants, groupMetadata }) {
   const ppUrl = await conn.profilePictureUrl(usuarioJid, 'image')
     .catch(_ => 'https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745522645448.jpeg')
 
-  const thumbBuffer = await fetch(icono).then(res => res.buffer())
+  const thumbBuffer = await fetch('https://files.catbox.moe/crdknj.jpg').then(res => res.buffer())
 
   const fkontak = {
     key: { participants: "0@s.whatsapp.net", remoteJid: "status@broadcast", fromMe: false, id: "Halo" },
-    message: { locationMessage: { name: "☆ MayukiBot-MD ☆ 🌸", jpegThumbnail: thumbBuffer } },
+    message: { locationMessage: { name: "☆ MiyukiBot-MD ☆ 🌸", jpegThumbnail: thumbBuffer } },
     participant: "0@s.whatsapp.net"
   }
 
@@ -42,7 +42,6 @@ export async function before(m, { conn, participants, groupMetadata }) {
   const hora = fechaObj.toLocaleTimeString('es-PE', { timeZone: 'America/Lima' })
   const fecha = fechaObj.toLocaleDateString('es-PE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'America/Lima' })
   const dia = fechaObj.toLocaleDateString('es-PE', { weekday: 'long', timeZone: 'America/Lima' })
-
   const groupSize = participants.length + ((m.messageStubType === 27) ? 1 : ((m.messageStubType === 28 || m.messageStubType === 32) ? -1 : 0))
 
   const fakeContext = {
@@ -50,64 +49,70 @@ export async function before(m, { conn, participants, groupMetadata }) {
       isForwarded: true,
       mentionedJid: [usuarioJid],
       externalAdReply: {
-        title: botname,
+        title: "☆ MiyukiBot-MD ☆",
         body: dev,
         mediaUrl: null,
         description: null,
         previewType: "PHOTO",
         thumbnailUrl: "https://files.catbox.moe/crdknj.jpg",
-        sourceUrl: "https://WhatsApp.com",
+        sourceUrl: "https://whatsapp.com",
         mediaType: 1,
         renderLargerThumbnail: false
       }
     }
   }
 
-  const welcomeMessage = `┏ • 〇〇 • - • - • - • - • - ┓
+  const welcomeMessage = `
+┏ • 〇〇 • - • - • - • - • - ┓
 🍓⏤͟͟͞͞ＶＩＥＮＶＥＮＩＤ＠⏤͟͟͞͞🍁
 ┗┳┳• - • - • - • - • ┳┳ ┛
 
-✿ вιєиνєи∂ισ α *_${groupMetadata.subject}_*
-♧ _𝐔𝐬𝐮𝐚𝐫𝐢𝐨:_ @${numeroUsuario}
+✿ Bienvenid@ a *${groupMetadata.subject}*
+♧ Usuario: @${numeroUsuario}
 ● ${groupMetadata.desc?.slice(0, 200) || "Sin descripción."}
-❏ αнσяα ѕσмσѕ *${groupSize}* мιєивяσѕ
-❍ _𝐅𝐞𝐜𝐡𝐚:_ ${dia}, ${fecha}
-❁ _𝐇𝐨𝐫𝐚:_ ${hora}
-≡ _𝐏𝐚𝐢𝐬:_ ${pais}
+❏ Ahora somos *${groupSize}* miembros
+❍ Fecha: ${dia}, ${fecha}
+❁ Hora: ${hora}
+≡ País: ${pais}
 
-> *➮ Puedes usar _#help_ para ver la lista de comandos. ૮₍｡˃ ᵕ ˂ ｡₎ა*`
+> 🌸 Usa _#help_ para ver la lista de comandos.`
 
-  const byeMessage = `┏ • 〇〇 • - • - • - • - • - ┓
+  const byeMessage = `
+┏ • 〇〇 • - • - • - • - • - ┓
 🍓⏤͟͟͞͞ＡＤＩＯＳ⏤͟͟͞͞🍁
 ┗┳┳• - • - • - • - • ┳┳ ┛
-✿ α∂ισѕ ∂є *_${groupMetadata.subject}_*
-♧ _𝐔𝐬𝐮𝐚𝐫𝐢𝐨:_ @${numeroUsuario}
-❏ _𝐌𝐢𝐞𝐦𝐛𝐫𝐨𝐬:_ ${groupSize}
-❍ _𝐅𝐞𝐜𝐡𝐚:_ ${dia}, ${fecha}
-❁ _𝐇𝐨𝐫𝐚:_ ${hora}
-≡ _𝐏𝐚𝐢𝐬:_ ${pais}
+
+✿ Adiós de *${groupMetadata.subject}*
+♧ Usuario: @${numeroUsuario}
+❏ Miembros: ${groupSize}
+❍ Fecha: ${dia}, ${fecha}
+❁ Hora: ${hora}
+≡ País: ${pais}
 
 > 💔 Te esperamos pronto de regreso.
-> *➮ Puedes usar _#help_ para ver la lista de comandos. ૮₍｡˃ ᵕ ˂ ｡₎ა*
+> 🌸 Usa _#help_ para ver la lista de comandos.`
 
-*🍓＊✿❀»»——>♡<——««❀✿＊🍁*`
+  const welcomeApi = `https://api-nv.eliasaryt.pro/api/generate/welcome-image?username=${encodeURIComponent(numeroUsuario)}&guildName=${encodeURIComponent(groupMetadata.subject)}&memberCount=${groupSize}&avatar=${encodeURIComponent(ppUrl)}&background=https://i.ibb.co/4YBNyvP/images-76.jpg&guildIcon=${encodeURIComponent('https://github.com/Neveloopp.png')}&key=hYSK8YrJpKRc9jSE`
+
+  const byeApi = `https://api-nv.eliasaryt.pro/api/generate/welcome-image?username=${encodeURIComponent(numeroUsuario)}&guildName=${encodeURIComponent(groupMetadata.subject)}&memberCount=${groupSize}&avatar=${encodeURIComponent(ppUrl)}&background=https://i.ibb.co/4YBNyvP/images-76.jpg&guildIcon=${encodeURIComponent('https://github.com/Neveloopp.png')}&key=hYSK8YrJpKRc9jSE`
 
   if (chat?.welcome && m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_ADD) {
-    await conn.sendMessage(m.chat, { 
-      image: { url: ppUrl }, 
-      caption: welcomeMessage, 
-      ...fakeContext, 
-      footer: "☆ MiyukiBot-MD ☆", 
-      headerType: 4
+    await conn.sendMessage(m.chat, {
+      image: { url: welcomeApi },
+      caption: welcomeMessage,
+      ...fakeContext,
+      footer: "☆ MiyukiBot-MD ☆",
+      mentions: [usuarioJid]
     }, { quoted: fkontak })
   }
 
   if (chat?.welcome && (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_LEAVE || m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_REMOVE)) {
-    await conn.sendMessage(m.chat, { 
-      image: { url: ppUrl }, 
-      caption: byeMessage, 
-      ...fakeContext, 
-      footer: "☆ MiyukiBot-MD ☆", 
+    await conn.sendMessage(m.chat, {
+      image: { url: byeApi },
+      caption: byeMessage,
+      ...fakeContext,
+      footer: "☆ MiyukiBot-MD ☆",
+      mentions: [usuarioJid]
     }, { quoted: fkontak })
   }
 }
