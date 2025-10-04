@@ -14,9 +14,14 @@ await m.react('🚀')
     const hours = Math.floor(uptime / 3600);
     const minutes = Math.floor((uptime % 3600) / 60);
     const secondsUp = Math.floor(uptime % 60);
+  const uptimeFormatted = `${hours}h ${minutes}m ${secondsUp}s`;
+
     const uptimeFormatted = `${hours}h ${minutes}m ${secondsUp}s`;
 
     const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2); // en MB
+
+const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A');
+
 
     setTimeout(async () => {
         let response = `╭━━━〔 *Info Bot* 〕━━⬣
