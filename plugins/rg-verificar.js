@@ -151,10 +151,10 @@ Tu registro ha sido completado exitosamente ✅`
           newsletterName: channelRD.name
         },
         externalAdReply: {
-          title: 'Registro MiyukiBot-MD',
-          body: 'Tu cuenta a sido registrada',
+          title: 'Verificando registro',
+          body: 'MiyukiBot-MD',
           mediaType: 1,
-          thumbnailUrl: 'https://files.catbox.moe/df1sci.jpg',
+          thumbnailUrl: 'https://files.catbox.moe/60sbrf.jpg',
           mediaUrl: redes,
           sourceUrl: redes,
           renderLargerThumbnail: true
