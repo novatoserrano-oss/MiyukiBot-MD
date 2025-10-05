@@ -11,11 +11,14 @@ let handler = async function (m, { conn, groupMetadata }) {
                    '👤 Miembro'
 
     return [
-      `┏━〔 👥 Usuario #${index + 1} 〕━┓`,
-      `┃ 🌱 *Nombre:* ${username}`,
-      `┃ ☘️ *JID:* ${jid}`,
-      `┃ 🎖️ *Rol:* ${estado}`,
-      `┗━━━━━━━━━━━━━━━━━━━┛`
+      `return [
+  `🌷・゜✿・゜・゜✿・゜🌷`,
+  `♡‧₊˚ *Usuario #${index + 1}* ˚₊‧♡`,
+  `🍓 *Nombre:* ${username}`,
+  `🍬 *JID:* ${jid}`,
+  `🦋 *Rol:* ${estado}`,
+  `🌸・゜✿・゜・゜✿・゜🌸
+]`
     ].join('\n')
   })
 
