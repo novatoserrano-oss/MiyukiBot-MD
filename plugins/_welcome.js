@@ -34,7 +34,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
 
   const fkontak = {
     key: { participants: "0@s.whatsapp.net", remoteJid: "status@broadcast", fromMe: false, id: "Halo" },
-    message: { locationMessage: { name: "☆ MiyukiBot-MD ☆ 🌸", jpegThumbnail: thumbBuffer } },
+    message: { locationMessage: { name: "MiyukiBot-MD 🌸", jpegThumbnail: thumbBuffer } },
     participant: "0@s.whatsapp.net"
   }
 
@@ -49,7 +49,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
       isForwarded: true,
       mentionedJid: [usuarioJid],
       externalAdReply: {
-        title: "☆ MiyukiBot-MD ☆",
+        title: "MiyukiBot-MD",
         body: dev,
         mediaUrl: null,
         description: null,
@@ -77,23 +77,26 @@ ${groupMetadata.desc?.slice(0, 200) || "Sin descripción disponible 🩷"}
 🕒 *Hora:* ${hora}  
 🌍 *País:* ${pais}  
 
-📌 Usa _#help_ para ver la lista de comandos.  
-> 🌸 MiyukiBot-MD 🌸`
+📌 Usa _#help_ para ver la lista de comando.
+
+> 𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`
 
   const byeMessage = `
-┏ • 〇〇 • - • - • - • - • - ┓
-🍓⏤͟͟͞͞ＡＤＩＯＳ⏤͟͟͞͞🍁
-┗┳┳• - • - • - • - • ┳┳ ┛
+╔══════════════════╗  
+                ＡＤＩＯＳ 
+╚══════════════════╝  
 
-✿ Adiós de *${groupMetadata.subject}*
-♧ Usuario: @${numeroUsuario}
-❏ Miembros: ${groupSize}
-❍ Fecha: ${dia}, ${fecha}
-❁ Hora: ${hora}
-≡ País: ${pais}
+🏷️ *Grupo:* ${groupMetadata.subject}  
+🧸 *Usuario:* @${numeroUsuario}  
 
-> 💔 Te esperamos pronto de regreso.
-> 🌸 Usa _#help_ para ver la lista de comandos.`
+👥 *Miembros restantes:* ${groupSize}  
+📅 *Fecha:* ${dia}, ${fecha}  
+⏰ *Hora:* ${hora}  
+🌎 *País:* ${pais}  
+
+🍃 Esperamos verte pronto de nuevo 🌼  
+  
+> 𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`
 
   const welcomeApi = `https://api-nv.eliasaryt.pro/api/generate/welcome-image?username=${encodeURIComponent(numeroUsuario)}&guildName=${encodeURIComponent(groupMetadata.subject)}&memberCount=${groupSize}&avatar=${encodeURIComponent(ppUrl)}&background=https://i.ibb.co/4YBNyvP/images-76.jpg&guildIcon=${encodeURIComponent('https://github.com/OmarGranda.png')}&key=hYSK8YrJpKRc9jSE`
 
