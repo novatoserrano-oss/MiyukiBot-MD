@@ -15,7 +15,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
   let bio
   try {
     const info = await conn.fetchStatus(who)
-    bio = info?.status?.trim() || "😔 Sin biografía disponible"
+    bio = info?.status?.trim() || "🚫 Sin biografía disponible"
   } catch {
     bio = "Sin biografía disponible"
   }
