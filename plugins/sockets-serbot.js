@@ -17,19 +17,7 @@ let crm3 = "SBpbmZvLWRvbmFyLmpz"
 let crm4 = "IF9hdXRvcmVzcG9uZGVyLmpzIGluZm8tYm90Lmpz"
 let drm1 = ""
 let drm2 = ""
-let rtx = "🌸 ╭─★ SER BOT • MODO QR ★─╮ 🌸
-
-✨ ¡Conviértete en un Sub-Bot Temporal escaneando este código QR desde otro celular o tu PC!
-
-🔹 Pasos a seguir:
-
-`1️⃣` › Toca los tres puntos ⋮ en la esquina superior derecha.
-`2️⃣` › Selecciona Dispositivos vinculados 🔗
-`3️⃣` › Escanea este código QR 📱 para iniciar sesión con el bot 🤖
-
-⏳ Este código QR expira en 45 segundos, ¡así que date prisa! ⚡
-
-🌼 Disfruta de tu experiencia como Sub-Bot 💫."
+let rtx = "🌸 SER BOT • MODO QR 🌸\n\n✨ Con otro celular o en la PC escanea este QR para convertirte en un Sub-Bot Temporal 🤖\n\n`1️⃣` » Haz clic en los tres puntos ⋮ en la esquina superior derecha\n\n`2️⃣` » Toca Dispositivos vinculados 🔗\n\n`3️⃣` » Escanea este código QR 📲 para iniciar sesión con el bot 💫\n\n⏳ ¡Este código QR expira en 45 segundos! ⚡."
 let rtx2 = "*❀ SER BOT • MODE CODE*\n\n✰ Usa este Código para convertirte en un *Sub-Bot* Temporal.\n\n\`1\` » Haga clic en los tres puntos en la esquina superior derecha\n\n\`2\` » Toque dispositivos vinculados\n\n\`3\` » Selecciona Vincular con el número de teléfono\n\n\`4\` » Escriba el Código para iniciar sesion con el bot\n\n✧ No es recomendable usar tu cuenta principal."
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
