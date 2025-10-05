@@ -21,19 +21,15 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
   }
 
   if (user.registered) {
-   const texto = `⚠️ 𝒂𝒗𝒊𝒔𝒐 ⚠️
+   const texto = `┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-*Ya cuentas con un registro activo...*  
-
-🌸 ¿𝒒𝒖𝒊𝒆𝒓𝒆𝒔 𝒓𝒆𝒈𝒊𝒔𝒕𝒓𝒂𝒓𝒕𝒆 𝒏𝒖𝒆𝒗𝒂𝒎𝒆𝒏𝒕𝒆?  
+*🫵 Ya cuentas con un registro activo...*
+  
+¿𝐐𝐮𝐢𝐞𝐫𝐞𝐬 𝐫𝐞𝐠𝐢𝐬𝐭𝐫𝐚𝐫𝐭𝐞 𝐧𝐮𝐞𝐯𝐚𝐦𝐞𝐧𝐭𝐞? 
 
 💌 Usa *#unreg* para borrar tu registro y comenzar otra vez.  
 
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`;
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈`;
 
     const botones = [
       { buttonId: `${usedPrefix}unreg`, buttonText: { displayText: '🚯 Eliminar Registro' }, type: 1 },
