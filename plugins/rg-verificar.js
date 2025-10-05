@@ -154,7 +154,7 @@ Tu registro ha sido completado exitosamente ✅`
           title: 'Registro MiyukiBot-MD',
           body: 'Tu cuenta a sido registrada',
           mediaType: 1,
-          thumbnailUrl: 'https://files.catbox.moe/1npzmw.jpg',
+          thumbnailUrl: 'https://files.catbox.moe/df1sci.jpg',
           mediaUrl: redes,
           sourceUrl: redes,
           renderLargerThumbnail: true
