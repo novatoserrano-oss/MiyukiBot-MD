@@ -7,18 +7,16 @@ let handler = async function (m, { conn, groupMetadata }) {
     const jid = p.id || 'N/A'
     const username = '@' + jid.split('@')[0]
     const estado = p.admin === 'superadmin' ? '👑 Fundador' :
-                   p.admin === 'admin' ? '🛡️ Admin' :
-                   '👤 Miembro'
+                   p.admin === 'admin' ? '🛡️ Administrador' :
+                   '💫 Miembro'
 
     return [
-      `return [
-  `🌷・゜✿・゜・゜✿・゜🌷`,
-  `♡‧₊˚ *Usuario #${index + 1}* ˚₊‧♡`,
-  `🍓 *Nombre:* ${username}`,
-  `🍬 *JID:* ${jid}`,
-  `🦋 *Rol:* ${estado}`,
-  `🌸・゜✿・゜・゜✿・゜🌸`
-]`
+      `💠╭──────────────╮`,
+      `💫 *Usuario #${index + 1}*`,
+      `🔹 *Nombre:* ${username}`,
+      `🔸 *JID:* ${jid}`,
+      `⚙️ *Rol:* ${estado}`,
+      `💠╰──────────────╯`
     ].join('\n')
   })
 
@@ -28,12 +26,12 @@ let handler = async function (m, { conn, groupMetadata }) {
   const totalAdmins = participantes.filter(p => p.admin).length
   const totalMiembros = participantes.length - totalAdmins
 
-  const mensajeFinal = `┏━━〔 📋 *Participantes del Grupo* 〕━━┓
-┃ 🌱 *Nombre del grupo:* ${groupMetadata.subject}
-┃ 🔢 *Total de miembros:* ${participantes.length}
+  const mensajeFinal = `╭━━━〔 📜 *INFORME DE MIEMBROS* 〕━━━╮
+┃ 🏷️ *Grupo:* ${groupMetadata.subject}
+┃ 👥 *Total:* ${participantes.length}
 ┃ 👑 *Admins:* ${totalAdmins}
-┃ 👤 *Miembros:* ${totalMiembros}
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+┃ 💫 *Miembros:* ${totalMiembros}
+╰━━━━━━━━━━━━━━━━━━━━━━╯
 
 ${contenido}`
 
