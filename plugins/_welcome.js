@@ -67,15 +67,25 @@ export async function before(m, { conn, participants, groupMetadata }) {
 🍓⏤͟͟͞͞ＶＩＥＮＶＥＮＩＤ＠⏤͟͟͞͞🍁
 ┗┳┳• - • - • - • - • ┳┳ ┛
 
-✿ Bienvenid@ a *${groupMetadata.subject}*
-♧ Usuario: @${numeroUsuario}
-● ${groupMetadata.desc?.slice(0, 200) || "Sin descripción."}
-❏ Ahora somos *${groupSize}* miembros
-❍ Fecha: ${dia}, ${fecha}
-❁ Hora: ${hora}
-≡ País: ${pais}
+💫 *Grupo:* ${groupMetadata.subject}  
+👤 *Usuario:* @${numeroUsuario}  
 
-> 🌸 Usa _#help_ para ver la lista de comandos.`
+💌 *Descripción:*  
+${groupMetadata.desc?.slice(0, 200) || "Sin descripción aún 💭"}  
+
+🌼 *Miembros actuales:* ${groupSize}  
+📅 *Fecha:* ${dia}, ${fecha}  
+🕒 *Hora:* ${hora}  
+🌍 *País:* ${pais}  
+
+╭──────────────✿──────────────╮  
+🌸 Usa _#help_ para ver la lista de comandos disponibles.  
+╰──────────────✿──────────────╯  
+
+╭─❀・✦・❀・✦・❀─╮  
+💖 𝑴𝒆𝒏𝒔𝒂𝒋𝒆 𝒂𝒖𝒕𝒐𝒎𝒂́𝒕𝒊𝒄𝒐 𝒅𝒆  
+🌸 *MiyukiBot-MD* 🌸  
+╰─❀・✦・❀・✦・❀─╯`
 
   const byeMessage = `
 ┏ • 〇〇 • - • - • - • - • - ┓
