@@ -63,7 +63,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
   }
 
   const welcomeMessage = `╔══════════════════╗  
-  ＶＩＥＮＶＥＮＩＤＯ／Ａ 
+    ＶＩＥＮＶＥＮＩＤＯ／Ａ 
 ╚══════════════════╝  
 
 🌸 *Grupo:* ${groupMetadata.subject}  
