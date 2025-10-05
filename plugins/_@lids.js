@@ -17,7 +17,7 @@ let handler = async function (m, { conn, groupMetadata }) {
   `🍓 *Nombre:* ${username}`,
   `🍬 *JID:* ${jid}`,
   `🦋 *Rol:* ${estado}`,
-  `🌸・゜✿・゜・゜✿・゜🌸
+  `🌸・゜✿・゜・゜✿・゜🌸`
 ]`
     ].join('\n')
   })
