@@ -73,7 +73,6 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
 
      const botones = [
        { buttonId: `${usedPrefix}reg ${name2}.18`, buttonText: { displayText: '🖍️ Auto Verificación' }, type: 1 },
-       { buttonId: `${usedPrefix}menu`, buttonText: { displayText: '🎲 Menu' }, type: 1 },
      ];
 
     return await conn.sendMessage(m.chat, {
