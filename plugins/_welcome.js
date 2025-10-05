@@ -63,15 +63,11 @@ export async function before(m, { conn, participants, groupMetadata }) {
   }
 
   const welcomeMessage = `╔══════════════════╗  
-    ＶＩＥＮＶＥＮＩＤＯ／Ａ 
+    *ＶＩＥＮＶＥＮＩＤＯ／Ａ* 
 ╚══════════════════╝  
 
 🌸 *Grupo:* ${groupMetadata.subject}  
 👤 *Usuario:* @${numeroUsuario}  
-
-💬 *Descripción:*  
-${groupMetadata.desc?.slice(0, 200) || "Sin descripción disponible 🩷"}  
-
 👥 *Miembros:* ${groupSize}  
 📅 *Fecha:* ${dia}, ${fecha}  
 🕒 *Hora:* ${hora}  
@@ -83,7 +79,7 @@ ${groupMetadata.desc?.slice(0, 200) || "Sin descripción disponible 🩷"}
 
   const byeMessage = `
 ╔══════════════════╗  
-                ＡＤＩＯＳ 
+                *ＡＤＩＯＳ* 
 ╚══════════════════╝  
 
 🏷️ *Grupo:* ${groupMetadata.subject}  
