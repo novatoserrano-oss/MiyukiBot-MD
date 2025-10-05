@@ -1,8 +1,8 @@
-handler = async (m, { conn, text }) => {
+let handler = async (m, { conn, text }) => {
   let user = global.db.data.users[m.sender]
 
-  let nombre = user.name || 'Sin nombre 💭'
-  let edad = user.age || 'Desconocida 💫'
+  let nombre = user.name || 'Sin nombre'
+  let edad = user.age || 'Desconocida'
   let pp
   try {
     pp = await conn.profilePictureUrl(m.sender, 'image')
@@ -13,24 +13,23 @@ handler = async (m, { conn, text }) => {
   user.registered = false
 
   await conn.sendMessage(m.chat, {
-    text: `🌸・｡ﾟ✧｡・ﾟ✿・｡ﾟ✧｡・ﾟ🌸
-      🍰✨ 𝑅𝐸𝐺𝐼𝑆𝑇𝑅𝑂 𝐸𝐿𝐼𝑀𝐼𝑁𝐴𝐷𝑂 ✨🍰
-🌸・｡ﾟ✧｡・ﾟ✿・｡ﾟ✧｡・ﾟ🌸
+    text: `✧━━━━━━༺⚜️༻━━━━━━✧
+       𝐓𝐔 𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐎 𝐅𝐔𝐄 𝐄𝐋𝐈𝐌𝐈𝐍𝐀𝐃𝐎  
+✧━━━━━━༺⚜️༻━━━━━━✧
 
-🐰💖 *Nombre anterior:* ${nombre}  
-🎀🎂 *Edad:* ${edad} años  
+👑👤 \`𝐍𝐨𝐦𝐛𝐫𝐞 𝐚𝐧𝐭𝐞𝐫𝐢𝐨𝐫:\` *${nombre}*
+💫🎂 \`𝐄𝐝𝐚𝐝:\` *${edad} 𝐚𝐧̃𝐨𝐬*
+🌟👋 𝐄𝐬𝐩𝐞𝐫𝐚𝐦𝐨𝐬 𝐯𝐨𝐥𝐯𝐞𝐫 𝐚 𝐯𝐞𝐫𝐭𝐞
 
-🦋💌 Esperamos verte de nuevo muy pronto, ¡te extrañaremos!  
-
-━━━━━━━━━━━━━━━
-🌷 𝑬𝒔𝒄𝒓𝒊𝒃𝒆: *.reg Nombre Edad*  
-para volver a registrarte 💕
-━━━━━━━━━━━━━━━`,
+━━━━━━━━━━━━━━━━━━━━
+📜 𝐄𝐬𝐜𝐫𝐢𝐛𝐞: *.reg 𝐍𝐨𝐦𝐛𝐫𝐞 𝐄𝐝𝐚𝐝*
+𝐩𝐚𝐫𝐚 𝐫𝐞𝐠𝐢𝐬𝐭𝐫𝐚𝐫𝐭𝐞 𝐧𝐮𝐞𝐯𝐚𝐦𝐞𝐧𝐭𝐞.
+━━━━━━━━━━━━━━━━━━━━`,
     mentions: [m.sender],
     contextInfo: {
       externalAdReply: {
-        title: `🌸 Registro eliminado con éxito ${emojis}`,
-        body: `✨ Usuario: ${nombre} • ${edad} años ✨`,
+        title: `⚡ Registro eliminado correctamente ${emojis}`,
+        body: `🧪 Nombre: ${nombre} • Edad: ${edad} años`,
         thumbnailUrl: pp,
         mediaType: 1,
         renderLargerThumbnail: true,
