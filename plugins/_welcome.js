@@ -67,7 +67,8 @@ export async function before(m, { conn, participants, groupMetadata }) {
 ╚══════════════════╝  
 
 🌸 *Grupo:* ${groupMetadata.subject}  
-👤 *Usuario:* @${numeroUsuario}  
+👤 *Usuario:* @${numeroUsuario}
+  
 👥 *Miembros:* ${groupSize}  
 📅 *Fecha:* ${dia}, ${fecha}  
 🕒 *Hora:* ${hora}  
