@@ -58,6 +58,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
   if (!Reg.test(text)) {
      const mensaje = `
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
 ❌ ᴏᴏᴘꜱ ᴄᴏᴍᴀɴᴅᴏ ɪɴᴄᴏʀʀᴇᴄᴛᴏ 
 
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -72,7 +73,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
 
      const botones = [
        { buttonId: `${usedPrefix}reg ${name2}.18`, buttonText: { displayText: '🖍️ Auto Verificación' }, type: 1 },
-       { buttonId: `${usedPrefix}menu`, buttonText: { displayText: '🎲 Menu All' }, type: 1 },
+       { buttonId: `${usedPrefix}menu`, buttonText: { displayText: '🎲 Menu' }, type: 1 },
      ];
 
     return await conn.sendMessage(m.chat, {
@@ -101,9 +102,9 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
   let dia = fechaObj.toLocaleDateString('es-PE', { weekday: 'long', timeZone: 'America/Lima' });
 
   let [_, name, splitter, age] = text.match(Reg)
-  if (!name) return m.reply(`✦₊˚ 🎀꒰ 🍓 ꒱🎀 ₊˚✦\n(｡>﹏<｡)💦 *El nombre no puede estar vacío*`)
-  if (!age) return m.reply(`✦₊˚ 🎀꒰ 🍓 ꒱🎀 ₊˚✦\n(≧﹏≦) *La edad no puede estar vacía*`)
-  if (name.length >= 100) return m.reply(`✦₊˚ 🎀꒰ 🍓 ꒱🎀 ₊˚✦\n(๑•﹏•) *El nombre es demasiado largo...*`)
+  if (!name) return m.reply(`❌ *El nombre no puede estar vacío*`)
+  if (!age) return m.reply(`❌ *La edad no puede estar vacía*`)
+  if (name.length >= 100) return m.reply(`❌ *El nombre es demasiado largo...*`)
   age = parseInt(age)
 
   user.name = `${name} ✓`
@@ -152,8 +153,8 @@ Tu registro ha sido completado exitosamente ✅`
           newsletterName: channelRD.name
         },
         externalAdReply: {
-          title: 'Verificando registro',
-          body: 'MiyukiBot-MD',
+          title: '𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿',
+          body: 'Verificando registro...',
           mediaType: 1,
           thumbnailUrl: 'https://files.catbox.moe/60sbrf.jpg',
           mediaUrl: redes,
