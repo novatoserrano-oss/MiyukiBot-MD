@@ -13,12 +13,12 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
     }
 
     // Reacción inicial
-    await conn.sendMessage(m.chat, { react: { text: "🔎", key: m.key } })
+    await conn.sendMessage(m.chat, { react: { text: "⏰", key: m.key } })
 
     // Buscar video
     let search = await yts(text)
     let video = search.videos[0]
-    if (!video) return conn.reply(m.chat, '⚠️ No se encontró ningún resultado.', m)
+    if (!video) return conn.reply(m.chat, '⚠️ *No se encontró ningún resultado.*', m)
 
     // APIs para descarga
     const apis = [
@@ -41,10 +41,10 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
 
     // Obtener enlace válido
     const { url: downloadUrl, servidor } = await fetchFromApis(apis)
-    if (!downloadUrl) return conn.reply(m.chat, '❌ No fue posible obtener el audio.', m)
+    if (!downloadUrl) return conn.reply(m.chat, '❌ *No fue posible obtener el audio.*', m)
 
     // Mostrar mensaje de descarga con tu marca
-    await conn.reply(m.chat, `📥*DESCARGANDO ARCHIVO...*
+    await conn.reply(m.chat, `📥 *DESCARGANDO ARCHIVO...*
 > Por favor espera unos segundos`, m)
 
     // Obtener tamaño
@@ -77,7 +77,7 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
 
   } catch (e) {
     console.error(e)
-    await conn.reply(m.chat, `⚠️ Error: ${e.message}`, m)
+    await conn.reply(m.chat, `⚠️ *Error:* ${e.message}`, m)
   }
 }
 
