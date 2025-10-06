@@ -23,7 +23,7 @@ let handler = async (m, { conn }) => {
     
     let redes = 'https://wa.me';
 
-    const thumb = await fetch('');
+    const thumb = await fetch('https://files.catbox.moe/sy0zzb.jpg');
     const bufferThumb = await thumb.arrayBuffer();
 
     let response = 
