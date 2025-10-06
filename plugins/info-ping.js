@@ -23,27 +23,24 @@ let handler = async (m, { conn }) => {
     
     let redes = 'https://wa.me';
 
-    const thumb = await fetch('https://n.uguu.se/vqJnHBPm.jpg');
+    const thumb = await fetch('');
     const bufferThumb = await thumb.arrayBuffer();
 
     let response = 
-`╭━〔 ⚙️ 𝙀𝙨𝙩𝙖𝙙𝙤 𝙙𝙚𝙡 𝘽𝙤𝙩 🛰️ 〕━⬣
-│ 📡 *Ping:* ${latency} ms
-│ ⚡ *Latencia:* ${latency.toFixed(2)} ms
-│ 💾 *RAM usada:* ${usedRAM} MB
-│ ⏳ *Uptime:* ${uptimeFormatted}
-│ 🕰️ *Fecha / Hora:* ${fechaHora}
-╰━〔 🌸 𝙍𝙞𝙣 𝙄𝙩𝙤𝙨𝙝𝙞 〕━⬣
-\`\`\`
-${sysInfo.trim()}
-\`\`\``
+`╭─❖ ⚙️ 𝙀𝙨𝙩𝙖𝙙𝙤 𝙙𝙚𝙡 𝘽𝙤𝙩
+│ 📶 Ping: ${latency} ms
+│ ⚡ Latencia: ${latency.toFixed(2)} ms
+│ 💽 RAM usada: ${usedRAM} MB
+│ ⏱️ Uptime: ${uptimeFormatted}
+│ 🗓️ Fecha / Hora: ${fechaHora}
+╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸`
 
     await conn.sendMessage(m.chat, {
       text: response,
       mentions: [m.sender],
       contextInfo: {
         externalAdReply: {
-          title: '🌺 Rɪɴ Iᴛᴏsʜɪ ᴍᴅ ⚙️ | 🌼 ʙʏ ᴅᴠ.sʜᴀᴅᴏᴡ 💫',
+          title: 'MiyukiBot-MD 🌸',
           body: dev,
           thumbnail: Buffer.from(bufferThumb),
           sourceUrl: redes,
