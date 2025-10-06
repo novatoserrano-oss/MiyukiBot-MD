@@ -24,37 +24,33 @@ let handler = async (m, { conn }) => {
   const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)
   const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A')
 
-  // 🔹 Coloca tu imagen personalizada aquí 👇
-  const imgUrl = 'https://files.catbox.moe/sy0zzb.jpg'
-  const thumbBuffer = Buffer.from(await (await fetch(imgUrl || 'https://files.catbox.moe/sy0zzb.jpg')).arrayBuffer())
+  const thumbBuffer = Buffer.from(await (await fetch('https://d.uguu.se/VpyXZrTP.webp')).arrayBuffer())
 
   exec(`neofetch --stdout`, async (error, stdout) => {
     let sysInfo = stdout.toString("utf-8").replace(/Memory:/, "Ram:")
 
     let response = 
-`╭─❖ ⚙️ *Estado del Bot*
-│ 📶 *Ping:* ${latency} ms
-│ ⚡ *Latencia:* ${latensi.toFixed(4)} ms
-│ 💽 *RAM usada:* ${usedRAM} MB
-│ ⏱️ *Uptime:* ${uptimeFormatted}
-│ 🗓️ *Fecha / Hora:* ${fechaHora}
-╰─❖ *MiyukiBot-MD 🌸*
+` ╭─❖ ⚙️ 𝙀𝙨𝙩𝙖𝙙𝙤 𝙙𝙚𝙡 𝘽𝙤𝙩
+│ 📶 Ping: ${latency} ms
+│ ⚡ Latencia: ${latensi.toFixed(4)} ms
+│ 💽 RAM usada: ${usedRAM} MB
+│ ⏱️ Uptime: ${uptimeFormatted}
+│ 🗓️ Fecha / Hora: ${fechaHora}
+╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝐃 🌸
 
 \`\`\`${sysInfo.trim()}\`\`\``
 
-   (con letras pequeñas abajo)
     await conn.sendMessage(m.chat, {
       text: response,
       mentions: [m.sender],
       contextInfo: {
         externalAdReply: {
           title: 'MiyukiBot-MD 🌸',
-          body: 'Estado del sistema',
+          body: 'xd',
           thumbnail: thumbBuffer,
-          sourceUrl: 'https://github.com/OmarGranda', // 🔹 Cambia este link por el tuyo
+          sourceUrl: redes,
           mediaType: 1,
-          renderLargerThumbnail: true,
-          showAdAttribution: true
+          renderLargerThumbnail: true
         }
       }
     }, { quoted: m })
