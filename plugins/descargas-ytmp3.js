@@ -44,7 +44,32 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
     if (!downloadUrl) return conn.reply(m.chat, '❌ No fue posible obtener el audio.', m)
 
     // Mostrar mensaje de descarga con tu marca
-    await conn.reply(m.chat, `📥 Descargando... por favor espera unos segundos ⏳\n\n🔗 Canal activo: *𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿*\n💠 FronCat`, m)
+    await conn.reply(m.chat, `📥 Descargando... por favor espera unos segundos`, m)
+
+const rcanal = async () => {
+      return {
+        contextInfo: {
+          isForwarded: true,
+          forwardedNewsletterMessageInfo: {
+            newsletterJid: '120363401008003732@newsletter',
+            serverMessageId: '',
+            newsletterName: '囹🎋𑜞 ᪲•˙ꨂ ֢✧: яιи ιтσѕнι - ¢нαииєℓ σffι¢ιαℓ ੈ♡‧₊˚'
+          },
+          externalAdReply: {
+            title: "𐔌 . ⋮ 𝗕 𝗨 𝗦 𝗖 𝗔 𝗡 𝗗 𝗢 .ᐟ ֹ ₊ ꒱",
+            body: "Buscando en Youtube...",
+            mediaUrl: null,
+            description: null,
+            previewType: "PHOTO",
+            thumbnail: await (await fetch('https://i.pinimg.com/originals/e0/98/ba/e098bac73c8ae72243f66c7bf712045a.jpg')).buffer(),
+            sourceUrl: redes,
+            mediaType: 1,
+            renderLargerThumbnail: false
+          }
+        }
+      }
+    }
+
 
     // Obtener tamaño
     const size = await getSize(downloadUrl)
