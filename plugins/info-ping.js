@@ -40,7 +40,6 @@ let handler = async (m, { conn }) => {
 │ 🗓️ *Fecha / Hora:* ${fechaHora}
 ╰─❖ *MiyukiBot-MD 🌸*
 
-\`\`\`${sysInfo.trim()}\`\`\``
 
     // 🔹 Enviar texto + vista previa (con letras pequeñas abajo)
     await conn.sendMessage(m.chat, {
