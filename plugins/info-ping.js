@@ -1,16 +1,14 @@
 import speed from 'performance-now'
 import { exec } from 'child_process'
 import moment from 'moment-timezone'
+import fetch from 'node-fetch'
 
 let handler = async (m, { conn }) => {
-  let timestamp = speed();
-  let latensi = speed() - timestamp;
-
   const start = new Date().getTime();
-  const { key } = await conn.sendMessage(m.chat, { text: `🕒 *Midiendo latencia...*` }, { quoted: m });
+  await conn.sendMessage(m.chat, { text: `🕒 *Midiendo latencia...*` }, { quoted: m });
   const end = new Date().getTime();
-  const latency = end - start;
 
+  const latency = end - start;
   const uptime = process.uptime();
   const hours = Math.floor(uptime / 3600);
   const minutes = Math.floor((uptime % 3600) / 60);
@@ -21,13 +19,17 @@ let handler = async (m, { conn }) => {
   const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A');
 
   exec(`neofetch --stdout`, async (error, stdout) => {
-    let child = stdout.toString("utf-8");
-    let sysInfo = child.replace(/Memory:/, "RAM:");
+    let sysInfo = stdout ? stdout.toString("utf-8").replace(/Memory:/, "RAM:") : 'No se pudo obtener info del sistema';
+    
+    let redes = 'https://wa.me';
+
+    const thumb = await fetch('https://n.uguu.se/vqJnHBPm.jpg');
+    const bufferThumb = await thumb.arrayBuffer();
 
     let response = 
 `╭━〔 ⚙️ 𝙀𝙨𝙩𝙖𝙙𝙤 𝙙𝙚𝙡 𝘽𝙤𝙩 🛰️ 〕━⬣
 │ 📡 *Ping:* ${latency} ms
-│ ⚡ *Latencia:* ${latensi.toFixed(4)} ms
+│ ⚡ *Latencia:* ${latency.toFixed(2)} ms
 │ 💾 *RAM usada:* ${usedRAM} MB
 │ ⏳ *Uptime:* ${uptimeFormatted}
 │ 🕰️ *Fecha / Hora:* ${fechaHora}
@@ -42,15 +44,15 @@ ${sysInfo.trim()}
       contextInfo: {
         externalAdReply: {
           title: '🌺 Rɪɴ Iᴛᴏsʜɪ ᴍᴅ ⚙️ | 🌼 ʙʏ ᴅᴠ.sʜᴀᴅᴏᴡ 💫',
-          body: club,
-          thumbnailUrl: await (await fetch('https://n.uguu.se/vqJnHBPm.jpg')).buffer(),
+          body: dev,
+          thumbnail: Buffer.from(bufferThumb),
           sourceUrl: redes,
           mediaType: 1,
           renderLargerThumbnail: true
         }
       }
-    }, { quoted: m })
-  })
+    }, { quoted: m });
+  });
 }
 
 handler.help = ['ping', 'p']
