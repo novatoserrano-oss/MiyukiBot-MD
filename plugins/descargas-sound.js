@@ -1,97 +1,77 @@
-import scdl from 'soundcloud-downloader'
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { dirname } from 'path'
+import axios from 'axios';
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) {
-    return conn.reply(
-      m.chat,
-      `🌸 *Ingresa el enlace de una canción de SoundCloud para descargarla.*\n\n` +
-      `💡 *Ejemplo:* \n> ${usedPrefix + command} https://soundcloud.com/ckfeine/brazilian-phonk`,
-      m
-    )
-  }
-
-  await m.react('⏳')
+const handler = async (m, { conn, text }) => {
+  if (!text) return m.reply('🎶 *Por favor ingresa el nombre de una canción o artista para buscar en SoundCloud.*\n\n💡 *Ejemplo:* `.sound Tokyo Nights`');
 
   try {
-    if (!text.includes('soundcloud.com')) {
-      return conn.reply(m.chat, '⚠️ *Por favor proporciona un enlace válido de SoundCloud.*', m)
+    await m.react('🎧');
+
+    const searchRes = await axios.get('https://delirius-apiofc.vercel.app/search/soundcloud', {
+      params: { q: text, limit: 1 }
+    });
+
+    const song = searchRes.data.data[0];
+    if (!song) return m.reply('🚫 *No se encontraron resultados en SoundCloud.*');
+
+    const dlRes = await axios.get('https://api.siputzx.my.id/api/d/soundcloud', {
+      params: { url: song.link }
+    });
+
+    if (!dlRes.data.status) {
+      return m.reply('⚠️ *No se pudo descargar el audio. Inténtalo más tarde.*');
     }
 
-    // Obtener información de la canción
-    const info = await scdl.getInfo(text).catch(() => null)
-    if (!info) {
-      await m.react('❌')
-      return conn.reply(m.chat, '❌ *No se pudo obtener información de la pista.*', m)
-    }
+    const audio = dlRes.data.data;
 
-    const title = info.title?.replace(/[\\/:*?"<>|]/g, '') || 'Sin título'
-    const artist = info.user?.username || 'Desconocido'
-    const thumbnail = info.artwork_url?.replace('-large', '-t500x500') || info.user?.avatar_url || null
-
-    // Descargar audio
-    const filePath = path.join(__dirname, `../tmp/${title}.mp3`)
-    const stream = await scdl.download(text).catch(() => null)
-    if (!stream) {
-      await m.react('❌')
-      return conn.reply(m.chat, '❌ *No se pudo descargar el audio.*', m)
-    }
-
-    await new Promise((resolve, reject) => {
-      const writeStream = fs.createWriteStream(filePath)
-      stream.pipe(writeStream)
-      writeStream.on('finish', resolve)
-      writeStream.on('error', reject)
-    })
-
-    // Enviar información + portada
     const caption = `
-╭──────────────────────────────╮
-│ 🎧 *SOUNDCLOUD DOWNLOADER* 🎶
-╰──────────────────────────────╯
-🎵 *Título:* ${title}
-👤 *Artista:* ${artist}
-🔗 *Enlace:* ${text}
+🎧 *SOUND CLOUD - DESCARGA EXITOSA* 🎶
+
+🎵 *Título:* ${audio.title || 'Desconocido'}
+👤 *Artista:* ${audio.user || 'Desconocido'}
+⏱️ *Duración:* ${msToTime(audio.duration) || 'Desconocido'}
+📝 *Descripción:* ${audio.description || 'Sin descripción'}
+🔗 *Enlace:* ${song.link || 'N/A'}
 
 💠 𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢
-    `.trim()
+──────────────────────────────
+`.trim();
 
-    if (thumbnail) {
-      await conn.sendMessage(m.chat, {
-        image: { url: thumbnail },
-        caption
-      }, { quoted: m })
-    } else {
-      await conn.sendMessage(m.chat, { text: caption }, { quoted: m })
-    }
+    await conn.sendFile(m.chat, audio.thumbnail, 'cover.jpg', caption, m);
 
-    // Leer el archivo MP3 y enviarlo
-    const audioBuffer = fs.readFileSync(filePath)
     await conn.sendMessage(m.chat, {
-      audio: audioBuffer,
+      audio: { url: audio.url },
+      fileName: `${audio.title}.mp3`,
       mimetype: 'audio/mpeg',
-      fileName: `${title}.mp3`
-    }, { quoted: m })
+      ptt: false,
+      contextInfo: {
+        externalAdReply: {
+          title: `${audio.title}`,
+          body: `🎧 Descarga completada | 𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋`,
+          thumbnailUrl: audio.thumbnail,
+          mediaType: 1,
+          renderLargerThumbnail: true
+        }
+      }
+    }, { quoted: m });
 
-    fs.unlinkSync(filePath)
-    await m.react('✅')
-
+    await m.react('✅');
   } catch (err) {
-    console.error('Error al descargar pista SoundCloud:', err)
-    await m.react('💥')
-    conn.reply(m.chat, '❌ *Error al descargar la canción. Verifica el enlace o inténtalo más tarde.*', m)
+    console.error('[SOUNDCLOUD ERROR]', err);
+    m.reply('💥 *Ocurrió un error al procesar la solicitud. Inténtalo nuevamente más tarde.*');
+    await m.react('❌');
   }
+};
+
+function msToTime(ms) {
+  let seconds = Math.floor((ms / 1000) % 60),
+      minutes = Math.floor((ms / (1000 * 60)) % 60);
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
-handler.help = ['sound <enlace>']
-handler.tags = ['descargas']
-handler.command = ['sound', 'scdl']
-handler.register = true
+handler.command = ['sound', 'soundcloud'];
+handler.help = ['soundcloud <nombre>'];
+handler.tags = ['descargas'];
+handler.register = true;
+handler.limit = 2;
 
-export default handler
+export default handler;
