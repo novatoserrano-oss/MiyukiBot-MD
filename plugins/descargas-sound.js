@@ -25,7 +25,7 @@ const handler = async (m, { conn, text }) => {
 
     const caption = `
 ╭────────────────╮
-│    *S O U N D C L O U D* 
+│    *S O U N D C L O U D*  │
 ╰────────────────╯
 
 ✨ *Título:* ${audio.title || 'Desconocido'}
