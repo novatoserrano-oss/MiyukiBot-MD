@@ -1,79 +1,85 @@
-import axios from 'axios';
+import axios from 'axios'
+import fs from 'fs'
+import fetch from 'node-fetch'
 
-const handler = async (m, { conn, text }) => {
-  if (!text) return m.reply('🎶 *Por favor, ingresa el nombre de una canción o artista para buscar en SoundCloud.*');
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+  if (!text) return conn.reply(
+    m.chat,
+    `🌸 *Ingresa el enlace o nombre de una canción de SoundCloud para descargarla.*\n\n💡 *Ejemplo:* \n> ${usedPrefix + command} https://soundcloud.com/ckfeine/brazilian-phonk`,
+    m
+  )
+
+  await m.react('⏳')
 
   try {
-    await m.react('⏳');
-
-    const searchRes = await axios.get('https://delirius-apiofc.vercel.app/search/soundcloud', {
-      params: { q: text, limit: 1 }
-    });
-
-    const song = searchRes.data.data[0];
-    if (!song) return m.reply('🚫 *No se encontraron resultados en SoundCloud.*');
-
-    const dlRes = await axios.get('https://api.siputzx.my.id/api/d/soundcloud', {
-      params: { url: song.link }
-    });
-
-    if (!dlRes.data.status) {
-      return m.reply('⚠️ *No se pudo descargar el audio desde SoundCloud.*');
+    // Si el usuario envía solo el nombre, hacemos una búsqueda primero
+    let url = text
+    if (!text.includes('soundcloud.com')) {
+      const search = await axios.get(`https://apis-starlights-team.koyeb.app/starlight/soundcloud-search?text=${encodeURIComponent(text)}`)
+      if (!Array.isArray(search.data) || search.data.length === 0) {
+        await m.react('❌')
+        return conn.reply(m.chat, '⚠️ *No se encontraron resultados para esa búsqueda.*', m)
+      }
+      url = search.data[0].url // toma el primer resultado
     }
 
-    const audio = dlRes.data.data;
+    // Descarga directa desde SoundCloud
+    const api = `https://apis-starlights-team.koyeb.app/starlight/soundcloud-down?url=${encodeURIComponent(url)}`
+    const res = await axios.get(api)
+    const data = res.data
 
-    const caption = `
-╭────────────────╮
-│    *S O U N D C L O U D*  │
-╰────────────────╯
+    if (!data || !data.url) {
+      await m.react('⚠️')
+      return conn.reply(m.chat, '❌ *No se pudo obtener la información de la canción.*', m)
+    }
 
-✨ *Título:* ${audio.title || 'Desconocido'}
-👤 *Artista:* ${audio.user || 'Desconocido'}
-⏱️ *Duración:* ${msToTime(audio.duration) || 'Desconocido'}
-📝 *Descripción:* ${audio.description || 'Sin descripción'}
-🔗 *Link:* ${song.link || 'N/A'}
+    const title = data.title || 'Sin título'
+    const artist = data.artist || 'Desconocido'
+    const thumb = data.thumb || 'https://cdn-icons-png.flaticon.com/512/1384/1384060.png'
+    const audioUrl = data.url
 
-💿 *Descarga completada con éxito!*
-🎶 *Disfruta tu música con estilo 🔥*
-`;
-
-    await conn.sendFile(m.chat, audio.thumbnail, 'cover.jpg', caption.trim(), m);
-
+    // Enviar información primero
     await conn.sendMessage(m.chat, {
-      audio: { url: audio.url },
-      fileName: `${audio.title}.mp3`,
+      image: { url: thumb },
+      caption: `
+🎧 *SoundCloud Downloader* 🎶
+
+🎵 *Título:* ${title}
+👤 *Artista:* ${artist}
+🔗 *Enlace:* ${url}
+
+💠 𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢
+      `.trim()
+    }, { quoted: m })
+
+    await m.react('🎵')
+
+    // Descargar audio MP3
+    const audioRes = await fetch(audioUrl)
+    const buffer = await audioRes.arrayBuffer()
+    const filePath = './tmp/soundcloud.mp3'
+    fs.writeFileSync(filePath, Buffer.from(buffer))
+
+    // Enviar el audio al chat
+    await conn.sendMessage(m.chat, {
+      audio: fs.readFileSync(filePath),
       mimetype: 'audio/mpeg',
-      ptt: false,
-      contextInfo: {
-        externalAdReply: {
-          title: `🎵 ${audio.title}`,
-          body: `🎧 ${audio.user || 'Artista desconocido'} | SoundCloud`,
-          thumbnailUrl: audio.thumbnail,
-          mediaType: 1,
-          renderLargerThumbnail: true
-        }
-      }
-    }, { quoted: m });
+      fileName: `${title}.mp3`
+    }, { quoted: m })
 
-    await m.react('✅');
-  } catch (err) {
-    console.error('[SOUNDCLOUD ERROR]', err);
-    await m.react('❌');
-    m.reply('💥 *Ocurrió un error al procesar tu solicitud. Intenta de nuevo más tarde.*');
+    fs.unlinkSync(filePath)
+    await m.react('✅')
+
+  } catch (e) {
+    console.error(e)
+    await m.react('💥')
+    conn.reply(m.chat, '❌ *Error al descargar la canción. Verifica el enlace o inténtalo más tarde.*', m)
   }
-};
-
-function msToTime(ms) {
-  let seconds = Math.floor((ms / 1000) % 60),
-      minutes = Math.floor((ms / (1000 * 60)) % 60);
-  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
-handler.command = ['sound', 'soundcloud'];
-handler.help = ['soundcloud <nombre>'];
-handler.tags = ['descargas'];
-handler.register = true;
-handler.limit = 2;
+handler.help = ['sound <texto o enlace>']
+handler.tags = ['descargas']
+handler.command = ['sound', 'soundcloud', 'scdl']
+handler.register = true
 
-export default handler;
+export default handler
