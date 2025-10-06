@@ -47,7 +47,7 @@ let handler = async (m, { conn }) => {
         externalAdReply: {
           title: 'MiyukiBot-MD 🌸',
           body: 'xd',
-          thumbnail: 'https://files.catbox.moe/sy0zzb.jpg',
+          thumbnail: thumbBuffer,
           sourceUrl: redes,
           mediaType: 1,
           renderLargerThumbnail: true
