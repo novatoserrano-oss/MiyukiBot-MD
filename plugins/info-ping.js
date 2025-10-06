@@ -4,6 +4,9 @@ import moment from 'moment-timezone'
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn }) => {
+  // 🔹 Reacción inicial
+  await conn.sendMessage(m.chat, { react: { text: '🕒', key: m.key } })
+
   let timestamp = speed()
   let latensi = speed() - timestamp
 
@@ -21,36 +24,46 @@ let handler = async (m, { conn }) => {
   const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)
   const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A')
 
-  const thumbBuffer = Buffer.from(await (await fetch('https://d.uguu.se/VpyXZrTP.webp')).arrayBuffer())
+  // 🔹 Coloca tu imagen aquí 👇
+  const imgUrl = '' // Ejemplo: 'https://teuservidor.com/imagen.jpg'
+
+  const thumbBuffer = imgUrl
+    ? Buffer.from(await (await fetch(imgUrl)).arrayBuffer())
+    : Buffer.from(await (await fetch('https://d.uguu.se/VpyXZrTP.webp')).arrayBuffer())
 
   exec(`neofetch --stdout`, async (error, stdout) => {
     let sysInfo = stdout.toString("utf-8").replace(/Memory:/, "Ram:")
 
     let response = 
-` ╭─❖ ⚙️ 𝙀𝙨𝙩𝙖𝙙𝙤 𝙙𝙚𝙡 𝘽𝙤𝙩
-│ 📶 Ping: ${latency} ms
-│ ⚡ Latencia: ${latensi.toFixed(4)} ms
-│ 💽 RAM usada: ${usedRAM} MB
-│ ⏱️ Uptime: ${uptimeFormatted}
-│ 🗓️ Fecha / Hora: ${fechaHora}
-╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝐃 🌸
+`╭─❖ ⚙️ *Estado del Bot*
+│ 📶 *Ping:* ${latency} ms
+│ ⚡ *Latencia:* ${latensi.toFixed(4)} ms
+│ 💽 *RAM usada:* ${usedRAM} MB
+│ ⏱️ *Uptime:* ${uptimeFormatted}
+│ 🗓️ *Fecha / Hora:* ${fechaHora}
+╰─❖ *MiyukiBot-MD 🌸*
 
 \`\`\`${sysInfo.trim()}\`\`\``
 
+    // 🔹 Enviar imagen + texto
     await conn.sendMessage(m.chat, {
-      text: response,
+      image: thumbBuffer,
+      caption: response,
       mentions: [m.sender],
       contextInfo: {
         externalAdReply: {
           title: 'MiyukiBot-MD 🌸',
-          body: 'xd',
+          body: 'Estado del sistema',
           thumbnail: thumbBuffer,
-          sourceUrl: redes,
+          sourceUrl: 'https://github.com/', // 🔹 Puedes poner tus redes aquí
           mediaType: 1,
           renderLargerThumbnail: true
         }
       }
     }, { quoted: m })
+
+    // 🔹 Reacción final
+    await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   })
 }
 
