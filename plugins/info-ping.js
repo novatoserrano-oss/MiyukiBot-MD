@@ -4,7 +4,7 @@ import moment from 'moment-timezone'
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn }) => {
-  // 🔹 Reacción inicial
+  // 💠 Reacción inicial
   await conn.sendMessage(m.chat, { react: { text: '🕒', key: m.key } })
 
   let timestamp = speed()
@@ -24,7 +24,8 @@ let handler = async (m, { conn }) => {
   const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)
   const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A')
 
-  const thumbBuffer = Buffer.from(await (await fetch('https://d.uguu.se/VpyXZrTP.webp')).arrayBuffer())
+  // 🖼️ Imagen personalizada agregada aquí
+  const thumbBuffer = Buffer.from(await (await fetch('https://files.catbox.moe/sy0zzb.jpg')).arrayBuffer())
 
   exec(`neofetch --stdout`, async (error, stdout) => {
     let sysInfo = stdout.toString("utf-8").replace(/Memory:/, "Ram:")
@@ -47,15 +48,15 @@ let handler = async (m, { conn }) => {
         externalAdReply: {
           title: 'MiyukiBot-MD 🌸',
           body: 'xd',
-          thumbnail: thumbBuffer,
-          sourceUrl: redes,
+          thumbnail: thumbBuffer, // ← Aquí se muestra tu imagen
+          sourceUrl: 'https://github.com/', // 🔗 Enlace clickeable (puedes cambiarlo)
           mediaType: 1,
           renderLargerThumbnail: true
         }
       }
     }, { quoted: m })
 
-    // 🔹 Reacción final
+    // 💠 Reacción final
     await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   })
 }
