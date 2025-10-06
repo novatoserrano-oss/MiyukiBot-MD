@@ -32,7 +32,7 @@ const handler = async (m, { conn, text }) => {
 📝 *Descripción:* ${audio.description || 'Sin descripción'}
 🔗 *Enlace:* ${song.link || 'N/A'}
 
-𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`.trim();
+*𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢*`.trim();
 
     await conn.sendFile(m.chat, audio.thumbnail, 'cover.jpg', caption, m);
 
