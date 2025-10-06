@@ -26,7 +26,7 @@ let handler = async (m, { conn }) => {
 
   // 🔹 Coloca tu imagen personalizada aquí 👇
   const imgUrl = 'https://files.catbox.moe/sy0zzb.jpg'
-  const thumbBuffer = Buffer.from(await (await fetch(imgUrl || 'https://i.ibb.co/mJQvP9K/miyuki-bot-banner.jpg')).arrayBuffer())
+  const thumbBuffer = Buffer.from(await (await fetch(imgUrl || 'https://files.catbox.moe/sy0zzb.jpg')).arrayBuffer())
 
   exec(`neofetch --stdout`, async (error, stdout) => {
     let sysInfo = stdout.toString("utf-8").replace(/Memory:/, "Ram:")
