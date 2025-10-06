@@ -5,8 +5,7 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
     m.chat,
     `🌸 *Ingresa el nombre de una canción o artista para buscar en SoundCloud.*\n\n` +
     `💡 *Ejemplo:* \n> ${usedPrefix + command} Tokyo Nights`,
-    m,
-    rcanal
+    m
   );
 
   await m.react('🎧');
@@ -21,11 +20,20 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
         for (let i = 0; i < results.length; i++) {
           let track = results[i];
 
-          let txt = `
+          // Mostrar primero la imagen
+          if (track.image) {
+            await conn.sendMessage(m.chat, {
+              image: { url: track.image },
+              caption: `🎵 *Resultado ${i + 1} de SoundCloud*`,
+            }, { quoted: m });
+          }
+
+          // Crear mensaje con la información
+          let info = `
 ╭───────────────────────╮
 │ 🌺 *ＭＩＹＵＫＩＢＯＴ - ＭＤ* 🌺
 ╰───────────────────────╯
-🎵 *SoundCloud Search Result* 🎶
+🎶 *SoundCloud Search Result* 🎶
 
 💫 *N°:* ${i + 1}
 🎼 *Título:* ${track.title || 'Sin título'}
@@ -35,14 +43,22 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
 🪶 *Creador:* ${track.creator || 'Desconocido'}
 🌐 *URL:* ${track.url}
 
-🖼️ *Portada:* ${track.image}
-
-╭───────────────────────╮
-│ 🌸 *Disfruta tu música con estilo* 💖
-╰───────────────────────╯
+💠 *FronCat*
 `;
 
-          await conn.sendMessage(m.chat, { text: txt }, { quoted: m });
+          // Enviar información con botón de descarga
+          await conn.sendMessage(m.chat, {
+            text: info,
+            footer: '🎧 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 💕',
+            buttons: [
+              {
+                buttonId: `.sound ${track.url}`,
+                buttonText: { displayText: '⬇️ Descargar Audio' },
+                type: 1
+              }
+            ],
+            headerType: 4
+          }, { quoted: m });
         }
 
         await m.react('✅');
