@@ -14,44 +14,46 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
     const results = response.data
 
     if (Array.isArray(results) && results.length > 0) {
-      const carousel = []
+      await m.react('⏳')
+      await conn.sendMessage(m.chat, {
+        text: `📀 *Buscando en SoundCloud...*\nPor favor espera mientras preparo los resultados 🎶\n\n💠 𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`
+      })
 
-      for (let i = 0; i < results.length; i++) {
+      for (let i = 0; i < results.length && i < 10; i++) {
         const track = results[i]
-        carousel.push({
-          body: `
-🎵 *${track.title || 'Sin título'}*
-👤 *Artista:* ${track.artist || 'Desconocido'}
-⏱️ *Duración:* ${track.duration || 'N/A'}
-🎧 *Reproducciones:* ${track.repro || 'N/A'}
-🪶 *Creador:* ${track.creator || 'Desconocido'}
-🌐 *URL:* ${track.url}
+        const title = track.title || 'Sin título'
+        const artist = track.artist || 'Desconocido'
+        const duration = track.duration || 'N/A'
+        const creator = track.creator || 'Desconocido'
+        const url = track.url
+        const image = track.image || 'https://cdn-icons-png.flaticon.com/512/1384/1384060.png'
 
-💠 𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢
-          `.trim(),
-          footer: '🎧 Pulsa el botón para descargar 🎶',
+        const textInfo = `
+╭───❖ 🌸 *Resultado ${i + 1}* ❖───╮
+🎶 *${title}*
+👤 *Artista:* ${artist}
+🪶 *Creador:* ${creator}
+⏱️ *Duración:* ${duration}
+🌐 *URL:* ${url}
+╰────────────────────╯
+
+💠 *𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢*
+        `.trim()
+
+        await conn.sendMessage(m.chat, {
+          image: { url: image },
+          caption: textInfo,
+          footer: '🎧 Pulsa el botón para descargar 🎵',
           buttons: [
             {
-              buttonId: `.sound ${track.url}`,
+              buttonId: `.sound ${url}`,
               buttonText: { displayText: '⬇️ Descargar Audio' },
               type: 1
             }
           ],
-          header: {
-            title: `🎶 Resultado ${i + 1}`,
-            subtitle: track.artist || 'SoundCloud',
-            image: { url: track.image || 'https://cdn-icons-png.flaticon.com/512/1384/1384060.png' },
-            mediaType: 1
-          }
-        })
+          headerType: 4
+        }, { quoted: m })
       }
-
-      await conn.sendCarousel(
-        m.chat,
-        `🔍 *Resultados para:* ${text}`,
-        `🎧 *SoundCloud Search* — ${results.length} resultados encontrados.\n💠 𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`,
-        carousel
-      )
 
       await m.react('✅')
     } else {
