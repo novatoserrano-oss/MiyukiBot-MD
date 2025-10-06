@@ -1,38 +1,59 @@
 import speed from 'performance-now'
-import { spawn, exec, execSync } from 'child_process'
+import { exec } from 'child_process'
+import moment from 'moment-timezone'
 
 let handler = async (m, { conn }) => {
-    const start = new Date().getTime();
-await m.react('🚀')
-    const { key } = await conn.sendMessage(m.chat, {text: `Cargando Datos 📡`}, {quoted: m});
-    const end = new Date().getTime();
+  let timestamp = speed();
+  let latensi = speed() - timestamp;
 
-    const latency = end - start;
-    const seconds = (latency / 1000).toFixed(1);
+  const start = new Date().getTime();
+  const { key } = await conn.sendMessage(m.chat, { text: `🕒 *Midiendo latencia...*` }, { quoted: m });
+  const end = new Date().getTime();
+  const latency = end - start;
 
-    const uptime = process.uptime(); // en segundos
-    const hours = Math.floor(uptime / 3600);
-    const minutes = Math.floor((uptime % 3600) / 60);
-    const secondsUp = Math.floor(uptime % 60);
-    const uptimeFormatted = `${hours}h ${minutes}m ${secondsUp}s`;
+  const uptime = process.uptime();
+  const hours = Math.floor(uptime / 3600);
+  const minutes = Math.floor((uptime % 3600) / 60);
+  const secondsUp = Math.floor(uptime % 60);
+  const uptimeFormatted = `${hours}h ${minutes}m ${secondsUp}s`;
 
-    const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2); // en MB
+  const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2);
+  const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A');
 
-    setTimeout(async () => {
-        let response = `╭━━━〔 *Info Bot* 〕━━⬣
-│ Hola 👋 @${m.sender.split('@')[0]}. 
-│ 📍 \`Ping:\` ${latency} ms
-│ 🎌 \`Uptime:\` [ ${uptimeFormatted} ]
-│ 💾 \`RAM usada:\` ${usedRAM} MB
-╰━〔 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 〕━⬣
+  exec(`neofetch --stdout`, async (error, stdout) => {
+    let child = stdout.toString("utf-8");
+    let sysInfo = child.replace(/Memory:/, "RAM:");
 
- © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`;
-        await m.react('✅')
-        await conn.sendMessage(m.chat, { text: response, edit: key, mentions: [m.sender] }, { quoted: m });
-    }, latency);
-};
+    let response = 
+`╭━〔 ⚙️ 𝙀𝙨𝙩𝙖𝙙𝙤 𝙙𝙚𝙡 𝘽𝙤𝙩 🛰️ 〕━⬣
+│ 📡 *Ping:* ${latency} ms
+│ ⚡ *Latencia:* ${latensi.toFixed(4)} ms
+│ 💾 *RAM usada:* ${usedRAM} MB
+│ ⏳ *Uptime:* ${uptimeFormatted}
+│ 🕰️ *Fecha / Hora:* ${fechaHora}
+╰━〔 🌸 𝙍𝙞𝙣 𝙄𝙩𝙤𝙨𝙝𝙞 〕━⬣
+\`\`\`
+${sysInfo.trim()}
+\`\`\``
 
-handler.help = ['ping']
+    await conn.sendMessage(m.chat, {
+      text: response,
+      mentions: [m.sender],
+      contextInfo: {
+        externalAdReply: {
+          title: '🌺 Rɪɴ Iᴛᴏsʜɪ ᴍᴅ ⚙️ | 🌼 ʙʏ ᴅᴠ.sʜᴀᴅᴏᴡ 💫',
+          body: club,
+          thumbnailUrl: await (await fetch('https://n.uguu.se/vqJnHBPm.jpg')).buffer(),
+          sourceUrl: redes,
+          mediaType: 1,
+          renderLargerThumbnail: true
+        }
+      }
+    }, { quoted: m })
+  })
+}
+
+handler.help = ['ping', 'p']
 handler.tags = ['info']
 handler.command = ['ping', 'p']
 handler.register = true
