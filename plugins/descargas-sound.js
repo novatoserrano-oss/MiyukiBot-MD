@@ -1,68 +1,80 @@
-import axios from 'axios'
+import scdl from 'soundcloud-downloader'
 import fs from 'fs'
-import fetch from 'node-fetch'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) return conn.reply(
-    m.chat,
-    `🌸 *Ingresa el enlace o nombre de una canción de SoundCloud para descargarla.*\n\n💡 *Ejemplo:* \n> ${usedPrefix + command} https://soundcloud.com/ckfeine/brazilian-phonk`,
-    m
-  )
+  if (!text) {
+    return conn.reply(
+      m.chat,
+      `🌸 *Ingresa el enlace de una canción de SoundCloud para descargarla.*\n\n` +
+      `💡 *Ejemplo:* \n> ${usedPrefix + command} https://soundcloud.com/ckfeine/brazilian-phonk`,
+      m
+    )
+  }
 
   await m.react('⏳')
 
   try {
-    // Si el usuario envía solo el nombre, hacemos una búsqueda primero
-    let url = text
     if (!text.includes('soundcloud.com')) {
-      const search = await axios.get(`https://apis-starlights-team.koyeb.app/starlight/soundcloud-search?text=${encodeURIComponent(text)}`)
-      if (!Array.isArray(search.data) || search.data.length === 0) {
-        await m.react('❌')
-        return conn.reply(m.chat, '⚠️ *No se encontraron resultados para esa búsqueda.*', m)
-      }
-      url = search.data[0].url // toma el primer resultado
+      return conn.reply(m.chat, '⚠️ *Por favor proporciona un enlace válido de SoundCloud.*', m)
     }
 
-    // Descarga directa desde SoundCloud
-    const api = `https://apis-starlights-team.koyeb.app/starlight/soundcloud-down?url=${encodeURIComponent(url)}`
-    const res = await axios.get(api)
-    const data = res.data
-
-    if (!data || !data.url) {
-      await m.react('⚠️')
-      return conn.reply(m.chat, '❌ *No se pudo obtener la información de la canción.*', m)
+    // Obtener información de la canción
+    const info = await scdl.getInfo(text).catch(() => null)
+    if (!info) {
+      await m.react('❌')
+      return conn.reply(m.chat, '❌ *No se pudo obtener información de la pista.*', m)
     }
 
-    const title = data.title || 'Sin título'
-    const artist = data.artist || 'Desconocido'
-    const thumb = data.thumb || 'https://cdn-icons-png.flaticon.com/512/1384/1384060.png'
-    const audioUrl = data.url
+    const title = info.title?.replace(/[\\/:*?"<>|]/g, '') || 'Sin título'
+    const artist = info.user?.username || 'Desconocido'
+    const thumbnail = info.artwork_url?.replace('-large', '-t500x500') || info.user?.avatar_url || null
 
-    // Enviar información primero
-    await conn.sendMessage(m.chat, {
-      image: { url: thumb },
-      caption: `
-🎧 *SoundCloud Downloader* 🎶
+    // Descargar audio
+    const filePath = path.join(__dirname, `../tmp/${title}.mp3`)
+    const stream = await scdl.download(text).catch(() => null)
+    if (!stream) {
+      await m.react('❌')
+      return conn.reply(m.chat, '❌ *No se pudo descargar el audio.*', m)
+    }
 
+    await new Promise((resolve, reject) => {
+      const writeStream = fs.createWriteStream(filePath)
+      stream.pipe(writeStream)
+      writeStream.on('finish', resolve)
+      writeStream.on('error', reject)
+    })
+
+    // Enviar información + portada
+    const caption = `
+╭──────────────────────────────╮
+│ 🎧 *SOUNDCLOUD DOWNLOADER* 🎶
+╰──────────────────────────────╯
 🎵 *Título:* ${title}
 👤 *Artista:* ${artist}
-🔗 *Enlace:* ${url}
+🔗 *Enlace:* ${text}
 
 💠 𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢
-      `.trim()
-    }, { quoted: m })
+    `.trim()
 
-    await m.react('🎵')
+    if (thumbnail) {
+      await conn.sendMessage(m.chat, {
+        image: { url: thumbnail },
+        caption
+      }, { quoted: m })
+    } else {
+      await conn.sendMessage(m.chat, { text: caption }, { quoted: m })
+    }
 
-    // Descargar audio MP3
-    const audioRes = await fetch(audioUrl)
-    const buffer = await audioRes.arrayBuffer()
-    const filePath = './tmp/soundcloud.mp3'
-    fs.writeFileSync(filePath, Buffer.from(buffer))
-
-    // Enviar el audio al chat
+    // Leer el archivo MP3 y enviarlo
+    const audioBuffer = fs.readFileSync(filePath)
     await conn.sendMessage(m.chat, {
-      audio: fs.readFileSync(filePath),
+      audio: audioBuffer,
       mimetype: 'audio/mpeg',
       fileName: `${title}.mp3`
     }, { quoted: m })
@@ -70,16 +82,16 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     fs.unlinkSync(filePath)
     await m.react('✅')
 
-  } catch (e) {
-    console.error(e)
+  } catch (err) {
+    console.error('Error al descargar pista SoundCloud:', err)
     await m.react('💥')
     conn.reply(m.chat, '❌ *Error al descargar la canción. Verifica el enlace o inténtalo más tarde.*', m)
   }
 }
 
-handler.help = ['sound <texto o enlace>']
+handler.help = ['sound <enlace>']
 handler.tags = ['descargas']
-handler.command = ['sound', 'soundcloud', 'scdl']
+handler.command = ['sound', 'scdl']
 handler.register = true
 
 export default handler
