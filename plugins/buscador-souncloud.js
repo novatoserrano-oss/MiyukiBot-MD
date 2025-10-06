@@ -42,42 +42,30 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
 💠 *𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢*
         `.trim()
 
-        cards.push({
-        body: proto.Message.InteractiveMessage.Body.fromObject({ text: infoHeader }),
-        footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: infoBody }),
-        header: proto.Message.InteractiveMessage.Header.fromObject({
-          title: '',
-          hasMediaAttachment: true,
-          imageMessage: image
-        }),
-        nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
+        await conn.sendMessage(m.chat, {
+          image: { url: image },
+          caption: txt,
+          footer: '🎶 Pulsa un botón para interactuar 🎧',
           buttons: [
             {
-              name: 'cta_copy',
-              buttonParamsJson: JSON.stringify({
-                display_text: "📋 𝘊𝘰𝘱𝘪𝘢𝘳 𝘭𝘪𝘯𝘬",
-                id: "copy_link",
-                copy_code: track.url
-              })
-            },
-            {
-              name: 'cta_url',
-              buttonParamsJson: JSON.stringify({
-                display_text: "🎧  𝘝𝘦𝘳 𝘦𝗻 𝘀𝗼𝘂𝗻𝗱𝗰𝗹𝗼𝘂𝗱",
-                url: track.url
-              })
-            },
-            {
-              name: 'cta_url',
-              buttonParamsJson: JSON.stringify({
-                display_text: "🕸️ 𝘊𝘢𝘯𝘢𝘭 𝘰𝘧𝘧𝘪𝘤𝘪𝘢𝘭",
-                url: "https://whatsapp.com/channel/0029VbAtbPA84OmJSLiHis2U"
-              })
+              buttonId: `.copiar ${url}`,
+              buttonText: { displayText: '🔗 Copiar Link' },
+              type: 1
             }
-          ]
-        })
-      });
-    }
+          ],
+          headerType: 4,
+          contextInfo: {
+            externalAdReply: {
+              title: title,
+              body: `🎧 ${artist} | SoundCloud`,
+              thumbnailUrl: image,
+              mediaType: 1,
+              renderLargerThumbnail: true,
+              sourceUrl: url // Este hace que se abra directamente el navegador
+            }
+          }
+        }, { quoted: m })
+      }
 
       await m.react('✅')
     } else {
@@ -92,10 +80,20 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
   }
 }
 
+// Comando adicional para copiar el link manualmente (simula el copiado)
+let copiarHandler = async (m, { text }) => {
+  if (!text) return m.reply('🔗 *Debes incluir el enlace para copiar.*')
+  await m.reply(`📋 *Link copiado:*\n${text}`)
+}
+
 handler.tags = ['buscador']
 handler.help = ['soundcloudsearch <texto>']
 handler.command = ['soundcloudsearch', 'scsearch']
 handler.register = true
 handler.coin = 5
+
+copiarHandler.command = ['copiar']
+copiarHandler.tags = ['util']
+copiarHandler.help = ['copiar <link>']
 
 export default handler
