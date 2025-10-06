@@ -29,11 +29,15 @@ let handler = async (m, { conn }) => {
     let response = 
 `╭─❖ ⚙️ 𝙀𝙨𝙩𝙖𝙙𝙤 𝙙𝙚𝙡 𝘽𝙤𝙩
 │ 📶 Ping: ${latency} ms
-│ ⚡ Latencia: ${latency.toFixed(2)} ms
+│ ⚡ Latencis: ${latency.toFixed(2)} ms
 │ 💽 RAM usada: ${usedRAM} MB
 │ ⏱️ Uptime: ${uptimeFormatted}
 │ 🗓️ Fecha / Hora: ${fechaHora}
-╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸`
+╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸
+
+\`\`\`
+${systInfo.Teim()} 
+\`\`\``
 
     await conn.sendMessage(m.chat, {
       text: response,
