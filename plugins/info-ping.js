@@ -25,7 +25,7 @@ let handler = async (m, { conn }) => {
   const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A')
 
   // 🔹 Coloca tu imagen personalizada aquí 👇
-  const imgUrl = '' // Ejemplo: 'https://tuservidor.com/imagen.jpg'
+  const imgUrl = 'https://files.catbox.moe/sy0zzb.jpg'
   const thumbBuffer = Buffer.from(await (await fetch(imgUrl || 'https://i.ibb.co/mJQvP9K/miyuki-bot-banner.jpg')).arrayBuffer())
 
   exec(`neofetch --stdout`, async (error, stdout) => {
@@ -42,7 +42,7 @@ let handler = async (m, { conn }) => {
 
 \`\`\`${sysInfo.trim()}\`\`\``
 
-    // 🔹 Enviar texto + vista previa (con letras pequeñas abajo)
+   (con letras pequeñas abajo)
     await conn.sendMessage(m.chat, {
       text: response,
       mentions: [m.sender],
@@ -51,7 +51,7 @@ let handler = async (m, { conn }) => {
           title: 'MiyukiBot-MD 🌸',
           body: 'Estado del sistema',
           thumbnail: thumbBuffer,
-          sourceUrl: 'https://github.com/', // 🔹 Cambia este link por el tuyo
+          sourceUrl: 'https://github.com/OmarGranda', // 🔹 Cambia este link por el tuyo
           mediaType: 1,
           renderLargerThumbnail: true,
           showAdAttribution: true
