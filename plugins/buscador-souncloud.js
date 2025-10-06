@@ -3,7 +3,7 @@ import axios from 'axios'
 let handler = async (m, { conn, usedPrefix, command, text }) => {
   if (!text) return conn.reply(
     m.chat,
-    `🌸 *Ingresa el nombre de una canción o artista para buscar en SoundCloud.*\n\n💡 *Ejemplo:* \n> ${usedPrefix + command} Tokyo Nights`,
+    `🎵 *Ingresa el nombre de una canción o artista para buscar en SoundCloud.*\n\n💡 *Ejemplo:* \n> ${usedPrefix + command} Tokyo Nights`,
     m
   )
 
@@ -16,7 +16,7 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
     if (Array.isArray(results) && results.length > 0) {
       await m.react('⏳')
       await conn.sendMessage(m.chat, {
-        text: `⚡ *Resultados de:* ${text}\n📀 *Mostrando ${results.length} resultados*\n\n🎶 *SoundCloud – Search*`,
+        text: `✨ *Resultados de búsqueda para:* _${text}_\n📀 *Se encontraron ${results.length} resultados*\n\n🎶 *SoundCloud – Search*`,
       }, { quoted: m })
 
       for (let i = 0; i < results.length && i < 10; i++) {
@@ -32,13 +32,12 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
         const txt = `
 🎧 *SOUNDCLOUD • BÚSQUEDA*
 
-🍀 *Nro:* ${i + 1}
-🎵 *Título:* ${title}
+🎶 *Título:* ${title}
 🎤 *Artista:* ${artist}
 👁‍🗨 *Reproducciones:* ${repro}
 ⏱️ *Duración:* ${duration}
 💫 *Creador:* ${creator}
-🌐 *URL:* ${url}
+🔗 *Enlace:* ${url}
 
 💠 *𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢*
         `.trim()
@@ -46,11 +45,16 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
         await conn.sendMessage(m.chat, {
           image: { url: image },
           caption: txt,
-          footer: '🎶 Pulsa el botón para descargar esta canción 🎧',
+          footer: '🎶 Pulsa un botón para interactuar 🎧',
           buttons: [
             {
-              buttonId: `.sound ${url}`,
-              buttonText: { displayText: '⬇️ Descargar Audio' },
+              buttonId: `.link ${url}`,
+              buttonText: { displayText: '🔗 Copiar Link' },
+              type: 1
+            },
+            {
+              buttonId: `.open ${url}`,
+              buttonText: { displayText: '🌐 Visitar Página' },
               type: 1
             }
           ],
