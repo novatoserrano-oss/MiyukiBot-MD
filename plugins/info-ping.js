@@ -26,8 +26,7 @@ let handler = async (m, { conn }) => {
     const thumb = await fetch('https://files.catbox.moe/sy0zzb.jpg');
     const bufferThumb = await thumb.arrayBuffer();
 
-    let response = 
-`╭─❖ ⚙️ 𝙀𝙨𝙩𝙖𝙙𝙤 𝙙𝙚𝙡 𝘽𝙤𝙩
+    let response = `╭─❖ ⚙️ 𝙀𝙨𝙩𝙖𝙙𝙤 𝙙𝙚𝙡 𝘽𝙤𝙩
 │ 📶 Ping: ${latency} ms
 │ ⚡ Latencis: ${latency.toFixed(2)} ms
 │ 💽 RAM usada: ${usedRAM} MB
