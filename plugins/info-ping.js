@@ -48,14 +48,13 @@ let handler = async (m, { conn }) => {
           title: 'MiyukiBot-MD 🌸',
           body: 'xd',
           thumbnail: thumbBuffer,
-          sourceUrl: redes,
+          sourceUrl: 'https://files.catbox.moe/sy0zzb.jpg',
           mediaType: 1,
           renderLargerThumbnail: true
         }
       }
     }, { quoted: m })
 
-    // 🔹 Reacción final
     await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   })
 }
