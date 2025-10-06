@@ -43,8 +43,8 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
     const { url: downloadUrl, servidor } = await fetchFromApis(apis)
     if (!downloadUrl) return conn.reply(m.chat, '❌ No fue posible obtener el audio.', m)
 
-    // Mostrar mensaje de descarga
-    await conn.reply(m.chat, `📥 Descargando... por favor espera unos segundos ⏳`, m)
+    // Mostrar mensaje de descarga con tu marca
+    await conn.reply(m.chat, `📥 Descargando... por favor espera unos segundos ⏳\n\n🔗 Canal activo: *𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿*\n💠 FronCat`, m)
 
     // Obtener tamaño
     const size = await getSize(downloadUrl)
