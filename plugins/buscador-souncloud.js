@@ -42,25 +42,42 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
 💠 *𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢*
         `.trim()
 
-        await conn.sendMessage(m.chat, {
-          image: { url: image },
-          caption: txt,
-          footer: '🎶 Pulsa un botón para interactuar 🎧',
+        cards.push({
+        body: proto.Message.InteractiveMessage.Body.fromObject({ text: infoHeader }),
+        footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: infoBody }),
+        header: proto.Message.InteractiveMessage.Header.fromObject({
+          title: '',
+          hasMediaAttachment: true,
+          imageMessage: image
+        }),
+        nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
           buttons: [
             {
-              buttonId: `.link ${url}`,
-              buttonText: { displayText: '🔗 Copiar Link' },
-              type: 1
+              name: 'cta_copy',
+              buttonParamsJson: JSON.stringify({
+                display_text: "📋 𝘊𝘰𝘱𝘪𝘢𝘳 𝘭𝘪𝘯𝘬",
+                id: "copy_link",
+                copy_code: track.url
+              })
             },
             {
-              buttonId: `.open ${url}`,
-              buttonText: { displayText: '🌐 Visitar Página' },
-              type: 1
+              name: 'cta_url',
+              buttonParamsJson: JSON.stringify({
+                display_text: "🎧  𝘝𝘦𝘳 𝘦𝗻 𝘀𝗼𝘂𝗻𝗱𝗰𝗹𝗼𝘂𝗱",
+                url: track.url
+              })
+            },
+            {
+              name: 'cta_url',
+              buttonParamsJson: JSON.stringify({
+                display_text: "🕸️ 𝘊𝘢𝘯𝘢𝘭 𝘰𝘧𝘧𝘪𝘤𝘪𝘢𝘭",
+                url: "https://whatsapp.com/channel/0029VbAtbPA84OmJSLiHis2U"
+              })
             }
-          ],
-          headerType: 4
-        }, { quoted: m })
-      }
+          ]
+        })
+      });
+    }
 
       await m.react('✅')
     } else {
