@@ -30,7 +30,7 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
         const image = track.image || 'https://cdn-icons-png.flaticon.com/512/1384/1384060.png'
 
         const txt = `
-🎧 *SOUNDCLOUD • BÚSQUEDA*
+🎧 *SOUNDCLOUD – RESULTADO*
 
 🎶 *Título:* ${title}
 🎤 *Artista:* ${artist}
@@ -45,25 +45,17 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
         await conn.sendMessage(m.chat, {
           image: { url: image },
           caption: txt,
-          footer: '🎶 Pulsa un botón para interactuar 🎧',
-          buttons: [
+          footer: '🌐 Pulsa el botón para abrir directamente en SoundCloud',
+          templateButtons: [
             {
-              buttonId: `.copiar ${url}`,
-              buttonText: { displayText: '🔗 Copiar Link' },
-              type: 1
+              index: 1,
+              urlButton: {
+                displayText: '🌐 Visitar en SoundCloud',
+                url: url
+              }
             }
           ],
-          headerType: 4,
-          contextInfo: {
-            externalAdReply: {
-              title: title,
-              body: `🎧 ${artist} | SoundCloud`,
-              thumbnailUrl: image,
-              mediaType: 1,
-              renderLargerThumbnail: true,
-              sourceUrl: url // Este hace que se abra directamente el navegador
-            }
-          }
+          headerType: 4
         }, { quoted: m })
       }
 
@@ -80,20 +72,10 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
   }
 }
 
-// Comando adicional para copiar el link manualmente (simula el copiado)
-let copiarHandler = async (m, { text }) => {
-  if (!text) return m.reply('🔗 *Debes incluir el enlace para copiar.*')
-  await m.reply(`📋 *Link copiado:*\n${text}`)
-}
-
 handler.tags = ['buscador']
 handler.help = ['soundcloudsearch <texto>']
 handler.command = ['soundcloudsearch', 'scsearch']
 handler.register = true
 handler.coin = 5
-
-copiarHandler.command = ['copiar']
-copiarHandler.tags = ['util']
-copiarHandler.help = ['copiar <link>']
 
 export default handler
