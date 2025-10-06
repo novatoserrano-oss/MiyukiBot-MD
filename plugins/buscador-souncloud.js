@@ -29,7 +29,7 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
         const url = track.url
         const image = track.image || 'https://cdn-icons-png.flaticon.com/512/1384/1384060.png'
 
-        const txt = `
+        const caption = `
 🎧 *SOUNDCLOUD – RESULTADO*
 
 🎶 *Título:* ${title}
@@ -44,18 +44,26 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
 
         await conn.sendMessage(m.chat, {
           image: { url: image },
-          caption: txt,
-          footer: '🌐 Pulsa el botón para abrir directamente en SoundCloud',
-          templateButtons: [
+          caption,
+          footer: '🌐 Pulsa para abrir el enlace directamente en SoundCloud',
+          buttons: [
             {
-              index: 1,
-              urlButton: {
-                displayText: '🌐 Visitar en SoundCloud',
-                url: url
-              }
+              buttonId: `.abrir ${url}`,
+              buttonText: { displayText: '🌐 Visitar en SoundCloud' },
+              type: 1
             }
           ],
-          headerType: 4
+          headerType: 4,
+          contextInfo: {
+            externalAdReply: {
+              title: title,
+              body: `${artist} | SoundCloud`,
+              thumbnailUrl: image,
+              mediaType: 1,
+              renderLargerThumbnail: true,
+              sourceUrl: url // se abre SoundCloud directamente
+            }
+          }
         }, { quoted: m })
       }
 
@@ -72,10 +80,20 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
   }
 }
 
+// comando extra para abrir desde botón
+let abrirHandler = async (m, { text }) => {
+  if (!text) return m.reply('🌐 *Debes incluir un enlace de SoundCloud.*')
+  await m.reply(`🌎 Abre este enlace:\n${text}`)
+}
+
 handler.tags = ['buscador']
 handler.help = ['soundcloudsearch <texto>']
 handler.command = ['soundcloudsearch', 'scsearch']
 handler.register = true
 handler.coin = 5
+
+abrirHandler.command = ['abrir']
+abrirHandler.tags = ['util']
+abrirHandler.help = ['abrir <url>']
 
 export default handler
