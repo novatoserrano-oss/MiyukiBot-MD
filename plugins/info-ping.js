@@ -36,7 +36,9 @@ let handler = async (m, { conn }) => {
 │ 💽 RAM usada: ${usedRAM} MB
 │ ⏱️ Uptime: ${uptimeFormatted}
 │ 🗓️ Fecha / Hora: ${fechaHora}
-╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝐃 🌸`
+╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝐃 🌸
+
+\`\`\`${sysInfo.trim()}\`\`\``
 
     await conn.sendMessage(m.chat, {
       text: response,
@@ -45,8 +47,8 @@ let handler = async (m, { conn }) => {
         externalAdReply: {
           title: 'MiyukiBot-MD 🌸',
           body: 'xd',
-          thumbnail: https://files.catbox.moe/sy0zzb.jpg, // ← Tu imagen se mostrará aquí
-          sourceUrl: 'https://github.com/OmarGranda', // 🔹 Este sí es el enlace clickeable (puedes cambiarlo)
+          thumbnail: thumbBuffer, // ← Tu imagen se mostrará aquí
+          sourceUrl: 'https://github.com/', // 🔹 Este sí es el enlace clickeable (puedes cambiarlo)
           mediaType: 1,
           renderLargerThumbnail: true
         }
