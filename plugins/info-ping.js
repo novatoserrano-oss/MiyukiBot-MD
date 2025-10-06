@@ -4,7 +4,6 @@ import moment from 'moment-timezone'
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn }) => {
-  // 🔹 Reacción inicial
   await conn.sendMessage(m.chat, { react: { text: '🕒', key: m.key } })
 
   let timestamp = speed()
@@ -24,7 +23,8 @@ let handler = async (m, { conn }) => {
   const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)
   const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A')
 
-  const thumbBuffer = Buffer.from(await (await fetch('https://d.uguu.se/VpyXZrTP.webp')).arrayBuffer())
+  // 🔹 Aquí pones tu imagen personalizada 👇
+  const thumbBuffer = Buffer.from(await (await fetch('https://files.catbox.moe/sy0zzb.jpg')).arrayBuffer())
 
   exec(`neofetch --stdout`, async (error, stdout) => {
     let sysInfo = stdout.toString("utf-8").replace(/Memory:/, "Ram:")
@@ -36,9 +36,7 @@ let handler = async (m, { conn }) => {
 │ 💽 RAM usada: ${usedRAM} MB
 │ ⏱️ Uptime: ${uptimeFormatted}
 │ 🗓️ Fecha / Hora: ${fechaHora}
-╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝐃 🌸
-
-\`\`\`${sysInfo.trim()}\`\`\``
+╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝐃 🌸`
 
     await conn.sendMessage(m.chat, {
       text: response,
@@ -47,8 +45,8 @@ let handler = async (m, { conn }) => {
         externalAdReply: {
           title: 'MiyukiBot-MD 🌸',
           body: 'xd',
-          thumbnail: thumbBuffer,
-          sourceUrl: 'https://files.catbox.moe/sy0zzb.jpg',
+          thumbnail: https://files.catbox.moe/sy0zzb.jpg, // ← Tu imagen se mostrará aquí
+          sourceUrl: 'https://github.com/OmarGranda', // 🔹 Este sí es el enlace clickeable (puedes cambiarlo)
           mediaType: 1,
           renderLargerThumbnail: true
         }
