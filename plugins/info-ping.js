@@ -38,9 +38,11 @@ let handler = async (m, { conn }) => {
 │ 💽 *RAM usada:* ${usedRAM} MB
 │ ⏱️ *Uptime:* ${uptimeFormatted}
 │ 🗓️ *Fecha / Hora:* ${fechaHora}
-╰─❖ *MiyukiBot-MD* 🌸
+╰─❖ *MiyukiBot-MD 🌸*
 
-    (con letras pequeñas abajo)
+\`\`\`${sysInfo.trim()}\`\`\``
+
+    // 🔹 Enviar texto + vista previa (con letras pequeñas abajo)
     await conn.sendMessage(m.chat, {
       text: response,
       mentions: [m.sender],
@@ -49,7 +51,7 @@ let handler = async (m, { conn }) => {
           title: 'MiyukiBot-MD 🌸',
           body: 'Estado del sistema',
           thumbnail: thumbBuffer,
-          sourceUrl: 'https://github.com/OmarGranda', 
+          sourceUrl: 'https://github.com/', // 🔹 Cambia este link por el tuyo
           mediaType: 1,
           renderLargerThumbnail: true,
           showAdAttribution: true
