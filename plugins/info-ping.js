@@ -24,10 +24,8 @@ let handler = async (m, { conn }) => {
   const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)
   const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A')
 
-  // 🔹 Coloca tu imagen aquí 👇
-  const imgUrl = '' // Ejemplo: 'https://tuservidor.com/miimagen.jpg'
-
-  // Si no hay imagen personalizada, usa una por defecto
+  // 🔹 Coloca tu imagen personalizada aquí 👇
+  const imgUrl = '' // Ejemplo: 'https://tuservidor.com/imagen.jpg'
   const thumbBuffer = Buffer.from(await (await fetch(imgUrl || 'https://i.ibb.co/mJQvP9K/miyuki-bot-banner.jpg')).arrayBuffer())
 
   exec(`neofetch --stdout`, async (error, stdout) => {
@@ -44,11 +42,21 @@ let handler = async (m, { conn }) => {
 
 \`\`\`${sysInfo.trim()}\`\`\``
 
-    // 🔹 Enviar imagen + texto (sin externalAdReply)
+    // 🔹 Enviar texto + vista previa (con letras pequeñas abajo)
     await conn.sendMessage(m.chat, {
-      image: thumbBuffer,
-      caption: response,
-      mentions: [m.sender]
+      text: response,
+      mentions: [m.sender],
+      contextInfo: {
+        externalAdReply: {
+          title: 'MiyukiBot-MD 🌸',
+          body: 'Estado del sistema',
+          thumbnail: thumbBuffer,
+          sourceUrl: 'https://github.com/', // 🔹 Cambia este link por el tuyo
+          mediaType: 1,
+          renderLargerThumbnail: true,
+          showAdAttribution: true
+        }
+      }
     }, { quoted: m })
 
     // 🔹 Reacción final
