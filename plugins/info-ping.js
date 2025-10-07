@@ -33,11 +33,11 @@ let handler = async (m, { conn }) => {
       // Nuevo diseño con emojis
       let response = 
 `╭─❖ ⚙️ 𝙀𝙨𝙩𝙖𝙙𝙤 𝙙𝙚𝙡 𝘽𝙤𝙩
-│ 📶 Ping: ${latency} ms
-│ ⚡ Latencia: ${latency.toFixed(2)} ms
-│ 💽 RAM usada: ${usedRAM} MB
-│ ⏱️ Uptime: ${uptimeFormatted}
-│ 🗓️ Fecha / Hora: ${fechaHora}
+│ 📶 *Ping:* ${latency} ms
+│ ⚡ *Velocidad:* ${latency.toFixed(2)} ms
+│ 💽 *RAM usada:* ${usedRAM} MB
+│ ⏱️ *Uptime:* ${uptimeFormatted}
+│ 🗓️ *Fecha/Hora:* ${fechaHora}
 ╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸
 
 ⚡ *Estado:* En línea ✅
@@ -48,10 +48,10 @@ let handler = async (m, { conn }) => {
         mentions: [m.sender],
         contextInfo: {
           externalAdReply: {
-            title: '🍄 Rɪɴ Iᴛᴏsʜɪ ᴍᴅ 🌹 | 🪾 ʙʏ ᴅᴠ.sʜᴀᴅᴏᴡ 🪴',
+            title: '𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿',
             body: '',
             thumbnail: thumbBuffer,
-            sourceUrl: redes, // Asegúrate de que la variable 'redes' exista
+            sourceUrl: redes,
             mediaType: 1,
             renderLargerThumbnail: true
           }
