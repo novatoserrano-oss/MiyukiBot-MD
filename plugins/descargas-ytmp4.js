@@ -39,14 +39,16 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
       const info = `🎬 *YOUTUBE MP4*
 ────────────────────
-📌 *Título:* ${meta.title}
-⏱️ *Duración:* ${meta.duration?.timestamp || meta.timestamp}
-📺 *Canal:* ${meta.author?.name || "-"}
-👁️ *Vistas:* ${meta.views?.toLocaleString() || "-"}
-💾 *Tamaño:* ${fileSize}
-⚡ *Calidad:* ${dl.quality}
-📅 *Publicado:* ${meta.ago}
-🔗 *Link:* ${meta.url}`
+> 📌 *Título:* ${meta.title}
+> ⏱️ *Duración:* ${meta.duration?.timestamp || meta.timestamp}
+> 📺 *Canal:* ${meta.author?.name || "-"}
+> 👁️ *Vistas:* $> {meta.views?.toLocaleString() || "-"}
+> 💾 *Tamaño:* ${fileSize}
+> ⚡ *Calidad:* ${dl.quality}
+> 📅 *Publicado:* ${meta.ago}
+> 🔗 *Link:* ${meta.url}
+────────────────────
+> *≡ Enviando, espera un momento...*`
 
       await conn.sendMessage(m.chat, {
         image: { url: meta.thumbnail },
