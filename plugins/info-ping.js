@@ -5,8 +5,8 @@ import fetch from 'node-fetch'
 
 let handler = async (m, { conn }) => {
   try {
-    // Reacción de inicio
-    await conn.sendMessage(m.chat, { react: { text: '⌛', key: m.key } })
+
+    await conn.sendMessage(m.chat, { react: { text: '🚀', key: m.key } })
 
     let timestamp = speed()
     let latensi = speed() - timestamp
@@ -26,12 +26,11 @@ let handler = async (m, { conn }) => {
     const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)
     const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A')
 
-    const thumbBuffer = Buffer.from(await (await fetch('https://i.postimg.cc/DZV718FL/IMG-20251006-WA0139.jpg.')).arrayBuffer())
+    const thumbBuffer = Buffer.from(await (await fetch('https://i.postimg.cc/DZV718FL/IMG-20251006-WA0139.jpg')).arrayBuffer())
 
     exec(`neofetch --stdout`, async (error, stdout) => {
       let sysInfo = stdout.toString("utf-8").replace(/Memory:/, "Ram:")
 
-      // Nuevo diseño con emojis
       let response = 
 `╭─❖ ⚙️ 𝙀𝙨𝙩𝙖𝙙𝙤 𝙙𝙚𝙡 𝘽𝙤𝙩
 │ 📶 *Ping:* ${latency} ms
