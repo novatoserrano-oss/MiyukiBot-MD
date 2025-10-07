@@ -87,8 +87,8 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   }
 }
 
-handler.help = ["ytmp4 <url>", "setcalidad <valor>"]
+handler.help = ["ytmp4 <url>"] 
 handler.tags = ["descargas"]
-handler.command = ["ytmp4", "setcalidad", "setquality"]
+handler.command = ["ytmp4"]
 
 export default handler
