@@ -49,9 +49,9 @@ let handler = async (m, { conn }) => {
         contextInfo: {
           externalAdReply: {
             title: '𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿',
-            body: '',
+            body: 'Powered By OmarGranda',
             thumbnail: thumbBuffer,
-            sourceUrl: redes,
+            sourceUrl: `https://github.com/OmarGranda',
             mediaType: 1,
             renderLargerThumbnail: true
           }
