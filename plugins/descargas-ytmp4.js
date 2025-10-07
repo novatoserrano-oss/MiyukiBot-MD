@@ -1,78 +1,95 @@
-import fetch from 'node-fetch'
+import axios from "axios"
+import fetch from "node-fetch"
+import { sizeFormatter } from "human-readable"
+
+let calidadPredeterminada = "720"
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) {
-    return conn.reply(m.chat, `🍂 Ingresa un enlace de YouTube.\n\n☁️ Ejemplo:\n${usedPrefix + command} https://youtube.com/watch?v=03pkdhqOEdY`, m)
-  }
+  try {
 
-  const apis = [
-    async (url) => {
-      let api = `https://api.stellarwa.xyz/dow/ytmp4v2?url=${encodeURIComponent(url)}&apikey=Shadow-xyz`
-      let res = await fetch(api)
-      let json = await res.json()
-      if (!json.status) throw new Error("❌ Stellar falló")
-      return {
-        title: json.data.title,
-        thumbnail: json.data.thumbnail,
-        dl: json.data.dl,
-        duration: json.data.duration
-      }
-    },
-    async (url) => {
-      let api = `https://api.yupra.my.id/api/downloader/ytmp4?url=${encodeURIComponent(url)}`
-      let res = await fetch(api)
-      let json = await res.json()
-      if (!json.title) throw new Error("❌ Yupra falló")
-      return {
-        title: json.title,
-        thumbnail: `https://i.ytimg.com/vi/${url.split("v=")[1]}/maxresdefault.jpg`,
-        dl: json.url || json.result?.[0]?.url,
-        duration: Math.floor((json.result?.[0]?.approxDurationMs || 0) / 1000)
-      }
-    },
-    async (url) => {
-      let api = `https://xyro.site/download/youtubemp4?url=${encodeURIComponent(url)}&quality=480`
-      let res = await fetch(api)
-      let json = await res.json()
-      if (!json.status) throw new Error("❌ Xyro falló")
-      return {
-        title: json.result.title,
-        thumbnail: json.result.thumb,
-        dl: json.result.dl,
-        duration: json.result.duration
+    if (command === "ytmp4") {
+      if (!text)
+        return conn.reply(
+          m.chat,
+          `📌 *Ingresa el enlace de YouTube para descargar en MP4.*\nEjemplo:\n${usedPrefix + command} https://youtu.be/HWjCStB6k4o`,
+          m
+        )
+
+      await conn.reply(
+        m.chat,
+        `⏳ *Procesando...*\nCalidad actual: *${calidadPredeterminada}p*`,
+        m
+      )
+
+      const apiUrl = `https://api.vreden.my.id/api/v1/download/youtube/video?url=${encodeURIComponent(text)}&quality=${calidadPredeterminada}`
+      const res = await axios.get(apiUrl)
+
+      if (!res.data?.status) throw new Error("No se pudo obtener información del video.")
+
+      const result = res.data.result
+      const meta = result.metadata
+      const dl = result.download
+
+      const head = await fetch(dl.url, { method: "HEAD" })
+      const size = head.headers.get("content-length")
+      const formatSize = sizeFormatter({ std: "JEDEC", decimalPlaces: 2 })
+      const fileSize = size ? formatSize(parseInt(size)) : "Desconocido"
+      const sizeMB = size ? parseInt(size) / 1024 / 1024 : 0
+
+      const info = `🎬 *YOUTUBE MP4*
+────────────────────
+📌 *Título:* ${meta.title}
+⏱️ *Duración:* ${meta.duration?.timestamp || meta.timestamp}
+📺 *Canal:* ${meta.author?.name || "-"}
+👁️ *Vistas:* ${meta.views?.toLocaleString() || "-"}
+💾 *Tamaño:* ${fileSize}
+⚡ *Calidad:* ${dl.quality}
+📅 *Publicado:* ${meta.ago}
+🔗 *Link:* ${meta.url}
+────────────────────
+> Usa /setquality para cambiar la calidad predeterminada.`
+
+      await conn.sendMessage(m.chat, {
+        image: { url: meta.thumbnail },
+        caption: info,
+      })
+
+      if (sizeMB > 100) {
+        await conn.sendMessage(
+          m.chat,
+          {
+            document: { url: dl.url },
+            mimetype: "video/mp4",
+            fileName: dl.filename,
+            caption: `🎬 *${meta.title}*\n💾 Tamaño: ${fileSize}\n⚡ Calidad: ${dl.quality}\n> Enviado como documento (más de 100 MB).`,
+          },
+          { quoted: m }
+        )
+      } else {
+        await conn.sendMessage(
+          m.chat,
+          {
+            video: { url: dl.url },
+            mimetype: "video/mp4",
+            fileName: dl.filename,
+            caption: `🎬 *${meta.title}*\n💾 Tamaño: ${fileSize}\n⚡ Calidad: ${dl.quality}`,
+          },
+          { quoted: m }
+        )
       }
     }
-  ]
-
-  let video
-  for (let i = 0; i < apis.length; i++) {
-    try {
-      let pick = apis.sort(() => Math.random() - 0.5)[0]
-      video = await pick(text)
-      if (video) break
-    } catch (e) {
-      console.log(`⚠️ API ${i+1} falló:`, e.message)
-    }
+  } catch (err) {
+    console.error(err)
+    conn.reply(
+      m.chat,
+      "❌ *Ocurrió un error al procesar tu solicitud.*\nVerifica el enlace o intenta con otro video.",
+      m
+    )
   }
-
-  if (!video) return conn.reply(m.chat, "❌ No se pudo descargar el video con ninguna API.", m)
-
-  let caption = `
-🎬 *Título:* ${video.title}
-⏱️ *Duración:* ${video.duration ? video.duration + " seg" : "N/A"}
-`.trim()
-
-  await conn.sendMessage(m.chat, {
-    video: { url: video.dl },
-    mimetype: "video/mp4",
-    fileName: video.title + ".mp4",
-    caption,
-    thumbnail: await (await fetch(video.thumbnail)).buffer()
-  }, { quoted: m })
 }
 
-handler.help = ["ytmp4"]
-handler.tags = ["downloader"]
-handler.command = ["ytmp4", "ytvideo"]
+handler.help = ["ytmp4 <url>", "setcalidad <valor>"]
+handler.tags = ["descargas"]
+handler.command = ["ytmp4", "setcalidad", "setquality"]
 
 export default handler
