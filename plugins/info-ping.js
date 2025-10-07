@@ -4,7 +4,6 @@ import moment from 'moment-timezone'
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn }) => {
-  // 🔹 Reacción inicial
   await conn.sendMessage(m.chat, { react: { text: '🕒', key: m.key } })
 
   let timestamp = speed()
@@ -24,23 +23,23 @@ let handler = async (m, { conn }) => {
   const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)
   const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A')
 
-  const thumbBuffer = Buffer.from(await (await fetch('https://d.uguu.se/VpyXZrTP.webp')).arrayBuffer())
+  // 🔹 Nueva imagen confiable (Wikimedia)
+  const thumbBuffer = Buffer.from(await (await fetch('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Android_robot_head.svg/512px-Android_robot_head.svg.png')).arrayBuffer())
 
   exec(`neofetch --stdout`, async (error, stdout) => {
     let sysInfo = stdout.toString("utf-8").replace(/Memory:/, "Ram:")
 
     let response = 
-` ╭─❖ ⚙️ 𝙀𝙨𝙩𝙖𝙙𝙤 𝙙𝙚𝙡 𝘽𝙤𝙩
+`╭─❖ ⚙️ *Estado del Bot*
 │ 📶 Ping: ${latency} ms
 │ ⚡ Latencia: ${latensi.toFixed(4)} ms
 │ 💽 RAM usada: ${usedRAM} MB
 │ ⏱️ Uptime: ${uptimeFormatted}
 │ 🗓️ Fecha / Hora: ${fechaHora}
 \`\`\`${sysInfo.trim()}\`\`\`
-╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸
+╰─❖ MiyukiBot-MD 🌸
 
 𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`
-
 
     await conn.sendMessage(m.chat, {
       text: response,
@@ -48,16 +47,15 @@ let handler = async (m, { conn }) => {
       contextInfo: {
         externalAdReply: {
           title: 'MiyukiBot-MD 🌸',
-          body: 'xd',
+          body: 'Sistema operativo activo',
           thumbnail: thumbBuffer,
-          sourceUrl: redes,
+          sourceUrl: 'https://github.com/',
           mediaType: 1,
           renderLargerThumbnail: true
         }
       }
     }, { quoted: m })
 
-    // 🔹 Reacción final
     await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
   })
 }
