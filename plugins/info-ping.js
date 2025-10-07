@@ -51,7 +51,7 @@ let handler = async (m, { conn }) => {
             title: '𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿',
             body: '',
             thumbnail: thumbBuffer,
-            sourceUrl: '',
+            sourceUrl: redes,
             mediaType: 1,
             renderLargerThumbnail: true
           }
