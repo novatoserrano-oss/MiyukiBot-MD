@@ -24,7 +24,7 @@ let handler = async (m, { conn }) => {
   const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A')
 
   // 🔹 Nueva imagen confiable (Wikimedia)
-  const thumbBuffer = Buffer.from(await (await fetch('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Android_robot_head.svg/512px-Android_robot_head.svg.png')).arrayBuffer())
+  const thumbBuffer = Buffer.from(await (await fetch('https://files.catbox.moe/sy0zzb.jpg')).arrayBuffer())
 
   exec(`neofetch --stdout`, async (error, stdout) => {
     let sysInfo = stdout.toString("utf-8").replace(/Memory:/, "Ram:")
