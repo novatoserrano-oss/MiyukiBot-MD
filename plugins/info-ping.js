@@ -32,16 +32,20 @@ let handler = async (m, { conn }) => {
 
       // Nuevo diseño con emojis
       let response = 
-`\`⚡ 𝗦 𝗧 𝗔 𝗧 𝗨 𝗦 • 𝗣 𝗜 𝗡 𝗚 🌿\`
+`🌐 𝗦 𝗧 𝗔 𝗧 𝗨 𝗦 • 𝗣𝗜𝗡𝗚 ⚡
 
-🌟 *Ping:* ⚡ ${latency} ms
-📡 *Latency:* ⏱️ ${latensi.toFixed(4)} ms
-💻 *RAM Usage:* 🖥️ ${usedRAM} MB
-⏳ *Uptime:* 🕒 ${uptimeFormatted}
-🗓️ *Date/Time:* 📅 ${fechaHora}
+🚀 *Ping del Bot:* ⏱️ ${latency} ms
+🔗 *Latencia de conexión:* 📶 ${latensi.toFixed(4)} ms
+🖥️ *Uso de RAM:* 💾 ${usedRAM} MB
+⏰ *Tiempo activo (Uptime):* 🕑 ${uptimeFormatted}
+📅 *Fecha y hora:* 🗓️ ${fechaHora}
+
+💻 *Información del Sistema:*
 \`\`\`${sysInfo.trim()}\`\`\`
-> ☄︎ кαиєкι вσт ν3 | 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝚂𝙷𝙰𝙳𝙾𝚆-𝚇𝚈𝚉
-      `
+
+🤖 *Bot:* MiyukiBot-MD
+⚡ *Estado:* En línea ✅
+🌟 *Powered by:* OmarGranda`
 
       await conn.sendMessage(m.chat, {
         text: response,
