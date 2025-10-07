@@ -1,7 +1,7 @@
 // Comando: ping.js
 module.exports = {
     name: 'ping',
-    alias: ['pong'],
+    alias: ['p'],
     desc: 'Muestra información completa del bot con reacciones y GIF dinámico',
     category: 'info',
     async exec(m, { conn }) {
@@ -40,11 +40,11 @@ module.exports = {
             else if (latency < 300) gifURL = 'https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif'; // Amarillo medio
             else gifURL = 'https://media.giphy.com/media/l0HlOvJ7yaacpuSas/giphy.gif'; // Rojo lento
 
-            // Mensaje final con imagen y datos
+            // Mensaje final con imagen/GIF
             await conn.sendMessage(
                 m.from,
                 {
-                    image: { url: gifURL },
+                    image: { url: gifURL }, // Aquí se asegura que la imagen/GIF se muestre
                     caption: `🏓 *Pong!*\n\n*Latencia del mensaje:* ${latency}ms\n*Ping de la API:* ${apiLatency}ms\n*Fecha y hora:* ${fechaHora}\n*Velocidad aproximada:* ${latency}ms\n*Servidores/Chats activos:* ${servidores}`
                 },
                 { quoted: m }
