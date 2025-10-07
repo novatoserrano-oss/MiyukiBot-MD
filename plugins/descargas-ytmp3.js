@@ -44,9 +44,36 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
     const { url: downloadUrl, servidor } = await fetchFromApis(apis)
     if (!downloadUrl) return conn.reply(m.chat, '❌ *No fue posible obtener el audio.*', m)
 
-    // Mostrar mensaje de descarga con tu marca
-    await conn.reply(m.chat, `📥 *DESCARGANDO ARCHIVO...*
-> Por favor espera unos segundos`, m)
+        const size = await getSize(downloadUrl)
+    const sizeStr = size ? formatSize(size) : 'Desconocido'
+
+    const meta = {
+      title: video.title,
+      duration: video.timestamp,
+      url: video.url,
+      author: video.author?.name || "Desconocido",
+      views: video.views?.toLocaleString('es-PE') || "0",
+      ago: video.ago || "Desconocido",
+      thumbnail: video.thumbnail,
+      size: sizeStr,
+      servidor
+    }
+
+    const textoInfo = `🎶 *ＹＯＵＴＵＢＥ • ＭＰ3* ☁️
+────────────────────
+> °𓃉𐇽ܳ𓏸🎋ᮬᩬִּ〫᪲۟. 𝐓𝐈𝐓𝐔𝐋𝐎: *${meta.title}*
+> °𓃉𐇽ܳ𓏸🌿ᮬᩬִּ〫᪲۟. 𝐃𝐔𝐑𝐀𝐂𝐈𝐎𝐍: *${meta.duration}*
+> °𓃉𐇽ܳ𓏸🍏ᮬᩬִּ〫᪲۟. 𝐂𝐀𝐍𝐀𝐋: *${meta.author}*
+> °𓃉𐇽ܳ𓏸🍄ᮬᩬִּ〫᪲۟. 𝐕𝐈𝐒𝐓𝐀𝐒: *${meta.views}*
+> °𓃉𐇽ܳ𓏸⚽ᮬᩬִּ〫᪲۟. 𝐓𝐀𝐌𝐀𝐍̃𝐎: *${meta.size}*
+> °𓃉𐇽ܳ𓏸☁️ᮬᩬִּ〫᪲۟. 𝐂𝐀𝐋𝐈𝐃𝐀𝐃: *128kbps*
+> °𓃉𐇽ܳ𓏸🌷ᮬᩬִּ〫᪲۟. 𝐏𝐔𝐁𝐈𝐂𝐀𝐃𝐎: *${meta.ago}*
+> °𓃉𐇽ܳ𓏸🕸️ᮬᩬִּ〫᪲۟. 𝐋𝐈𝐍𝐊: *${meta.url}*
+> °𓃉𐇽ܳ𓏸⚙️ᮬᩬִּ〫᪲۟. 𝐒𝐄𝐑𝐕𝐈𝐃𝐎𝐑: *${meta.servidor}*
+────────────────────
+
+> *≡ Enviando, espera un momento...*`
+
 
     // Obtener tamaño
     const size = await getSize(downloadUrl)
