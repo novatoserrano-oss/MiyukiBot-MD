@@ -11,7 +11,8 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       if (!text)
         return conn.reply(
           m.chat,
-          `📌 *Ingresa el enlace de YouTube para descargar en MP4.*\nEjemplo:\n${usedPrefix + command} https://youtu.be/HWjCStB6k4o`,
+          `📌 *Ingresa el enlace de YouTube para descargar en MP4.*
+> Ejemplo: ${usedPrefix + command} https://youtu.be/HWjCStB6k4o`,
           m
         )
 
@@ -46,8 +47,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 💾 *Tamaño:* ${fileSize}
 ⚡ *Calidad:* ${dl.quality}
 📅 *Publicado:* ${meta.ago}
-🔗 *Link:* ${meta.url}
-────────────────────`
+🔗 *Link:* ${meta.url}`
 
       await conn.sendMessage(m.chat, {
         image: { url: meta.thumbnail },
@@ -61,7 +61,11 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
             document: { url: dl.url },
             mimetype: "video/mp4",
             fileName: dl.filename,
-            caption: `🎬 *${meta.title}*\n💾 Tamaño: ${fileSize}\n⚡ Calidad: ${dl.quality}\n> Enviado como documento (más de 100 MB).`,
+            caption: `🎬 *Nombre:* ${meta.title}
+> 💾 Tamaño: ${fileSize}
+⚡ Calidad: ${dl.quality}
+
+> Enviado como documento (más de 100 MB).`,
           },
           { quoted: m }
         )
@@ -72,7 +76,9 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
             video: { url: dl.url },
             mimetype: "video/mp4",
             fileName: dl.filename,
-            caption: `🎬 *${meta.title}*\n💾 Tamaño: ${fileSize}\n⚡ Calidad: ${dl.quality}`,
+            caption: `🎬 *Nombre* ${meta.title}
+> 💾 Tamaño: ${fileSize}
+⚡ Calidad: ${dl.quality}`,
           },
           { quoted: m }
         )
@@ -82,7 +88,8 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     console.error(err)
     conn.reply(
       m.chat,
-      "❌ *Ocurrió un error al procesar tu solicitud.*\nVerifica el enlace o intenta con otro video.",
+      "❌ *Ocurrió un error al procesar tu solicitud.*
+> Verifica el enlace o intenta con otro video.",
       m
     )
   }
