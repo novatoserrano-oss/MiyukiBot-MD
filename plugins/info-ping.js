@@ -38,6 +38,7 @@ let handler = async (m, { conn }) => {
 │ 💽 *RAM usada:* ${usedRAM} MB
 │ ⏱️ *Uptime:* ${uptimeFormatted}
 │ 🗓️ *Fecha:* ${fecha}
+     *Hora:* ${hora} 
 ╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸
 
 ⚡ *Estado:* En línea ✅
