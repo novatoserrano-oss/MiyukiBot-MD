@@ -11,15 +11,14 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       if (!text)
         return conn.reply(
           m.chat,
-          `📌 *Ingresa el enlace de YouTube para descargar en MP4.*
-> Ejemplo: ${usedPrefix + command} https://youtu.be/HWjCStB6k4o`,
+          `📌 *Ingresa el enlace de YouTube para descargar en MP4.*\nEjemplo:\n${usedPrefix + command} https://youtu.be/HWjCStB6k4o`,
           m
         )
 
       await conn.reply(
         m.chat,
-        `⏳ *DESCARGANDO ARCHIVO*
-> Por favor espere en lo que envió su archivo `,
+        `⏳ *DESCARGANDO*
+> Por favor espero en lo que envió su archivo`,
         m
       )
 
@@ -61,11 +60,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
             document: { url: dl.url },
             mimetype: "video/mp4",
             fileName: dl.filename,
-            caption: `🎬 *Nombre:* ${meta.title}
-> 💾 Tamaño: ${fileSize}
-⚡ Calidad: ${dl.quality}
-
-> Enviado como documento (más de 100 MB).`,
+            caption: `🎬 *${meta.title}*\n💾 Tamaño: ${fileSize}\n⚡ Calidad: ${dl.quality}\n> Enviado como documento (más de 100 MB).`,
           },
           { quoted: m }
         )
@@ -76,9 +71,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
             video: { url: dl.url },
             mimetype: "video/mp4",
             fileName: dl.filename,
-            caption: `🎬 *Nombre* ${meta.title}
-> 💾 Tamaño: ${fileSize}
-⚡ Calidad: ${dl.quality}`,
+            caption: `🎬 *${meta.title}*\n💾 Tamaño: ${fileSize}\n⚡ Calidad: ${dl.quality}`,
           },
           { quoted: m }
         )
@@ -88,8 +81,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     console.error(err)
     conn.reply(
       m.chat,
-      "❌ *Ocurrió un error al procesar tu solicitud.*
-> Verifica el enlace o intenta con otro video.",
+      "❌ *Ocurrió un error al procesar tu solicitud.*\nVerifica el enlace o intenta con otro video.",
       m
     )
   }
