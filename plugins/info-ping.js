@@ -25,7 +25,7 @@ let handler = async (m, { conn }) => {
     const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)
     const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A')
 
-    const thumbBuffer = Buffer.from(await (await fetch('https://i.pinimg.com/originals/d0/bc/19/d0bc19ccb8e9441e1b3962990bfb09a6.png')).arrayBuffer())
+    const thumbBuffer = Buffer.from(await (await fetch('https://files.catbox.moe/sy0zzb.jpg')).arrayBuffer())
 
     exec(`neofetch --stdout`, async (error, stdout) => {
       let sysInfo = stdout.toString("utf-8").replace(/Memory:/, "Ram:")
@@ -39,9 +39,7 @@ let handler = async (m, { conn }) => {
 💻 *RAM Usage:* 🖥️ ${usedRAM} MB
 ⏳ *Uptime:* 🕒 ${uptimeFormatted}
 🗓️ *Date/Time:* 📅 ${fechaHora}
-
 \`\`\`${sysInfo.trim()}\`\`\`
-
 > ☄︎ кαиєкι вσт ν3 | 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝚂𝙷𝙰𝙳𝙾𝚆-𝚇𝚈𝚉
       `
 
