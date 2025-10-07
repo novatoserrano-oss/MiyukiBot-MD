@@ -1,68 +1,65 @@
-import speed from 'performance-now'
-import { exec } from 'child_process'
-import moment from 'moment-timezone'
-import fetch from 'node-fetch'
+// Comando: ping.js
+module.exports = {
+    name: 'ping',
+    alias: ['pong'],
+    desc: 'Muestra información completa del bot con reacciones y GIF dinámico',
+    category: 'info',
+    async exec(m, { conn }) {
+        try {
+            // Reacción de inicio
+            await conn.sendMessage(m.from, { react: { text: '⌛', key: m.key } });
 
-let handler = async (m, { conn }) => {
-  await conn.sendMessage(m.chat, { react: { text: '🕒', key: m.key } })
+            const start = Date.now();
 
-  let timestamp = speed()
-  let latensi = speed() - timestamp
+            // Mensaje temporal para medir latencia
+            const temp = await conn.sendMessage(
+                m.from,
+                { text: '🏓 Calculando ping...' },
+                { quoted: m }
+            );
 
-  const start = new Date().getTime()
-  await conn.sendMessage(m.chat, { text: `🕒 *Midiendo latencia...*` }, { quoted: m })
-  const end = new Date().getTime()
-  const latency = end - start
+            const latency = Date.now() - start; // Latencia del mensaje
+            const apiLatency = Math.round(conn.ws?.ping || latency); // Ping de la API
 
-  const uptime = process.uptime()
-  const hours = Math.floor(uptime / 3600)
-  const minutes = Math.floor((uptime % 3600) / 60)
-  const secondsUp = Math.floor(uptime % 60)
-  const uptimeFormatted = `${hours}h ${minutes}m ${secondsUp}s`
+            const fechaHora = new Date().toLocaleString('es-ES', {
+                timeZone: 'America/Mexico_City',
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
 
-  const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)
-  const fechaHora = moment().tz('America/Lima').format('YYYY/MM/DD, h:mm A')
+            const servidores = conn.chats ? Object.keys(conn.chats).length : 'N/A';
 
-  // 🔹 Nueva imagen confiable (Wikimedia)
-  const thumbBuffer = Buffer.from(await (await fetch('https://files.catbox.moe/sy0zzb.jpg')).arrayBuffer())
+            // GIF dinámico según la latencia
+            let gifURL;
+            if (latency < 100) gifURL = 'https://media.giphy.com/media/26tPoyDhjiJ2g7rEs/giphy.gif'; // Verde rápido
+            else if (latency < 300) gifURL = 'https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif'; // Amarillo medio
+            else gifURL = 'https://media.giphy.com/media/l0HlOvJ7yaacpuSas/giphy.gif'; // Rojo lento
 
-  exec(`neofetch --stdout`, async (error, stdout) => {
-    let sysInfo = stdout.toString("utf-8").replace(/Memory:/, "Ram:")
+            // Mensaje final con imagen y datos
+            await conn.sendMessage(
+                m.from,
+                {
+                    image: { url: gifURL },
+                    caption: `🏓 *Pong!*\n\n*Latencia del mensaje:* ${latency}ms\n*Ping de la API:* ${apiLatency}ms\n*Fecha y hora:* ${fechaHora}\n*Velocidad aproximada:* ${latency}ms\n*Servidores/Chats activos:* ${servidores}`
+                },
+                { quoted: m }
+            );
 
-    let response = 
-`╭─❖ ⚙️ *Estado del Bot*
-│ 📶 Ping: ${latency} ms
-│ ⚡ Latencia: ${latensi.toFixed(4)} ms
-│ 💽 RAM usada: ${usedRAM} MB
-│ ⏱️ Uptime: ${uptimeFormatted}
-│ 🗓️ Fecha / Hora: ${fechaHora}
-\`\`\`${sysInfo.trim()}\`\`\`
-╰─❖ MiyukiBot-MD 🌸
+            // Reacción final
+            await conn.sendMessage(m.from, { react: { text: '✅', key: m.key } });
 
-𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`
-
-    await conn.sendMessage(m.chat, {
-      text: response,
-      mentions: [m.sender],
-      contextInfo: {
-        externalAdReply: {
-          title: 'MiyukiBot-MD 🌸',
-          body: 'Sistema operativo activo',
-          thumbnail: thumbBuffer,
-          sourceUrl: 'https://github.com/',
-          mediaType: 1,
-          renderLargerThumbnail: true
+        } catch (error) {
+            console.log(error);
+            await conn.sendMessage(
+                m.from,
+                { text: '❌ Ocurrió un error al calcular el ping.' },
+                { quoted: m }
+            );
         }
-      }
-    }, { quoted: m })
-
-    await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
-  })
-}
-
-handler.help = ['ping', 'p']
-handler.tags = ['info']
-handler.command = ['ping', 'p']
-handler.register = true
-
-export default handler
+    },
+};
