@@ -32,15 +32,14 @@ let handler = async (m, { conn }) => {
 
       // Nuevo diseño con emojis
       let response = 
-`🌐 𝗦 𝗧 𝗔 𝗧 𝗨 𝗦 • 𝗣𝗜𝗡𝗚 ⚡
+`╭─❖ ⚙️ 𝙀𝙨𝙩𝙖𝙙𝙤 𝙙𝙚𝙡 𝘽𝙤𝙩
+│ 📶 Ping: ${latency} ms
+│ ⚡ Latencia: ${latency.toFixed(2)} ms
+│ 💽 RAM usada: ${usedRAM} MB
+│ ⏱️ Uptime: ${uptimeFormatted}
+│ 🗓️ Fecha / Hora: ${fechaHora}
+╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸
 
-🚀 *Ping del Bot:* ⏱️ ${latency} ms
-🔗 *Latencia de conexión:* 📶 ${latensi.toFixed(4)} ms
-🖥️ *Uso de RAM:* 💾 ${usedRAM} MB
-⏰ *Tiempo activo (Uptime):* 🕑 ${uptimeFormatted}
-📅 *Fecha y hora:* 🗓️ ${fechaHora}
-
-🤖 *Bot:* MiyukiBot-MD
 ⚡ *Estado:* En línea ✅
 🌟 *Powered by:* OmarGranda`
 
