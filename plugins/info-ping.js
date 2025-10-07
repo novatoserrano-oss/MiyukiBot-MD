@@ -37,8 +37,7 @@ let handler = async (m, { conn }) => {
 │ ⚡ *Velocidad:* ${latency.toFixed(2)} ms
 │ 💽 *RAM usada:* ${usedRAM} MB
 │ ⏱️ *Uptime:* ${uptimeFormatted}
-│ 🗓️ *Fecha:* ${fecha}
-     *Hora:* ${hora} 
+│ 🗓️ *Fecha:* ${fecha} 
 ╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸
 
 ⚡ *Estado:* En línea ✅
