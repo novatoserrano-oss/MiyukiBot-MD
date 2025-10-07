@@ -22,15 +22,12 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
 
   if (user.registered) {
    const texto = 
-`┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
+`
 *🗣️ Ya cuentas con un registro activo...*
   
 ¿𝐐𝐮𝐢𝐞𝐫𝐞𝐬 𝐫𝐞𝐠𝐢𝐬𝐭𝐫𝐚𝐫𝐭𝐞 𝐧𝐮𝐞𝐯𝐚𝐦𝐞𝐧𝐭𝐞? 
 
-🫵 Usa *#unreg* para borrar tu registro y comenzar otra vez.  
-
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈`;
+🫵 Usa *#unreg* para borrar tu registro y comenzar otra vez.`;
 
     const botones = [
       { buttonId: `${usedPrefix}unreg`, buttonText: { displayText: '🚯 Eliminar Registro' }, type: 1 },
