@@ -17,7 +17,8 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
       await conn.reply(
         m.chat,
-        `⏳ *Procesando...*\nCalidad actual: *${calidadPredeterminada}p*`,
+        `⏳ *DESCARGANDO ARCHIVO*
+> Por favor espere en lo que envió su archivo `,
         m
       )
 
@@ -46,8 +47,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 ⚡ *Calidad:* ${dl.quality}
 📅 *Publicado:* ${meta.ago}
 🔗 *Link:* ${meta.url}
-────────────────────
-> Usa /setquality para cambiar la calidad predeterminada.`
+────────────────────`
 
       await conn.sendMessage(m.chat, {
         image: { url: meta.thumbnail },
