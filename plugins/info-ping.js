@@ -12,7 +12,8 @@ let handler = async (m, { conn }) => {
     let latensi = speed() - timestamp
 
     const start = new Date().getTime()
-    await conn.sendMessage(m.chat, { text: `*⚙️ 𝘊𝘢𝘭𝘤𝘶𝘭𝘢𝘯𝘥𝘰 𝘱𝘪𝘯𝘨...*` }, { quoted: m })
+    await conn.sendMessage(m.chat, { text: `*📡 Cargando datos...*
+> Por favor espere...` }, { quoted: m })
     const end = new Date().getTime()
     const latency = end - start
 
@@ -37,7 +38,7 @@ let handler = async (m, { conn }) => {
 │ ⚡ *Velocidad:* ${latency.toFixed(2)} ms
 │ 💽 *RAM usada:* ${usedRAM} MB
 │ ⏱️ *Uptime:* ${uptimeFormatted}
-│ 🗓️ *Fecha/Hora:* ${fechaHora}
+│ 🗓️ *Fecha:* ${fecha}
 ╰─❖ 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸
 
 ⚡ *Estado:* En línea ✅
