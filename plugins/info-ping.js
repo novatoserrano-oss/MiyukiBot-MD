@@ -40,9 +40,6 @@ let handler = async (m, { conn }) => {
 ⏰ *Tiempo activo (Uptime):* 🕑 ${uptimeFormatted}
 📅 *Fecha y hora:* 🗓️ ${fechaHora}
 
-💻 *Información del Sistema:*
-\`\`\`${sysInfo.trim()}\`\`\`
-
 🤖 *Bot:* MiyukiBot-MD
 ⚡ *Estado:* En línea ✅
 🌟 *Powered by:* OmarGranda`
