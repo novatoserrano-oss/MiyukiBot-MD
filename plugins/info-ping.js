@@ -12,7 +12,7 @@ let handler = async (m, { conn }) => {
     let latensi = speed() - timestamp
 
     const start = new Date().getTime()
-    await conn.sendMessage(m.chat, { text: `*📡 Cargando datos...*
+    await conn.sendMessage(m.chat, { text: `*📡 CARGANDO DATOS*
 > Por favor espere...` }, { quoted: m })
     const end = new Date().getTime()
     const latency = end - start
