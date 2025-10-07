@@ -3,7 +3,7 @@ import Jimp from 'jimp'
 import axios from 'axios'
 import crypto from 'crypto'
 
-const savetube = { /* ... tu objeto savetube ya existente ... */ }
+const savetube = { /* ... el mismo objeto savetube que ya tienes ... */ }
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
   let q = args.join(" ").trim()
@@ -13,13 +13,13 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     }, { quoted: m })
   }
 
-  // Reacción inicial
+  // Reacción inicial antes de descargar
   await conn.sendMessage(m.chat, {
-    text: "⚡ *Buscando y preparando tu video...* ⏳"
+    text: `⚡ *Preparando tu video...*\n⏳ Esto puede tardar unos segundos.`
   }, { quoted: m })
   
   try {
-    // 🔍 Buscar en YouTube
+    // 🔍 Buscar en YT
     let res = await fetch(`https://delirius-apiofc.vercel.app/search/ytsearch?q=${encodeURIComponent(q)}`)
     let json = await res.json()
     if (!json.status || !json.data || !json.data.length) {
@@ -35,6 +35,16 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 
     let { result } = info
 
+    // Diseño bonito con emojis
+    let caption = `
+🎬 *Título:* ${result.title}
+⏱️ *Duración:* ${vid.duration}
+📺 *Canal:* ${vid.author?.name || "Desconocido"}
+⚡ *Calidad:* ${result.quality}p
+🔗 *Link:* ${vid.url}
+💎 ¡Disfruta tu video!
+`.trim()
+
     // Miniatura
     let thumb = null
     try {
@@ -45,22 +55,9 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
       console.log("Error al procesar miniatura:", err)
     }
 
-    // Diseño tipo tarjeta
-    let caption = `
-🎬 *${result.title}*
-────────────────────
-⏱️ *Duración:* ${vid.duration}
-📺 *Canal:* ${vid.author?.name || "Desconocido"}
-⚡ *Calidad:* ${result.quality}p
-🔗 *Link:* ${vid.url}
-────────────────────
-💎 ¡Disfruta tu video! 💖
-`.trim()
-
-    // Reacción antes de enviar
+    // Reacción antes de enviar el archivo
     await conn.sendMessage(m.chat, { text: "✨ *Enviando tu video...*" }, { quoted: m })
 
-    // Enviar video como documento
     await conn.sendMessage(m.chat, {
       document: { url: result.download },
       mimetype: "video/mp4",
