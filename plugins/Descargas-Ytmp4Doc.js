@@ -201,4 +201,4 @@ conn.sendMessage(m.chat, { text: 💔 Error: ${err.message} }, { quoted: m })
 
 handler.command = ['ytmp4doc', 'ytvdoc', 'ytdoc']
 handler.help = ['ytmp4doc']
-handler.tags = ['descargas']
+handler.tags = ['descargas'
