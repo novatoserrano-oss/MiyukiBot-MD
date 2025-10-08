@@ -17,7 +17,7 @@ const cooldown = 15 * 60 * 1000
 const now = Date.now()
 if (now < user.lastHunt) {
 const restante = user.lastHunt - now
-return conn.reply(m.chat, `ꕥ Debes esperar *${formatTime(restante)}* para usar *${usedPrefix + command}* de nuevo.`, m)
+return conn.reply(m.chat, `ꕥ Debes esperar *${formatTime(restante)}* para usar *${usedPrefix + command}* de nuevo.`, m, rcanal)
 }
 user.lastHunt = now + cooldown
 const evento = pickRandom(eventos)
@@ -40,7 +40,7 @@ if (user.coin < 0) user.coin = 0
 if (user.exp < 0) user.exp = 0
 }
 if (user.health < 0) user.health = 0
-conn.reply(m.chat, `❀ ${evento.mensaje} *¥${monedas.toLocaleString()} ${currency}*`, m)
+conn.reply(m.chat, `❀ ${evento.mensaje} *¥${monedas.toLocaleString()} ${currency}*`, m, rcanal)
 }
 
 handler.tags = ['rpg']
