@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+
 import Jimp from 'jimp'
 import axios from 'axios'
 import crypto from 'crypto'
@@ -97,7 +97,7 @@ const savetube = {
       const dl = await savetube.request(`https://${cdn}${savetube.api.download}`, {
         id: id,
         downloadType: 'video',
-        quality: quality, // 360p
+        quality: quality,
         key: decrypted.key
       });
 
@@ -120,80 +120,82 @@ const savetube = {
   }
 };
 
+// Función principal del handler
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-  let q = args.join(" ").trim()
-  if (!q) {
+  const query = args.join(" ").trim();
+  if (!query) {
     return conn.sendMessage(m.chat, {
       text: `*🧪 Ingresa el nombre del video a descargar.*`
-    }, { quoted: m })
+    }, { quoted: m });
   }
 
   await conn.sendMessage(m.chat, {
-    text: `🎬 *DESCARGANDO*
-> Por favor espere en lo que envió su archivo`
-  }, { quoted: m })
-  
+    text: `🎥 *DESCARGANDO VIDEO*...\n> Espere por favor mientras se genera su archivo`
+  }, { quoted: m });
+
   try {
-    // 🔍 Buscar en YT
-    let res = await fetch(`https://delirius-apiofc.vercel.app/search/ytsearch?q=${encodeURIComponent(q)}`)
-    let json = await res.json()
+    // Buscar en YouTube
+    const res = await fetch(`https://delirius-apiofc.vercel.app/search/ytsearch?q=${encodeURIComponent(query)}`);
+    const json = await res.json();
+
     if (!json.status || !json.data || !json.data.length) {
-      return conn.sendMessage(m.chat, { text: `No encontré resultados para *${q}*.` }, { quoted: m })
+      return conn.sendMessage(m.chat, { text: `❌ No encontré resultados para *${query}*.` }, { quoted: m });
     }
 
-    let vid = json.data[0]
+    const video = json.data[0];
 
-    let info = await savetube.download(vid.url, '360')
+    // Descargar video
+    const info = await savetube.download(video.url, '360');
     if (!info.status) {
-      return conn.sendMessage(m.chat, { text: `⚠️ No se pudo obtener el video de *${vid.title}*.` }, { quoted: m })
+      return conn.sendMessage(m.chat, { text: `⚠️ No se pudo obtener el video de *${video.title}*.` }, { quoted: m });
     }
 
-    let { result } = info
+    const { result } = info;
 
-    let caption = `
-= 💎 *${result.title}*
-= 🌱 𝐃𝐮𝐫𝐚𝐜𝐢𝐨𝐧: ${vid.duration}
-= ☘️ 𝐂𝐚𝐧𝐚𝐥: ${vid.author?.name || "Desconocido"}
-= 💥 𝐂𝐚𝐥𝐢𝐝𝐚𝐝: ${result.quality}p
-= 🍧 𝐋𝐢𝐧𝐤: ${vid.url}
-`.trim()
-
-    let thumb = null
+    // Crear miniatura
+    let thumb = null;
     try {
-      const img = await Jimp.read(result.thumbnail)
-      img.resize(300, Jimp.AUTO)
-      thumb = await img.getBufferAsync(Jimp.MIME_JPEG)
+      const img = await Jimp.read(result.thumbnail);
+      img.resize(300, Jimp.AUTO);
+      thumb = await img.getBufferAsync(Jimp.MIME_JPEG);
     } catch (err) {
-      console.log("Error al procesar miniatura:", err)
+      console.log("Error al procesar miniatura:", err);
     }
 
+    // Enviar archivo
     await conn.sendMessage(m.chat, {
       document: { url: result.download },
       mimetype: "video/mp4",
       fileName: `${result.title}.mp4`,
-      caption,
+      caption: `
+🎬 *${result.title}*
+⏱️ Duración: ${video.duration}
+📺 Canal: ${video.author?.name || "Desconocido"}
+🔧 Calidad: ${result.quality}p
+🔗 Link: ${video.url}
+      `.trim(),
       ...(thumb ? { jpegThumbnail: thumb } : {}),
       contextInfo: {
         externalAdReply: {
           title: result.title,
           body: "🚀 YouTube Video 💖",
-          mediaUrl: vid.url,
-          sourceUrl: vid.url,
+          mediaUrl: video.url,
+          sourceUrl: video.url,
           thumbnailUrl: result.thumbnail,
           mediaType: 1,
           renderLargerThumbnail: true
         }
       }
-    }, { quoted: m })
+    }, { quoted: m });
 
   } catch (err) {
-    console.error("[Error en ytmp4doc:]", err)
-    conn.sendMessage(m.chat, { text: `💔 Error: ${err.message}` }, { quoted: m })
+    console.error("[Error en ytmp4doc:]", err);
+    conn.sendMessage(m.chat, { text: `💔 Error: ${err.message}` }, { quoted: m });
   }
 }
 
-handler.command = ['ytmp4doc', 'ytvdoc', 'ytdoc']
-handler.help = ['ytmp4doc']
-handler.tags = ['descargas']
+handler.command = ['ytmp4doc', 'ytvdoc', 'ytdoc'];
+handler.help = ['ytmp4doc'];
+handler.tags = ['descargas'];
 
-export default handler
+export default handler;
