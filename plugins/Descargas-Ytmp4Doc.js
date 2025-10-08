@@ -124,7 +124,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   const query = args.join(" ").trim();
   if (!query) {
     return conn.sendMessage(m.chat, {
-      text: `*🧪 Ingresa el nombre del video a descargar.*`
+      text: `*✍️ Ingresa el nombre del video a descargar.*`
     }, { quoted: m });
   }
 
@@ -132,7 +132,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   await conn.sendMessage(m.chat, { react: { text: '🎥', key: m.key } });
 
   // Procesar opción de calidad (velocidad)
-  let quality = '360'; // valor por default
+  let quality = '720'; // valor por default
   const qualityArgIndex = args.findIndex(arg => arg.toLowerCase() === 'velocidad');
   if (qualityArgIndex !== -1 && args[qualityArgIndex + 1]) {
     const v = args[qualityArgIndex + 1];
