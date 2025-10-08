@@ -1,5 +1,4 @@
 
-import fetch from 'node-fetch'
 import Jimp from 'jimp'
 import axios from 'axios'
 import crypto from 'crypto'
@@ -16,7 +15,7 @@ const savetube = {
     'content-type': 'application/json',
     'origin': 'https://yt.savetube.me',
     'referer': 'https://yt.savetube.me/',
-    'user-agent': 'Postify/1.0.0'
+    'user-agent': 'MiyukiBot/1.0.0'
   },
   crypto: {
     hexToBuffer: (hexString) => {
@@ -29,17 +28,13 @@ const savetube = {
       const iv = data.slice(0, 16);
       const content = data.slice(16);
       const key = savetube.crypto.hexToBuffer(secretKey);
-
       const decipher = crypto.createDecipheriv('aes-128-cbc', key, iv);
       let decrypted = decipher.update(content);
       decrypted = Buffer.concat([decrypted, decipher.final()]);
-
       return JSON.parse(decrypted.toString());
     }
   },
-  isUrl: str => { 
-    try { new URL(str); return true } catch { return false } 
-  },
+  isUrl: str => { try { new URL(str); return true } catch { return false } },
   youtube: url => {
     const patterns = [
       /youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/,
@@ -125,62 +120,65 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   let q = args.join(" ").trim()
   if (!q) {
     return conn.sendMessage(m.chat, {
-      text: `*\`🍉 ɪɴɢʀᴇsᴇ ᴇʟ ɴᴏᴍʙʀᴇ ᴅᴇʟ ᴀᴜᴅɪᴏ ᴀ ᴅᴇsᴄᴀʀɢᴀʀ.\`*`
+      text: `🧁✨ *¡Hola, dulce!*\n\n🍬 **Por favor, ingresa el nombre del audio o video que deseas descargar.**`
     }, { quoted: m })
   }
 
+  // Reacción inicial con emoji de estrella brillante
+  await conn.sendMessage(m.chat, { react: { text: '🌟', key: m.key } })
+
+  // Progreso visual (puedes personalizar si quieres)
   await conn.sendMessage(m.chat, {
-    text: `૮₍｡˃ ᵕ ˂ ｡₎ა 🫛 *¡Descargando tu archiwito kawaii!*
-  
-˚₊· ͟͟͞͞➳❥ 📊 Progresito:  
-[▓▓▓▓▓░░░░░] 50% 🍬💗`
+    text: `✨✨✨ *Buscando tu contenido mágico...* ✨✨✨`
   }, { quoted: m })
 
   try {
-    // 🔍 Buscar en YT
+    // 🔍 Buscar en YouTube
     let res = await fetch(`https://delirius-apiofc.vercel.app/search/ytsearch?q=${encodeURIComponent(q)}`)
     let json = await res.json()
     if (!json.status || !json.data || !json.data.length) {
-      return conn.sendMessage(m.chat, { text: `❌ No encontré resultados para *${q}*.` }, { quoted: m })
+      await conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } });
+      return conn.sendMessage(m.chat, { text: `❌ *No encontré resultados para "${q}"*.` }, { quoted: m })
     }
 
     let vid = json.data[0]
 
-    // 📥 Descargar con SAVETUBE
+    // Descargar el audio
     let info = await savetube.download(vid.url)
     if (!info.status) {
-      return conn.sendMessage(m.chat, { text: `🌿 No se pudo obtener el audio de *${vid.title}*.` }, { quoted: m })
+      await conn.sendMessage(m.chat, { react: { text: '⚠️', key: m.key } });
+      return conn.sendMessage(m.chat, { text: `⚠️ *No se pudo obtener el audio de "${vid.title}"*.` }, { quoted: m })
     }
 
     let { result } = info
 
-    let caption = `
-= 📀 *${result.title}*
-= ⏱️ 𝐃𝐮𝐫𝐚𝐜𝐢𝐨𝐧: ${vid.duration}
-= ⚡ 𝐂𝐚𝐧𝐚𝐥: ${vid.author?.name || "Desconocido"}
-= 🍧 𝐂𝐚𝐥𝐢𝐝𝐚𝐝: ${result.quality}
-= 🔗 𝐋𝐢𝐧𝐤: ${vid.url}
-`.trim()
-
+    // Miniatura
     let thumb = null
     try {
       const img = await Jimp.read(result.thumbnail)
       img.resize(300, Jimp.AUTO)
       thumb = await img.getBufferAsync(Jimp.MIME_JPEG)
     } catch (err) {
-      console.log("⚠️ Error al procesar miniatura:", err)
+      console.log('⚠️ Error al procesar miniatura:', err)
     }
 
+    // Enviar archivo
     await conn.sendMessage(m.chat, {
       document: { url: result.download },
-      mimetype: "audio/mpeg",
+      mimetype: 'audio/mpeg',
       fileName: `${result.title}.mp3`,
-      caption,
+      caption: `
+🎶 *${result.title}*
+🕒 Duración: ${vid.duration}
+🎤 Canal: ${vid.author?.name || "Desconocido"}
+🔊 Calidad: ${result.quality}
+🔗 Link: ${vid.url}
+      `.trim(),
       ...(thumb ? { jpegThumbnail: thumb } : {}),
       contextInfo: {
         externalAdReply: {
           title: result.title,
-          body: "𝚈𝙾𝚄𝚃𝚄𝙱𝙴 ~ 𝙼𝙿3 ~ 𝙳𝙾𝙲 ",
+          body: "🌸 MiyukiBot - Tu asistente kawaii",
           mediaUrl: vid.url,
           sourceUrl: vid.url,
           thumbnailUrl: result.thumbnail,
@@ -190,14 +188,18 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
       }
     }, { quoted: m })
 
-  } catch (err) {
-    console.error("[Error en ytmp3doc]", err)
-    conn.sendMessage(m.chat, { text: `Error: ${err.message}` }, { quoted: m })
+    // Reacción final con emoji de estrella brillante
+    await conn.sendMessage(m.chat, { react: { text: '🌈', key: m.key } })
+
+  } catch (e) {
+    console.error("[Error en ytmp3doc]", e)
+    await conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } });
+    return conn.reply(m.chat, `🚨 ¡Oops! Algo salió mal:\n${e.message}\n\nPor favor, reporta este error con *${usedPrefix}report*`, m)
   }
 }
 
 handler.command = ['ytmp3doc', 'ytadoc']
-handler.help = ['ytmp3doc <texto>']
+handler.help = ['ytmp3doc <nombre>']
 handler.tags = ['descargas']
 
 export default handler
