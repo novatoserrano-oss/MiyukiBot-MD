@@ -1,26 +1,22 @@
 
-// 📝 IMPORTACIONES Y CONSTANTES
-// ===============================
 import WAMessageStubType from (await import('@whiskeysockets/baileys')).default
-import chalk from 'chalk'          // Para colores en consola
-import fs from 'fs'                // Sistema de archivos
-import path from 'path'            // Rutas
-import fetch from 'node-fetch'     // Fetch para imágenes
+import chalk from 'chalk'
+import fs from 'fs'
+import path from 'path'
+import fetch from 'node-fetch'
 
-// Cachés para optimización
+// Cachés
 const groupMetadataCache = new Map()
 const lidCache = new Map()
 
-// ===============================
-// 🛠️ HANDLER PRINCIPAL
-// ===============================
+// Handler principal
 const handler = m => m
 
 handler.before = async function (m, { conn, participants, groupMetadata }) {
-  // 🚫 Validar si es mensaje de stub y grupo
+  // Validar si es mensaje de stub y grupo
   if (!m.messageStubType || !m.isGroup) return
 
-  // 🔐 Verificar si es bot primario
+  // Verificar bot primario
   const primaryBot = global.db.data.chats[m.chat]?.primaryBot
   if (primaryBot && conn.user.jid !== primaryBot) throw false
 
@@ -29,64 +25,71 @@ handler.before = async function (m, { conn, participants, groupMetadata }) {
   const usuario = await resolveLidToRealJid(m?.sender, conn, m?.chat)
   const groupAdmins = participants.filter(p => p.admin)
 
-  // ⚙️ Datos de ejemplo (personaliza aquí)
-  const icono = 'https://images.unsplash.com/photo-1612831455549-2f8d8e5e8d2e' // Imagen
-  const redes = 'https://example.com' // URL de redes
-  const textbot = 'Texto del bot' // Texto del bot
+  // Datos de ejemplo
+  const icono = 'https://images.unsplash.com/photo-1612831455549-2f8d8e5e8d2e' // Ejemplo de icono
+  const redes = 'https://example.com' // URL de ejemplo para redes
+  const textbot = 'Texto del bot' // Texto ejemplo
 
-  // 📸 Perfil del chat
+  // Preparamos la imagen del perfil
   const pp = await conn.profilePictureUrl(m.chat, 'image').catch(_ => null) || 'https://files.catbox.moe/av0kub.jpg'
 
-  // 📝 Mensajes personalizados con emojis
+  // Mensajes personalizados
   const mensajes = {
-    nombre: `✨👤 @${usuario.split('@')[0]} ha cambiado el nombre del grupo.\n📝 Ahora el grupo se llama:\n*${m.messageStubParameters[0]}*`,
-    foto: `🖼️📸 Se ha cambiado la foto del grupo.\n👤 Acción hecha por:\n@${usuario.split('@')[0]}`,
-    edit: `⚙️🔧 @${usuario.split('@')[0]} ha configurado el grupo para que ${m.messageStubParameters[0] == 'on' ? 'solo admins' : 'todos'} puedan hacerlo.`,
-    newlink: `🔗🔄 El enlace del grupo ha sido restablecido.\n👤 Acción por:\n@${usuario.split('@')[0]}`,
-    status: `🔒🔓 El grupo ahora está ${m.messageStubParameters[0] == 'on' ? 'cerrado 🔐' : 'abierto 🔓'} por @${usuario.split('@')[0]}\n> Ahora ${m.messageStubParameters[0] == 'on' ? '*solo admins*' : '*todos*'} pueden enviar mensajes.`,
-    admingp: `🛡️✅ @${users.split('@')[0]} ahora es admin del grupo.\n👤 Acción por:\n@${usuario.split('@')[0]}`,
-    noadmingp: `🛡️❌ @${users.split('@')[0]} deja de ser admin del grupo.\n👤 Acción por:\n@${usuario.split('@')[0]}`
+    nombre: `> ❀ @${usuario.split('@')[0]} Ha cambiado el nombre del grupo.\n> ✦ Ahora el grupo se llama:\n> *${m.messageStubParameters[0]}*.`,
+    foto: `> ❀ Se ha cambiado la imagen del grupo.\n> ✦ Acción hecha por:\n> » @${usuario.split('@')[0]}`,
+    edit: `> ❀ @${usuario.split('@')[0]} Ha permitido que ${m.messageStubParameters[0] == 'on' ? 'solo admins' : 'todos'} puedan configurar el grupo.`,
+    newlink: `> ❀ El enlace del grupo ha sido restablecido.\n> ✦ Acción hecha por:\n> » @${usuario.split('@')[0]}`,
+    status: `> ❀ El grupo ha sido ${m.messageStubParameters[0] == 'on' ? '*cerrado*' : '*abierto*'} Por @${usuario.split('@')[0]}\n> ✦ Ahora ${m.messageStubParameters[0] == 'on' ? '*solo admins*' : '*todos*'} pueden enviar mensaje.`,
+    admingp: `> ❀ @${users.split('@')[0]} Ahora es admin del grupo.\n> ✦ Acción hecha por:\n> » @${usuario.split('@')[0]}`,
+    noadmingp: `> ❀ @${users.split('@')[0]} Deja de ser admin del grupo.\n> ✦ Acción hecha por:\n> » @${usuario.split('@')[0]}`
   }
 
-  // 🔥 Limpieza de archivos si detecta
+  // Limpieza de archivos si detecta
   if (chat.detect && m.messageStubType == 2) {
     const sessionPath = `./${sessions}/`
     for (const file of await fs.promises.readdir(sessionPath)) {
       if (file.includes((m.isGroup ? m.chat : m.sender).split('@')[0])) {
         await fs.promises.unlink(path.join(sessionPath, file))
-        console.log(`${chalk.yellow.bold('✎')} ${chalk.greenBright(`'${file}'`)} - ${chalk.redBright('Archivo eliminado.')}`)
+        console.log(`${chalk.yellow.bold('✎ Delete!')} ${chalk.greenBright(`'${file}'`)}\n${chalk.redBright('Que provoca el "undefined" en el chat.')}`)
       }
     }
   }
 
-  // 📩 Procesar tipos de stub
+  // Procesar diferentes tipos de stub
   if (chat.detect) {
     switch (m.messageStubType) {
-      case 21: // Cambio de nombre
+      case 21:
+        // Cambio de nombre
         rcanal.contextInfo.mentionedJid = [usuario, ...groupAdmins.map(v => v.id)]
         await this.sendMessage(m.chat, { text: mensajes.nombre, ...rcanal }, { quoted: null })
         break
-      case 22: // Cambio de foto
+      case 22:
+        // Cambio de foto
         rcanal.contextInfo.mentionedJid = [usuario, ...groupAdmins.map(v => v.id)]
         await this.sendMessage(m.chat, { image: { url: pp }, caption: mensajes.foto, ...rcanal }, { quoted: null })
         break
-      case 23: // Restablecer enlace
+      case 23:
+        // Restablecer enlace
         rcanal.contextInfo.mentionedJid = [usuario, ...groupAdmins.map(v => v.id)]
         await this.sendMessage(m.chat, { text: mensajes.newlink, ...rcanal }, { quoted: null })
         break
-      case 25: // Configuración
+      case 25:
+        // Configuración
         rcanal.contextInfo.mentionedJid = [usuario, ...groupAdmins.map(v => v.id)]
         await this.sendMessage(m.chat, { text: mensajes.edit, ...rcanal }, { quoted: null })
         break
-      case 26: // Estado del grupo
+      case 26:
+        // Estado del grupo
         rcanal.contextInfo.mentionedJid = [usuario, ...groupAdmins.map(v => v.id)]
         await this.sendMessage(m.chat, { text: mensajes.status, ...rcanal }, { quoted: null })
         break
-      case 29: // Nuevo admin
+      case 29:
+        // Nuevo admin
         rcanal.contextInfo.mentionedJid = [usuario, users, ...groupAdmins.map(v => v.id)].filter(Boolean)
         await this.sendMessage(m.chat, { text: mensajes.admingp, ...rcanal }, { quoted: null })
         return
-      case 30: // Quitar admin
+      case 30:
+        // Quitar admin
         rcanal.contextInfo.mentionedJid = [usuario, users, ...groupAdmins.map(v => v.id)].filter(Boolean)
         await this.sendMessage(m.chat, { text: mensajes.noadmingp, ...rcanal }, { quoted: null })
         break
@@ -101,14 +104,10 @@ handler.before = async function (m, { conn, participants, groupMetadata }) {
   }
 }
 
-// ===============================
-// 🚀 EXPORTAR HANDLER
-// ===============================
+// Exportación del handler
 export default handler
 
-// ===============================
-// 🔍 RESOLVER LID a JID real
-// ===============================
+// Función para resolver lid a jid real
 async function resolveLidToRealJid(lid, conn, groupChatId, maxRetries = 3, retryDelay = 60000) {
   const inputJid = lid.toString()
   if (!inputJid.endsWith("@lid") || !groupChatId?.endsWith("@g.us")) {
