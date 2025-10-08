@@ -11,7 +11,7 @@ return conn.reply(m.chat, `ꕥ Debes esperar *${tiempoRestante}* para usar *${us
 }
 user.lastwork = Date.now() + cooldown
 let rsl = Math.floor(Math.random() * 1501) + 2000
-await conn.reply(m.chat, `❀ ${pickRandom(trabajo)} *¥${rsl.toLocaleString()} ${currency}*.`, m)
+await conn.reply(m.chat, `❀ ${pickRandom(trabajo)} *¥${rsl.toLocaleString()} ${currency}*.`, m, rcanal)
 user.coin += rsl
 }
 
