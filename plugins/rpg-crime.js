@@ -23,7 +23,7 @@ cantidad = Math.floor(Math.random() * 1501) + 4000
 user.coin -= cantidad
 if (user.coin < 0) user.coin = 0
 }
-await conn.reply(m.chat, `❀ ${evento.mensaje} *¥${cantidad.toLocaleString()} ${currency}*`, m)
+await conn.reply(m.chat, `❀ ${evento.mensaje} *¥${cantidad.toLocaleString()} ${currency}*`, m, rcanal)
 }
 
 handler.tags = ['economy']
