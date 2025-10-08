@@ -18,6 +18,7 @@ text += `✰ ${startIndex + i + 1} » *${name}:*\n`
 text += `\t\t Total→ *¥${total.toLocaleString()} ${currency}*\n`
 }
 text += `\n> • Página *${page}* de *${totalPages}*`
+await conn.reply(m.chat, text.trim(), m, { mentions: conn.parseMention(text) })
 
   await conn.sendMessage(m.chat, {
     image: { url: 'https://files.catbox.moe/8xasa6.jpg' },
