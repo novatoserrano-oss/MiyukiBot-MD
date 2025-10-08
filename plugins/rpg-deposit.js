@@ -3,7 +3,7 @@ if (!db.data.chats[m.chat].economy && m.isGroup) {
 return m.reply(`《✦》Los comandos de *Economía* están desactivados en este grupo.\n\nUn *administrador* puede activarlos con el comando:\n» *${usedPrefix}economy on*`)
 }
 let user = global.db.data.users[m.sender]
-if (!args[0]) return m.reply(`❀ Ingresa la cantidad de *${currency}* que deseas Depositar.`, rcanal)
+if (!args[0]) return m.reply(`❀ Ingresa la cantidad de *${currency}* que deseas Depositar.`)
 if ((args[0]) < 1) return m.reply(`ꕥ Ingresa una cantidad válida de *${currency}*.`)
 if (args[0] == 'all') {
 let count = parseInt(user.coin)
