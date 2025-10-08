@@ -2,7 +2,7 @@ import axios from "axios"
 import fetch from "node-fetch"
 import { sizeFormatter } from "human-readable"
 
-let calidadPredeterminada = "720"
+let calidadPredeterminada = "480"
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   try {
