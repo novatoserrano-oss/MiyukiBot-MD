@@ -10,7 +10,7 @@ const ahora = Date.now()
 if (ahora < user.lastcrime) {
 const restante = user.lastcrime - ahora
 const wait = formatTimeMs(restante)
-return conn.reply(m.chat, `ꕥ Debes esperar *${wait}* para usar *${usedPrefix + command}* de nuevo.`, m)
+return conn.reply(m.chat, `ꕥ Debes esperar *${wait}* para usar *${usedPrefix + command}* de nuevo.`, m, rcanal)
 }
 user.lastcrime = ahora + cooldown
 const evento = pickRandom(crimen)
