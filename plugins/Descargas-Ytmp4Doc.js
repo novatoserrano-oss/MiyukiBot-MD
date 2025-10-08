@@ -1,5 +1,4 @@
 
-import Jimp from 'jimp'
 import axios from 'axios'
 import crypto from 'crypto'
 
@@ -129,9 +128,18 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     }, { quoted: m });
   }
 
-  await conn.sendMessage(m.chat, {
-    text: `🎥 *DESCARGANDO VIDEO*...\n> Espere por favor mientras se genera su archivo`
-  }, { quoted: m });
+  // Emoji reacción al inicio
+  await conn.sendMessage(m.chat, { react: { text: '🎥', key: m.key } });
+
+  // Procesar opción de calidad (velocidad)
+  let quality = '360'; // valor por default
+  const qualityArgIndex = args.findIndex(arg => arg.toLowerCase() === 'velocidad');
+  if (qualityArgIndex !== -1 && args[qualityArgIndex + 1]) {
+    const v = args[qualityArgIndex + 1];
+    if (['144','240','360','480','720','1080'].includes(v)) {
+      quality = v;
+    }
+  }
 
   try {
     // Buscar en YouTube
@@ -139,14 +147,16 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     const json = await res.json();
 
     if (!json.status || !json.data || !json.data.length) {
+      await conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } });
       return conn.sendMessage(m.chat, { text: `❌ No encontré resultados para *${query}*.` }, { quoted: m });
     }
 
     const video = json.data[0];
 
-    // Descargar video
-    const info = await savetube.download(video.url, '360');
+    // Descargar video con calidad seleccionada
+    const info = await savetube.download(video.url, quality);
     if (!info.status) {
+      await conn.sendMessage(m.chat, { react: { text: '⚠️', key: m.key } });
       return conn.sendMessage(m.chat, { text: `⚠️ No se pudo obtener el video de *${video.title}*.` }, { quoted: m });
     }
 
@@ -162,7 +172,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
       console.log("Error al procesar miniatura:", err);
     }
 
-    // Enviar archivo
+    // Enviar el video
     await conn.sendMessage(m.chat, {
       document: { url: result.download },
       mimetype: "video/mp4",
@@ -186,10 +196,15 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
           renderLargerThumbnail: true
         }
       }
-    }, { quoted: m });
+    });
+
+    // Emoji reacción final
+    await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } });
 
   } catch (err) {
     console.error("[Error en ytmp4doc:]", err);
+    // Reacción en error
+    await conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } });
     conn.sendMessage(m.chat, { text: `💔 Error: ${err.message}` }, { quoted: m });
   }
 }
