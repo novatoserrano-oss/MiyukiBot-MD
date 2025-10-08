@@ -33,7 +33,7 @@ await m.react('✔️')
 } else if (['play2', 'mp4'].includes(command)) {
 const video = await getVid(url)
 if (!video?.url) throw '⚠️ No se pudo obtener el video.'
-await conn.sendFile(m.chat, video.url, `${title}.mp4`, ``, m)
+await conn.sendFile(m.chat, video.url, `${title}.mp4`, `*${title}*`, m)
 await m.react('✔️')
 }} catch (e) {
 await m.react('✖️')
