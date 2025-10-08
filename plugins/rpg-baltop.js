@@ -1,6 +1,6 @@
 let handler = async (m, { conn, args, participants }) => {
 if (!db.data.chats[m.chat].economy && m.isGroup) {
-return m.reply(`《✦》Los comandos de *Economía* están desactivados en este grupo.\n\nUn *administrador* puede activarlos con el comando:\n» *${usedPrefix}economy on*`, rcanal)
+return m.reply(`《✦》Los comandos de *Economía* están desactivados en este grupo.\n\nUn *administrador* puede activarlos con el comando:\n» *${usedPrefix}economy on*`)
 }
 const users = [...new Map(Object.entries(global.db.data.users).map(([jid, data]) => [jid, { ...data, jid }])).values()]
 const sorted = users.sort((a, b) => ((b.coin || 0) + (b.bank || 0)) - ((a.coin || 0) + (a.bank || 0)))
@@ -18,7 +18,7 @@ text += `✰ ${startIndex + i + 1} » *${name}:*\n`
 text += `\t\t Total→ *¥${total.toLocaleString()} ${currency}*\n`
 }
 text += `\n> • Página *${page}* de *${totalPages}*`
-await conn.reply(m.chat, text.trim(), m, { mentions: conn.parseMention(text) })
+await conn.reply(m.chat, text.trim(), m, rcanal { mentions: conn.parseMention(text) })
 }
 
 handler.help = ['baltop']
