@@ -10,14 +10,14 @@ user.coin = user.coin || 0
 user.exp = user.exp || 0
 if (now < user.lastcofre) {
 let wait = formatTime(Math.floor((user.lastcofre - now) / 1000))
-return conn.reply(m.chat, `ꕥ Debes esperar *${wait}* para usar *${usedPrefix + command}* de nuevo.`, m rcanal)
+return conn.reply(m.chat, `ꕥ Debes esperar *${wait}* para usar *${usedPrefix + command}* de nuevo.`, m, rcanal)
 }
 let reward = Math.floor(Math.random() * (60000 - 40000 + 1)) + 40000
 let expGain = Math.floor(Math.random() * (111)) + 50
 user.coin += reward
 user.exp += expGain
 user.lastcofre = now + gap
-conn.reply(m.chat, `「✿」 ${pickRandom(cofres)}\n> Has recibido *¥${reward.toLocaleString()} ${currency}*.`, m rcanal)
+conn.reply(m.chat, `「✿」 ${pickRandom(cofres)}\n> Has recibido *¥${reward.toLocaleString()} ${currency}*.`, m, rcanal)
 }
 
 handler.help = ['cofre']
