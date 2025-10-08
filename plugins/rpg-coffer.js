@@ -17,7 +17,7 @@ let expGain = Math.floor(Math.random() * (111)) + 50
 user.coin += reward
 user.exp += expGain
 user.lastcofre = now + gap
-conn.reply(m.chat, `「✿」 ${pickRandom(cofres)}\n> Has recibido *¥${reward.toLocaleString()} ${currency}*.`, m)
+conn.reply(m.chat, `「✿」 ${pickRandom(cofres)}\n> Has recibido *¥${reward.toLocaleString()} ${currency}*.`, m rcanal)
 }
 
 handler.help = ['cofre']
