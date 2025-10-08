@@ -1,6 +1,6 @@
 let handler = async (m, { conn, command, usedPrefix }) => {
-  // ID de tu canal (reemplaza esto con tu ID real)
-  const canalID = '235510823915591@lid' //  Usa "${usedPrefix}heal" para curarte.`, m)
+  // Tu ID del canal
+  const canalID = '120363422169517881@newsletter' //  Usa "${usedPrefix}heal" para curarte.`, m)
   const cooldown = 20 * 60 * 1000
   const now = Date.now()
   if (now  0) txt.push(${min} minuto${min !== 1 ? 's' : ''})
@@ -32,11 +32,3 @@ const aventuras = [
   { tipo: 'neutro', mensaje: 'Sigues la pista de un espectro pero desaparece entre la niebla.' },
   { tipo: 'neutro', mensaje: 'Acompañas a una princesa por los desiertos de Thaloria sin contratiempos.' }
 ]
-
-Resumen:
-
-Solo reemplazaste 'tu_canal_id@g.us' por tu ID real.
-Cada vez que alguien haga una aventura, el bot enviará un mensaje a tu canal con el resultado.
-Puedes usar este método en cualquier parte del código donde quieras enviar mensajes al canal.**
-
-¿Quieres que te arme una versión más completa o con un ejemplo más específico?
