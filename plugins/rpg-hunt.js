@@ -12,7 +12,7 @@ user.exp = user.exp || 0
 user.health = user.health || 100
 user.lastHunt = user.lastHunt || 0  
 if (user.health < 5)
-return conn.reply(m.chat, `ꕥ No tienes suficiente salud para volver a *cazar*.\n> Usa *"${usedPrefix}heal"* para curarte.`, m)
+return conn.reply(m.chat, `ꕥ No tienes suficiente salud para volver a *cazar*.\n> Usa *"${usedPrefix}heal"* para curarte.`, m, rcanal)
 const cooldown = 15 * 60 * 1000
 const now = Date.now()
 if (now < user.lastHunt) {
