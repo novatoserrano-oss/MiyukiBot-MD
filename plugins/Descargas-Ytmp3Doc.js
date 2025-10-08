@@ -120,7 +120,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   let q = args.join(" ").trim()
   if (!q) {
     return conn.sendMessage(m.chat, {
-      text: `🧁✨ *¡Hola, dulce!*\n\n🍬 **Por favor, ingresa el nombre del audio o video que deseas descargar.**`
+      text: `💥 *Por favor, ingresa el nombre del audio o video que deseas descargar.*`
     }, { quoted: m })
   }
 
@@ -129,7 +129,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 
   // Progreso visual (puedes personalizar si quieres)
   await conn.sendMessage(m.chat, {
-    text: `✨✨✨ *Buscando tu contenido mágico...* ✨✨✨`
+    text: `✨✨✨ *Descargando tu contenido...* ✨✨✨`
   }, { quoted: m })
 
   try {
@@ -178,7 +178,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
       contextInfo: {
         externalAdReply: {
           title: result.title,
-          body: "🌸 MiyukiBot - Tu asistente kawaii",
+          body: "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸",
           mediaUrl: vid.url,
           sourceUrl: vid.url,
           thumbnailUrl: result.thumbnail,
