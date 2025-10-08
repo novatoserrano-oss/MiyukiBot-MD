@@ -24,7 +24,7 @@ Duración 🕑 : *${timestamp}*
 Publicado 🗓️ : *${ago}*
 Link 🔗 : *${url}*`
 const thumb = (await conn.getFile(thumbnail)).data
-await conn.sendMessage(m.chat, { image: thumb, caption: info }, { quoted: m })
+await conn.sendMessage(m.chat, { image: thumb, caption: info, ...rcanal }, { quoted: fkontak })
 if (['play', 'mp3'].includes(command)) {
 const audio = await getAud(url)
 if (!audio?.url) throw '⚠️ No se pudo obtener el audio.'
