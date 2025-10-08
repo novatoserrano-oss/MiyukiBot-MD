@@ -18,7 +18,7 @@ text += `✰ ${startIndex + i + 1} » *${name}:*\n`
 text += `\t\t Total→ *¥${total.toLocaleString()} ${currency}*\n`
 }
 text += `\n> • Página *${page}* de *${totalPages}*`
-await conn.reply(m.chat, text.trim(), m, rcanal { mentions: conn.parseMention(text) })
+await conn.reply(m.chat, text.trim(), m, { mentions: conn.parseMention(text) })
 }
 
 handler.help = ['baltop']
