@@ -1,4 +1,4 @@
-let handler = async (m,canal { conn, usedPrefix, command }) => {
+let handler = async (m,rcanal { conn, usedPrefix, command }) => {
 if (!global.db.data.chats[m.chat].economy && m.isGroup) {
 return m.reply(`《✦》Los comandos de *Economía* están desactivados en este grupo.\n\nUn *administrador* puede activarlos con el comando:\n» *${usedPrefix}economy on*`)
 }
