@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+/*import fetch from 'node-fetch';
 
 export async function before(m, { conn }) {
   if (!m.text || !global.prefix.test(m.text)) return;
@@ -96,4 +96,55 @@ export async function before(m, { conn }) {
       }
     }
   }, { quoted: fkontak });
+}*/
+
+export async function before(m, { groupMetadata }) {
+if (!m.text || !global.prefix.test(m.text)) return
+const usedPrefix = global.prefix.exec(m.text)[0]
+const command = m.text.slice(usedPrefix.length).trim().split(' ')[0].toLowerCase()
+if (!command || command.length === 0) return
+const validCommand = (command, plugins) => {
+for (let plugin of Object.values(plugins)) {
+if (plugin.command && (Array.isArray(plugin.command) ? plugin.command : [plugin.command]).includes(command)) {
+return true
+}}
+return false
 }
+let chat = global.db.data.chats[m.chat]
+let settings = global.db.data.settings[this.user.jid]
+let owner = [...global.owner.map(([number]) => number)].map(v => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(m.sender)
+if (chat.modoadmin) return
+if (settings.self) return
+if (command === 'mute') return
+if (chat.isMute && !owner) return
+if (command === 'bot') return
+if (chat.isBanned && !owner) return
+if (validCommand(command, global.plugins)) {
+} else {
+const comando = command
+const mensajesNoEncontrado = [
+    `❌ El comando *"${command}"* no existe.\n💬 Usa *${usedPrefix}menu* para ver todos los disponibles.`,
+    `⚠️ No encontré el comando *"${command}"*.\n📖 Revisa *${usedPrefix}menu* para opciones válidas.`,
+    `🧩 *"${command}"* no es un comando válido.\n➡️ Usa *${usedPrefix}menu* para ver los comandos.`,
+    `💭 No reconozco *"${command}"*.\n✨ Mira *${usedPrefix}menu* para ver qué puedo hacer.`,
+    `🔍 El comando *"${command}"* no está registrado.\n💡 Usa *${usedPrefix}menu* para ver la lista completa.`
+  ];
+
+  const texto = mensajesNoEncontrado[Math.floor(Math.random() * mensajesNoEncontrado.length)];
+  const thumb = 'https://files.catbox.moe/oxt9wo.jpg';
+
+  await conn.sendMessage(m.chat, {
+    text: texto,
+    mentions: [m.sender],
+    contextInfo: {
+      externalAdReply: {
+        title: 'MiyukiBot-MD 👽',
+        body: '© Powered by OmarGranda',
+        thumbnailUrl: thumb,
+        sourceUrl: 'https://instagram.com',
+        mediaType: 1,
+        renderLargerThumbnail: true
+      }
+    }
+  }, { quoted: fkontak });
+ }
