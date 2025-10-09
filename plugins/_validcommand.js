@@ -6,7 +6,7 @@ export async function before(m, { conn }) {
   const usedPrefix = global.prefix.exec(m.text)[0];
   const command = m.text.slice(usedPrefix.length).trim().split(' ')[0].toLowerCase();
   
-  const thumbRes = await fetch("https://files.catbox.moe/rw14fh.jpg");
+  const thumbRes = await fetch("https://files.catbox.moe/3nmafy.jpg");
   const thumbBuffer = await thumbRes.buffer();
   const fkontak = {
         key: {
@@ -54,7 +54,7 @@ export async function before(m, { conn }) {
             title: '🌸 MiyukiBot-MD 🌸',
             body: '💖 “Sistema kawaii en modo descanso~”',
             thumbnailUrl: 'https://files.catbox.moe/mez710.jpg',
-            sourceUrl: 'https://github.com/Yuji-XDev',
+            sourceUrl: 'https://github.com/OmarGranda',
             mediaType: 1,
             renderLargerThumbnail: true
           }
@@ -89,7 +89,7 @@ export async function before(m, { conn }) {
   ];
 
   const texto = mensajesNoEncontrado[Math.floor(Math.random() * mensajesNoEncontrado.length)];
-  const thumb = 'https://files.catbox.moe/9mwuqe.jpg';
+  const thumb = 'https://files.catbox.moe/rw14fh.jpg';
 
   await conn.sendMessage(m.chat, {
     text: texto,
