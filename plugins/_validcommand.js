@@ -51,8 +51,8 @@ export async function before(m, { conn }) {
         mentions: [m.sender],
         contextInfo: {
           externalAdReply: {
-            title: '🌸 MiyukiBot-MD 🌸',
-            body: '💖 “Sistema kawaii en modo descanso~”',
+            title: 'MiyukiBot-MD 🌸',
+            body: '© 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢',
             thumbnailUrl: 'https://files.catbox.moe/mez710.jpg',
             sourceUrl: 'https://github.com/OmarGranda',
             mediaType: 1,
@@ -96,8 +96,8 @@ export async function before(m, { conn }) {
     mentions: [m.sender],
     contextInfo: {
       externalAdReply: {
-        title: '🌷 MiyukiBot-MD 🌷',
-        body: '💌 Sistema kawaii y siempre encantador~',
+        title: 'MiyukiBot-MD 🌸',
+        body: '© 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢',
         thumbnailUrl: thumb,
         sourceUrl: 'https://instagram.com',
         mediaType: 1,
