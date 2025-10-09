@@ -17,7 +17,7 @@ export async function before(m, { conn }) {
         },
         message: {
             locationMessage: {
-                name: `🌸｡･ﾟ♡ 𝐌𝐢𝐲𝐮𝐤𝐢𝐁𝐨𝐭-𝐌𝐃 ♡･ﾟ｡🌸`,
+                name: `𝐌𝐢𝐲𝐮𝐤𝐢𝐁𝐨𝐭-𝐌𝐃`,
                 jpegThumbnail: thumbBuffer
             }
         },
