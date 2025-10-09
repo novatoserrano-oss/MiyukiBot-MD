@@ -1,28 +1,45 @@
 let handler = async (m, { conn, usedPrefix, command, args }) => {
-let chat = global.db.data.chats[m.chat]
-if (command === 'bot') {
-if (args.length === 0) {
-const estado = chat.isBanned ? '✗ Desactivado' : '✓ Activado'
-const info = `「✦」Un administrador puede activar o desactivar a *${botname}* utilizando:\n\n✐ _Activar_ » *${usedPrefix}bot enable*\n✐ _Desactivar_ » *${usedPrefix}bot disable*\n\n✧ Estado actual » *${estado}*`
-return conn.reply(m.chat, info, m, rcanal);
-}
-if (args[0] === 'off') {
-if (chat.isBanned) {
-return conn.reply(m.chat, `《✦》${botname} ya estaba desactivado.`, m, rcanal);
-}
-chat.isBanned = true
-return conn.reply(m.chat, `❀ Has *desactivado* a ${botname}!`, m)
-} else if (args[0] === 'on') {
-if (!chat.isBanned) {
-return conn.reply(m.chat, `《✦》${botname} ya estaba activado.`, m, rcanal);
-}
-chat.isBanned = false
-return conn.reply(m.chat, `❀ Has *activado* a ${botname}!`, m, rcanal);
-}}}
+  const chat = global.db.data.chats[m.chat];
+  const estadoActual = chat.isBanned ? '✗ Desactivado' : '✓ Activado';
+  const bot = global.botname;
 
-handler.help = ['bot']
-handler.tags = ['grupo']
-handler.command = ['bot']
-handler.admin = true
+  if (!args[0]) {
+    const info = `
+╭━━━〔 ⚙️ *Control del Bot* 〕━━⬣
+┃ ✦ Un *administrador* puede:
+┃
+┃ 🟢 Activar » *${usedPrefix}bot enable*
+┃ 🔴 Desactivar » *${usedPrefix}bot disable*
+┃
+┃ ✧ Estado actual » *${estadoActual}*
+╰━━━━━━━━━━━━━━━━━━⬣`;
+    return conn.reply(m.chat, info, m, rcanal);
+  }
 
-export default handler
+  const arg = args[0].toLowerCase();
+
+  if (['off', 'disable', 'desactivar'].includes(arg)) {
+    if (chat.isBanned) 
+      return conn.reply(m.chat, `⚠️ *${bot}* ya estaba *desactivado.*`, m, rcanal);
+    
+    chat.isBanned = true;
+    return conn.reply(m.chat, `🔒 Has *desactivado* a *${bot}* en este grupo.`, m, rcanal);
+  }
+
+  if (['on', 'enable', 'activar'].includes(arg)) {
+    if (!chat.isBanned)
+      return conn.reply(m.chat, `⚠️ *${bot}* ya estaba *activado.*`, m, rcanal);
+    
+    chat.isBanned = false;
+    return conn.reply(m.chat, `✅ Has *activado* a *${bot}* en este grupo.`, m, rcanal);
+  }
+
+  return conn.reply(m.chat, `❌ Opción no válida.\nUsa *${usedPrefix}bot enable* o *${usedPrefix}bot disable*`, m, rcanal);
+};
+
+handler.help = ['bot [enable|disable]'];
+handler.tags = ['grupo'];
+handler.command = ['bot'];
+handler.admin = true;
+
+export default handler;
