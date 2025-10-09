@@ -53,7 +53,7 @@ export async function before(m, { conn }) {
         mentions: [m.sender],
         contextInfo: {
           externalAdReply: {
-            title: 'MiyukiBot-MD • Offline',
+            title: 'MiyukiBot-MD',
             body: '© Powered by OmarGranda',
             thumbnailUrl: 'https://files.catbox.moe/mez710.jpg',
             sourceUrl: 'https://github.com/OmarGranda',
