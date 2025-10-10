@@ -1,54 +1,54 @@
-let handler = async (m, { conn, usedPrefix, command, args, isAdmin, isOwner }) => {
-  let chat = global.db.data.chats[m.chat];
-  const bot = global.botname || "🤖 Bot";
-  
-  // Aseguramos que exista la propiedad isBanned
-  if (chat.isBanned === undefined) chat.isBanned = false;
+import fs from 'fs'
 
-  const estadoActual = chat.isBanned ? '✗ Desactivado' : '✓ Activado';
+let handler = async (m, { conn, args, usedPrefix, command, isAdmin, isOwner }) => {
+  let chat = global.db.data.chats[m.chat]
+  const bot = global.botname || '🤖 MiyukiBot'
 
-  // Si no se pasan argumentos, mostrar menú
+  // Asegurar que la propiedad exista
+  if (typeof chat.isBanned === 'undefined') chat.isBanned = false
+
+  const estadoActual = chat.isBanned ? '✗ Desactivado' : '✓ Activado'
+
+  // Sin argumentos → mostrar menú
   if (!args[0]) {
     const info = `
 ╭━━━〔 ⚙️ *Control del Bot* 〕━━⬣
 ┃ ✦ Solo *administradores* pueden usar:
 ┃
-┃ 🟢 Activar » *${usedPrefix + command} enable*
-┃ 🔴 Desactivar » *${usedPrefix + command} disable*
+┃ 🟢 Activar » *${usedPrefix + command} on*
+┃ 🔴 Desactivar » *${usedPrefix + command} off*
 ┃
 ┃ ✧ Estado actual » *${estadoActual}*
-╰━━━━━━━━━━━━━━━━━━⬣`;
-    return conn.reply(m.chat, info.trim(), m);
+╰━━━━━━━━━━━━━━━━━━⬣
+`.trim()
+    return conn.reply(m.chat, info, m)
   }
 
-  const arg = args[0].toLowerCase();
+  // Normalizar argumento
+  const arg = args[0].toLowerCase()
 
-  // Solo admins o el dueño pueden cambiar el estado
-  if (!isAdmin && !isOwner)
-    return conn.reply(m.chat, `⚠️ Solo *administradores* pueden usar este comando.`, m);
+  // Verificar permisos
+  if (!isAdmin && !isOwner) return conn.reply(m.chat, '⚠️ Solo *administradores* pueden usar este comando.', m)
 
   if (['off', 'disable', 'desactivar'].includes(arg)) {
-    if (chat.isBanned)
-      return conn.reply(m.chat, `⚠️ *${bot}* ya estaba *desactivado.*`, m);
-
-    chat.isBanned = true;
-    return conn.reply(m.chat, `🔒 Has *desactivado* a *${bot}* en este grupo.`, m);
+    if (chat.isBanned) return conn.reply(m.chat, `⚠️ *${bot}* ya estaba *desactivado.*`, m)
+    chat.isBanned = true
+    return conn.reply(m.chat, `🔒 Has *desactivado* a *${bot}* en este grupo.`, m)
   }
 
   if (['on', 'enable', 'activar'].includes(arg)) {
-    if (!chat.isBanned)
-      return conn.reply(m.chat, `⚠️ *${bot}* ya estaba *activado.*`, m);
-
-    chat.isBanned = false;
-    return conn.reply(m.chat, `✅ Has *activado* a *${bot}* en este grupo.`, m);
+    if (!chat.isBanned) return conn.reply(m.chat, `⚠️ *${bot}* ya estaba *activado.*`, m)
+    chat.isBanned = false
+    return conn.reply(m.chat, `✅ Has *activado* a *${bot}* en este grupo.`, m)
   }
 
-  return conn.reply(m.chat, `❌ Opción no válida.\nUsa *${usedPrefix + command} enable* o *${usedPrefix + command} disable*`, m);
-};
+  return conn.reply(m.chat, `❌ Opción no válida.\nUsa *${usedPrefix + command} on* o *${usedPrefix + command} off*`, m)
+}
 
-handler.help = ['bot [enable|disable]'];
-handler.tags = ['grupo'];
-handler.command = /^bot$/i;
-handler.admin = true;
+handler.help = ['bot [on/off]']
+handler.tags = ['grupo']
+handler.command = /^bot$/i
+handler.admin = true
+handler.group = true
 
-export default handler;
+export default handler
