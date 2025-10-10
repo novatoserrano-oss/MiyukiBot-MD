@@ -14,6 +14,6 @@ if (!chat.isBanned) {
 }
 chat.isBanned = false
 return conn.reply(m.chat, `❀ Has *activado* a ${botname}!`, m)
-};
+}}} 
 
-handler.help = ['bot [enable|disable]']
+handler.help = ['bot']
