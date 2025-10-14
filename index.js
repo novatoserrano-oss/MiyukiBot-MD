@@ -61,7 +61,7 @@ async function showBanner() {
     `.split('\n').map(line => chalk.hex('#00fff9').bold(line)).join('\n')
 
     const subtitle = chalk.hex('#ff66cc').bold('⚙ MIYUKI SYSTEM ONLINE ⚙').padStart(45)
-    const poweredMsg = chalk.hex('#ffcc00').italic('© Powered by ShadowCore Engine')
+    const poweredMsg = chalk.hex('#ffcc00').italic('© Powered By OmarGranda')
     const aiMsg = chalk.hex('#00f7ff').bold('─────────────────────────────────────────────────────────────')
 
     const tips = [
