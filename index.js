@@ -10,7 +10,7 @@ import fs, { readdirSync, statSync, unlinkSync, existsSync, mkdirSync, readFileS
 import yargs from 'yargs'
 import { spawn, execSync } from 'child_process'
 import lodash from 'lodash'
-import { kanekiJadiBot } from './plugins/sockets-serbot.js'
+import { MiyukiBot-MD } from './plugins/sockets-serbot.js'
 import chalk from 'chalk'
 import syntaxerror from 'syntax-error'
 import { tmpdir } from 'os'
@@ -41,12 +41,12 @@ let { say } = cfonts
 
 /*
 console.log(chalk.magentaBright('\n🚀 Iniciando...'))
-say('kanekiBot-V2', {
+say('MiyukiBot-MD', {
 font: 'simple',
 align: 'left',
 gradient: ['green', 'white']
 })
-say('© Powered By Dv.Shadow', {
+say('© Powered By OmarGranda', {
 font: 'console',
 align: 'center',
 colors: ['cyan', 'magenta', 'yellow']
@@ -67,7 +67,7 @@ async function showBanner() {
     const tips = [
         chalk.hex('#00ffcc')('✦ Usa /menu para explorar las funciones disponibles.'),
         chalk.hex('#ff66cc')('⌬ Mantén tu sistema actualizado para máximo rendimiento.'),
-        chalk.hex('#ffcc00')('⬡ Bienvenido al poder estético de MiyukiBot-V2.')
+        chalk.hex('#ffcc00')('⬡ Bienvenido al poder estético de MiyukiBot-MD.')
     ]
 
     const loadingStyles = [
@@ -94,13 +94,13 @@ async function showBanner() {
                 borderStyle: 'double',
                 borderColor: 'cyanBright',
                 backgroundColor: '#000010',
-                title: 'MiyukiBot-V2 System',
+                title: 'MiyukiBot-MD System',
                 titleAlignment: 'center'
             }
         )
     )
 
-    say('MIYUKI • BOT', {
+    say('MIYUKI • BOT • MD', {
         font: 'block',
         align: 'center',
         colors: ['cyan', 'white'],
@@ -131,7 +131,7 @@ async function showBanner() {
     console.log(
         chalk.bold.cyanBright(
             boxen(
-                chalk.bold('💠 Sistema MiyukiBot-V2 Iniciado Exitosamente 💠\n') +
+                chalk.bold('💠 Sistema MiyukiBot-MD Iniciado Exitosamente 💠\n') +
                 chalk.hex('#00f7ff')('Todos los módulos están activos y sincronizados.') +
                 '\n\n' +
                 tips.join('\n') +
