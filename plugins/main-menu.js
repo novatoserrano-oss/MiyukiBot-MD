@@ -38,24 +38,30 @@ let handler = async (m, { conn }) => {
 
   let menu = `   SISTEMA EN LÍNEA: 「𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸」
 
-[👤] *Usuario:* @${mentionedJid.split('@')[0]}
-[📚] *Comandos:* ${totalCommands}
-[⚙️] *Versión:* ${vs}
-[🛠️] *Librería:* ${libreria}
-[🤖] *Bot:* ${(conn.user.jid == global.conn.user.jid ? 'Principal' : 'Sub-Bot')}
-[🚀] *Tiempo de actividad:* ${uptime}
+╭━━━〔 ⚙️ 𝗦𝗜𝗦𝗧𝗘𝗠𝗔 𝗔𝗖𝗧𝗜𝗩𝗢 〕━━⬣
+│
+│ 👤 *Usuario:* @${mentionedJid.split('@')[0]}
+│ 📚 *Comandos:* ${totalCommands}
+│ ⚙️ *Versión:* ${vs}
+│ 🛠️ *Librería:* ${libreria}
+│ 🤖 *Modo:* ${(conn.user.jid == global.conn.user.jid ? 'Principal' : 'Sub-Bot')}
+│ 🚀 *Uptime:* ${uptime}
+│
+╰━━━〔 💾 𝗥𝗘𝗖𝗨𝗥𝗦𝗢𝗦 𝗗𝗘𝗟 𝗦𝗜𝗦𝗧𝗘𝗠𝗔 〕━━⬣
+│
+│ 💽 *RAM Total:* ${total} MB
+│ 📈 *RAM Usada:* ${used} MB
+│ 📉 *RAM Libre:* ${free} MB
+│ 🌿 *Ping:* ${ping} ms
+│
+╰━━━〔 🗓️ 𝗙𝗘𝗖𝗛𝗔 𝗬 𝗛𝗢𝗥𝗔 〕━━⬣
+│
+│ 📅 *Día:* ${dia}
+│ 🗓️ *Fecha:* ${fecha}
+│ ⏰ *Hora:* ${hora}
+│
+╰━━━━━━━━━━━━━━━━━━⬣
 
-*──ESTADO DEL SISTEMA──*
-[💾] *RAM Total:* ${total} MB
-[📈] *RAM Usada:* ${used} MB
-[📉] *RAM Libre:* ${free} MB
-[🌿] *Ping:* *${ping} ms*
-
-*───FECHA Y HORA───*
-[📅] *Día:* ${dia}
-[🗓️] *Fecha:* ${fecha}
-[⏰] *Hora:* ${hora}
-*─────────────────*
 
 *╭─────────*
 *│* ⑀✬ \`𝐄𝐂𝐎𝐍𝐎𝐌𝐈𝐀\`  ︴

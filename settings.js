@@ -13,7 +13,7 @@ global.botNumber = "" //Ejemplo: 573218138672
 
 global.owner = [
 // <-- Número @s.whatsapp.net -->
-["51927303598", "🜲 Propietario", true],
+//["51927303598", "🜲 Propietario", true],
 ["51965763942"],
 ['51919199620'],
 ['59892681750'], 
@@ -34,7 +34,7 @@ global.vs = "^1.8.2|Latest"
 global.nameqr = "MiyukiBot-MD"
 global.sessions = "Sessions/Principal"
 global.jadi = "Sessions/SubBot"
-global.MiyukiJadibts = true
+global.kanekiJadibts = true
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
