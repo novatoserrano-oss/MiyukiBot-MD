@@ -21,7 +21,7 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 │ 🩵 *Miyuki siempre cuidando de su servidor con amor~* 💌
 │
 ╰───❀ 〘 *MiyukiBot-MD* 〙❀───╯`;
-      return conn.reply(m.chat, info, fkontak, fake);
+      return conn.reply(m.chat, info, m);
     }
 
     if (args[0] === 'off') {
