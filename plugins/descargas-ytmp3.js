@@ -40,11 +40,16 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
 > 🔗 *𝐋𝐈𝐍𝐊:* ${video.url}
 ────────────────────`
 
-    const audioBuffer = await (await fetch(data.data.download_url)).buffer()
+    const thumb = (await conn.getFile(video.thumbnail)).data
+
+    await conn.sendMessage(m.chat, { image: thumb, caption }, { quoted: m })
+
+    const audioBuffer = await (await fetch(info.download_url)).buffer()
     await conn.sendMessage(m.chat, {
       audio: audioBuffer,
+      fileName: `${info.title}.mp3`,
       mimetype: "audio/mpeg",
-      ptt: true
+      ptt: false
     }, { quoted: m })
 
   } catch (e) {
