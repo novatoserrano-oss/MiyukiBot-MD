@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+/*import fetch from 'node-fetch';
 
 export async function before(m, { conn }) {
   if (!m.text || !global.prefix.test(m.text)) return;
@@ -94,4 +94,4 @@ export async function before(m, { conn }) {
       }
     }
   }, { quoted: fkontak });
-}
+}*/
