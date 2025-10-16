@@ -1,11 +1,9 @@
 let handler = async (m, { conn, usedPrefix, command, args }) => {
+  global.db.data.chats[m.chat] = global.db.data.chats[m.chat] || {};
   let chat = global.db.data.chats[m.chat];
-  if (!(m.chat in global.db.data.chats)) {
-    return conn.reply(m.chat, `🌸 *¡Este lugar aún no pertenece a MiyukiBot-MD!* 💕`, m);
-  }
 
   if (command === 'bot') {
-    if (args.length === 0) {
+    if (!args || args.length === 0) {
       const estado = chat.isBanned ? '✘ 𝘿𝙀𝙎𝘼𝘾𝙏𝙄𝙑𝘼𝘿𝙊 🌙' : '✔ 𝘼𝘾𝙏𝙄𝙑𝙊 🌸';
       const info = `
 ╭───🌸 〘 *MiyukiBot-MD Control Center* 〙 🌸───╮
@@ -24,19 +22,23 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
       return conn.reply(m.chat, info, m);
     }
 
-    if (args[0] === 'off') {
+    if (args[0].toLowerCase() === 'off') {
       if (chat.isBanned) {
         return conn.reply(m.chat, `😴 *Miyuki ya está descansando en este grupo...* 🌙`, m);
       }
       chat.isBanned = true;
       return conn.reply(m.chat, `💤 *Miyuki entra en modo descanso... el grupo queda en calma.* 💤`, m);
-    } else if (args[0] === 'on') {
+    }
+
+    if (args[0].toLowerCase() === 'on') {
       if (!chat.isBanned) {
         return conn.reply(m.chat, `🌸 *Miyuki ya está despierta y lista para ayudarte!* 💖`, m);
       }
       chat.isBanned = false;
       return conn.reply(m.chat, `✨ *Miyuki vuelve al grupo con energía y ternura~* 💕`, m);
     }
+
+    return conn.reply(m.chat, `❀ *Uso correcto:* ${usedPrefix}bot [on/off]`, m);
   }
 };
 
