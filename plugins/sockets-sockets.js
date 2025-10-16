@@ -26,27 +26,6 @@ return conn.reply(m.chat, `❀ Has *${enable ? 'activado' : 'desactivado'}* el m
 conn.reply(m.chat, `「✦」Puedes activar o desactivar el modo *${type}* utilizando:\n\n● Activar » ${usedPrefix}${command} enable\n● Desactivar » ${usedPrefix}${command} disable\n\n✧ Estado actual » *${isEnable ? '✓ Activado' : '✗ Desactivado'}*`, m)
 break
 }
-case 'join': {
-if (!text) return m.reply(`❀ Debes enviar un enlace de invitación para unirme a un grupo.`)
-const [_, code] = text.match(linkRegex) || []
-if (!code) return m.reply(`ꕥ El enlace de invitación no es válido.`)
-await m.react('🕒')
-await conn.groupAcceptInvite(code)
-await m.react('✔️')
-m.reply(`❀ ${botname} se a unido exitosamente al grupo.`)
-break
-}
-case 'salir': case 'leave': {
-await m.react('🕒')
-const id = text || m.chat
-const chat = global.db.data.chats[m.chat]
-chat.welcome = false
-await conn.reply(id, `❀ Adiós a todos, ${botname} se despide! (≧ω≦)ゞ`)
-await conn.groupLeave(id)
-chat.welcome = true
-await m.react('✔️')
-break
-}
 case 'logout': {
 const rawId = conn.user?.id || ''
 const cleanId = jidDecode(rawId)?.user || rawId.split('@')[0]
@@ -83,8 +62,8 @@ await m.react('✖️')
 conn.reply(m.chat, `⚠︎ Se ha producido un problema.\n> Usa *${usedPrefix}report* para informarlo.\n\n${error.message || error}`, m)
 }}
 
-handler.command = ['self', 'public', 'antiprivate', 'gponly', 'sologp', 'join', 'salir', 'leave', 'logout', 'reload']
-handler.help = ['self', 'public', 'antiprivate', 'gponly', 'sologp', 'join', 'salir', 'leave', 'logout', 'reload']
+handler.command = ['self', 'public', 'antiprivate', 'gponly', 'sologp', 'salir', 'leave', 'logout', 'reload']
+handler.help = ['self', 'public', 'antiprivate', 'gponly', 'sologp', 'salir', 'leave', 'logout', 'reload']
 handler.tags = ['socket']
 
 export default handler
