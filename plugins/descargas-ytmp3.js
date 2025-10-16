@@ -13,94 +13,43 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
       )
     }
 
-    await conn.sendMessage(m.chat, { react: { text: "⏰", key: m.key } })
-
     let search = await yts(text)
     let video = search.videos[0]
     if (!video) return conn.reply(m.chat, '☁️ No se encontró ningún resultado.', m)
 
-    const apis = [
-      { 
-        api: 'ZenzzXD v2', 
-        endpoint: `https://api.zenzxz.my.id/downloader/ytmp3v2?url=${encodeURIComponent(video.url)}`, 
-        extractor: res => res.download_url 
-      },
-      { 
-        api: 'Vreden', 
-        endpoint: `https://api.vreden.my.id/api/v1/download/youtube/audio?url=${encodeURIComponent(video.url)}&quality=128`, 
-        extractor: res => res.result?.download?.url 
-      },
-      { 
-        api: 'Xyro', 
-        endpoint: `https://xyro.site/download/youtubemp3?url=${encodeURIComponent(video.url)}`, 
-        extractor: res => res.result?.dl 
-      }
-    ]
+    const apiUrl = `https://api.zenzxz.my.id/api/downloader/ytmp3v2?url=${encodeURIComponent(video.url)}`
+    const res = await fetch(apiUrl)
+    const data = await res.json()
 
-    const { url: downloadUrl, servidor } = await fetchFromApis(apis)
-    if (!downloadUrl) return conn.reply(m.chat, '❌ Ninguna API devolvió el audio.', m)
+    if (!data.success || !data.data?.download_url)
+      return conn.reply(m.chat, '❌ Error al obtener el audio desde la API.', m)
 
-    const size = await getSize(downloadUrl)
+    const info = data.data
+    const size = await getSize(info.download_url)
     const sizeStr = size ? formatSize(size) : 'Desconocido'
 
-    const meta = {
-      title: video.title,
-      duration: video.timestamp,
-      url: video.url,
-      author: video.author?.name || "Desconocido",
-      views: video.views?.toLocaleString('es-PE') || "0",
-      ago: video.ago || "Desconocido",
-      thumbnail: video.thumbnail,
-      size: sizeStr,
-      servidor
-    }
-
-    const textoInfo = `🎶 *ＹＯＵＴＵＢＥ • ＭＰ3* ☁️
+    const caption = `🎶 *ＹＯＵＴＵＢＥ • ＭＰ3* ☁️
 ────────────────────
-> 🎵 *𝐓𝐈𝐓𝐔𝐋𝐎:* ${meta.title}
-> ⏰ *𝐃𝐔𝐑𝐀𝐂𝐈𝐎𝐍:* ${meta.duration}
-> 🎬 *𝐂𝐀𝐍𝐀𝐋:* ${meta.author}
-> 👀 *𝐕𝐈𝐒𝐓𝐀𝐒:* ${meta.views}
-> 💾 *𝐓𝐀𝐌𝐀𝐍̃𝐎:* ${meta.size}
+> 🎵 *𝐓𝐈𝐓𝐔𝐋𝐎:* ${info.title}
+> ⏰ *𝐃𝐔𝐑𝐀𝐂𝐈𝐎𝐍:* ${video.timestamp}
+> 🎬 *𝐂𝐀𝐍𝐀𝐋:* ${video.author.name}
+> 👀 *𝐕𝐈𝐒𝐓𝐀𝐒:* ${video.views.toLocaleString('es-PE')}
+> 💾 *𝐓𝐀𝐌𝐀𝐍̃𝐎:* ${sizeStr}
 > 🤩 *𝐂𝐀𝐋𝐈𝐃𝐀𝐃:* 128kbps
-> 🗓️ *𝐏𝐔𝐁𝐋𝐈𝐂𝐀𝐃𝐎:* ${meta.ago}
-> 🔗 *𝐋𝐈𝐍𝐊:* ${meta.url}
-────────────────────
+> 🗓️ *𝐏𝐔𝐁𝐋𝐈𝐂𝐀𝐃𝐎:* ${video.ago}
+> 🔗 *𝐋𝐈𝐍𝐊:* ${video.url}
+────────────────────`
 
-> *≡ Enviando, espera un momento...*`
-
-    // Enviar info de la canción
-    await conn.sendMessage(m.chat, {
-      image: { url: meta.thumbnail },
-      caption: textoInfo
-    }, { quoted: m })
-
-    // Descargar y enviar el audio
-    const audioBuffer = await (await fetch(downloadUrl)).buffer()
+    const audioBuffer = await (await fetch(data.data.download_url)).buffer()
     await conn.sendMessage(m.chat, {
       audio: audioBuffer,
-      fileName: `${meta.title}.mp3`,
       mimetype: "audio/mpeg",
-      ptt: false,
-      contextInfo: {
-        externalAdReply: {
-          showAdAttribution: true,
-          title: '𝐘 𝐎 𝐔 𝐓 𝐔 𝐁 𝐄 • 𝐌 𝐔 𝐒 𝐈 𝐂',
-          body: `Duración: ${meta.duration} | Calidad: 128kbps | Peso: ${meta.size}`,
-          thumbnailUrl: meta.thumbnail,
-          mediaType: 2,
-          renderLargerThumbnail: true,
-          mediaUrl: meta.url,
-          sourceUrl: meta.url
-        }
-      }
+      ptt: true
     }, { quoted: m })
-
-    await conn.sendMessage(m.chat, { react: { text: "✔️", key: m.key } })
 
   } catch (e) {
     console.error(e)
-    await conn.reply(m.chat, `❌ Error: ${e.message}`, m)
+    conn.reply(m.chat, `❌ Error: ${e.message}`, m)
   }
 }
 
@@ -109,18 +58,6 @@ handler.tags = ['descargas']
 handler.help = ['ytmp3 <texto o link>', 'song <texto>']
 
 export default handler
-
-async function fetchFromApis(apis) {
-  for (const api of apis) {
-    try {
-      const res = await fetch(api.endpoint)
-      const json = await res.json()
-      const url = api.extractor(json)
-      if (url) return { url, servidor: api.api }
-    } catch {}
-  }
-  return { url: null, servidor: "Ninguno" }
-}
 
 async function getSize(url) {
   try {
