@@ -1,4 +1,13 @@
-const { useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, fetchLatestBaileysVersion } = (await import("@whiskeysockets/baileys"))
+/*const { useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, fetchLatestBaileysVersion } = (await import("@whiskeysockets/baileys"))*/
+import {
+  generateWAMessageFromContent,
+  proto,
+  useMultiFileAuthState,
+  DisconnectReason,
+  makeCacheableSignalKeyStore,
+  fetchLatestBaileysVersion
+} from "@whiskeysockets/baileys"
+
 import qrcode from "qrcode"
 import NodeCache from "node-cache"
 import fs from "fs"
@@ -18,7 +27,7 @@ let crm4 = "IF9hdXRvcmVzcG9uZGVyLmpzIGluZm8tYm90Lmpz"
 let drm1 = ""
 let drm2 = ""
 let rtx = "*❀ SER BOT • MODE QR*\n\n✰ Con otro celular o en la PC escanea este QR para convertirte en un *Sub-Bot* Temporal.\n\n\`1\` » Haga clic en los tres puntos en la esquina superior derecha\n\n\`2\` » Toque dispositivos vinculados\n\n\`3\` » Escanee este codigo QR para iniciar sesion con el bot\n\n✧ ¡Este código QR expira en 45 segundos!."
-let rtx2 = "*❀ SER BOT • MODE CODE*\n\n✰ Usa este Código para convertirte en un *Sub-Bot* Temporal.\n\n\`1\` » Haga clic en los tres puntos en la esquina superior derecha\n\n\`2\` » Toque dispositivos vinculados\n\n\`3\` » Selecciona Vincular con el número de teléfono\n\n\`4\` » Escriba el Código para iniciar sesion con el bot\n\n✧ No es recomendable usar tu cuenta principal."
+//let rtx2 = "*❀ SER BOT • MODE CODE*\n\n✰ Usa este Código para convertirte en un *Sub-Bot* Temporal.\n\n\`1\` » Haga clic en los tres puntos en la esquina superior derecha\n\n\`2\` » Toque dispositivos vinculados\n\n\`3\` » Selecciona Vincular con el número de teléfono\n\n\`4\` » Escriba el Código para iniciar sesion con el bot\n\n✧ No es recomendable usar tu cuenta principal."
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const kanekiJBOptions = {}
@@ -123,8 +132,65 @@ return
 if (qr && mcode) {
 let secret = await sock.requestPairingCode((m.sender.split`@`[0]))
 secret = secret.match(/.{1,4}/g)?.join("-")
+*/
 txtCode = await conn.sendMessage(m.chat, {text : rtx2}, { quoted: m })
-codeBot = await m.reply(secret)
+codeBot = await m.reply(secret)*/
+
+let rtx2 = `
+👾 *ＢＯＴ • Ｖ 3* ☃️
+
+✨ Usa este código para ser un *Sub-Bot Temporal*
+🔐 \`ᴄᴏᴅɪɢᴏ ᴅᴇ ᴠɪɴᴄᴜʟᴀᴄɪᴏ́ɴ:\` *${secret}*
+
+🌿 \`ᴘᴀsᴏs:\`
+1️⃣ Abre los tres puntos ⠇ arriba a la derecha  
+2️⃣ Entra en *Dispositivos vinculados*  
+3️⃣ Toca *Vincular con número de teléfono*  
+4️⃣ Escribe el código y ¡listo!* 💫`;
+
+  const img = 'https://i.pinimg.com/originals/ab/e7/e4/abe7e489d32433fc81b866fe162548d6.jpg'
+
+  const preparedImage = await conn.prepareMessageMedia({ image: { url: img } }, { upload: conn.waUploadToServer })
+
+  const msg = generateWAMessageFromContent(m.chat, {
+    viewOnceMessage: {
+      message: {
+        messageContextInfo: { deviceListMetadata: {}, deviceListMetadataVersion: 2 },
+        interactiveMessage: proto.Message.InteractiveMessage.create({
+          header: {
+            title: "🌐 Sub-Bot Temporal",
+            hasMediaAttachment: true,
+            imageMessage: preparedImage.imageMessage
+          },
+          body: { text: rtx2 },
+          footer: { text: '           ⚠︎  𝐀 𝐕 𝐈 𝐒 𝐎  ⚠︎ \n✧ No es recomendable usar tu cuenta principal.' },
+          nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+            buttons: [
+              {
+                name: "cta_copy",
+                buttonParamsJson: JSON.stringify({
+                  display_text: "📋 ᴄ ᴏ ᴘ ɪ ᴀ ʀ ° ᴄ ᴏ ᴅ ɪ ɢ ᴏ",
+                  id: "copy_code",
+                  copy_code: `${secret}`
+                })
+              },
+              {
+                name: "cta_url",
+                buttonParamsJson: JSON.stringify({
+                  display_text: "ᴛᴏᴄᴀ ᴀǫᴜɪ",
+                  url: "https://whatsapp.com/channel/0029VbAtbPA84OmJSLiHis2U"
+                })
+              }
+            ]
+          })
+        })
+      }
+    }
+  }, { quoted: m })
+
+  await conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id })
+
+
 console.log(secret)
 }
 if (txtCode && txtCode.key) {
