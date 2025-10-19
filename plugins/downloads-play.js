@@ -84,7 +84,8 @@ export default handler
 
 async function getAudio(url) {
   try {
-    const api = `https://api.zenzxz.my.id/api/downloader/ytmp3v2?url=${encodeURIComponent(url)}`
+    const api = `
+{ api: 'ZenzzXD', endpoint: `${global.APIs.zenzxz.url}/downloader/ytmp3?url=${encodeURIComponent(url)}`, extractor: res => res.download_url }`
     const res = await fetch(api).then(r => r.json())
     return res?.data?.download_url ? { url: res.data.download_url, api: 'ZenzzXD' } : null
   } catch {
