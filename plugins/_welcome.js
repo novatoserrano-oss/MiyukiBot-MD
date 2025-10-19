@@ -63,7 +63,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
   }
 
   const welcomeMessage = `╔══════════════════╗  
-    *ＶＩＥＮＶＥＮＩＤＯ／Ａ* 
+     *ＶＩＥＮＶＥＮＩＤＯ／Ａ* 
 ╚══════════════════╝  
 
 🌸 *Grupo:* ${groupMetadata.subject}  
@@ -74,7 +74,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
 🕒 *Hora:* ${hora}  
 🌍 *País:* ${pais}  
 
-📌 Usa _#help_ para ver la lista de comandos.
+📌 Usa _.menu_ para ver la lista de comandos.
 
 > 𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`
 
