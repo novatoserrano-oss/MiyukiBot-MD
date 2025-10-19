@@ -25,7 +25,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     if (seconds > 600) throw '⚠ El video supera el límite de duración (10 minutos).'
 
     const vistas = formatViews(views)
-    const caption = `
+    const info = `
 ＹＯＵＴＵＢＥ - ＰＬＡＹ
 
 ⏳ Descargando : *${title}*
@@ -38,7 +38,7 @@ Link 🔗 : *${url}*
 `
 
     const thumb = (await conn.getFile(thumbnail)).data
-    await conn.sendMessage(m.chat, { image: thumb, caption }, { quoted: m })
+    await conn.sendMessage(m.chat, { image: thumb, caption: info, ...rcanal }, { quoted: fkontak })
 
     if (['play', 'playaudio'].includes(command)) {
       const audio = await getAudio(url)
