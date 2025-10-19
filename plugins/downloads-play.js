@@ -6,11 +6,11 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     if (!text?.trim())
       return conn.reply(
         m.chat,
-        `🌿 Ingresa el nombre o enlace del video.\n\nEjemplo:\n> ${usedPrefix + command} The Weeknd - Blinding Lights`,
+        `☃️ Ingresa el nombre o enlace del video.\n\nEjemplo:\n> ${usedPrefix + command} The Weeknd - Blinding Lights`,
         m
       )
 
-    await m.react('☃️')
+    await m.react('🕒')
 
     const videoMatch = text.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/|v\/))([a-zA-Z0-9_-]{11})/)
     const query = videoMatch ? `https://youtu.be/${videoMatch[1]}` : text
@@ -84,8 +84,7 @@ export default handler
 
 async function getAudio(url) {
   try {
-    const api = `
-{ api: 'ZenzzXD', endpoint: `${global.APIs.zenzxz.url}/downloader/ytmp3?url=${encodeURIComponent(url)}`, extractor: res => res.download_url }`
+    const api = `https://api.zenzxz.my.id/api/downloader/ytmp3v2?url=${encodeURIComponent(url)}`
     const res = await fetch(api).then(r => r.json())
     return res?.data?.download_url ? { url: res.data.download_url, api: 'ZenzzXD' } : null
   } catch {
@@ -103,6 +102,7 @@ async function getVideo(url) {
   }
 }
 
+// 👁️ FORMATO DE VISTAS
 function formatViews(views) {
   if (!views) return "Desconocido"
   if (views >= 1_000_000_000) return `${(views / 1_000_000_000).toFixed(1)}B (${views.toLocaleString()})`
