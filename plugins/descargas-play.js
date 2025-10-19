@@ -54,7 +54,7 @@ if (!text.trim()) return conn.reply(m.chat, `🔔 *Por favor, ingresa el nombre 
 
     await conn.reply(m.chat, infoMessage, m, external)
 
-    if (['playaudio'].includes(command)) {
+    if (['play', 'playaudio'].includes(command)) {
       try {
         const res = await fetch(`https://api.vreden.my.id/api/v1/download/youtube/audio?url=${url}&quality=128`)
         const json = await res.json()
@@ -84,7 +84,7 @@ if (!text.trim()) return conn.reply(m.chat, `🔔 *Por favor, ingresa el nombre 
       }
     }
     
-    else if (['playvideo'].includes(command)) {
+    else if (['play2', 'playvideo'].includes(command)) {
       try {
         const res = await fetch(`https://api.stellarwa.xyz/dow/ytmp4?url=${url}&apikey=Diamond`)
         const json = await res.json()
