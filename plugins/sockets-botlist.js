@@ -2,6 +2,7 @@ import ws from "ws"
 
 const handler = async (m, { conn, command, usedPrefix, participants }) => {
   try {
+
     const activeConns = global.conns.filter(c => 
       c?.user && 
       c?.ws?.socket && 
@@ -26,21 +27,20 @@ const handler = async (m, { conn, command, usedPrefix, participants }) => {
       return resultado.trim()
     }
 
-    let groupBots = users.filter(bot => 
-  participants.some(p => p.id === bot || p.id === (bot.endsWith('@s.whatsapp.net') ? bot : `${bot}@s.whatsapp.net`))
-)
+    let groupBots = users.filter(bot => participants.some(p => p.id === bot))
 
-if (participants.some(p => p.id === global.conn.user.jid) && !groupBots.includes(global.conn.user.jid)) {
-  groupBots.push(global.conn.user.jid)
-}
+    if (participants.some(p => p.id === global.conn.user.jid) && !groupBots.includes(global.conn.user.jid)) {
+      groupBots.push(global.conn.user.jid)
+    }
+
     const botsGroup = groupBots.length > 0 
       ? groupBots.map(bot => {
           const isMainBot = bot === global.conn.user.jid
           const v = activeConns.find(c => c.user.jid === bot)
           const uptime = isMainBot 
-            ? convertirMsADiasHorasMinutosSegundos(Date.now() - global.conn.uptime) 
+            ? convertirMsADiasHorasMinutosSegundos(Date.now() - global.conn.uptime)
             : v?.uptime 
-              ? convertirMsADiasHorasMinutosSegundos(Date.now() - v.uptime) 
+              ? convertirMsADiasHorasMinutosSegundos(Date.now() - v.uptime)
               : "Activo desde ahora"
           const mention = bot.replace(/[^0-9]/g, '')
           return `@${mention}\n> Bot: ${isMainBot ? 'Principal' : 'Sub-Bot'}\n> Online: ${uptime}`
@@ -55,10 +55,11 @@ if (participants.some(p => p.id === global.conn.user.jid) && !groupBots.includes
 ❏ En este grupo: *${groupBots.length}* bots
 ${botsGroup}`
 
-    const mentionList = groupBots.map(bot => bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`)
-    rcanal.contextInfo.mentionedJid = mentionList
+    const rcanal = { contextInfo: { mentionedJid: groupBots } }
+
     await conn.sendMessage(m.chat, { text: message, ...rcanal }, { quoted: m })
   } catch (error) {
+    console.error(error)
     m.reply(`⚠︎ Se ha producido un problema.\n> Usa *${usedPrefix}report* para informarlo.\n\n${error.message}`)
   }
 }
