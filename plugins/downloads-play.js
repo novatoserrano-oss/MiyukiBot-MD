@@ -7,8 +7,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
       return conn.reply(
         m.chat,
         `☃️ Ingresa el nombre o enlace del video.\n\nEjemplo:\n> ${usedPrefix + command} The Weeknd - Blinding Lights`,
-        m,
-        rcanal
+        m
       )
 
     await m.react('🕒')
@@ -39,7 +38,7 @@ Link 🔗 : *${url}*
 `
 
     const thumb = (await conn.getFile(thumbnail)).data
-    await conn.sendMessage(m.chat, { image: thumb, caption ...rcanal}, { quoted: m })
+    await conn.sendMessage(m.chat, { image: thumb, caption }, { quoted: m })
 
     if (['play', 'playaudio'].includes(command)) {
       const audio = await getAudio(url)
