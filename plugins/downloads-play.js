@@ -38,7 +38,7 @@ Link 🔗 : *${url}*
 `
 
     const thumb = (await conn.getFile(thumbnail)).data
-    await conn.sendMessage(m.chat, { image: thumb, caption ...rcanal}, { quoted: m })
+    await conn.sendMessage(m.chat, { image: thumb, caption }, { quoted: m })
 
     if (['play', 'playaudio'].includes(command)) {
       const audio = await getAudio(url)
