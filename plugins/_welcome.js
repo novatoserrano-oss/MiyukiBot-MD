@@ -50,7 +50,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
       mentionedJid: [usuarioJid],
       externalAdReply: {
         title: "MiyukiBot-MD",
-        body: dev,
+        body: "By OmarGranda",
         mediaUrl: null,
         description: null,
         previewType: "PHOTO",
@@ -74,7 +74,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
 🕒 *Hora:* ${hora}  
 🌍 *País:* ${pais}  
 
-📌 Usa _#help_ para ver la lista de comando.
+📌 Usa _#help_ para ver la lista de comandos.
 
 > 𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`
 
@@ -95,13 +95,9 @@ export async function before(m, { conn, participants, groupMetadata }) {
   
 > 𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`
 
-  const welcomeApi = `https://api-nv.eliasaryt.pro/api/generate/welcome-image?username=${encodeURIComponent(numeroUsuario)}&guildName=${encodeURIComponent(groupMetadata.subject)}&memberCount=${groupSize}&avatar=${encodeURIComponent(ppUrl)}&background=https://i.ibb.co/4YBNyvP/images-76.jpg&guildIcon=${encodeURIComponent('https://github.com/OmarGranda.png')}&key=hYSK8YrJpKRc9jSE`
-
-  const byeApi = `https://api-nv.eliasaryt.pro/api/generate/welcome-image?username=${encodeURIComponent(numeroUsuario)}&guildName=${encodeURIComponent(groupMetadata.subject)}&memberCount=${groupSize}&avatar=${encodeURIComponent(ppUrl)}&background=https://i.ibb.co/4YBNyvP/images-76.jpg&guildIcon=${encodeURIComponent('https://github.com/OmarGranda.png')}&key=hYSK8YrJpKRc9jSE`
-
   if (chat?.welcome && m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_ADD) {
     await conn.sendMessage(m.chat, {
-      image: { url: welcomeApi },
+      image: { url: ppUrl },
       caption: welcomeMessage,
       ...fakeContext,
       footer: "☆ MiyukiBot-MD ☆",
@@ -111,7 +107,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
 
   if (chat?.welcome && (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_LEAVE || m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_REMOVE)) {
     await conn.sendMessage(m.chat, {
-      image: { url: byeApi },
+      image: { url: ppUrl },
       caption: byeMessage,
       ...fakeContext,
       footer: "☆ MiyukiBot-MD ☆",
