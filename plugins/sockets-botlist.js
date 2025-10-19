@@ -26,11 +26,13 @@ const handler = async (m, { conn, command, usedPrefix, participants }) => {
       return resultado.trim()
     }
 
-    let groupBots = users.filter(bot => participants.some(p => p.id === bot))
-    if (participants.some(p => p.id === global.conn.user.jid) && !groupBots.includes(global.conn.user.jid)) {
-      groupBots.push(global.conn.user.jid)
-    }
+    let groupBots = users.filter(bot => 
+  participants.some(p => p.id === bot || p.id === (bot.endsWith('@s.whatsapp.net') ? bot : `${bot}@s.whatsapp.net`))
+)
 
+if (participants.some(p => p.id === global.conn.user.jid) && !groupBots.includes(global.conn.user.jid)) {
+  groupBots.push(global.conn.user.jid)
+}
     const botsGroup = groupBots.length > 0 
       ? groupBots.map(bot => {
           const isMainBot = bot === global.conn.user.jid
