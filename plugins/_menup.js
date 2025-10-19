@@ -99,7 +99,7 @@ let handler = async (m, { conn, usedPrefix, __dirname, participants }) => {
 🎋 *Usuarios totales:* ${totalreg}
 ☁️ *Grupos activos:* ${groupsCount}
 🚀 *Tiempo activo:* ${uptime}
-📡 *Fecha:* ${hora}, ${hora}, ${fechaTxt}
+📡 *Fecha:* ${hora}, ${dia}, ${fechaTxt}
 ─────────────────────`.trim()
 
     const cuerpo = infoUser + `*🍡 Mᴇɴú ᴅɪsᴘᴏɴɪʙʟᴇ:*
