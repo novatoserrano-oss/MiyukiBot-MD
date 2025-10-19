@@ -1,12 +1,5 @@
-/*const { useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, fetchLatestBaileysVersion } = (await import("@whiskeysockets/baileys"))*/
-import {
-  generateWAMessageFromContent,
-  proto,
-  useMultiFileAuthState,
-  DisconnectReason,
-  makeCacheableSignalKeyStore,
-  fetchLatestBaileysVersion
-} from "@whiskeysockets/baileys"
+const { generateWAMessageFromContent,
+  proto, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, fetchLatestBaileysVersion } = (await import("@whiskeysockets/baileys"))
 
 import qrcode from "qrcode"
 import NodeCache from "node-cache"
