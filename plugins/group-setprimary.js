@@ -1,7 +1,10 @@
 import ws from 'ws'
 
 let handler = async (m, { conn, usedPrefix, command }) => {
+  if (!m.isGroup) return
+
   const chat = global.db.data.chats[m.chat]
+
   const subBots = [
     ...new Set([
       ...global.conns
@@ -14,9 +17,22 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     subBots.push(global.conn.user.jid)
   }
 
+  if (
+    chat?.primaryBot &&
+    chat.primaryBot !== conn.user.jid &&
+    command !== 'setprimary' &&
+    command !== 'delprimary'
+  ) {
+    return
+  }
+
   if (command === 'setprimary') {
     const mentionedJid = m.mentionedJid || []
-    const who = mentionedJid[0] ? mentionedJid[0] : m.quoted ? m.quoted.sender : false
+    const who = mentionedJid[0]
+      ? mentionedJid[0]
+      : m.quoted
+      ? m.quoted.sender
+      : false
 
     if (!who)
       return conn.reply(
@@ -64,26 +80,6 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       m
     )
   }
-}
-
-handler.before = async function (m, { conn }) {
-  try {
-    if (!m.isGroup) return !0
-
-    const chat = global.db.data.chats[m.chat]
-    const esteBot = conn.user.jid
-    const texto = m.text?.toLowerCase() || ''
-
-    if (texto.startsWith('.setprimary') || texto.startsWith('.delprimary')) return !0
-
-    if (chat?.primaryBot) {
-      const botPrincipal = chat.primaryBot
-      if (botPrincipal !== esteBot) return !1
-    }
-  } catch (e) {
-    console.error('Error en filtro primaryBot:', e)
-  }
-  return !0
 }
 
 handler.help = ['setprimary', 'delprimary']
