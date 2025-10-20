@@ -20,7 +20,7 @@ await conn.sendMessage(m.chat, {
   document: { url: data5.dllink },
   mimetype: 'application/vnd.android.package-archive',
   fileName: `${data5.name}.apk`,
-  caption: `°\n> ${club}`,
+  caption: `°\n> ${dev}`,
   ...(thumbnail ? { jpegThumbnail: thumbnail } : {}),
   contextInfo: {
     externalAdReply: {
