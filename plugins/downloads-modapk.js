@@ -16,6 +16,21 @@ if (data5.size.includes('GB') || data5.size.replace(' MB', '') > 999) {
 return await conn.reply(m.chat, `ꕥ El archivo es demasiado pesado.`, m)
 }
 //await conn.sendMessage(m.chat, { document: { url: data5.dllink }, mimetype: 'application/vnd.android.package-archive', fileName: data5.name + '.apk', caption: null }, { quoted: m })
+await conn.sendMessage(m.chat, {
+  document: { url: data5.dllink },
+  mimetype: 'application/vnd.android.package-archive',
+  fileName: `${data5.name}.apk`,
+  caption: `°\n> ${club}`,
+  ...(thumbnail ? { jpegThumbnail: thumbnail } : {}),
+  contextInfo: {
+    externalAdReply: {
+      mediaType: 1,
+      thumbnailUrl: data5.icon,
+      renderLargerThumbnail: true,
+      sourceUrl: `https://aptoide.com/search?query=${encodeURIComponent(data5.name)}`
+    }
+  }
+}, { quoted: fkontak })
 await m.react('✔️')
 } catch (error) {
 await m.react('✖️')
