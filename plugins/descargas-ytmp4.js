@@ -1,96 +1,52 @@
-import axios from "axios"
 import fetch from "node-fetch"
-import { sizeFormatter } from "human-readable"
+import fs from "fs"
 
-let calidadPredeterminada = "480"
-
-let handler = async (m, { conn, text, usedPrefix, command }) => {
+const handler = async (m, { conn, text, usedPrefix, command }) => {
   try {
+    if (!text?.trim()) return conn.reply(m.chat, `🍂 *Ingresa el enlace del video de YouTube*`, m)
 
-    if (command === "ytmp4") {
-      if (!text)
-        return conn.reply(
-          m.chat,
-          `📌 *Ingresa el enlace de YouTube para descargar en MP4.*\nEjemplo:\n${usedPrefix + command} https://youtu.be/HWjCStB6k4o`,
-          m
-        )
+    const api = `https://api.vreden.my.id/api/v1/download/youtube/video?url=${encodeURIComponent(text)}&quality=360`
+    const res = await fetch(api)
+    if (!res.ok) throw new Error(`Error al obtener datos de la API.`)
+    const json = await res.json()
 
-      await conn.reply(
-        m.chat,
-        `⏳ *DESCARGANDO*
-> Por favor espero en lo que envió su archivo`,
-        m
-      )
+    if (!json.status || !json.result?.download?.url) throw new Error(`No se pudo descargar el video.`)
 
-      const apiUrl = `https://api.vreden.my.id/api/v1/download/youtube/video?url=${encodeURIComponent(text)}&quality=${calidadPredeterminada}`
-      const res = await axios.get(apiUrl)
+    const video = json.result
+    const { title, duration } = video.metadata
+    const downloadUrl = video.download.url
 
-      if (!res.data?.status) throw new Error("No se pudo obtener información del video.")
+    const head = await fetch(downloadUrl, { method: "HEAD" })
+    const fileSize = head.headers.get("content-length")
+    const fileMB = fileSize ? (Number(fileSize) / 1024 / 1024).toFixed(2) : 0
 
-      const result = res.data.result
-      const meta = result.metadata
-      const dl = result.download
+    const caption = `🌿 *${title}*\n🍉 \`Duracion:\` ${duration.timestamp}`
 
-      const head = await fetch(dl.url, { method: "HEAD" })
-      const size = head.headers.get("content-length")
-      const formatSize = sizeFormatter({ std: "JEDEC", decimalPlaces: 2 })
-      const fileSize = size ? formatSize(parseInt(size)) : "Desconocido"
-      const sizeMB = size ? parseInt(size) / 1024 / 1024 : 0
+    await m.react('📥')
 
-      const info = `🎬 *YOUTUBE MP4*
-────────────────────
-> 📌 *Título:* ${meta.title}
-> ⏱️ *Duración:* ${meta.duration?.timestamp || meta.timestamp}
-> 📺 *Canal:* ${meta.author?.name || "-"}
-> 👁️ *Vistas:* $> {meta.views?.toLocaleString() || "-"}
-> 💾 *Tamaño:* ${fileSize}
-> ⚡ *Calidad:* ${dl.quality}
-> 📅 *Publicado:* ${meta.ago}
-> 🔗 *Link:* ${meta.url}
-────────────────────
-> *≡ Enviando, espera un momento...*`
-
+    if (fileMB > 70) {
       await conn.sendMessage(m.chat, {
-        image: { url: meta.thumbnail },
-        caption: info,
-      })
-
-      if (sizeMB > 100) {
-        await conn.sendMessage(
-          m.chat,
-          {
-            document: { url: dl.url },
-            mimetype: "video/mp4",
-            fileName: dl.filename,
-            caption: `🎬 *${meta.title}*\n💾 Tamaño: ${fileSize}\n⚡ Calidad: ${dl.quality}\n> Enviado como documento (más de 100 MB).`,
-          },
-          { quoted: m }
-        )
-      } else {
-        await conn.sendMessage(
-          m.chat,
-          {
-            video: { url: dl.url },
-            mimetype: "video/mp4",
-            fileName: dl.filename,
-            caption: `🎬 *${meta.title}*\n💾 Tamaño: ${fileSize}\n⚡ Calidad: ${dl.quality}`,
-          },
-          { quoted: m }
-        )
-      }
+        document: { url: downloadUrl },
+        mimetype: "video/mp4",
+        fileName: `${title}.mp4`,
+        caption
+      }, { quoted: m })
+    } else {
+      await conn.sendMessage(m.chat, {
+        video: { url: downloadUrl },
+        caption
+      }, { quoted: m })
     }
-  } catch (err) {
-    console.error(err)
-    conn.reply(
-      m.chat,
-      "❌ *Ocurrió un error al procesar tu solicitud.*\nVerifica el enlace o intenta con otro video.",
-      m
-    )
+
+    await m.react('✔️')
+  } catch (e) {
+    console.error(e)
+    conn.reply(m.chat, `*Ocurrió un error al procesar el video.*\nVerifica el enlace o inténtalo más tarde.`, m)
   }
 }
 
-handler.help = ["ytmp4 <url>"] 
-handler.tags = ["descargas"]
-handler.command = ["ytmp4"]
+handler.help = ['ytmp4 <url>']
+handler.tags = ['descargas']
+handler.command =  ['ytmp4']
 
 export default handler
