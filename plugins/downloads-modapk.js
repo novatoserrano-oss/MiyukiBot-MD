@@ -21,12 +21,10 @@ var handler = async (m, { conn, usedPrefix, command, text }) => {
 
     await conn.sendFile(m.chat, data5.icon, 'thumbnail.jpg', txt, m, null, rcanal)
 
-    // Evita descargas muy pesadas
     if (data5.size.includes('GB') || parseFloat(data5.size.replace(' MB', '')) > 999) {
       return await conn.reply(m.chat, `ꕥ El archivo es demasiado pesado.`, m)
     }
 
-    // Crea miniatura
     let thumbnail = null
     try {
       const img = await Jimp.read(data5.icon)
@@ -35,9 +33,6 @@ var handler = async (m, { conn, usedPrefix, command, text }) => {
     } catch (err) {
       console.log('⚠️ Error al crear miniatura:', err)
     }
-
-    // Define valores por si no existen globales
-    const fkontak = { key: { participant: '0@s.whatsapp.net' }, message: { contactMessage: { displayName: 'APK Downloader' } } }
 
     await conn.sendMessage(
       m.chat,
