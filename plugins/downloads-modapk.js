@@ -21,7 +21,7 @@ await conn.sendMessage(m.chat, {
   mimetype: 'application/vnd.android.package-archive',
   fileName: `${data5.name}.apk`,
   caption: `°\n> ${dev}`,
-  ...(thumbnail ? { jpegThumbnail: thumbnail } : {}),
+  ...(thumbnail ? { jpegThumbnail: data5.icon } : {}),
   contextInfo: {
     externalAdReply: {
       mediaType: 1,
