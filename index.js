@@ -36,7 +36,7 @@ const { chain } = lodash
 const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
 let { say } = cfonts
-/*console.log(chalk.cyan('BOT LISTO ESPERE...🌿\n'))
+console.log(chalk.cyan('BOT LISTO ESPERE...🌿\n'))
 say('MIYUKI BOT', {
 font: 'block',
 align: 'center',
@@ -46,34 +46,7 @@ say('powered by Omar Granda\ncolaborador: Shadow.xyz', {
 font: 'console',
 align: 'center',
 colors: ['cyan', 'magenta', 'yellow']
-})*/
-
-console.log(chalk.cyan('BOT LISTO ESPERE...🌿\n'));
-
-const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
-let i = 0;
-
-const loading = setInterval(() => {
-    process.stdout.write(`\r${chalk.greenBright(frames[i % frames.length])} Iniciando módulos...`);
-    i++;
-}, 100);
-
-setTimeout(() => {
-    clearInterval(loading);
-    process.stdout.write('\r✅ Módulos iniciados!           \n\n');
-
-    say('MIYUKI BOT', {
-        font: 'block',
-        align: 'center',
-        gradient: ['green', 'white']
-    });
-    say('powered by Omar Granda\ncolaborador: Shadow.xyz', {
-        font: 'console',
-        align: 'center',
-        colors: ['cyan', 'magenta', 'yellow']
-    });
-
-}, 4000);
+})
 protoType()
 serialize()
 
