@@ -36,134 +36,17 @@ const { chain } = lodash
 const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
 let { say } = cfonts
-
-
-
-/*
-console.log(chalk.magentaBright('\n🚀 Iniciando...'))
-say('MiyukiBot-MD', {
-font: 'simple',
-align: 'left',
+console.log(chalk.cyan('BOT LISTO ESPERE...🌿\n'))
+say('MIYUKI BOT', {
+font: 'block',
+align: 'center',
 gradient: ['green', 'white']
 })
-say('© Powered By OmarGranda', {
+say('powered by Omar Granda\ncolaborador: Shadow.xyz', {
 font: 'console',
 align: 'center',
 colors: ['cyan', 'magenta', 'yellow']
-})*/
-
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-
-async function showBanner() {
-    const title = `
-░█▀▄░█▀▄░█▀▄░█░█░█   █▄▄░█▀█░▀█▀░  ░█▄▄░█▀█░▀█▀░█░█░█▀▄
-░█▀▄░█▀▄░█▀▄░█▄█░█   █▄█░█▄█░░█░   ░█▄█░█▄█░░█░░█▄█░█▀▄
-    `.split('\n').map(line => chalk.hex('#00fff9').bold(line)).join('\n')
-
-    const subtitle = chalk.hex('#ff66cc').bold('⚙ MIYUKI SYSTEM ONLINE ⚙').padStart(45)
-    const poweredMsg = chalk.hex('#ffcc00').italic('© Powered By OmarGranda')
-    const aiMsg = chalk.hex('#00f7ff').bold('─────────────────────────────────────────────────────────────')
-
-    const tips = [
-        chalk.hex('#00ffcc')('✦ Usa /menu para explorar las funciones disponibles.'),
-        chalk.hex('#ff66cc')('⌬ Mantén tu sistema actualizado para máximo rendimiento.'),
-        chalk.hex('#ffcc00')('⬡ Bienvenido al poder estético de MiyukiBot-MD.')
-    ]
-
-    const loadingStyles = [
-        ['⠋', 'Inicializando interfaz principal...'],
-        ['⠙', 'Cargando base de datos del sistema...'],
-        ['⠹', 'Activando núcleo lógico IA...'],
-        ['⠸', 'Compilando módulos dinámicos...'],
-        ['⠼', 'Sincronizando datos del usuario...'],
-        ['⠴', 'Conectando con servidor principal...'],
-        ['⠦', 'Aplicando parches de seguridad...'],
-        ['⠧', 'Optimizando flujo de comandos...'],
-        ['⠇', 'Energizando núcleo Miyuki...'],
-        ['⠏', 'Finalizando arranque del sistema...'],
-    ]
-
-    console.clear()
-
-    console.log(
-        boxen(
-            title + '\n' + subtitle,
-            {
-                padding: 1,
-                margin: 1,
-                borderStyle: 'double',
-                borderColor: 'cyanBright',
-                backgroundColor: '#000010',
-                title: 'MiyukiBot-MD System',
-                titleAlignment: 'center'
-            }
-        )
-    )
-
-    say('MIYUKI • BOT • MD', {
-        font: 'block',
-        align: 'center',
-        colors: ['cyan', 'white'],
-        background: 'transparent',
-        letterSpacing: 1,
-        lineHeight: 1
-    })
-    say('Cyber Edition', {
-        font: 'console',
-        align: 'center',
-        colors: ['yellowBright'],
-        background: 'transparent'
-    })
-
-    console.log('\n' + aiMsg + '\n')
-
-    const colors = ['#00fff9', '#00ffcc', '#ff66cc', '#ffcc00', '#00f7ff']
-    for (let i = 0; i < 60; i++) {
-        const [symbol, message] = loadingStyles[i % loadingStyles.length]
-        const color = colors[i % colors.length]
-        process.stdout.write(
-            '\r' + chalk.hex(color).bold(`${symbol} ${message}`)
-        )
-        await sleep(100)
-    }
-    process.stdout.write('\r' + ' '.repeat(60) + '\r')
-
-    console.log(
-        chalk.bold.cyanBright(
-            boxen(
-                chalk.bold('💠 Sistema MiyukiBot-MD Iniciado Exitosamente 💠\n') +
-                chalk.hex('#00f7ff')('Todos los módulos están activos y sincronizados.') +
-                '\n\n' +
-                tips.join('\n') +
-                '\n\n' +
-                poweredMsg,
-                {
-                    padding: 1,
-                    margin: 1,
-                    borderStyle: 'round',
-                    borderColor: 'magentaBright',
-                    backgroundColor: '#000012'
-                }
-            )
-        )
-    )
-
-    const patterns = [
-        chalk.hex('#00eaff')('✦'),
-        chalk.hex('#ff66cc')('⌬'),
-        chalk.hex('#ffcc00')('⬡'),
-        chalk.hex('#00ffcc')('✧'),
-        chalk.hex('#00f7ff')('◆'),
-        chalk.hex('#ff3366')('⬢')
-    ]
-
-    let line = ''
-    for (let i = 0; i < 70; i++) line += patterns[i % patterns.length]
-    console.log('\n' + line + '\n')
-}
-
-await showBanner()
-
+})
 protoType()
 serialize()
 
