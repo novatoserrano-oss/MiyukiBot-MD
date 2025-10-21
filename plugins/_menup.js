@@ -1,3 +1,4 @@
+
 import fs from 'fs'
 import moment from 'moment-timezone'
 import PhoneNumber from 'awesome-phonenumber'
@@ -23,7 +24,7 @@ let handler = async (m, { conn, args, usedPrefix, command, text }) => {
     const comandosTotales = Object.keys(global.plugins).length
 
     const phone = PhoneNumber('+' + userId)
-    const pais = phone.getRegionCode() ? phone.getRegionCode() : 'Desconocido 🌍'
+    const pais = phone.getRegionCode() || 'Desconocido 🌍'
 
     const channel = 'https://whatsapp.com/channel/0029VbAtbPA84OmJSLiHis2U'
     const owner = 'https://wa.me/51919199620'
@@ -31,10 +32,9 @@ let handler = async (m, { conn, args, usedPrefix, command, text }) => {
     const logo = 'https://shadow-xyz.vercel.app/img/shadow13.jpg'
 
     const comandos = Object.values(global.plugins)
-      .filter(plugin => plugin.help && plugin.tags && plugin.tags.includes('descargas'))
-      .map(plugin => Array.isArray(plugin.help) ? plugin.help : [plugin.help])
-      .flat()
-      .map(cmd => `> ☁️ ${usedPrefix}${cmd}`)
+      .filter(p => p.help && p.tags && p.tags.includes('descargas'))
+      .flatMap(p => Array.isArray(p.help) ? p.help : [p.help])
+      .map(cmd => `🍬 ${usedPrefix}${cmd}`)
       .join('\n')
 
     const cuerpo = `──────────────────────
@@ -51,84 +51,74 @@ let handler = async (m, { conn, args, usedPrefix, command, text }) => {
 ✎ 💫 *Fecha:* ${hora}, ${fecha}, ${diaCapitalizado}
 ──────────────────────
 
-🍋 𝘾𝙊𝙈𝘼𝙉𝘿𝙊𝙎
+🍡 *Comandos disponibles:*
+${comandos || '⚠️ No hay comandos de descargas disponibles.'}
 `.trim()
 
-    const menu = comandos 
-      ? `${cuerpo}\n\n${comandos}`
-      : `${cuerpo}`
-
-    const nativeFlowButtons = proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
-      buttons: [
-        {
-          name: 'cta_url',
-          buttonParamsJson: JSON.stringify({
-            display_text: '📢 Canal Oficial',
-            url: channel,
-            merchant_url: channel
-          })
-        },
-        {
-          name: 'cta_url',
-          buttonParamsJson: JSON.stringify({
-            display_text: '🌷 Instagram',
-            url: ig,
-            merchant_url: ig
-          })
-        },
-        {
-          name: 'cta_url',
-          buttonParamsJson: JSON.stringify({
-            display_text: '📞 contacto',
-            url: owner,
-            merchant_url: owner
-          })
-        }
-      ]
-    })
-
-    await conn.relayMessage(
-      m.chat,
+    const buttons = [
       {
-        viewOnceMessage: {
-          message: {
-            interactiveMessage: {
-              body: { text: menu },
-              footer: { text: '🍓 bot de mrd | Menu Descargas' },
-              header: {
-                title: '✨ Bienvenid@ soy?, ʀbot de mrd xD',
-                subtitle: '',
-                hasMediaAttachment: true,
-                imageMessage: (await conn.prepareMessageMedia({ image: { url: logo } }, { upload: conn.waUploadToServer })).imageMessage
-              },
-              nativeFlowMessage: nativeFlowButtons,
-              contextInfo: {
-                mentionedJid: [m.sender],
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                  newsletterJid: '120363422142340004@newsletter',
-                  serverMessageId: 100,
-                  newsletterName: 'bot de mrd : 𝖢𝗁𝖺𝗇𝗇𝖾𝗅 𝖮𝖿𝗂𝖼𝗂𝖺𝗅'
-                },
-                externalAdReply: {
-                  title: '🍓 bot de mrd - MD',
-                  body: '✨ Descarga tus archivos favoritos.',
-                  thumbnailUrl: logo,
-                  mediaType: 1,
-                  renderLargerThumbnail: true,
-                  sourceUrl: channel
-                }
+        name: 'cta_url',
+        buttonParamsJson: JSON.stringify({
+          display_text: '📢 Canal Oficial',
+          url: channel,
+          merchant_url: channel
+        })
+      },
+      {
+        name: 'cta_url',
+        buttonParamsJson: JSON.stringify({
+          display_text: '🌸 Instagram',
+          url: ig,
+          merchant_url: ig
+        })
+      },
+      {
+        name: 'cta_url',
+        buttonParamsJson: JSON.stringify({
+          display_text: '📞 Contacto',
+          url: owner,
+          merchant_url: owner
+        })
+      }
+    ]
+
+    const msg = proto.Message.fromObject({
+      viewOnceMessage: {
+        message: {
+          interactiveMessage: {
+            header: {
+              title: '🍓 ʙᴏᴛ ᴅᴇ ᴍʀᴅ — ᴍᴇɴᴜ ᴅᴇ ᴅᴇsᴄᴀʀɢᴀs',
+              subtitle: '',
+              hasMediaAttachment: true,
+              imageMessage: (await conn.prepareMessageMedia({ image: { url: logo } }, { upload: conn.waUploadToServer })).imageMessage
+            },
+            body: { text: cuerpo },
+            footer: { text: '🌷 ʙᴏᴛ ᴅᴇ ᴍʀᴅ | Sistema de descargas' },
+            nativeFlowMessage: { buttons },
+            contextInfo: {
+              mentionedJid: [m.sender],
+              forwardingScore: 999,
+              isForwarded: true,
+              externalAdReply: {
+                title: '🍓 ʙᴏᴛ ᴅᴇ ᴍʀᴅ - ᴍᴅ',
+                body: '✨ Descarga tus archivos favoritos fácilmente.',
+                thumbnailUrl: logo,
+                mediaType: 1,
+                renderLargerThumbnail: true,
+                sourceUrl: channel
               }
             }
           }
         }
-      },
-      {}
-    )
+      }
+    })
+
+    await conn.relayMessage(m.chat, msg, {})
+    await m.react('✅')
 
   } catch (e) {
     console.error(e)
-    await conn.reply(m.chat, `Error al mostrar el menú de descargas:\n${e.message}`, m, fake)
+    await conn.reply(m.chat, `Error al mostrar el menú de descargas:\n${e.message}`, m)
   }
 }
 
