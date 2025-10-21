@@ -8,16 +8,25 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     if (!target) return conn.reply(m.chat, `Menciona a quien quieres asustar.\nEjemplo: ${usedPrefix}${command} @usuario`, m)
 
     const username = target.split('@')[0]
-    const FAKE_SIZE_BYTES = 100n * 1024n * 1024n * 1024n // 100 GB
-    const fakeSizeNumber = FAKE_SIZE_BYTES > BigInt(Number.MAX_SAFE_INTEGER)
-      ? Number.MAX_SAFE_INTEGER
-      : Number(FAKE_SIZE_BYTES)
 
+    const FAKE_SIZE_BYTES = 100n * 1024n * 1024n * 1024n
+    const fakeSizeNumber = (FAKE_SIZE_BYTES <= BigInt(Number.MAX_SAFE_INTEGER))
+      ? Number(FAKE_SIZE_BYTES)
+      : Number.MAX_SAFE_INTEGER
+
+    const imageUrl = 'https://files.catbox.moe/r1qp16.jpg'
+    let buffer
     const smallContent = `😏🥰🥵🥵🥵🥵🥵`
-    const buffer = Buffer.from(smallContent, 'utf8')
+    try {
+      const res = await axios.get(imageUrl, { responseType: 'arraybuffer', timeout: 15000 })
+      buffer = Buffer.from(res.data)
+    } catch (err) {
+      console.warn('No se pudo descargar la imagen remoto, usando fallback pequeño:', err?.message || err)
+      buffer = Buffer.from(smallContent, 'utf8')
+    }
 
-    const fakeImageName = 'omar.jpg'
-    const fakeDocName = 'omar.jpg'
+    const fakeImageName = 'pack.jpg'
+    const fakeDocName = 'pack.jpg'
 
     const notif = `@${username} 😏 ¡Cuidado con lo que descargas!`
     await conn.sendMessage(m.chat, { text: notif, mentions: [target] }, { quoted: m })
@@ -35,6 +44,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
         { quoted: m }
       )
     } catch (errImage) {
+      console.warn('Envio imagen con fileLength falló, reintentando sin fileLength:', errImage?.message || errImage)
       await conn.sendMessage(
         m.chat,
         {
@@ -46,19 +56,32 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       )
     }
 
-    await conn.sendMessage(
-      m.chat,
-      {
-        document: buffer,
-        mimetype: 'image/jpeg',
-        fileName: fakeDocName,
-        fileLength: fakeSizeNumber,
-        caption: `📁 ${fakeDocName}`
-      },
-      { quoted: m }
-    )
+    try {
+      await conn.sendMessage(
+        m.chat,
+        {
+          document: buffer,
+          mimetype: 'image/jpeg',
+          fileName: fakeDocName,
+          fileLength: fakeSizeNumber,
+          caption: `📁 ${fakeDocName}`
+        },
+        { quoted: m }
+      )
+    } catch (errDoc) {
+      console.warn('Envio documento con fileLength falló, reintentando sin fileLength:', errDoc?.message || errDoc)
+      await conn.sendMessage(
+        m.chat,
+        {
+          document: buffer,
+          mimetype: 'image/jpeg',
+          fileName: fakeDocName,
+          caption: `📁 ${fakeDocName}`
+        },
+        { quoted: m }
+      )
+    }
 
-    // intentar borrar mensaje del comando
     try {
       await conn.sendMessage(m.chat, { delete: m.key })
     } catch (err) {
