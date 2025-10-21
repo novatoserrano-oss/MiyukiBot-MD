@@ -47,7 +47,7 @@ let handler = async (m, { conn, command }) => {
 ╰───────────────❖`
     }).join('\n\n')
 
-    const thumb = 'https://d.uguu.se/GmSLPtrU.png'
+    const thumb = 'https://files.catbox.moe/mez710.jpg'
 
     const mensaje = `
 ⟡ ────────────── ⟡
