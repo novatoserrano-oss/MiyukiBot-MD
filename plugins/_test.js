@@ -1,5 +1,4 @@
-import fetch from "node-fetch"
-import { saveDatabase } from "../lib/database.js"
+import { randomBytes } from 'crypto'
 
 let handler = async (m, { conn, usedPrefix, command, args }) => {
   const toNum = (jid = '') => String(jid).split('@')[0].split(':')[0].replace(/[^0-9]/g, '')
@@ -9,18 +8,12 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
   const isROwner = [botId, ...owners].map(v => toNum(v)).includes(senderNum)
   const isOwner = isROwner || !!m.fromMe
 
-  let settings = global.db?.data?.settings || (global.db.data.settings = {})
-  let bot = settings[conn.user.jid] || (settings[conn.user.jid] = {})
-
   // Comando de ayuda
   if (!args[0] || args[0] === 'help') {
-    const imageUrl = "https://files.catbox.moe/b10cv6.jpg"
-    let imageBuffer = await fetch(imageUrl).then(res => res.buffer())
-    
     const helpMessage = `꒰⌢ ʚ˚₊‧ ⌨️ ꒱꒱ :: *AUTOTYPE* ıllı
 
 ੭੭ ﹙ 📌 ﹚:: *Uso del comando*
-\`\`\`Controla la escritura automática del bot con efecto de puntos "..."\`\`\`
+\`\`\`Controla la escritura automática del bot con efecto de "escribiendo..."\`\`\`
 
 ੭੭ ﹙ 🍒 ﹚:: *Comandos disponibles*
 • ${usedPrefix}autotype on - Activar autotype
@@ -28,14 +21,16 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 • ${usedPrefix}autotype status - Ver estado actual
 • ${usedPrefix}autotype help - Mostrar esta ayuda
 
+੭੭ ﹙ ⚡ ﹚:: *Funcionamiento*
+\`\`\`Activa/desactiva el efecto de escritura en TODOS los mensajes\`\`\`
+
 ੭੭ ﹙ ⚠️ ﹚:: *Nota importante*
 \`\`\`Solo propietarios pueden usar este comando\`\`\`
 
 ‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`
 
-    await conn.sendMessage(m.chat, {
-      image: imageBuffer,
-      caption: helpMessage
+    await conn.sendMessage(m.chat, { 
+      text: helpMessage 
     }, { quoted: m })
     return
   }
@@ -50,10 +45,12 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 
 \`\`\`Este comando solo está disponible para propietarios del bot\`\`\`
 
-੭੭ ﹙ ℹ️ ﹚:: *Información*
-\`\`\`Contacta con el owner si necesitas usar esta función\`\`\`
-
 ‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`)
+  }
+
+  // Inicializar variable global si no existe
+  if (global.autotype === undefined) {
+    global.autotype = true // Activado por defecto
   }
 
   switch (subCommand) {
@@ -61,16 +58,15 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
     case 'activar':
     case 'enable':
     case '1':
-      bot.autotypeDotOnly = true
-      await saveDatabase()
+      global.autotype = true
       await m.reply(`꒰⌢ ʚ˚₊‧ ⌨️ ꒱꒱ :: *AUTOTYPE* ıllı
 
 ੭੭ ﹙ ✅ ﹚:: *Función activada*
 
-\`\`\`El bot ahora mostrará escritura automática con efecto de puntos "..." en sus respuestas\`\`\`
+\`\`\`El bot ahora mostrará efecto de escritura en TODOS los mensajes\`\`\`
 
 ੭੭ ﹙ 🎀 ﹚:: *Estado*
-\`\`\`AUTOTYPE: Activado\`\`\`
+\`\`\`AUTOTYPE: 🟢 ACTIVADO\`\`\`
 
 ‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`)
       break
@@ -79,16 +75,15 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
     case 'desactivar':
     case 'disable':
     case '0':
-      bot.autotypeDotOnly = false
-      await saveDatabase()
+      global.autotype = false
       await m.reply(`꒰⌢ ʚ˚₊‧ ⌨️ ꒱꒱ :: *AUTOTYPE* ıllı
 
 ੭੭ ﹙ ❌ ﹚:: *Función desactivada*
 
-\`\`\`El bot ya no mostrará escritura automática con efecto de puntos en sus respuestas\`\`\`
+\`\`\`El bot ya no mostrará efecto de escritura en los mensajes\`\`\`
 
 ੭੭ ﹙ 🎀 ﹚:: *Estado*
-\`\`\`AUTOTYPE: Desactivado\`\`\`
+\`\`\`AUTOTYPE: 🔴 DESACTIVADO\`\`\`
 
 ‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`)
       break
@@ -96,17 +91,14 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
     case 'status':
     case 'estado':
     case 'info':
-      const status = bot.autotypeDotOnly ? '🟢 ACTIVADO' : '🔴 DESACTIVADO'
+      const status = global.autotype ? '🟢 ACTIVADO' : '🔴 DESACTIVADO'
       await m.reply(`꒰⌢ ʚ˚₊‧ 📊 ꒱꒱ :: *ESTADO ACTUAL* ıllı
 
 ੭੭ ﹙ 🎀 ﹚:: *Estado de Autotype*
 \`\`\`${status}\`\`\`
 
-੭੭ ﹙ ⚙️ ﹚:: *Descripción*
-\`\`\`Efecto de escritura con "..." en mensajes\`\`\`
-
-੭੭ ﹙ 🔧 ﹚:: *Control*
-\`\`\`Solo propietarios pueden modificar\`\`\`
+੭੭ ﹙ ⚡ ﹚:: *Funcionamiento*
+\`\`\`Controla el efecto "escribiendo..." en todos los mensajes\`\`\`
 
 ੭੭ ﹙ 💡 ﹚:: *Uso*
 • ${usedPrefix}autotype on/off
@@ -123,20 +115,36 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 
 ੭੭ ﹙ 🛠️ ﹚:: *Comandos válidos*
 • on - Activar función
-• off - Desactivar función
+• off - Desactivar función  
 • status - Ver estado
 • help - Mostrar ayuda
-
-੭੭ ﹙ 💡 ﹚:: *Ejemplo*
-${usedPrefix}autotype on
 
 ‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`)
       break
   }
 }
 
+// Función global para manejar el autotype
+global.autoTypeHandler = async (conn, m) => {
+  if (global.autotype === false) return // Si está desactivado, no hacer nada
+  
+  try {
+    // Simular efecto de escritura
+    await conn.sendPresenceUpdate('composing', m.chat)
+    
+    // Duración aleatoria entre 1-3 segundos
+    const duration = Math.floor(Math.random() * 2000) + 1000
+    await new Promise(resolve => setTimeout(resolve, duration))
+    
+    // Dejar de escribir
+    await conn.sendPresenceUpdate('paused', m.chat)
+  } catch (e) {
+    // Silenciar errores
+  }
+}
+
 handler.help = ['autotype']
 handler.tags = ['owner']
-handler.command = /^(autotype|autotipo)$/i
+handler.command = /^(autotype|autotipo|autowrite)$/i
 
 export default handler
