@@ -1,66 +1,98 @@
-import ws from "ws"
+import ws from 'ws'
+import axios from 'axios'
 
-const handler = async (m, { conn, command, usedPrefix, participants }) => {
-try {
-const users = [global.conn.user.jid, ...new Set(global.conns.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn.user.jid))]
-function convertirMsADiasHorasMinutosSegundos(ms) {
-const segundos = Math.floor(ms / 1000)
-const minutos = Math.floor(segundos / 60)
-const horas = Math.floor(minutos / 60)
-const días = Math.floor(horas / 24)
-const segRest = segundos % 60
-const minRest = minutos % 60
-const horasRest = horas % 24
-let resultado = ""
-if (días) resultado += `${días} días, `
-if (horasRest) resultado += `${horasRest} horas, `
-if (minRest) resultado += `${minRest} minutos, `
-if (segRest) resultado += `${segRest} segundos`
-return resultado.trim()
-}
-let groupBots = users.filter((bot) => participants.some((p) => p.id === bot))
-if (participants.some((p) => p.id === global.conn.user.jid) && !groupBots.includes(global.conn.user.jid)) { groupBots.push(global.conn.user.jid) }
-const botsGroup = groupBots.length > 0 ? groupBots.map((bot) => {
-const isMainBot = bot === global.conn.user.jid
-const v = global.conns.find((conn) => conn.user.jid === bot)
-const uptime = isMainBot ? convertirMsADiasHorasMinutosSegundos(Date.now() - global.conn.uptime) : v?.uptime ? convertirMsADiasHorasMinutosSegundos(Date.now() - v.uptime) : "Activo desde ahora"
-const mention = bot.replace(/[^0-9]/g, '')
-return `@${mention}\n> Bot: ${isMainBot ? 'Principal' : 'Sub-Bot'}\n> Online: ${uptime}`}).join("\n\n") : `✧ No hay bots activos en este grupo`
-const message = `*「 ✦ 」 Lista de bots activos*
-
-❀ Principal: *1*
-✿ Subs: *${users.length - 1}*
-
-❏ En este grupo: *${groupBots.length}* bots
-${botsGroup}`
-const mentionList = groupBots.map(bot => bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`)
-    rcanal.contextInfo.mentionedJid = mentionList
-    const rcanal2 = {
-      contextInfo: {
-        mentionedJid: mentionList
-      }
-    }
-
-    await conn.sendMessage(
-      m.chat,
-      {
-        image: { url: 'https://files.catbox.moe/cut28l.jpg' },
-        caption: message.trim(),
-        mentions: mentionList,
-        fileName: 'sockets.jpg',
-        mimetype: 'image/jpeg',
-        ...rcanal2,
-      },
-      { quoted: m }
+let handler = async (m, { conn, command }) => {
+  try {
+    const connsActivas = global.conns.filter(conn =>
+      conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED
     )
 
-  } catch (error) {
-    m.reply(`⚠︎ Se ha producido un problema.\n> Usa *${usedPrefix}report* para informarlo.\n\n${error.message}`)
+    const vistos = new Set()
+    const subbotsUnicos = connsActivas.filter(conn => {
+      const jid = conn.user?.jid
+      if (vistos.has(jid)) return false
+      vistos.add(jid)
+      return true
+    })
+
+    const convertirTiempo = (ms) => {
+      const segundos = Math.floor(ms / 1000)
+      const minutos = Math.floor(segundos / 60)
+      const horas = Math.floor(minutos / 60)
+      const dias = Math.floor(horas / 24)
+      const seg = segundos % 60
+      const min = minutos % 60
+      const h = horas % 24
+      const partes = []
+      if (dias) partes.push(`${dias}d`)
+      if (h) partes.push(`${h}h`)
+      if (min) partes.push(`${min}m`)
+      if (seg) partes.push(`${seg}s`)
+      return partes.join(' ')
+    }
+
+    const total = subbotsUnicos.length
+    const uptime = convertirTiempo(process.uptime() * 1000)
+
+    const lista = subbotsUnicos.map((bot, i) => {
+      const tiempo = bot.uptime
+        ? convertirTiempo(Date.now() - bot.uptime)
+        : 'Recién iniciado'
+      return `
+╭───────────────❖
+│ ✦ *Socket:* ${i + 1}
+│ ✦ *Nombre:* ${bot.user?.name || 'Sub Miyuki'}
+│ ✦ *Número:* wa.me/${(bot.user?.jid || '').replace(/[^0-9]/g, '')}
+│ ✦ *Online:* ${tiempo}
+╰───────────────❖`
+    }).join('\n\n')
+
+    const thumb = 'https://files.catbox.moe/7d41lk.jpg'
+
+    const mensaje = `
+⟡ ────────────── ⟡
+🌸 *ＭｉｙｕｋｉＢｏｔ-ＭＤ*
+⟡ ────────────── ⟡
+
+💠 *Panel de Sockets Activos*
+╭───────────────────╮
+│ 🪄 *Conectados:* ${total}
+│ ⏳ *Tiempo activo:* ${uptime}
+╰───────────────────╯
+
+✨ *Estado actual de los SubBots:*
+
+${lista || '🌙 No hay subbots conectados actualmente.'}
+
+╭──────────────────────╮
+│ 🤍 *Powered by:* ᴍɪʏᴜᴋɪʙᴏᴛ-ᴍᴅ
+│ 🩵 *Canal Oficial:* Miyuki Network
+╰──────────────────────╯
+`
+
+    await conn.sendMessage(m.chat, {
+      text: mensaje,
+      contextInfo: {
+        mentionedJid: [m.sender],
+        externalAdReply: {
+          title: '🌐 MiyukiBot-MD • Sockets Online',
+          body: `Total activos: ${total}`,
+          thumbnailUrl: thumb,
+          sourceUrl: 'https://whatsapp.com/channel/0029VaBL0X07Ef9e9pIY0F2Y',
+          mediaType: 1,
+          renderLargerThumbnail: true
+        }
+      }
+    }, { quoted: m })
+
+  } catch (e) {
+    console.error(e)
+    m.reply(`⚠️ Error al mostrar los sockets.\n> ${e.message}`)
   }
 }
 
-handler.tags = ["serbot"]
-handler.help = ["botlist"]
-handler.command = ["botlist", "listbots", "listbot", "bots", "sockets", "socket"]
+handler.help = ['sockets', 'bots', 'socket']
+handler.tags = ['jadibot']
+handler.command = ['sockets', 'bots', 'socket']
 
 export default handler
