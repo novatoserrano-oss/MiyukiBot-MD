@@ -15,6 +15,18 @@ clearTimeout(this)
 resolve()
 }, ms))
 
+// Manejo de autotype global - AÑADIDO AQUÍ
+if (global.autoTypeHandler) {
+  // Antes de procesar cualquier mensaje
+  conn.ev.on('messages.upsert', async ({ messages }) => {
+    const m = messages[0]
+    if (!m.message || m.key.remoteJid === 'status@broadcast') return
+    
+    // Llamar al handler de autotype
+    await global.autoTypeHandler(conn, m)
+  })
+}
+
 export async function handler(chatUpdate) {
 this.msgqueque = this.msgqueque || []
 this.uptime = this.uptime || Date.now()
@@ -568,4 +580,4 @@ let file = global.__filename(import.meta.url, true)
 watchFile(file, async () => {
 unwatchFile(file)
 console.log(chalk.magenta("Se actualizo 'handler.js'"))
-})
+}
