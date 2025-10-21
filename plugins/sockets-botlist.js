@@ -50,7 +50,6 @@ const mentionList = groupBots.map(bot => bot.endsWith("@s.whatsapp.net") ? bot :
         fileName: 'sockets.jpg',
         mimetype: 'image/jpeg',
         ...rcanal2,
-        ...rcanal // 🙂
       },
       { quoted: m }
     )
