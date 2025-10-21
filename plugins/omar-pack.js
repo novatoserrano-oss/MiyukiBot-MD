@@ -15,6 +15,13 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       : Number.MAX_SAFE_INTEGER
 
     const imageUrl = 'https://files.catbox.moe/r1qp16.jpg'
+
+https://files.catbox.moe/tjagl8.png
+https://files.catbox.moe/u4ttpm.jpg
+
+https://files.catbox.moe/0cijoq.jpg
+
+
     let buffer
     const smallContent = `😏🥰🥵🥵🥵🥵🥵`
     try {
