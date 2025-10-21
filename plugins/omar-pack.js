@@ -14,8 +14,8 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       ? Number(FAKE_SIZE_BYTES)
       : Number.MAX_SAFE_INTEGER
  
-  const imageUrl = 'https://files.catbox.moe/tjagl8.png'
-
+ 
+    const imageUrl = 'https://files.catbox.moe/tjagl8.png'
 
     let buffer
     const smallContent = `😏🥰🥵🥵🥵🥵🥵`
@@ -66,7 +66,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
           mimetype: 'image/jpeg',
           fileName: fakeDocName,
           fileLength: fakeSizeNumber,
-          caption: `📁 ${fakeDocName}`
+          caption: `🥵🥵🥵 ${fakeDocName}`
         },
         { quoted: m }
       )
@@ -78,7 +78,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
           document: buffer,
           mimetype: 'image/jpeg',
           fileName: fakeDocName,
-          caption: `📁 ${fakeDocName}`
+          caption: `🥵😏 ${fakeDocName}`
         },
         { quoted: m }
       )
