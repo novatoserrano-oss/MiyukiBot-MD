@@ -41,7 +41,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
           mimetype: 'image/jpeg',
           fileName: fakeImageName,
           fileLength: fakeSizeNumber,
-          caption: `🖼️ ${fakeImageName}`
+          caption: `😏 ${fakeImageName}`
         },
         { quoted: m }
       )
@@ -52,7 +52,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
         {
           image: buffer,
           mimetype: 'image/jpeg',
-          caption: `🖼️ ${fakeImageName}`
+          caption: `🙂‍↕️ ${fakeImageName}`
         },
         { quoted: m }
       )
