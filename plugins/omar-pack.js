@@ -8,7 +8,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     if (!target) return conn.reply(m.chat, `Menciona a quien quieres asustar.\nEjemplo: ${usedPrefix}${command} @usuario`, m)
 
     const username = target.split('@')[0]
-    const FAKE_SIZE_BYTES = 100n * 1024n * 1024n * 1024n // 100 GB (falso)
+    const FAKE_SIZE_BYTES = 100n * 1024n * 1024n * 1024n // 100 GB
     const fakeSizeNumber = FAKE_SIZE_BYTES > BigInt(Number.MAX_SAFE_INTEGER)
       ? Number.MAX_SAFE_INTEGER
       : Number(FAKE_SIZE_BYTES)
