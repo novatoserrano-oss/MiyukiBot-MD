@@ -14,6 +14,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
     const videoMatch = text.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/|v\/))([a-zA-Z0-9_-]{11})/)
     const query = videoMatch ? `https://youtu.be/${videoMatch[1]}` : text
+
     const search = await yts(query)
     const result = videoMatch
       ? search.videos.find(v => v.videoId === videoMatch[1]) || search.all[0]
@@ -38,7 +39,7 @@ Link 🔗 : *${url}*
 `
 
     const thumb = (await conn.getFile(thumbnail)).data
-    await conn.sendMessage(m.chat, { image: thumb, caption: info, ...rcanal }, { quoted: fkontak })
+    await conn.sendMessage(m.chat, { image: thumb, caption: info, }, { quoted: fkontak })
 
     if (['play', 'playaudio'].includes(command)) {
       const audio = await getAudio(url)
@@ -81,22 +82,26 @@ handler.group = true
 
 export default handler
 
+async function getVideo(url) {
+  try {
+    const api = `https://api.vreden.my.id/api/v1/download/youtube/video?url=${encodeURIComponent(url)}&quality=360`
+    const res = await fetch(api).then(r => r.json())
+
+    const data = res?.result?.download
+    if (data?.status && data?.url)
+      return { url: data.url, api: 'Vreden' }
+
+    return null
+  } catch {
+    return null
+  }
+}
 
 async function getAudio(url) {
   try {
     const api = `https://api.zenzxz.my.id/api/downloader/ytmp3v2?url=${encodeURIComponent(url)}`
     const res = await fetch(api).then(r => r.json())
     return res?.data?.download_url ? { url: res.data.download_url, api: 'ZenzzXD' } : null
-  } catch {
-    return null
-  }
-}
-
-async function getVideo(url) {
-  try {
-    const api = `https://api.stellarwa.xyz/dow/ytmp4?url=${encodeURIComponent(url)}&apikey=Shadow_Core`
-    const res = await fetch(api).then(r => r.json())
-    return res?.data?.dl ? { url: res.data.dl, api: 'StellarWA' } : null
   } catch {
     return null
   }
