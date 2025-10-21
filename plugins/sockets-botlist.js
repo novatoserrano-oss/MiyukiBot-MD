@@ -50,20 +50,20 @@ let handler = async (m, { conn, command }) => {
     const thumb = 'https://files.catbox.moe/mez710.jpg'
 
     const mensaje = `
-╭─⬣ 「 *ＭｉｙｕｋｉＢｏｔ-ＭＤ* 」⬣
+╭─⬣「 *ＭｉｙｕｋｉＢｏｔ-ＭＤ* 」⬣
 │🌸 *Panel de SubBots Activos*
 │━━━━━━━━━━━━━━━━━━━
 │ 📡 *Total conectados:* ${total}
 │ 🕒 *Uptime:* ${uptime}
-╰━━━━━━━━━━━━━━━━━━━⬣
+╰━━━━━━━━━━━━━━━━━━⬣
 
 ${lista || '🌙 No hay SubBots conectados actualmente.'}
 
-╭━━━━━━━━━━━━━━━━━━━⬣
+╭━━━━━━━━━━━━━━━━━━⬣
 │ ⚙️ *Sistema:* MiyukiBot-MD
 │ 💎 *Canal Oficial:* ${channel}
-│ 🔗 *Potenciado por:* ᴍɪʏᴜᴋɪʙᴏᴛ-ᴍᴅ
-╰━━━━━━━━━━━━━━━━━━━⬣
+│ 🔗 *Potenciado por:* OmarGranda
+╰━━━━━━━━━━━━━━━━━━⬣
 `
 
     await conn.sendMessage(m.chat, {
