@@ -571,13 +571,17 @@ group: `『✦』El comando *${comando}* solo puede ser usado en grupos.`,
 private: `『✦』El comando *${comando}* solo puede ser usado al chat privado del bot.`,
 admin: `『✦』El comando *${comando}* solo puede ser usado por los administradores del grupo.`, 
 botAdmin: `『✦』Para ejecutar el comando *${comando}* debo ser administrador del grupo.`,
-unreg: `『✦』El comando *${comando}* solo puede ser usado por los usuarios registrado, registrate usando:\n> » #${verifyaleatorio} ${user2}.${edadaleatoria}`,
-restrict: `『✦』Esta caracteristica está desactivada.`
+unreg: `『✦』El comando *${comando}* solo puede ser usado por los usuarios registrados, registrate usando:\n> » #${verifyaleatorio} ${user2}.${edadaleatoria}`,
+restrict: `『✦』Esta característica está desactivada.`
 }[type]
 if (msg) return conn.reply(m.chat, msg, m, rcanal).then(_ => m.react('✖️'))
 }
+
+
+}  // ← ESTA ES LA QUE FALTABA 🔥
+
 let file = global.__filename(import.meta.url, true)
 watchFile(file, async () => {
-unwatchFile(file)
-console.log(chalk.magenta("Se actualizo 'handler.js'"))
-}
+  unwatchFile(file)
+  console.log(chalk.magenta("Se actualizó 'handler.js'"))
+})
