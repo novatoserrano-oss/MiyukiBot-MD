@@ -35,8 +35,7 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 
     await conn.sendMessage(m.chat, {
       image: imageBuffer,
-      caption: helpMessage,
-      contextInfo: global.rcanalr
+      caption: helpMessage
     }, { quoted: m })
     return
   }
@@ -45,7 +44,7 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 
   // Verificar permisos de propietario
   if (!isOwner) { 
-    return conn.reply(m.chat, `꒰⌢ ʚ˚₊‧ 🚫 ꒱꒱ :: *ACCESO DENEGADO* ıllı
+    return m.reply(`꒰⌢ ʚ˚₊‧ 🚫 ꒱꒱ :: *ACCESO DENEGADO* ıllı
 
 ੭੭ ﹙ ❌ ﹚:: *Sin permisos*
 
@@ -54,7 +53,7 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 ੭੭ ﹙ ℹ️ ﹚:: *Información*
 \`\`\`Contacta con el owner si necesitas usar esta función\`\`\`
 
-‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`, m, global.rcanalx)
+‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`)
   }
 
   switch (subCommand) {
@@ -64,7 +63,7 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
     case '1':
       bot.autotypeDotOnly = true
       await saveDatabase()
-      await conn.reply(m.chat, `꒰⌢ ʚ˚₊‧ ⌨️ ꒱꒱ :: *AUTOTYPE* ıllı
+      await m.reply(`꒰⌢ ʚ˚₊‧ ⌨️ ꒱꒱ :: *AUTOTYPE* ıllı
 
 ੭੭ ﹙ ✅ ﹚:: *Función activada*
 
@@ -73,7 +72,7 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 ੭੭ ﹙ 🎀 ﹚:: *Estado*
 \`\`\`AUTOTYPE: Activado\`\`\`
 
-‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`, m, global.rcanalr)
+‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`)
       break
 
     case 'off':
@@ -82,7 +81,7 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
     case '0':
       bot.autotypeDotOnly = false
       await saveDatabase()
-      await conn.reply(m.chat, `꒰⌢ ʚ˚₊‧ ⌨️ ꒱꒱ :: *AUTOTYPE* ıllı
+      await m.reply(`꒰⌢ ʚ˚₊‧ ⌨️ ꒱꒱ :: *AUTOTYPE* ıllı
 
 ੭੭ ﹙ ❌ ﹚:: *Función desactivada*
 
@@ -91,14 +90,14 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 ੭੭ ﹙ 🎀 ﹚:: *Estado*
 \`\`\`AUTOTYPE: Desactivado\`\`\`
 
-‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`, m, global.rcanalr)
+‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`)
       break
 
     case 'status':
     case 'estado':
     case 'info':
       const status = bot.autotypeDotOnly ? '🟢 ACTIVADO' : '🔴 DESACTIVADO'
-      await conn.reply(m.chat, `꒰⌢ ʚ˚₊‧ 📊 ꒱꒱ :: *ESTADO ACTUAL* ıllı
+      await m.reply(`꒰⌢ ʚ˚₊‧ 📊 ꒱꒱ :: *ESTADO ACTUAL* ıllı
 
 ੭੭ ﹙ 🎀 ﹚:: *Estado de Autotype*
 \`\`\`${status}\`\`\`
@@ -113,11 +112,11 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 • ${usedPrefix}autotype on/off
 • ${usedPrefix}autotype status
 
-‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`, m, global.rcanalr)
+‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`)
       break
 
     default:
-      await conn.reply(m.chat, `꒰⌢ ʚ˚₊‧ ⚠️ ꒱꒱ :: *COMANDO NO VÁLIDO* ıllı
+      await m.reply(`꒰⌢ ʚ˚₊‧ ⚠️ ꒱꒱ :: *COMANDO NO VÁLIDO* ıllı
 
 ੭੭ ﹙ ❌ ﹚:: *Opción no reconocida*
 \`\`\`${subCommand}\`\`\`
@@ -131,7 +130,7 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 ੭੭ ﹙ 💡 ﹚:: *Ejemplo*
 ${usedPrefix}autotype on
 
-‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`, m, global.rcanalw)
+‐ ダ *ɪᴛsᴜᴋɪ ɴᴀᴋᴀɴᴏ ᴀɪ* ギ`)
       break
   }
 }
