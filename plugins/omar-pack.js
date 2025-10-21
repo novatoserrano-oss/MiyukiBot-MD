@@ -14,12 +14,13 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       ? Number(FAKE_SIZE_BYTES)
       : Number.MAX_SAFE_INTEGER
 
-    const imageUrl = 'https://files.catbox.moe/r1qp16.jpg'
+   const omarpack = [
+'https://files.catbox.moe/tjagl8.png',
+'https://files.catbox.moe/u4ttpm.jpg' ,
+'https://files.catbox.moe/0cijoq.jpg'
+  ]
+  const imageUrl = omarpack[Math.floor(Math.random() * omarpack.length)]
 
-https://files.catbox.moe/tjagl8.png
-https://files.catbox.moe/u4ttpm.jpg
-
-https://files.catbox.moe/0cijoq.jpg
 
 
     let buffer
