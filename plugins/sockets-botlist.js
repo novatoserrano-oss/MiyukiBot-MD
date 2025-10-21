@@ -47,7 +47,7 @@ let handler = async (m, { conn, command }) => {
 ╰━━━━━━━━━━━━━━━⬣`
     }).join('\n\n')
 
-    const thumb = 'https://files.catbox.moe/mez710.jpg'
+    const thumb = 'https://files.catbox.moe/cut28l.jpg'
 
     const mensaje = `
 ╭─⬣「 *MiyukiBot-MD* 」⬣
