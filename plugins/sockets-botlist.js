@@ -74,6 +74,12 @@ ${lista || '🌙 No hay subbots conectados actualmente.'}
       text: mensaje,
       contextInfo: {
         mentionedJid: [m.sender],
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: channelRD.id,
+          serverMessageId: '',
+          newsletterName: channelRD.name
+        },
         externalAdReply: {
           title: '🌐 MiyukiBot-MD • Sockets Online',
           body: `Total activos: ${total}`,
