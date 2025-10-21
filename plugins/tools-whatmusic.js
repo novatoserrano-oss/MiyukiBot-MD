@@ -26,10 +26,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       )
     }
 
-    let msg = await conn.sendMessage(m.chat, {
-      image: { url: icono },
-      caption: '🍏 *Detectando canción...*\n\n▰▱▱▱▱▱▱▱▱▱ 10%'
-    }, { quoted: m })
+    let msg = await conn.reply(m.chat, '🍏 *Detectando canción...*\n\n▰▱▱▱▱▱▱▱▱▱ 10%', m)
 
     const etapas = [
       '▰▰▱▱▱▱▱▱▱▱ 20%',
@@ -47,8 +44,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       await new Promise(res => setTimeout(res, 600))
       await conn.sendMessage(m.chat, {
         edit: msg.key,
-        image: { url: icono },
-        caption: `🍏 *Detectando canción...*\n\n${barra}`
+        text: `🍏 *Detectando canción...*\n\n${barra}`
       })
     }
 
@@ -81,15 +77,11 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 ┃ 📅 *𝐋𝐚𝐧𝐳𝐚𝐦𝐢𝐞𝐧𝐭𝐨:* ${release}
 ┃────────────────────
 ${video ? `┃ 🔎 *𝐄𝐧𝐜𝐨𝐧𝐭𝐫𝐚𝐝𝐨 𝐞𝐧 𝐘𝐨𝐮𝐓𝐮𝐛𝐞:*  
-┃ 🎥 ${video.title}
-┃ ⏱ ${video.timestamp}
-┃ 👁 ${video.views.toLocaleString()} vistas
-┃ 📺 ${video.author.name}
-┃ 🔗 ${video.url}` : '┃ ❌ No se encontró en YouTube'}
-┃────────────────────
-┃ 🧠 *Código creador por:* Shadow-nex
-┃ 🌐 *User:* Shadow.xyz
-┃ 👑 *Colaborador:* OmarGranda
+┃ 🎥 Título: ${video.title}
+┃ ⏱ Duracion: ${video.timestamp}
+┃ 👁 vistas: ${video.views.toLocaleString()} vistas
+┃ 📺 canal: ${video.author.name}
+┃ 🔗 link: ${video.url}` : '┃ ❌ No se encontró en YouTube'}
 ╰━━━━━━━━━━━━━━⬣
 `.trim()
 
