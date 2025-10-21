@@ -1,3 +1,15 @@
+📢 COMUNICADO OFICIAL — MIYUKIBOT-MD 🤖
+
+Lamentamos informar que Omar Granda, creador y desarrollador principal de MiyukiBot-MD, se encuentra actualmente fuera del proyecto por motivos de soporte técnico.
+
+Esto se debe a problemas de spam ocasionados por números desconocidos, los cuales afectaron su actividad y conexión con el sistema.
+
+📆 Estará ausente por un periodo aproximado de varios meses, durante los cuales el equipo de soporte continuará manteniendo el funcionamiento del bot y brindando asistencia a los usuarios activos.
+
+Agradecemos su comprensión y apoyo durante este tiempo 💙
+
+— Administración de MiyukiBot-MD 🌸
+
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1'
 import './settings.js'
 import './plugins/_allfake.js'
