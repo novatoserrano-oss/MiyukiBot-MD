@@ -50,7 +50,7 @@ let handler = async (m, { conn, command }) => {
     const thumb = 'https://files.catbox.moe/mez710.jpg'
 
     const mensaje = `
-╭─⬣「 *ＭｉｙｕｋｉＢｏｔ-ＭＤ* 」⬣
+╭─⬣「 *MiyukiBot-MD* 」⬣
 │🌸 *Panel de SubBots Activos*
 │━━━━━━━━━━━━━━━━━━━
 │ 📡 *Total conectados:* ${total}
