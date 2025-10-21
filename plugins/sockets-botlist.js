@@ -41,7 +41,7 @@ let handler = async (m, { conn, command }) => {
       return `
 ╭━━━━━━━━━━━━━━━⬣
 ┃ 🧩 *Socket:* ${i + 1}
-┃ 👤 *Nombre:* ${bot.user?.name || 'Sub Miyuki'}
+┃ 👤 *Nombre:* ${bot.user?.name || 'Miyuki SubBot'}
 ┃ 📞 *Número:* wa.me/${(bot.user?.jid || '').replace(/[^0-9]/g, '')}
 ┃ ⏱️ *Activo desde:* ${tiempo}
 ╰━━━━━━━━━━━━━━━⬣`
