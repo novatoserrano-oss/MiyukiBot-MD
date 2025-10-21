@@ -27,8 +27,8 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       buffer = Buffer.from(smallContent, 'utf8')
     }
 
-    const fakeImageName = 'pack.jpg'
-    const fakeDocName = 'pack.jpg'
+    const fakeImageName = 'OmarGranda.jpg'
+    const fakeDocName = 'OmarGranda.jpg'
 
     const notif = `@${username} 😏 ¡Cuidado con lo que descargas!`
     await conn.sendMessage(m.chat, { text: notif, mentions: [target] }, { quoted: m })
