@@ -39,35 +39,31 @@ let handler = async (m, { conn, command }) => {
         ? convertirTiempo(Date.now() - bot.uptime)
         : 'Recién iniciado'
       return `
-╭───────────────❖
-│ ✦ *Socket:* ${i + 1}
-│ ✦ *Nombre:* ${bot.user?.name || 'Sub Miyuki'}
-│ ✦ *Número:* wa.me/${(bot.user?.jid || '').replace(/[^0-9]/g, '')}
-│ ✦ *Online:* ${tiempo}
-╰───────────────❖`
+╭━━━━━━━━━━━━━━━⬣
+┃ 🧩 *Socket:* ${i + 1}
+┃ 👤 *Nombre:* ${bot.user?.name || 'Sub Miyuki'}
+┃ 📞 *Número:* wa.me/${(bot.user?.jid || '').replace(/[^0-9]/g, '')}
+┃ ⏱️ *Activo desde:* ${tiempo}
+╰━━━━━━━━━━━━━━━⬣`
     }).join('\n\n')
 
     const thumb = 'https://files.catbox.moe/mez710.jpg'
 
     const mensaje = `
-⟡ ────────────── ⟡
-🌸 *ＭｉｙｕｋｉＢｏｔ-ＭＤ*
-⟡ ────────────── ⟡
+╭─⬣ 「 *ＭｉｙｕｋｉＢｏｔ-ＭＤ* 」⬣
+│🌸 *Panel de SubBots Activos*
+│━━━━━━━━━━━━━━━━━━━
+│ 📡 *Total conectados:* ${total}
+│ 🕒 *Uptime:* ${uptime}
+╰━━━━━━━━━━━━━━━━━━━⬣
 
-💠 *Panel de Sockets Activos*
-╭───────────────────╮
-│ 🪄 *Conectados:* ${total}
-│ ⏳ *Tiempo activo:* ${uptime}
-╰───────────────────╯
+${lista || '🌙 No hay SubBots conectados actualmente.'}
 
-✨ *Estado actual de los SubBots:*
-
-${lista || '🌙 No hay subbots conectados actualmente.'}
-
-╭──────────────────────╮
-│ 🤍 *Powered by:* ᴍɪʏᴜᴋɪʙᴏᴛ-ᴍᴅ
-│ 🩵 *Canal Oficial:* ${channel}
-╰──────────────────────╯
+╭━━━━━━━━━━━━━━━━━━━⬣
+│ ⚙️ *Sistema:* MiyukiBot-MD
+│ 💎 *Canal Oficial:* ${channel}
+│ 🔗 *Potenciado por:* ᴍɪʏᴜᴋɪʙᴏᴛ-ᴍᴅ
+╰━━━━━━━━━━━━━━━━━━━⬣
 `
 
     await conn.sendMessage(m.chat, {
@@ -75,8 +71,8 @@ ${lista || '🌙 No hay subbots conectados actualmente.'}
       contextInfo: {
         mentionedJid: [m.sender],
         externalAdReply: {
-          title: '🌐 MiyukiBot-MD • Sockets Online',
-          body: `Total activos: ${total}`,
+          title: '💠 MiyukiBot-MD • SubBots Online',
+          body: `Actualmente activos: ${total}`,
           thumbnailUrl: thumb,
           sourceUrl: 'https://whatsapp.com/channel/0029VaBL0X07Ef9e9pIY0F2Y',
           mediaType: 1,
@@ -87,7 +83,7 @@ ${lista || '🌙 No hay subbots conectados actualmente.'}
 
   } catch (e) {
     console.error(e)
-    m.reply(`⚠️ Error al mostrar los sockets.\n> ${e.message}`)
+    m.reply(`⚠️ Error al mostrar los SubBots.\n> ${e.message}`)
   }
 }
 
