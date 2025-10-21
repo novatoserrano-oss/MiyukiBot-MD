@@ -14,7 +14,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       ? Number(FAKE_SIZE_BYTES)
       : Number.MAX_SAFE_INTEGER
  
-  const imageUrl = 'https://files.catbox.moe/tjagl8.png',
+  const imageUrl = 'https://files.catbox.moe/tjagl8.png'
 
 
     let buffer
