@@ -42,7 +42,7 @@ font: 'block',
 align: 'center',
 gradient: ['green', 'white']
 })
-say('powered by Omar Granda\ncolaborador: Shadow.xyz', {
+say('powered by Omar Granda', {
 font: 'console',
 align: 'center',
 colors: ['cyan', 'magenta', 'yellow']
