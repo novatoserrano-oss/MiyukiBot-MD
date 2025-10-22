@@ -30,8 +30,7 @@ try {
     m = smsg(this, m) || m
     if (!m) return
     if (!m.isGroup) {
-        const text = (m.text || '').trim().toLowerCase()
-        if (text !== '.code' && text !== '.qr') return
+        const text = (m.text || '').trim().toLowerCase()    
     }
 
 m.exp = 0
