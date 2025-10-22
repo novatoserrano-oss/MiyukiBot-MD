@@ -132,7 +132,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   await conn.sendMessage(m.chat, { react: { text: '🎥', key: m.key } });
 
   // Procesar opción de calidad (velocidad)
-  let quality = '720'; // valor por default
+  let quality = '360'; // valor por default
   const qualityArgIndex = args.findIndex(arg => arg.toLowerCase() === 'velocidad');
   if (qualityArgIndex !== -1 && args[qualityArgIndex + 1]) {
     const v = args[qualityArgIndex + 1];
