@@ -37,12 +37,12 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
 let { say } = cfonts
 console.log(chalk.cyan('BOT LISTO ESPERE...🌿\n'))
-say('MIYUKI BOT', {
+say('MIYUKIBOT-MD', {
 font: 'block',
 align: 'center',
 gradient: ['green', 'white']
 })
-say('powered by Omar Granda', {
+say('powered by OmarGranda', {
 font: 'console',
 align: 'center',
 colors: ['cyan', 'magenta', 'yellow']
