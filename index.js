@@ -32,12 +32,12 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
 let { say } = cfonts
 console.log(chalk.magentaBright('\n❀ Iniciando...'))
-say('Bot', {
+say('MiyukiBot-MD', {
 font: 'simple',
 align: 'left',
 gradient: ['#ff4fcb', '#ff77ff']
 })
-say('Made with love by OmarGranda', {
+say('Powered By OmarGranda', {
 font: 'console',
 align: 'center',
 colors: ['cyan', 'magenta', 'yellow']
