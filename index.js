@@ -10,6 +10,7 @@ import fs, { readdirSync, statSync, unlinkSync, existsSync, mkdirSync, readFileS
 import yargs from 'yargs';
 import { spawn, execSync } from 'child_process'
 import lodash from 'lodash'
+//import { kanekiAIJadiBot } from './plugins/sockets-serbot.js'
 import chalk from 'chalk'
 import syntaxerror from 'syntax-error'
 import pino from 'pino'
@@ -32,12 +33,12 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
 let { say } = cfonts
 console.log(chalk.magentaBright('\n❀ Iniciando...'))
-say('MiyukiBot-MD', {
+say('Bot-MD', {
 font: 'simple',
 align: 'left',
-gradient: ['#ff4fcb', '#ff77ff']
+gradient: ['green', 'white']
 })
-say('Powered By OmarGranda', {
+say('Made with love by xd', {
 font: 'console',
 align: 'center',
 colors: ['cyan', 'magenta', 'yellow']
@@ -56,7 +57,7 @@ return createRequire(dir)
 global.timestamp = {start: new Date}
 const __dirname = global.__dirname(import.meta.url)
 global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
-global.prefix = new RegExp('^[/]')
+global.prefix = new RegExp('^[#!./-]')
 
 global.db = new Low(/https?:\/\//.test(opts['db'] || '') ? new cloudDBAdapter(opts['db']) : new JSONFile('database.json'))
 global.DATABASE = global.db;
@@ -247,7 +248,7 @@ console.error("Rechazo no manejado detectado:", reason);
 });
 
 global.rutaJadiBot = join(__dirname, `./${jadi}`)
-if (global.kanekiJadibts) {
+if (global.kanekiAIJadibts) {
 if (!existsSync(global.rutaJadiBot)) {
 mkdirSync(global.rutaJadiBot, { recursive: true }) 
 console.log(chalk.bold.cyan(`ꕥ La carpeta: ${jadi} se creó correctamente.`))
@@ -261,7 +262,7 @@ for (const gjbts of readRutaJadiBot) {
 const botPath = join(rutaJadiBot, gjbts)
 const readBotPath = readdirSync(botPath)
 if (readBotPath.includes(creds)) {
-kanekiJadiBot({pathkanekiJadiBot: botPath, m: null, conn, args: '', usedPrefix: '/', command: 'serbot'})
+kanekiAIJadiBot({pathkanekiAIJadiBot: botPath, m: null, conn, args: '', usedPrefix: '/', command: 'serbot'})
 }}}}
 
 const pluginFolder = global.__dirname(join(__dirname, './plugins/index'))
