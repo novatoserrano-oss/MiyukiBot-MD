@@ -201,4 +201,34 @@ const savetube = {
       if (!videoInfo.status) return videoInfo
       const decrypted = await savetube.crypto.decrypt(videoInfo.data.data)
       const downloadData = await savetube.request(
-        `https://${cdn}${
+        `https://${cdn}${savetube.api.download}`,
+        {
+          id,
+          downloadType: "audio",
+          quality: "mp3",
+          key: decrypted.key
+        }
+      )
+      if (!downloadData.data.data?.downloadUrl)
+        return { status: false, code: 500, error: "No se pudo obtener link de descarga" }
+
+      return {
+        status: true,
+        result: {
+          download: downloadData.data.data.downloadUrl,
+          title: decrypted.title || "Desconocido"
+        }
+      }
+    } catch (error) {
+      return { status: false, code: 500, error: error.message }
+    }
+  }
+}
+
+function formatViews(views) {
+  if (views === undefined) return "No disponible"
+  if (views >= 1_000_000_000) return `${(views / 1_000_000_000).toFixed(1)}B (${views.toLocaleString()})`
+  if (views >= 1_000_000) return `${(views / 1_000_000).toFixed(1)}M (${views.toLocaleString()})`
+  if (views >= 1_000) return `${(views / 1_000).toFixed(1)}k (${views.toLocaleString()})`
+  return views.toString()
+}
