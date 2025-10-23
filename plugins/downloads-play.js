@@ -6,7 +6,7 @@ import axios from "axios"
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   try {
     if (!text?.trim())
-      return conn.reply(m.chat, `💫 *Por favor ingresa el nombre o enlace del video que deseas buscar.*`, m, rcanal)
+      return conn.reply(m.chat, `💫 *Por favor ingresa el nombre o enlace del video que deseas buscar.*`, m)
 
     await m.react('🎧')
 
@@ -35,7 +35,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 🔗 *Enlace:* ${url}`
 
     const thumb = (await conn.getFile(thumbnail)).data
-    await conn.sendMessage(m.chat, { image: thumb, caption: info, ...rcanal }, { quoted: fkontak })
+    await conn.sendMessage(m.chat, { image: thumb, caption: info }, { quoted: fkontak })
 
     if (['play', 'mp3'].includes(command)) {
       await m.react('🎶')
