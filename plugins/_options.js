@@ -62,12 +62,15 @@ throw false
 chat.economy = isEnable
 break
 }
-case 'antiprivado':
-case 'antiprivate':
-if (!isOwner) return global.dfail('rowner', m, conn)
-isEnable = bot.antiPrivate
-isAll = true
-break
+   case 'antiprivado':
+    case 'antiprivate':
+      isAll = true
+      if (!isOwner) {
+        global.dfail('rowner', m, conn)
+        throw false
+      }
+      bot.antiPrivate = isEnable
+      break
 }
 case 'rpg': case 'gacha': {
 if (m.isGroup && !(isAdmin || isOwner)) {
