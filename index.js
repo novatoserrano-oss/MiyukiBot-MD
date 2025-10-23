@@ -7,21 +7,17 @@ import { fileURLToPath, pathToFileURL } from 'url'
 import { platform } from 'process'
 import * as ws from 'ws'
 import fs, { readdirSync, statSync, unlinkSync, existsSync, mkdirSync, readFileSync, rmSync, watch } from 'fs'
-import yargs from 'yargs'
+import yargs from 'yargs';
 import { spawn, execSync } from 'child_process'
 import lodash from 'lodash'
 import chalk from 'chalk'
 import syntaxerror from 'syntax-error'
-import { tmpdir } from 'os'
-import { format } from 'util'
-import boxen from 'boxen'
 import pino from 'pino'
 import Pino from 'pino'
 import path, { join, dirname } from 'path'
 import { Boom } from '@hapi/boom'
 import { makeWASocket, protoType, serialize } from './lib/simple.js'
 import { Low, JSONFile } from 'lowdb'
-import { mongoDB, mongoDBV2 } from './lib/mongoDB.js'
 import store from './lib/store.js'
 const { proto } = (await import('@whiskeysockets/baileys')).default
 import pkg from 'google-libphonenumber'
@@ -35,13 +31,13 @@ const { chain } = lodash
 const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
 let { say } = cfonts
-console.log(chalk.cyan('BOT LISTO ESPERE...🌿\n'))
-say('MIYUKIBOT-MD', {
-font: 'block',
-align: 'center',
-gradient: ['green', 'white']
+console.log(chalk.magentaBright('\n❀ Iniciando...'))
+say('Bot', {
+font: 'simple',
+align: 'left',
+gradient: ['#ff4fcb', '#ff77ff']
 })
-say('powered by OmarGranda', {
+say('Made with love by OmarGranda', {
 font: 'console',
 align: 'center',
 colors: ['cyan', 'magenta', 'yellow']
@@ -60,34 +56,31 @@ return createRequire(dir)
 global.timestamp = {start: new Date}
 const __dirname = global.__dirname(import.meta.url)
 global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
-global.prefix = new RegExp('^[#!./]')
+global.prefix = new RegExp('^[/]')
 
 global.db = new Low(/https?:\/\//.test(opts['db'] || '') ? new cloudDBAdapter(opts['db']) : new JSONFile('database.json'))
-global.DATABASE = global.db; 
+global.DATABASE = global.db;
 global.loadDatabase = async function loadDatabase() {
 if (global.db.READ) {
 return new Promise((resolve) => setInterval(async function() {
 if (!global.db.READ) {
 clearInterval(this);
-resolve(global.db.data == null ? global.loadDatabase() : global.db.data)
-}}, 1 * 1000))
+resolve(global.db.data == null ? global.loadDatabase() : global.db.data);
+}}, 1 * 1000));
 }
-if (global.db.data !== null) return
-global.db.READ = true
-await global.db.read().catch(console.error)
-global.db.READ = null
+if (global.db.data !== null) return;
+global.db.READ = true;
+await global.db.read().catch(console.error);
+global.db.READ = null;
 global.db.data = {
 users: {},
 chats: {},
-stats: {},
-msgs: {},
-sticker: {},
 settings: {},
 ...(global.db.data || {}),
-}
-global.db.chain = chain(global.db.data)
-}
-loadDatabase()
+};
+global.db.chain = chain(global.db.data);
+};
+loadDatabase(); 
 
 const {state, saveState, saveCreds} = await useMultiFileAuthState(global.sessions)
 const msgRetryCounterMap = new Map()
@@ -132,10 +125,10 @@ syncFullHistory: false,
 getMessage: async (key) => {
 try {
 let jid = jidNormalizedUser(key.remoteJid);
-let msg = await store.loadMessage(jid, key.id)
-return msg?.message || ""
+let msg = await store.loadMessage(jid, key.id);
+return msg?.message || "";
 } catch (error) {
-return ""
+return "";
 }},
 msgRetryCounterCache: msgRetryCounterCache || new Map(),
 userDevicesCache: userDevicesCache || new Map(),
@@ -144,9 +137,11 @@ cachedGroupMetadata: (jid) => globalThis.conn.chats[jid] ?? {},
 version: version, 
 keepAliveIntervalMs: 55000, 
 maxIdleTimeMs: 60000, 
-}
+};
 
-global.conn = makeWASocket(connectionOptions)
+global.conn = makeWASocket(connectionOptions);
+conn.ev.on("creds.update", saveCreds)
+
 if (!fs.existsSync(`./${sessions}/creds.json`)) {
 if (opcion === '2' || methodCode) {
 opcion = '2'
@@ -156,7 +151,7 @@ if (!!phoneNumber) {
 addNumber = phoneNumber.replace(/[^0-9]/g, '')
 } else {
 do {
-phoneNumber = await question(chalk.bgBlack(chalk.bold.greenBright(`[ ✎ ]  Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.magentaBright('---> ')}`)))
+phoneNumber = await question(chalk.bgBlack(chalk.bold.greenBright(`[ ✿ ]  Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.magentaBright('---> ')}`)))
 phoneNumber = phoneNumber.replace(/\D/g,'')
 if (!phoneNumber.startsWith('+')) {
 phoneNumber = `+${phoneNumber}`
@@ -165,115 +160,28 @@ rl.close()
 addNumber = phoneNumber.replace(/\D/g, '')
 setTimeout(async () => {
 let codeBot = await conn.requestPairingCode(addNumber)
-codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot
-console.log(chalk.bold.white(chalk.bgMagenta(`[ ♻️ ]  Código:`)), chalk.bold.white(chalk.white(codeBot)))
+codeBot = codeBot.match(/.{1,4}/g)?.join("-") || codeBot
+console.log(chalk.bold.white(chalk.bgMagenta(`[ ✿ ]  Código:`)), chalk.bold.white(chalk.white(codeBot)))
 }, 3000)
 }}}}
-conn.isInit = false
-conn.well = false
-conn.logger.info(`[ ✅ ]  H E C H O\n`)
+conn.isInit = false;
+conn.well = false;
+conn.logger.info(`[ ✿ ]  H E C H O\n`)
 if (!opts['test']) {
 if (global.db) setInterval(async () => {
 if (global.db.data) await global.db.write()
-if (opts['autocleartmp'] && (global.support || {}).find) (tmp = [os.tmpdir(), 'tmp', `${jadi}`], tmp.forEach((filename) => cp.spawn('find', [filename, '-amin', '3', '-type', 'f', '-delete'])))
-}, 30 * 1000)
+if (opts['autocleartmp'] && (global.support || {}).find) (tmp = [os.tmpdir(), 'tmp', `${jadi}`], tmp.forEach((filename) => cp.spawn('find', [filename, '-amin', '3', '-type', 'f', '-delete'])));
+}, 30 * 1000);
 }
-
-async function resolveLidToRealJid(lidJid, groupJid, maxRetries = 3, retryDelay = 1000) {
-if (!lidJid?.endsWith("@lid") || !groupJid?.endsWith("@g.us")) return lidJid?.includes("@") ? lidJid : `${lidJid}@s.whatsapp.net`
-const cached = lidCache.get(lidJid);
-if (cached) return cached;
-const lidToFind = lidJid.split("@")[0];
-let attempts = 0
-while (attempts < maxRetries) {
-try {
-const metadata = await conn.groupMetadata(groupJid)
-if (!metadata?.participants) throw new Error("No se obtuvieron participantes")
-for (const participant of metadata.participants) {
-try {
-if (!participant?.jid) continue
-const contactDetails = await conn.onWhatsApp(participant.jid)
-if (!contactDetails?.[0]?.lid) continue
-const possibleLid = contactDetails[0].lid.split("@")[0]
-if (possibleLid === lidToFind) {
-lidCache.set(lidJid, participant.jid)
-return participant.jid
-}} catch (e) {
-continue
-}}
-lidCache.set(lidJid, lidJid)
-return lidJid
-} catch (e) {
-attempts++
-if (attempts >= maxRetries) {
-lidCache.set(lidJid, lidJid)
-return lidJid
-}
-await new Promise(resolve => setTimeout(resolve, retryDelay))
-}}
-return lidJid
-}
-
-async function extractAndProcessLids(text, groupJid) {
-if (!text) return text
-const lidMatches = text.match(/\d+@lid/g) || []
-let processedText = text
-for (const lid of lidMatches) {
-try {
-const realJid = await resolveLidToRealJid(lid, groupJid);
-processedText = processedText.replace(new RegExp(lid, 'g'), realJid)
-} catch (e) {
-console.error(`Error procesando LID ${lid}:`, e)
-}}
-return processedText
-}
-
-async function processLidsInMessage(message, groupJid) {
-if (!message || !message.key) return message
-try {
-const messageCopy = {
-key: {...message.key},
-message: message.message ? {...message.message} : undefined,
-...(message.quoted && {quoted: {...message.quoted}}),
-...(message.mentionedJid && {mentionedJid: [...message.mentionedJid]})
-}
-const remoteJid = messageCopy.key.remoteJid || groupJid
-if (messageCopy.key?.participant?.endsWith('@lid')) { messageCopy.key.participant = await resolveLidToRealJid(messageCopy.key.participant, remoteJid) }
-if (messageCopy.message?.extendedTextMessage?.contextInfo?.participant?.endsWith('@lid')) { messageCopy.message.extendedTextMessage.contextInfo.participant = await resolveLidToRealJid( messageCopy.message.extendedTextMessage.contextInfo.participant, remoteJid ) }
-if (messageCopy.message?.extendedTextMessage?.contextInfo?.mentionedJid) {
-const mentionedJid = messageCopy.message.extendedTextMessage.contextInfo.mentionedJid
-if (Array.isArray(mentionedJid)) {
-for (let i = 0; i < mentionedJid.length; i++) {
-if (mentionedJid[i]?.endsWith('@lid')) {
-mentionedJid[i] = await resolveLidToRealJid(mentionedJid[i], remoteJid)
-}}}}
-if (messageCopy.message?.extendedTextMessage?.contextInfo?.quotedMessage?.extendedTextMessage?.contextInfo?.mentionedJid) {
-const quotedMentionedJid = messageCopy.message.extendedTextMessage.contextInfo.quotedMessage.extendedTextMessage.contextInfo.mentionedJid;
-if (Array.isArray(quotedMentionedJid)) {
-for (let i = 0; i < quotedMentionedJid.length; i++) {
-if (quotedMentionedJid[i]?.endsWith('@lid')) {
-quotedMentionedJid[i] = await resolveLidToRealJid(quotedMentionedJid[i], remoteJid)
-}}}}
-if (messageCopy.message?.conversation) { messageCopy.message.conversation = await extractAndProcessLids(messageCopy.message.conversation, remoteJid) }
-if (messageCopy.message?.extendedTextMessage?.text) { messageCopy.message.extendedTextMessage.text = await extractAndProcessLids(messageCopy.message.extendedTextMessage.text, remoteJid) }
-if (messageCopy.message?.extendedTextMessage?.contextInfo?.participant && !messageCopy.quoted) {
-const quotedSender = await resolveLidToRealJid( messageCopy.message.extendedTextMessage.contextInfo.participant, remoteJid );
-messageCopy.quoted = { sender: quotedSender, message: messageCopy.message.extendedTextMessage.contextInfo.quotedMessage }
-}
-return messageCopy
-} catch (e) {
-console.error('Error en processLidsInMessage:', e)
-return message
-}}
 
 async function connectionUpdate(update) {
-const {connection, lastDisconnect, isNewLogin} = update
-global.stopped = connection
-if (isNewLogin) conn.isInit = true
+const {connection, lastDisconnect, isNewLogin} = update;
+global.stopped = connection;
+if (isNewLogin) conn.isInit = true;
 const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
 if (code && code !== DisconnectReason.loggedOut && conn?.ws.socket == null) {
 await global.reloadHandler(true).catch(console.error);
-global.timestamp.connect = new Date
+global.timestamp.connect = new Date;
 }
 if (global.db.data == null) loadDatabase()
 if (update.qr != 0 && update.qr != undefined || methodCodeQR) {
@@ -287,31 +195,15 @@ await joinChannels(conn)
 console.log(chalk.green.bold(`[ ✿ ]  Conectado a: ${userName}`))
 }
 let reason = new Boom(lastDisconnect?.error)?.output?.statusCode
-if (connection === 'close') {
-if (reason === DisconnectReason.badSession) {
-console.log(chalk.bold.cyanBright(`\n⚠︎ Sin conexión, borra la session principal del Bot, y conectate nuevamente.`))
-} else if (reason === DisconnectReason.connectionClosed) {
-console.log(chalk.bold.magentaBright(`\n♻ Reconectando la conexión del Bot...`))
+if (connection === "close") {
+if ([401, 440, 428, 405].includes(reason)) {
+console.log(chalk.red(`→ (${code}) › Cierra la session Principal.`));
+}
+console.log(chalk.yellow("→ Reconectando el Bot Principal..."));
 await global.reloadHandler(true).catch(console.error)
-} else if (reason === DisconnectReason.connectionLost) {
-console.log(chalk.bold.blueBright(`\n⚠︎ Conexión perdida con el servidor, reconectando el Bot...`))
-await global.reloadHandler(true).catch(console.error)
-} else if (reason === DisconnectReason.connectionReplaced) {
-console.log(chalk.bold.yellowBright(`\nꕥ La conexión del Bot ha sido reemplazada.`))
-} else if (reason === DisconnectReason.loggedOut) {
-console.log(chalk.bold.redBright(`\n⚠︎ Sin conexión, borra la session principal del Bot, y conectate nuevamente.`))
-await global.reloadHandler(true).catch(console.error)
-} else if (reason === DisconnectReason.restartRequired) {
-console.log(chalk.bold.cyanBright(`\n♻ Conectando el Bot con el servidor...`))
-await global.reloadHandler(true).catch(console.error)
-} else if (reason === DisconnectReason.timedOut) {
-console.log(chalk.bold.yellowBright(`\n♻ Conexión agotada, reconectando el Bot...`))
-await global.reloadHandler(true).catch(console.error)
-} else {
-console.log(chalk.bold.redBright(`\n⚠︎ Conexión cerrada, conectese nuevamente.`))
-}}}
-process.on('uncaughtException', console.error)
-let isInit = true
+}};
+process.on('uncaughtException', console.error);
+let isInit = true;
 let handler = await import('./handler.js')
 global.reloadHandler = async function(restatConn) {
 try {
@@ -349,15 +241,10 @@ conn.ev.on('connection.update', conn.connectionUpdate)
 conn.ev.on('creds.update', conn.credsUpdate)
 isInit = false
 return true
-}
-setInterval(() => {
-console.log('[ ✿ ]  Reiniciando...');
-process.exit(0)
-}, 10800000)
-let rtU = join(__dirname, `./${jadi}`)
-if (!existsSync(rtU)) {
-mkdirSync(rtU, { recursive: true }) 
-}
+};
+process.on('unhandledRejection', (reason, promise) => {
+console.error("Rechazo no manejado detectado:", reason);
+});
 
 global.rutaJadiBot = join(__dirname, `./${jadi}`)
 if (global.kanekiJadibts) {
@@ -435,9 +322,9 @@ resolve(code !== 127);
 });
 }),
 new Promise((resolve) => {
-p.on('error', (_) => resolve(false))
-})])
-}))
+p.on('error', (_) => resolve(false));
+})]);
+}));
 const [ffmpeg, ffprobe, ffmpegWebp, convert, magick, gm, find] = test;
 const s = global.support = {ffmpeg, ffprobe, ffmpegWebp, convert, magick, gm, find};
 Object.freeze(global.support);
@@ -453,23 +340,7 @@ unlinkSync(filePath)})
 console.log(chalk.gray(`→ Archivos de la carpeta TMP eliminados`))
 } catch {
 console.log(chalk.gray(`→ Los archivos de la carpeta TMP no se pudieron eliminar`));
-}}, 30 * 1000)
-// Sessions Subs
-setInterval(async () => {
-const directories = [`./${sessions}/`, `./${jadi}/`]
-directories.forEach(dir => {
-readdirSync(dir, (err, files) => {
-if (err) throw err
-files.forEach(file => {
-if (file !== 'creds.json') {
-const filePath = path.join(dir, file);
-unlinkSync(filePath, err => {
-if (err) {
-console.log(chalk.gray(`\n→ El archivo ${file} no se logró borrar.\n` + err))
-} else {
-console.log(chalk.gray(`\n→ ${file} fué eliminado correctamente.`))
-} }) }
-}) }) }) }, 10 * 60 * 1000)
+}}, 30 * 1000) 
 _quickTest().catch(console.error)
 async function isValidPhoneNumber(number) {
 try {
