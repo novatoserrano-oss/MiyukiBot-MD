@@ -38,7 +38,7 @@ font: 'simple',
 align: 'left',
 gradient: ['green', 'white']
 })
-say('Made with love by xd', {
+say('Made with by OmarGranda', {
 font: 'console',
 align: 'center',
 colors: ['cyan', 'magenta', 'yellow']
