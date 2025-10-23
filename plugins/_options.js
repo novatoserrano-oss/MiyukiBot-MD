@@ -62,16 +62,7 @@ throw false
 chat.economy = isEnable
 break
 }
-   case 'antiprivado':
-    case 'antiprivate':
-      isAll = true
-      if (!isOwner) {
-        global.dfail('rowner', m, conn)
-        throw false
-      }
-      bot.antiPrivate = isEnable
-      break
-}
+
 case 'rpg': case 'gacha': {
 if (m.isGroup && !(isAdmin || isOwner)) {
 global.dfail('admin', m, conn)
@@ -93,9 +84,9 @@ chat[type] = isEnable
 conn.reply(m.chat, `❀ Has *${isEnable ? 'activado' : 'desactivado'}* el *${type}* para este grupo.`, m)
 }
 
-handler.help = ['welcome', 'bienvenida', 'modoadmin', 'onlyadmin', 'nsfw', 'modohorny', 'economy', 'economia', 'rpg', 'gacha', 'detect', 'alertas', 'antilink', 'antienlace', 'antilinks', 'antienlaces', 'antiprivate', 'antiprivado']
+handler.help = ['welcome', 'bienvenida', 'modoadmin', 'onlyadmin', 'nsfw', 'modohorny', 'economy', 'economia', 'rpg', 'gacha', 'detect', 'alertas', 'antilink', 'antienlace', 'antilinks', 'antienlaces']
 handler.tags = ['nable']
-handler.command = ['welcome', 'bienvenida', 'modoadmin', 'onlyadmin', 'nsfw', 'modohorny', 'economy', 'economia', 'rpg', 'gacha', 'detect', 'alertas', 'antilink', 'antienlace', 'antilinks', 'antienlaces', 'antiprivate', 'antiprivado']
+handler.command = ['welcome', 'bienvenida', 'modoadmin', 'onlyadmin', 'nsfw', 'modohorny', 'economy', 'economia', 'rpg', 'gacha', 'detect', 'alertas', 'antilink', 'antienlace', 'antilinks', 'antienlaces']
 handler.group = true
 
 export default handler
