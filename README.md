@@ -10,6 +10,12 @@
       title="WhatsApp" 
       src="https://img.shields.io/badge/WhatsApp-Creador-25D366?style=for-the-badge&logo=whatsapp&logoColor=white">
   </a>
+  
+  <a href="https://wa.me/51908027316">
+    <img 
+      title="WhatsApp" 
+      src="https://img.shields.io/badge/WhatsApp-NÚMERO SECUNDARIO-25D366?style=for-the-badge&logo=whatsapp&logoColor=white">
+  </a>
     <a href="https://whatsapp.com/channel/0029Vb6wMPa8kyyTpjBG9C2H">
     <img 
       title="WhatsApp Channel" 
