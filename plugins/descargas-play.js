@@ -8,6 +8,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   
 try {
 if (!text.trim()) return conn.reply(m.chat, `🔔 *Por favor, ingresa el nombre o link del archivo a descargar.*`, m)
+    await m.react('🎧')
 
     let videoIdMatch = text.match(youtubeRegexID)
     let search = await yts(videoIdMatch ? 'https://youtu.be/' + videoIdMatch[1] : text)
