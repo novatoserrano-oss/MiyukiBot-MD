@@ -38,7 +38,7 @@ font: 'simple',
 align: 'left',
 gradient: ['green', 'white']
 })
-say('Made with by OmarGranda', {
+say('Powered By OmarGranda', {
 font: 'console',
 align: 'center',
 colors: ['cyan', 'magenta', 'yellow']
