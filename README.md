@@ -140,7 +140,7 @@ npm start
 ```
 </details>
 
-### 🚩 OBTNER OTRO CÓDIGO QR EN TERMUX 
+### 🚩 OBTNER OTRO CÓDIGO DE VINCULACIÓN EN TERMUX 
 <details>
  <summary>Haz clic para ver los comandos</summary>
   
