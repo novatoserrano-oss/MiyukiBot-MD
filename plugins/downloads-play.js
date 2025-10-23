@@ -8,7 +8,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     if (!text?.trim())
       return conn.reply(m.chat, `💫 *Por favor ingresa el nombre o enlace del video que deseas buscar.*`, m, rcanal)
 
-    await m.react('🔎')
+    await m.react('🎧')
 
     const videoMatch = text.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|shorts\/|v\/)?([a-zA-Z0-9_-]{11})/)
     const query = videoMatch ? `https://youtu.be/${videoMatch[1]}` : text
@@ -25,19 +25,14 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
     const vistas = formatViews(views)
     const info = `
-🎧 *— YOUTUBE PLAYER —* 🎬
+🎧 *YOUTUBE PLAYER* 🎬
 
 📀 *Título:* ${title}
 📺 *Canal:* ${author.name}
 👁️‍🗨️ *Vistas:* ${vistas}
 ⏱️ *Duración:* ${timestamp}
 🗓️ *Publicado:* ${ago}
-🔗 *Enlace:* ${url}
-
-✨ *Selecciona el formato con:* 
-> 🎵 ${usedPrefix}mp3 — *Audio*
-> 🎞️ ${usedPrefix}mp4 — *Video*
-`
+🔗 *Enlace:* ${url}`
 
     const thumb = (await conn.getFile(thumbnail)).data
     await conn.sendMessage(m.chat, { image: thumb, caption: info, ...rcanal }, { quoted: fkontak })
