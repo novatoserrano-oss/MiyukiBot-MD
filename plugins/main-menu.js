@@ -3,59 +3,71 @@ import moment from 'moment-timezone'
 import speed from 'performance-now'
 
 let handler = async (m, { conn }) => {
-  let mentionedJid = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
-  let totalCommands = Object.keys(global.plugins).length
+  try {
+    await m.react('🌸')
+    conn.sendPresenceUpdate('composing', m.chat)
 
-  const iconos = [
-'https://files.catbox.moe/lee8v6.jpg',
-'https://files.catbox.moe/cut28l.jpg', 
-'https://files.catbox.moe/rut9jj.jpg',
-'https://files.catbox.moe/lgq7yr.jpg', 
-'https://files.catbox.moe/8pil8x.jpg',
-'https://files.catbox.moe/6a3vsc.jpg', 
-'https://files.catbox.moe/ltc7g2.jpg', 
-'https://files.catbox.moe/kt7pbi.jpg',
-'https://files.catbox.moe/vskjfh.jpg' 
-  ]
-  const randomIcono = iconos[Math.floor(Math.random() * iconos.length)]
+    let mentionedJid = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
+    let totalCommands = Object.keys(global.plugins).length
 
-  // ⏳ ping
-  let timestamp = speed()
-  let ping = (speed() - timestamp).toFixed(2)
+    const iconos = [
+      'https://files.catbox.moe/lee8v6.jpg',
+      'https://files.catbox.moe/cut28l.jpg',
+      'https://files.catbox.moe/rut9jj.jpg',
+      'https://files.catbox.moe/lgq7yr.jpg',
+      'https://files.catbox.moe/8pil8x.jpg',
+      'https://files.catbox.moe/6a3vsc.jpg',
+      'https://files.catbox.moe/ltc7g2.jpg',
+      'https://files.catbox.moe/kt7pbi.jpg',
+      'https://files.catbox.moe/vskjfh.jpg'
+    ]
+    const randomIcono = iconos[Math.floor(Math.random() * iconos.length)]
 
-  // 🕓 Tiempo activo(uptime)
-  let uptime = clockString(process.uptime() * 1000)
+    const vs = global.vs || '1.8.0'
+    const libreria = global.libreria || 'Baileys'
+    const botname = global.botname || 'MiyukiBot-MD'
+    const textbot = global.textbot || 'MiyukiBot-MD 🌸'
+    const redes = global.redes || 'https://github.com/'
+    const channelRD = global.channelRD || { id: '', name: 'Canal Oficial 🌸' }
 
-  // 🖥️ Info RAM
-  let total = (os.totalmem() / 1024 / 1024).toFixed(0)
-  let free = (os.freemem() / 1024 / 1024).toFixed(0)
-  let used = total - free
+    // ⏳ Ping
+    let timestamp = speed()
+    let ping = (speed() - timestamp).toFixed(2)
 
-  // 📅 Fecha y hora
-  let fecha = moment.tz('America/Lima').format('DD/MM/YYYY')
-  let hora = moment.tz('America/Lima').format('HH:mm:ss')
-  let dia = moment.tz('America/Lima').format('dddd')
+    // 🕓 Uptime
+    let uptime = clockString(process.uptime() * 1000)
 
-  let menu = `   SISTEMA EN LÍNEA: 「𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸」
+    // 🖥️ RAM info
+    let total = (os.totalmem() / 1024 / 1024).toFixed(0)
+    let free = (os.freemem() / 1024 / 1024).toFixed(0)
+    let used = total - free
 
-[👤] *Usuario:* @${mentionedJid.split('@')[0]}
-[📚] *Comandos:* ${totalCommands}
-[⚙️] *Versión:* ${vs}
-[🛠️] *Librería:* ${libreria}
-[🤖] *Bot:* ${(conn.user.jid == global.conn.user.jid ? 'Principal' : 'Sub-Bot')}
-[🚀] *Tiempo de actividad:* ${uptime}
+    // 📅 Fecha y hora
+    let fecha = moment.tz('America/Lima').format('DD/MM/YYYY')
+    let hora = moment.tz('America/Lima').format('HH:mm:ss')
+    let dia = moment.tz('America/Lima').format('dddd')
+    let menu = `
+╭━━━〔 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸 〕━━⬣
+│👤 *Usuario:* @${mentionedJid.split('@')[0]}
+│📚 *Comandos:* ${totalCommands}
+│⚙️ *Versión:* ${vs}
+│🛠️ *Librería:* ${libreria}
+│🤖 *Bot:* ${(conn.user.jid == global.conn.user.jid ? 'Principal' : 'Sub-Bot')}
+│🚀 *Tiempo activo:* ${uptime}
+╰━━━━━━━━━━━━━━━━━━⬣
 
-*──ESTADO DEL SISTEMA──*
-[💾] *RAM Total:* ${total} MB
-[📈] *RAM Usada:* ${used} MB
-[📉] *RAM Libre:* ${free} MB
-[🌿] *Ping:* *${ping} ms*
+╭─〔 💾 ESTADO DEL SISTEMA 〕─⬣
+│💾 *RAM Total:* ${total} MB
+│📈 *RAM Usada:* ${used} MB
+│📉 *RAM Libre:* ${free} MB
+│🌿 *Ping:* ${ping} ms
+╰━━━━━━━━━━━━━━━━━━⬣
 
-*───FECHA Y HORA───*
-[📅] *Día:* ${dia}
-[🗓️] *Fecha:* ${fecha}
-[⏰] *Hora:* ${hora}
-*─────────────────*
+╭─〔 🗓️ FECHA Y HORA 〕─⬣
+│📅 *Día:* ${dia}
+│📆 *Fecha:* ${fecha}
+│⏰ *Hora:* ${hora}
+╰━━━━━━━━━━━━━━━━━━⬣
 
 *╭─────────*
 *│* ⑀✬ \`𝐄𝐂𝐎𝐍𝐎𝐌𝐈𝐀\`  ︴
@@ -301,28 +313,33 @@ let handler = async (m, { conn }) => {
 👑 © Powered By OmarGranda
 `
 
-  await conn.sendMessage(m.chat, { 
-    text: menu,
-    contextInfo: {
-      mentionedJid: [mentionedJid],
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: channelRD.id,
-        serverMessageId: '',
-        newsletterName: channelRD.name
-      },
-      externalAdReply: {
-        title: botname,
-        body: textbot,
-        mediaType: 1,
-        mediaUrl: redes,
-        sourceUrl: redes,
-        thumbnailUrl: randomIcono,
-        showAdAttribution: false,
-        renderLargerThumbnail: true
+    await conn.sendMessage(m.chat, {
+      text: menu,
+      contextInfo: {
+        mentionedJid: [mentionedJid],
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: channelRD.id,
+          serverMessageId: '',
+          newsletterName: channelRD.name
+        },
+        externalAdReply: {
+          title: botname,
+          body: textbot,
+          mediaType: 1,
+          mediaUrl: redes,
+          sourceUrl: redes,
+          thumbnailUrl: randomIcono,
+          showAdAttribution: false,
+          renderLargerThumbnail: true
+        }
       }
-    }
-  }, { quoted: m })
+    }, { quoted: m })
+
+  } catch (e) {
+    console.error(e)
+    m.reply('Ocurrió un error al generar el menú.')
+  }
 }
 
 handler.help = ['menu']
@@ -337,4 +354,4 @@ function clockString(ms) {
   let m = Math.floor(ms / 60000) % 60
   let s = Math.floor(ms / 1000) % 60
   return [h, m, s].map(v => v.toString().padStart(2, '0')).join(':')
-    }
+}
