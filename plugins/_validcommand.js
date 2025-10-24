@@ -5,7 +5,7 @@ export async function before(m, { conn }) {
 
   const usedPrefix = global.prefix.exec(m.text)[0];
   const command = m.text.slice(usedPrefix.length).trim().split(' ')[0].toLowerCase();
-
+/*
   const thumbRes = await fetch("https://files.catbox.moe/3nmafy.jpg");
   const thumbBuffer = await thumbRes.buffer();
 
@@ -24,7 +24,7 @@ export async function before(m, { conn }) {
     },
     participant: "0@s.whatsapp.net"
   };
-
+*/
   if (!command || command === 'bot') return;
 
   const isValidCommand = (command, plugins) => {
@@ -53,7 +53,7 @@ export async function before(m, { conn }) {
           externalAdReply: {
             title: 'MiyukiBot-MD',
             body: '© Powered by OmarGranda',
-            thumbnailUrl: 'https://files.catbox.moe/mez710.jpg',
+            thumbnailUrl: icono,
             sourceUrl: 'https://github.com/OmarGranda',
             mediaType: 1,
             renderLargerThumbnail: true
@@ -78,7 +78,7 @@ export async function before(m, { conn }) {
   ];
 
   const texto = mensajesNoEncontrado[Math.floor(Math.random() * mensajesNoEncontrado.length)];
-  const thumb = 'https://files.catbox.moe/oxt9wo.jpg';
+  const thumb = icono;
 
   await conn.sendMessage(m.chat, {
     text: texto,
