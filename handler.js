@@ -31,7 +31,7 @@ try {
     if (!m) return
     if (!m.isGroup) {
         const text = (m.text || '').trim().toLowerCase()
-        if (text !== '.creador' && text !== '.ping') return
+        if (text !== '.sc' && text !== '.creador') return
     }
 
 m.exp = 0
