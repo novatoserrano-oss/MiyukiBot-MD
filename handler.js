@@ -30,7 +30,8 @@ try {
     m = smsg(this, m) || m
     if (!m) return
     if (!m.isGroup) {
-        const text = (m.text || '').trim().toLowerCase()    
+        const text = (m.text || '').trim().toLowerCase()
+        if (text !== '.creador' && text !== '.ping') return
     }
 
 m.exp = 0
