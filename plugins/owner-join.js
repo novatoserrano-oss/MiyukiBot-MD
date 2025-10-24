@@ -2,8 +2,8 @@ let linkRegex = /https:\/\/chat\.whatsapp\.com\/([0-9A-Za-z]{20,24})/i;
 
 let handler = async (m, { conn, text, isOwner }) => {
     if (!text) {
-        await m.react('🍉');
-        return m.reply(`🍉 *Debes enviar una invitación para que ${botname} se una al grupo.*\n\n📎 Ejemplo:\n.invite https://chat.whatsapp.com/xxxxxxxxxxxxxxxxxxxxxx`);
+        await m.react('❌');
+        return m.reply(`🚩 *Debes enviar una invitación para que ${botname} se una al grupo.*\n\n📎 Ejemplo:\n.join https://chat.whatsapp.com/xxxxxxxxxxxxxxxxxxxxxx`);
     }
 
     let [_, code] = text.match(linkRegex) || [];
@@ -14,7 +14,7 @@ let handler = async (m, { conn, text, isOwner }) => {
     }
 
     if (isOwner) {
-        await m.react('🐾');
+        await m.react('🚩');
         await conn.groupAcceptInvite(code)
             .then(async () => {
                 await m.react('✅');
@@ -26,7 +26,7 @@ let handler = async (m, { conn, text, isOwner }) => {
             });
     } else {
         await m.react('📨');
-        let message = `🍉 *Nueva invitación a un grupo:*\n\n🔗 ${text}\n\n👤 *Enviado por:* @${m.sender.split('@')[0]}`;
+        let message = `💌 *Nueva invitación a un grupo:*\n\n🔗 ${text}\n\n👤 *Enviado por:* @${m.sender.split('@')[0]}`;
         await conn.sendMessage(`${suittag}` + '@s.whatsapp.net', { text: message, mentions: [m.sender] }, { quoted: m });
         await m.react('🩷');
         m.reply(`💌 *El link del grupo ha sido enviado al propietario.*\n\n🐾 ¡Gracias por tu invitación! ฅ^•ﻌ•^ฅ`);
