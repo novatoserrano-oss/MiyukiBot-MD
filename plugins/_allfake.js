@@ -37,6 +37,7 @@ global.icono = [
 'https://files.catbox.moe/wqh63g.jpg'
 ].getRandom()*/
 
+global.icono = "https://cdn.yupra.my.id/yp/1i3hwqc3.jpg"
 
 global.rcanal = {
   contextInfo: {
