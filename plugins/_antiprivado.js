@@ -1,19 +1,59 @@
-export async function before(m, { conn, isROwner }) {
-  if (m.isBaileys && m.fromMe) return !0
-  if (!m.message) return !0
-  if (m.chat === '120363401404146384@newsletter') return !0
 
-  if (!m.isGroup) {
-    const bot = global.db.data.settings[conn.user.jid] || {}
-    const isCreator = isROwner
+import fs from 'fs'
 
-    const excepciones = ['PIEDRA', 'PAPEL', 'TIJERA', 'code', 'qr']
-    if (excepciones.some(e => m.text?.toUpperCase().includes(e))) return !0
+const handler = async (m, { conn, command, isOwner, usedPrefix }) => {
+  const setting = global.db.data.settings[conn.user.jid] || {}
+  
+  if (command === 'antiprivate') {
+    if (!isOwner) return m.reply('⚠️ Solo mi *creador* puede usar este comando.')
 
-    if (bot.antiPrivate && !isCreator) {
-      await conn.readMessages([m.key])
-      return !0
+    if (!m.text) return m.reply(`
+🌙 *Uso correcto:*
+> ${usedPrefix + command} on
+> ${usedPrefix + command} off
+
+📛 *Estado actual:* ${setting.antiPrivate ? '🟢 Activado' : '🔴 Desactivado'}
+`)
+
+    if (m.text.toLowerCase() === 'on') {
+      setting.antiPrivate = true
+      m.reply('✅ El modo *Anti-Privado* fue activado correctamente.\nEl bot ignorará los mensajes privados.')
+    } else if (m.text.toLowerCase() === 'off') {
+      setting.antiPrivate = false
+      m.reply('🚫 El modo *Anti-Privado* fue desactivado.\nEl bot responderá nuevamente en privados.')
+    } else {
+      m.reply('❌ Opción no válida. Usa "on" o "off".')
     }
+  }
+}
+handler.help = ['antiprivate on/off']
+handler.tags = ['owner']
+handler.command = /^antiprivate$/i
+handler.rowner = true
+
+export default handler
+
+export async function before(m, { conn, isOwner, isROwner }) {
+  if (m.isBaileys && m.fromMe) return !0
+  if (m.isGroup) return !1
+  if (!m.message) return !0
+
+  if (
+    m.text.includes('PIEDRA') ||
+    m.text.includes('PAPEL') ||
+    m.text.includes('TIJERA') ||
+    m.text.includes('serbot') ||
+    m.text.includes('jadibot')
+  ) return !0
+
+  const bot = global.db.data.settings[conn.user.jid] || {}
+  const chatId = m.chat
+
+  if (chatId === '120363416409380841@newsletter') return !0
+
+  if (bot.antiPrivate && !isOwner && !isROwner) {
+    console.log(`📵 Mensaje privado de ${m.sender}`)
+    return !0
   }
 
   return !1
