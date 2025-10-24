@@ -15,12 +15,12 @@ const handler = async (m, { conn, command, args, usedPrefix, isOwner }) => {
     const opt = args[0].toLowerCase()
     if (opt === 'on') {
       user.typing = true
-      return m.reply(`✅  @${m.sender.split('@')[0]}`, null, {
+      return m.reply(`✅ El modo *escribiendo...* ha sido activado para @${m.sender.split('@')[0]}`, null, {
         mentions: [m.sender]
       })
     } else if (opt === 'off') {
       user.typing = false
-      return m.reply(`❌ @${m.sender.split('@')[0]}`, null, {
+      return m.reply(`❌ El modo *escribiendo...* ha sido desactivado para @${m.sender.split('@')[0]}`, null, {
         mentions: [m.sender]
       })
     } else {
