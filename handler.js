@@ -31,7 +31,6 @@ try {
     if (!m) return
     if (!m.isGroup) {
         const text = (m.text || '').trim().toLowerCase()
-        if (text !== '') return
     }
 
 m.exp = 0
