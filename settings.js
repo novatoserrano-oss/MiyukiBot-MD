@@ -43,7 +43,7 @@ global.author = "Omar Granda"
 global.etiqueta = "OmarGranda"
 global.currency = "¥enes"
 global.banner = "https://d.uguu.se/GmSLPtrU.png"
-global.icono = "https://cdn.yupra.my.id/yp/1i3hwqc3.jpg"
+
 global.catalogo = fs.readFileSync('./lib/catalogo.jpg')
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
