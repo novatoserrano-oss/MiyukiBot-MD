@@ -54,7 +54,7 @@ try {
 }
 
 global.apikey = 'ItsukiNakanoIA'
-global.botNumber = '50578440363'
+global.botNumber = ''
 global.botname = '𝐈𝐭𝐬𝐮𝐤𝐢 𝐍𝐚𝐤𝐚𝐧𝐨-𝐈𝐀 𝐖𝐚𝐛𝐨𝐭 👑✨'
 global.wm = '© 𝐋𝐞𝐨  𝐗𝐬𝐳𝐲'
 global.wm3 = '⫹⫺  multi-device'
