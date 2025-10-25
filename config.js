@@ -12,7 +12,6 @@ global.__dirname = (url) => dirname(fileURLToPath(url))
 
 global.owner = [
    ['51908027316', '۪👑 OmarGranda', true],
-   ['51908027316', 'Omar', true],
    ['51919199620', 'Shadowxyz', true]
 ];
 
