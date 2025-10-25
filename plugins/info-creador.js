@@ -1,95 +1,65 @@
-import { existsSync } from 'fs'
-import { join } from 'path'
-import { prepareWAMessageMedia, generateWAMessageFromContent, proto } from '@whiskeysockets/baileys'
+// by dv.shadow - https://github.com/Yuji-XDev
 
-let handler = async (m, { conn }) => {
-  try {
-    await conn.sendMessage(m.chat, { react: { text: '👑', key: m.key } })
+import { proto } from '@whiskeysockets/baileys'
+import PhoneNumber from 'awesome-phonenumber'
 
-    const menuText = `👑 *CREADOR - 𝗟𝗲𝗼  𝘅𝘇𝘅𝘀𝘆 ⚡*\n\n𝗦𝗲𝗹𝗲𝗰𝗶𝗼𝗻𝗮 𝗨𝗻 𝗠𝗲𝘁𝗼𝗱𝗼:`
+const name = "OmarGranda"
+const empresa = "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿"
+const numCreador = "51927303598"
+const correo = "omargranda673@gmail.com"
+const web = "https://github.com/OmarGranda"
+const about = " Creador y desarrollodor del bot 🧑‍💻 "
+const direccion = "Perú"
 
-    const localImagePath = join(process.cwd(), 'src', 'image-owner.jpg')
+const vcard = `
+BEGIN:VCARD
+VERSION:3.0
+N:;${name};;;
+FN:${name}
+ORG:${empresa}
+TITLE:CEO & Fundador
+TEL;waid=${numCreador}:${new PhoneNumber("+" + numCreador).getNumber("international")}
+EMAIL:${correo}
+URL:${web}
+NOTE:${about}
+ADR:;;${direccion};;;;
+X-ABADR:ES
+X-WA-BIZ-NAME:${name}
+X-WA-BIZ-DESCRIPTION:${about}
+END:VCARD`.trim()
 
-    const nativeButtons = [
-      {
-        name: 'cta_url',
-        buttonParamsJson: JSON.stringify({ 
-          display_text: '📸 ɪɴsᴛᴀɢʀᴀᴍ', 
-          url: 'https://www.instagram.com/danxyb01' 
-        })
-      },
-      {
-        name: 'cta_url',
-        buttonParamsJson: JSON.stringify({ 
-          display_text: '👑 ᴄʀᴇᴀᴅᴏʀ', 
-          url: 'https://wa.me/16503058299' 
-        })
-      },
-      {
-        name: 'cta_url',
-        buttonParamsJson: JSON.stringify({ 
-          display_text: '🌸 ᴅᴏɴᴀᴄɪᴏɴᴄɪᴛᴀ', 
-          url: 'https://paypal.me/Erenxs01' 
-        })
-      },
-      {
-        name: 'cta_url',
-        buttonParamsJson: JSON.stringify({ 
-          display_text: '💎 ᴏʙᴛᴇɴ ɪᴛsᴜᴋɪ-ᴘʀᴇᴍ', 
-          url: 'https://xzys-ultra.vercel.app' 
-        })
-      },
-      {
-        name: 'cta_url',
-        buttonParamsJson: JSON.stringify({ 
-          display_text: '🍉 ᴄᴀɴᴀʟ ᴏғɪᴄɪᴀʟ', 
-          url: 'https://whatsapp.com/channel/0029VbBBn9R4NViep4KwCT3Z' 
-        })
-      },
-      {
-        name: 'cta_url',
-        buttonParamsJson: JSON.stringify({ 
-          display_text: '💎 ᴛɪᴋᴛᴏᴋ', 
-          url: 'https://www.tiktok.com/@xzzys16' 
-        })
-      }
-    ]
-
-    // === Imagen opcional ===
-    let header
-    if (existsSync(localImagePath)) {
-      const media = await prepareWAMessageMedia({ image: { url: localImagePath } }, { upload: conn.waUploadToServer })
-      header = proto.Message.InteractiveMessage.Header.fromObject({
-        hasMediaAttachment: true,
-        imageMessage: media.imageMessage
-      })
-    } else {
-      header = proto.Message.InteractiveMessage.Header.fromObject({ hasMediaAttachment: false })
-    }
-
-    // === Crear mensaje interactivo ===
-    const interactiveMessage = proto.Message.InteractiveMessage.fromObject({
-      body: proto.Message.InteractiveMessage.Body.fromObject({ text: menuText }),
-      footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: '> 𝐈𝐭𝐬𝐮𝐤𝐢 𝐍𝐚𝐤𝐚𝐧𝐨-𝐈𝐀 𝐯2 🌸' }),
-      header,
-      nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
-        buttons: nativeButtons
-      })
-    })
-
-    const msg = generateWAMessageFromContent(m.chat, { interactiveMessage }, { userJid: conn.user.jid, quoted: m })
-    await conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id })
-
-  } catch (e) {
-    console.error('❌ Error en el comando owner:', e)
-    await conn.sendMessage(m.chat, {
-      text: `❌ *Error al cargar la información del creador*\n\n🔗 Contacta directamente: https://wa.me/16503058299\n\n⚠️ *Error:* ${e.message}`
-    }, { quoted: m })
-  }
+const contactMessage = {
+  displayName: name,
+  vcard
 }
 
-handler.help = ['owner', 'creador']
-handler.tags = ['info']
-handler.command = ['owner', 'creador', 'contacto']
+let handler = async (m, { conn }) => {
+  await m.react("👑")
+  await conn.sendMessage(
+    m.chat,
+    {
+      contacts: {
+        displayName: name,
+        contacts: [contactMessage]
+      },
+      contextInfo: {
+        mentionedJid: [m.sender],
+        externalAdReply: {
+          title: "Contacto De Mi Creador 👑",
+          body: "",
+          mediaType: 1,
+          thumbnailUrl: 'https://files.catbox.moe/r1qp16.jpg',
+          renderLargerThumbnail: true,
+          sourceUrl: web
+      }
+    }
+  },
+    { quoted: m }
+  )
+}
+
+handler.help = ["creador"]
+handler.tags = ["info"]
+handler.command = ["creador", "creator", "owner"]
 
 export default handler

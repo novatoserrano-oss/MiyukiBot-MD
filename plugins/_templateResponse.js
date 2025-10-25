@@ -1,6 +1,5 @@
 const { proto, generateWAMessage, areJidsSameUser, decryptPollVote, } = (await import('@whiskeysockets/baileys')).default
-
-async function handler(m, chatUpdate) {
+export async function all(m, chatUpdate) {
 if (m.isBaileys) {
 return
 }
@@ -81,6 +80,3 @@ type: 'append',
 }
 this.ev.emit('messages.upsert', msg)
 }
-
-handler.all = handler
-export default handler
