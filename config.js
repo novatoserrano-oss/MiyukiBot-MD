@@ -46,7 +46,7 @@ try {
   console.log(chalk.yellow('⚠️ No se pudo leer el prefijo dinámico aún. Se usa el prefijo por defecto.'))
 }
 
-global.apikey = 'ShirayukiBot-MD'
+global.apikey = 'ItsukiNakanoIA'
 global.botname = 'ShirayukiBot-MD 👑✨'
 global.wm = '© Omar Granda'
 global.wm3 = '⫹⫺  multi-device'
