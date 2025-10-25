@@ -33,7 +33,7 @@ global.vs = "^1.8.2|Latest"
 global.nameqr = "MiyukiBot-MD"
 global.sessions = "Sessions/Principal"
 global.jadi = "Sessions/SubBot"
-
+global.kanekiJadibts = true
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
 global.botname = "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸"
