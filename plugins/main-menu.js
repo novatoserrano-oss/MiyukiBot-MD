@@ -9,7 +9,6 @@ let handler = async (m, { conn }) => {
 
     let mentionedJid = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
     let totalCommands = Object.keys(global.plugins).length
-/*
     const iconos = [
       'https://files.catbox.moe/lee8v6.jpg',
       'https://files.catbox.moe/cut28l.jpg',
