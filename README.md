@@ -1,136 +1,207 @@
-# 🎀 Itsuki Nakano - IA ✨
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Oswald+Code&pause=1000&color=FF69B4&width=435&lines=Bienvenido+al+Repositorio;Itsuki+Nakano+IA;Versión+4.3.1+Oficial;Creado+por+LeoXzzsy;)](https://git.io/typing-svg)
+> [!IMPORTANT]
+> **Este proyecto está en constante evolución. Estamos comprometidos en ofrecer a nuestra comunidad un Bot increíble. Te invitamos a instalarlo y para estar al tanto de todas las novedades.**
 
-<!-- Banner -->
-<h1 align="center">
-  <img src="https://files.catbox.moe/vcdr4w.jpg" width="700" alt="Itsuki-Nakano IA Banner Ofc"/>
-</h1>
+<p align="center"> 
+  <a href="https://github.com/OmarGranda"><img src="https://readme-typing-svg.herokuapp.com?font=Boldonse&size=20&duration=3000&pause=1000&color=FFC0CB&center=true&width=435&lines=MiyukiBot-MD;%C2%A1El+mejor+bot+de+WhatsApp!" height="500px"></a> 
+<img src="https://files.catbox.moe/xr69o2.jpg" width="500" height="500" />
 
-[![Version](https://img.shields.io/badge/Version-3.4.0-pink.svg)]()
-[![Baileys](https://img.shields.io/badge/Baileys-Multi--Device-blue.svg)]()
-[![Plugins](https://img.shields.io/badge/Plugins-1000+-success.svg)]()
-[![Speed](https://img.shields.io/badge/Speed-⚡Ultra--Fast-yellow.svg)]()
-[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)]()
-[![License](https://img.shields.io/badge/License-MIT-orange.svg)]()
+<a href="https://wa.me/51927303598">
+    <img 
+      title="WhatsApp" 
+      src="https://img.shields.io/badge/WhatsApp-Creador-25D366?style=for-the-badge&logo=whatsapp&logoColor=white">
+  </a>
+  
+  <a href="https://wa.me/51908027316">
+    <img 
+      title="WhatsApp" 
+      src="https://img.shields.io/badge/WhatsApp-NÚMERO SECUNDARIO-25D366?style=for-the-badge&logo=whatsapp&logoColor=white">
+  </a>
+    <a href="https://whatsapp.com/channel/0029Vb6wMPa8kyyTpjBG9C2H">
+    <img 
+      title="WhatsApp Channel" 
+      src="https://img.shields.io/badge/WhatsApp%20Channel-MiyukiBotMD-25D366?style=for-the-badge&logo=whatsapp&logoColor=white">
+  </a>
+      <a href="https://chat.whatsapp.com/CwedgsWWypMCpn7ZjNhE4g?mode=ems_copy_t">
+    <img 
+      title="WhatsAppCommunity" 
+      src="https://img.shields.io/badge/WhatsApp%20community-MiyukiBotMD-25D366?style=for-the-badge&logo=whatsapp&logoColor=white">
+  </a>
+   <a href="https://www.youtube.com/@OmarGranda673">
+    <img 
+      title="YouTube" 
+      src="https://img.shields.io/badge/YouTube-MiyukiBotMD-FF0000?style=for-the-badge&logo=youtube&logoColor=white">
+  </a>
+  
+  ## 🌸 CARACTERISTICAS DESTACADAS 
 
-# 🔎 `Itsuki Nakano IA -INFO` 🌷
+<p align="center">
 
-**Una Bot De WhatsApp Temática con Sistemas Únicos**  
-*Construido con dedicación, responsabilidad y mucho amor por el estudio 📚✨*
+<table>
+  <tr>
+    <th>🧠 Función</th>
+    <th>✨ Descripción</th>
+  </tr>
+  <tr>
+    <td>🤖 Jadibot</td>
+    <td>Conexión y reconexión automática</td>
+  </tr>
+  <tr>
+    <td>📥 Descargas</td>
+    <td>Soporte para descargar de YouTube, TikTok, Instagram y más</td>
+  </tr>
+  <tr>
+    <td>🛡️ Gestión de Grupos</td>
+    <td>Anti-enlaces, bienvenida, antifake, modo admin y más</td>
+  </tr>
+  <tr>
+    <td>⚔️ Sistema RPG</td>
+    <td>Sistema de gacha, Sube de nivel, gana recompensas, juega con otros</td>
+  </tr>
+  <tr>
+    <td>🎮 Juegos</td>
+    <td>Adivina, reto, piedra papel tijera, ruleta y más</td>
+   </tr>
+  <tr>
+    <td>💻 Base de datos</td>
+    <td>PostgreSQL para una mayor eficiencia y escalabilidad</td>
+  </tr>
+  <tr>
+    <td>🚧 En constante mejora</td>
+    <td>Siempre en evolución con nuevas ideas y funciones</td>
+  </tr>
+</table>
 
+</p>
 
-
-## 📖 Sobre Itsuki Nakano IA
-
-Itsuki Nakano IA es un bot de WhatsApp inspirado en **Itsuki Nakano**, la quintilliza más responsable y dedicada de *"Gotoubun no Hanayome" (The Quintessential Quintuplets)*. Este bot encarna los valores de Itsuki: dedicación al estudio, responsabilidad, amor por la comida (especialmente onigiris), y un corazón bondadoso detrás de su actitud seria.
-
-
-### `🌸 Inspiración del Anime`
-
-**Gotoubun no Hanayome (五等分の花嫁)**
-- **Género:** Romance, Comedia, Escolar, Harem
-- **Personaje:** Itsuki Nakano (中野 五月)
-- **Características:** 
-  - La quinta y "mayor" de las quintillizas
-  - Cabello largo rojo/anaranjado con una estrella 
-  - Personalidad seria y responsable
-  - Sueño: Convertirse en maestra
-  - Debilidad: La comida (especialmente onigiris 🍙)
-  - Valor principal: La educación y el esfuerzo
-
-
-## `✨ Características Principales`
+## ✅ PLATAFORMAS DISPONIBLES
 
 <details>
-<summary><b> ➮ Funciones Completas</b></summary>
+  <summary>Haz clic para ver las plataformas disponibles</summary>
 
-> Bot temático de Itsuki Nakano en desarrollo. Si presenta alguna falla, reportar al creador para una solución óptima.
-
-- [x] **Sistema de Economía Completo (NK-Economy)**
-  - Trabajo con temática de Itsuki (`.work`)
-  - Balance y banco (`.balance`, `.deposit`)
-  - Transferencias (`.pay`)
-  - Sistema de crímenes (`.crimen`)
-  
-- [x] **Sistema Gacha de Personajes (NK-Gacha)**
-  - Roll de personajes (`.roll`)
-  - Reclamar y gestionar harem (`.claim`, `.harem`)
-  - Regalar y votar personajes (`.regalar`, `.vote`)
-  - Top personajes (`.topwaifus`)
-  - Ver imágenes y videos (`.wimage`, `.wvideo`)
-  - Agregar personajes (`.addcharacter`)
-  
-- [x] **SubBot Mejorado (NK-SubBot)**
-  - Conexión por QR o código
-  - Sistema de reconexión sin conflictos
-  - Gestión de múltiples sub-bots
-  
-- [x] **Antiprivado (NK-AntiPrivate)**
-  - Bloqueo automático de privados
-  - Activar/desactivar (`.antiprivate`)
-  - Lista blanca de números
-  
-- [x] **IA Conversacional (NK-AI)**
-  - Más de 250 frases únicas
-  - Respuestas contextuales
-  - Personalidad de Itsuki (`.itsuki`)
-  
-- [x] **Utilidades (NK-Utils)**
-  - Buscador Google
-  - Crear stickers (image/video/gif/url)
-  - Invitar bot a grupos (`.invite`)
-  - Sistema de errores (`.errors`)
-  - Escaneo de sintaxis (`.syntax`, `.scandir`)
-  
-- [x] **Juegos**
-  - TicTacToe, matemáticas, RPG
-  
-- [x] **Descargas**
-  - Música y video de YouTube
-  
-- [x] **Personalización**
-  - Menú temático de Itsuki Nakano
-  - Mensajes con recanal (enlaces externos)
-  - Emojis temáticos 🍙📚🍱✨
-  
-- [x] **Chatbot**
-  - Interacción con voz y texto
-  - Autoresponder personalizado
-  
-- [ ] **En desarrollo**
-  - Más funciones educativas
-  - Sistema de misiones diarias
-  - Tienda de objetos
+  - 📱 **Termux**
+  - ☁️ **SkyUltraPlus**
 
 </details>
 
+### DESCARGAR TERMUX AQUÍ 👇
+Haz clic en la imagen para descargar
 
-</div>
+<a href="https://www.mediafire.com/file/0m2y32wxccia8o1/com.termux_1022.apk/file"><img src="https://qu.ax/finc.jpg" height="200px"></a> 
 
-> [!IMPORTANT]
-> **Este proyecto está en constante evolución. Estamos comprometidos en ofrecer a nuestra comunidad un Bot increíble. Te invitamos a instalarlo y para estar al tanto de todas las novedades. [¡Únete a nuestro nuevo canal!](https://whatsapp.com/channel/0029VbBBn9R4NViep4KwCT3Z)**
+### 📱INSTALACIÓN MANUAL - TERMUX
 
+<details>
+ <summary>Haz clic par ver los comandos de instalación</summary>
+  
+> Copia los comandos uno por uno y pegalos en termux
 
-## Colaboradores y Agradecimiento ❤️
+```bash
+termux-setup-storage
+```
 
-<a href="https://github.com/xzzys26/Itsuki-IA/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=xzzys26/Itsuki-IA&cache=bust" alt="Contribuidores">
-</a>
+```bash
+pkg update && pkg upgrade -y
+```
 
-<p align="center">
-  <img src="https://github.com/BrayanOFC-Li/Lines-Neon-MB/raw/main/assets_MB/line-neon.gif" width="400"/>
-</p>
+```bash
+pkg install git nodejs ffmpeg imagemagick yarn -y
+```
 
-### **`OWNER Supremo2 DEL PROYECTO 👑`**
-<div style="display: flex; gap: 10px;">
-  <a href="https://github.com/BrayanOFC-Li" style="text-decoration: none;">
-    <img src="https://github.com/BrayanOFC-Li.png" width="130" height="130" alt="BrayanOFC" style="border-radius: 50%;" />
-  </a>
+```bash
+git clone https://github.com/OmarGranda/MiyukiBot-MD && cd MiyukiBot-MD
+```
 
-![line](https://github.com/BrayanOFC-Li/Lines-Neon-MB/raw/main/assets_MB/Line-Neon.jpg)
+```bash
+yarn install
+```
 
-## 💫 Hola, soy BrayanOFC Owner Supremo de segunda Mano de este proyecto
-tengo 17años y
-Soy una persona apasionada por la tecnología, la programación y la creación de proyectos innovadores. Me gusta aprender cosas nuevas, mejorar cada día y compartir mis conocimientos con los demás como en este proyecto. Siempre busco nuevos retos para seguir creciendo y aportar algo positivo con lo que hago. 🚀
+```bash
+npm install
+```
 
-![line](https://github.com/BrayanOFC-Li/Lines-Neon-MB/raw/main/assets_MB/line-neon.gif)
+```bash
+npm start
+```
+
+> Si aparece (Y/I/N/O/D/Z) [default=N] ? use la letra "y" + "ENTER" para continuar con la instalación
+
+</details>
+
+### 🟢 ACTIVAR EN CASO DE DETENERSE EN TERMUX
+<details>
+ <summary>Haz clic para ver los comandos de activación</summary>
+  
+> Si después de instalar el bot en Termux se detiene **(pantalla en blanco, pérdida de conexión a Internet, reinicio del dispositivo)**, sigue estos pasos: 
+
+1️⃣ Abre Termux y navega al directorio del bot:
+   
+```bash
+cd MiyukiBot-MD
+```
+
+2️⃣ Inicia el bot nuevamente:
+  
+```bash
+npm start
+```
+</details>
+
+### 🚩 OBTNER OTRO CÓDIGO DE VINCULACIÓN EN TERMUX 
+<details>
+ <summary>Haz clic para ver los comandos</summary>
+  
+> Si después de instalar el bot en Termux y iniciar la session del bot **(el numero se va a soporte, se cierra la conexión o demorastes al conectar)**, sigue estos pasos:
+
+1️⃣ Abre Termux y navega al directorio del bot:
+
+```bash
+cd MiyukiBot-MD
+```
+
+2️⃣ Elimina la carpeta MiniSession:
+
+```bash
+rm -rf Sessions
+```
+
+3️⃣ Inicia el bot nuevamente:
+
+```bash
+npm start
+```
+</details>
+
+### 🚀 ACTUALIZAR EL BOT A SU ÚLTIMA VERSIÓN 
+<details>
+ <summary>Haz clic para ver el comando de actualizaciones</summary>
+  
+> Copia y pega dentro de termux
+  
+```bash
+ grep -q 'bash\|wget' <(dpkg -l) || apt install -y bash wget && wget -O - https://raw.githubusercontent.com/OmarGranda/MiyukiBot-MD-Bot/main/update.sh | bash
+```
+</details>
+
+### ☁️ ACTIVAR MIYUKIBOT-MD 24/7 EN SKYULTRAPLUS
+[![YouTube](https://img.shields.io/badge/SkyUltraPlus-Host-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/fZbcCLpSH6Y?si=1sDen7Bzmb7jVpAI)
+
+<a href="https://dash.corinplus.com"><img src="https://qu.ax/wbJoB.png" height="125px"></a>
+
+### Información sobre Sky
+- **Pagina Oficial:** [`Aqui`](https://skyultraplus.com)
+- **Dashboard:** [`Aquí`](https://dash.skyultraplus.com)
+- **Estado de servicios:** [`Aquí`](https://estado.skyultraplus.com)
+- **Canal de WhatsApp:** [`Aquí`](https://whatsapp.com/channel/0029VakUvreFHWpyWUr4Jr0g)
+- **Comunidad:** [`Aquí`](https://chat.whatsapp.com/E6iWpvGuJ8zJNPbN3zOr0D)
+- **Discord:** [`SkyUltraPlus`](https://discord.gg/6saUm5cw)
+  
+### DUEÑO Y EDITOR DEL BOT 👑
+[![Omar Granda](https://avatars.githubusercontent.com/u/230871778?v=4)]()
+
+> Copyright (c) 2025 **[OmarGranda](https://github.com/OmarGranda/MiyukiBot-MD/blob/main/LICENSE)**
+
+### COLABORADOR 🤝
+
+[![Yuji-XDev 𓆩⚡ ✞ 𝑺𝒉𝒂𝒅𝒐𝒘 𝒐𝒇𝒇𝒊𝒄𝒊𝒂𝒍 🍧𓆪](https://avatars.githubusercontent.com/u/196103894?v=4)]()
+
+>  **[✞ 𝚂𝚑𝚊𝚍𝚘𝚠_𝚡𝚢𝚣 🔥](https://github.com/Yuji-XDev)**
