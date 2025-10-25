@@ -21,7 +21,7 @@ let handler = async (m, { conn }) => {
       'https://files.catbox.moe/vskjfh.jpg'
     ]
     const randomIcono = iconos[Math.floor(Math.random() * iconos.length)]
-*/
+
     const vs = global.vs || '1.8.0'
     const libreria = global.libreria || 'Baileys'
     const botname = global.botname || 'MiyukiBot-MD'
@@ -328,7 +328,7 @@ let handler = async (m, { conn }) => {
           mediaType: 1,
           mediaUrl: redes,
           sourceUrl: redes,
-          thumbnailUrl: '',
+          thumbnailUrl: randomIcono,
           showAdAttribution: false,
           renderLargerThumbnail: true
         }
