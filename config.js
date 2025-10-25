@@ -47,17 +47,16 @@ try {
   console.log(chalk.yellow('⚠️ No se pudo leer el prefijo dinámico aún. Se usa el prefijo por defecto.'))
 }
 
-global.apikey = 'ItsukiNakanoIA'
-global.botNumber = '50578440363'
-global.botname = '𝐈𝐭𝐬𝐮𝐤𝐢 𝐍𝐚𝐤𝐚𝐧𝐨-𝐈𝐀 𝐖𝐚𝐛𝐨𝐭 👑✨'
-global.wm = '© 𝐋𝐞𝐨  𝐗𝐬𝐳𝐲'
+global.apikey = 'ShirayukiBot-MD'
+global.botname = 'ShirayukiBot-MD 👑✨'
+global.wm = '© Omar Granda'
 global.wm3 = '⫹⫺  multi-device'
-global.author = 'made by @Leo Xzsy'
-global.dev = '© powered by Leo Xzsy'
-global.textbot = 'Itsuki|IA- Leo Xzsy'
-global.etiqueta = '@Leo Xzsy'
-global.gt = '© creado Por Leo Xzsy'
-global.me = '𝐈𝐭𝐬𝐮𝐤𝐢-𝐖𝐀𝐁𝐎𝐓'
+global.author = 'made by @Omar Granda'
+global.dev = '© powered by Omar Granda'
+global.textbot = 'Shirayuki|IA - Omar Granda'
+global.etiqueta = '@Omar Granda'
+global.gt = '© creado Por Omar Granda'
+global.me = 'Shirayuki-𝐖𝐀𝐁𝐎𝐓'
 global.listo = '*Aqui tiene*'
 global.moneda = 'Yenes'
 global.multiplier = 69
