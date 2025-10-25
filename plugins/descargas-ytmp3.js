@@ -1,86 +1,65 @@
-import fetch from 'node-fetch'
-import yts from 'yt-search'
-import axios from 'axios'
+import fetch from "node-fetch"
 
-let handler = async (m, { conn, text, command, usedPrefix }) => {
+let handler = async (m, { conn, args }) => {
+  if (!args[0]) return m.reply(`🌟 Ingresa un link de YouTube\n\n📌 Ejemplo: .ytmp3 https://youtu.be/xxxxx`)
+
+  const urlVideo = args[0].trim()
+
   try {
-    if (!text) {
-      return conn.reply(
-        m.chat,
-        `✍️ *Ingresa el nombre de la canción o un enlace de YouTube*.
-> Ejemplo: ${usedPrefix + command} DJ Malam Pagi`,
-        m
-      )
+    await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key } })
+
+    let res, fromBackup = false
+
+    try {
+      res = await fetch(`https://api.zenkey.my.id/api/download/ytmp3?apikey=zenkey&url=${encodeURIComponent(urlVideo)}`)
+      if (!res.ok) throw new Error("Error en API principal")
+      console.log("» Usando API principal (Zenkey)")
+    } catch {
+      console.warn("» Error con API principal, intentando respaldo...")
+      res = await fetch(`https://apiadonix.kozow.com/download/ytmp3?apikey=${global.apikey}&url=${encodeURIComponent(urlVideo)}`)
+      if (!res.ok) throw new Error("Error en API de respaldo")
+      console.log("» Usando API de respaldo (Adonix)")
+      fromBackup = true
     }
 
-    let search = await yts(text)
-    let video = search.videos[0]
-    if (!video) return conn.reply(m.chat, '☁️ No se encontró ningún resultado.', m)
-
-    const apiUrl = `https://api.zenzxz.my.id/api/downloader/ytmp3v2?url=${encodeURIComponent(video.url)}`
-    const res = await fetch(apiUrl)
     const data = await res.json()
+    console.log("📦 Respuesta completa del API:", JSON.stringify(data, null, 2))
 
-    if (!data.success || !data.data?.download_url)
-      return conn.reply(m.chat, '❌ Error al obtener el audio desde la API.', m)
+    const downloadUrl = fromBackup
+      ? data.url
+      : (
+        data.result?.download_url ??
+        data.download_url ??
+        data.url ??
+        data.result?.url ??
+        data.result?.link ??
+        data.result?.audio ??
+        null
+      )
 
-    const info = data.data
-    const size = await getSize(info.download_url)
-    const sizeStr = size ? formatSize(size) : 'Desconocido'
+    if (!downloadUrl) return m.reply("❌ No se pudo obtener el audio de la respuesta.")
 
-    const caption = `🎶 *ＹＯＵＴＵＢＥ • ＭＰ3* ☁️
-────────────────────
-> 🎵 *𝐓𝐈𝐓𝐔𝐋𝐎:* ${info.title}
-> ⏰ *𝐃𝐔𝐑𝐀𝐂𝐈𝐎𝐍:* ${video.timestamp}
-> 🎬 *𝐂𝐀𝐍𝐀𝐋:* ${video.author.name}
-> 👀 *𝐕𝐈𝐒𝐓𝐀𝐒:* ${video.views.toLocaleString('es-PE')}
-> 💾 *𝐓𝐀𝐌𝐀𝐍̃𝐎:* ${sizeStr}
-> 🤩 *𝐂𝐀𝐋𝐈𝐃𝐀𝐃:* 128kbps
-> 🗓️ *𝐏𝐔𝐁𝐋𝐈𝐂𝐀𝐃𝐎:* ${video.ago}
-> 🔗 *𝐋𝐈𝐍𝐊:* ${video.url}
-────────────────────`
+    const fileResp = await fetch(downloadUrl)
+    const buffer = Buffer.from(await fileResp.arrayBuffer())
 
-    const thumb = (await conn.getFile(video.thumbnail)).data
-
-    await conn.sendMessage(m.chat, { image: thumb, caption }, { quoted: m })
-
-    const audioBuffer = await (await fetch(info.download_url)).buffer()
-    await conn.sendMessage(m.chat, {
-      audio: audioBuffer,
-      fileName: `${info.title}.mp3`,
-      mimetype: "audio/mpeg",
-      ptt: false
-    }, { quoted: m })
+    await conn.sendMessage(
+      m.chat,
+      {
+        audio: buffer,
+        mimetype: "audio/mpeg",
+        fileName: `audio.mp3`
+      },
+      { quoted: m }
+    )
 
   } catch (e) {
-    console.error(e)
-    conn.reply(m.chat, `❌ Error: ${e.message}`, m)
+    console.error("❌ Error en ytmp3 handler:", e)
+    m.reply("❌ Error al descargar el audio. Intenta con otro link.")
   }
 }
 
-handler.command = ['ytmp3', 'song']
-handler.tags = ['descargas']
-handler.help = ['ytmp3 <texto o link>', 'song <texto>']
+handler.command = ['ytmp3']
+handler.help = ["ytmp3 <link>"]
+handler.tags = ["descargas"]
 
 export default handler
-
-async function getSize(url) {
-  try {
-    const response = await axios.head(url)
-    const length = response.headers['content-length']
-    return length ? parseInt(length, 10) : null
-  } catch {
-    return null
-  }
-}
-
-function formatSize(bytes) {
-  const units = ['B', 'KB', 'MB', 'GB']
-  let i = 0
-  if (!bytes || isNaN(bytes)) return 'Desconocido'
-  while (bytes >= 1024 && i < units.length - 1) {
-    bytes /= 1024
-    i++
-  }
-  return `${bytes.toFixed(2)} ${units[i]}`
-}
