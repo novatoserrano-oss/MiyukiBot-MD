@@ -11,7 +11,7 @@ import { dirname } from 'path'
 global.__dirname = (url) => dirname(fileURLToPath(url))
 
 global.owner = [
-   ['595972314588', '۪〬.࠭⤿ 👑 ⋅ 𝘿𝙖𝙫𝙞𝙙   𝙭𝙯𝙨𝙮', true],
+   ['51908027316', '۪〬.࠭⤿ 👑 ⋅ 𝘿𝙖𝙫𝙞𝙙   𝙭𝙯𝙨𝙮', true],
    ['16503058299', '𝙇𝙚𝙤   𝙭𝙯𝙨𝙮  🦇🩸', true],
    ['5216641784469', 'BrayanOFC', true],
    ['15614809253', 'AyeitsRyze', true],
@@ -31,14 +31,14 @@ global.baileys = 'V 6.7.9'
 global.languaje = 'Español'
 global.vs = '4.3.1'
 global.vsJB = '5.0'
-global.nameqr = 'Itsukiqr'
-global.namebot = 'Itsuki-IA'
-global.sessions = 'Itsuki-sessions'
+global.nameqr = 'Shirayukiqr'
+global.namebot = 'Shirayuki-IA'
+global.sessions = 'Shirayuki-sessions'
 global.jadi = 'jadibts'
 global.ItsukiJadibts = true
 global.Choso = true
 
-global.defaultPrefix = ['.', '!', '/', '#', '%']
+global.defaultPrefix = ['.', '!', '/', '#']
 global.prefix = global.defaultPrefix
 try {
   if (global.db?.data?.settings) {
