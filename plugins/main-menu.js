@@ -9,6 +9,7 @@ let handler = async (m, { conn }) => {
 
     let mentionedJid = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
     let totalCommands = Object.keys(global.plugins).length
+/*
     const iconos = [
       'https://files.catbox.moe/lee8v6.jpg',
       'https://files.catbox.moe/cut28l.jpg',
@@ -21,7 +22,7 @@ let handler = async (m, { conn }) => {
       'https://files.catbox.moe/vskjfh.jpg'
     ]
     const randomIcono = iconos[Math.floor(Math.random() * iconos.length)]
-
+*/
     const vs = global.vs || '1.8.0'
     const libreria = global.libreria || 'Baileys'
     const botname = global.botname || 'MiyukiBot-MD'
@@ -312,7 +313,6 @@ let handler = async (m, { conn }) => {
 👑 © Powered By OmarGranda
 `
 
-export default menu;
     await conn.sendMessage(m.chat, {
       text: menu,
       contextInfo: {
@@ -329,7 +329,7 @@ export default menu;
           mediaType: 1,
           mediaUrl: redes,
           sourceUrl: redes,
-          thumbnailUrl: randomIcono,
+          thumbnailUrl: 'https://qu.ax/ndWOF.jpg',
           showAdAttribution: false,
           renderLargerThumbnail: true
         }
