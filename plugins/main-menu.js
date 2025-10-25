@@ -46,20 +46,20 @@ let handler = async (m, { conn }) => {
     let hora = moment.tz('America/Lima').format('HH:mm:ss')
     let dia = moment.tz('America/Lima').format('dddd')
     let menu = `
-╭━━━〔 🌸 𝐌𝐢𝐲𝐮𝐤𝐢𝐁𝐨𝐭-𝐌𝐃 〕━━⬣
+╭━━━〔 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸 〕━━⬣
 │👤 *Usuario:* @${mentionedJid.split('@')[0]}
 │📚 *Comandos:* ${totalCommands}
 │⚙️ *Versión:* ${vs}
-│🧩 *Librería:* ${libreria}
-│🤖 *Modo:* ${(conn.user.jid == global.conn.user.jid ? 'Principal' : 'Sub-Bot')}
-│⏱️ *Uptime:* ${uptime}
+│🛠️ *Librería:* ${libreria}
+│🤖 *Bot:* ${(conn.user.jid == global.conn.user.jid ? 'Principal' : 'Sub-Bot')}
+│🚀 *Tiempo activo:* ${uptime}
 ╰━━━━━━━━━━━━━━━━━━⬣
 
-╭─〔 💻 ESTADO DEL SISTEMA 〕─⬣
+╭─〔 💾 ESTADO DEL SISTEMA 〕─⬣
 │💾 *RAM Total:* ${total} MB
 │📈 *RAM Usada:* ${used} MB
-│🪫 *RAM Libre:* ${free} MB
-│📶 *Ping:* ${ping} ms
+│📉 *RAM Libre:* ${free} MB
+│🌿 *Ping:* ${ping} ms
 ╰━━━━━━━━━━━━━━━━━━⬣
 
 ╭─〔 🗓️ FECHA Y HORA 〕─⬣
@@ -68,83 +68,250 @@ let handler = async (m, { conn }) => {
 │⏰ *Hora:* ${hora}
 ╰━━━━━━━━━━━━━━━━━━⬣
 
-╭─〔 💰 ECONOMÍA 〕─⬣
-│💼 *#work • #trabajar*
-│🎰 *#casino • #slot* + [cantidad]
-│🪙 *#balance • #bank* + <usuario>
-│🏦 *#deposit • #withdraw* + [cantidad]
-│🎁 *#daily • #weekly • #monthly*
-│💸 *#steal • #robar* + [@usuario]
-│📊 *#economyboard • #baltop*
-│⚒️ *#miming • #mine • #adventure*
-│🐟 *#fish • #hunt • #dungeon*
-╰──────────────────⬣
+*╭─────────*
+*│* ⑀✬ \`𝐄𝐂𝐎𝐍𝐎𝐌𝐈𝐀\`  ︴
+*╰─╮*
+*╭─╯*
+*┊ Comandos de para ganar money* ❖
+*┊* 🤑 #w • #work • #trabajar*
+*┊* 🤑 *#slut • #protituirse*
+*┊* 🤑 *#coinflip • #flip • #cf* + [cantidad] <cara/cruz>
+*┊* 🤑 *#crime • #crimen*
+*┊* 🤑 *#roulette • #rt* + [red/black] [cantidad]
+*┊* 🤑 *#casino • #apostar* • *#slot* + [cantidad]
+*┊* 🤑 *#balance • #bal • #bank* + <usuario>
+*┊* 🤑 *#deposit • #dep • #depositar • #d* + [cantidad] | all
+*┊* 🤑 *#withdraw • #with • #retirar* + [cantidad] | all
+*┊* 🤑 *#economyinfo • #einfo*
+*┊* 🤑 *#givecoins • #pay • #coinsgive* + [usuario] [cantidad]
+*┊* 🤑 *#miming • #minar • #mine*
+*┊* 🤑 *#daily • #diario*
+*┊* 🤑 *#cofre* • *#coffer*
+*┊* 🤑 *#weekly • #semanal*
+*┊* 🤑 *#monthly • #mensual*
+*┊* 🤑 *#steal • #robar • #rob* + [@mencion]
+*┊* 🤑 *#economyboard • #eboard • #baltop* + <pagina>
+*┊* 🤑 *#aventura • #adventure*
+*┊* 🤑 *#curar • #heal*
+*┊* 🤑 *#cazar • #hunt*
+*┊* 🤑 *#fish • #pescar*
+*┊* 🤑 *#mazmorra • #dungeon*
+*╰───────────┅≡*
 
-╭─〔 📥 DESCARGAS 〕─⬣
-│🎵 *#play • #ytmp3 • #ytmp4*
-│🎬 *#tiktok • #instagram • #facebook*
-│📦 *#mediafire • #mega*
-│🔍 *#ytsearch • #pinterest • #image*
-│📱 *#apk • #modapk*
-╰──────────────────⬣
+*╭─────────*
+*│* ⑀✬ \`DOWNLOAD\`  ︴
+*╰─╮*
+*╭─╯*
+*┊ Comandos para descargar archivos de varias fuentes* ❖
+*┊* 📥 *#tiktok • #tt* + [Link] / [busqueda]
+*┊* 📥 *#mediafire • #mf* + [Link]
+*┊*  *#mega • #mg* + [Link]
+*┊* 📥 *#play • #play2* + [Cancion]
+*┊* 📥 *#ytmp3 • #ytmp4* [Link]
+*┊* 📥 *#facebook • #fb* + [Link]
+*┊* 📥 *#twitter • #x* + [Link]
+*┊* 📥 *#ig • #instagram* + [Link]
+*┊* 📥 *#pinterest • #pin* + [busqueda] / [Link]
+*┊* 📥 *#image • #imagen* + [busqueda]
+*┊* 📥 *#apk • #modapk* + [busqueda]
+*┊* 📥 *#ytsearch • #search* + [busqueda]
+*╰───────────┅≡*
 
-╭─〔 🎴 GACHA 〕─⬣
-│💞 *#claim • #harem • #buychar*
-│💎 *#rollwaifu • #wshop • #sell*
-│📖 *#animeinfo • #animelist*
-│💌 *#vote • #topwaifus • #robwaifu*
-│🎀 *#givechar • #trade*
-╰──────────────────⬣
+*╭─────────*
+*│* ⑀✬ \`GACHA\`  ︴
+*╰─╮*
+*╭─╯*
+*┊ Comandos para reclamar y colecciónar personajes* ❖
+*┊* 🎁 *#buycharacter • #buychar • #buyc* + [nombre]
+*┊* 🎁 *#charimage • #waifuimage • #cimage • #wimage* + [nombre]
+*┊* 🎁 *#charinfo • #winfo • #waifuinfo* + [nombre]
+*┊* 🎁 *#claim • #c • #reclamar* + {citar personaje}
+*┊* 🎁 *#delclaimmsg*
+*┊* 🎁 *#deletewaifu • #delwaifu • #delchar* + [nombre]
+*┊* 🎁 *#favoritetop • #favtop*
+*┊* 🎁 *#gachainfo • #ginfo • #infogacha*
+*┊* 🎁 *#giveallharem* + [@usuario]
+*┊* 🎁 *#givechar • #givewaifu • #regalar* + [@usuario] [nombre]
+*┊* 🎁 *#robwaifu • #robarwaifu* + [@usuario]
+*┊* 🎁 *#harem • #waifus • #claims* + <@usuario>
+*┊* 🎁 *#haremshop • #tiendawaifus • #wshop* + <Pagina>
+*┊* 🎁 *#removesale • #removerventa* + [precio] [nombre]
+*┊* 🎁 *#rollwaifu • #rw • #roll*
+*┊* 🎁 *#sell • #vender* + [precio] [nombre]
+*┊* 🎁 *#serieinfo • #ainfo • #animeinfo* + [nombre]
+*┊* 🎁 *#serielist • #slist • #animelist*
+*┊* 🎁 *#setclaimmsg • #setclaim* + [mensaje]
+*┊* 🎁 *#trade • #intercambiar* + [Tu personaje] / [Personaje 2]
+*┊* 🎁 *#vote • #votar* + [nombre]
+*┊* 🎁 *#waifusboard • #waifustop • #topwaifus • #wtop* + [número]
+*╰───────────┅≡*
 
-╭─〔 ⚙️ SOCKETS 〕─⬣
-│🤖 *#qr • #bots • #status*
-│🔐 *#logout • #setpfp • #setstatus*
-│🪪 *#setusername • #join • #leave*
-╰──────────────────⬣
+*╭─────────*
+*│* ⑀✬ \`SOCKETS\`  ︴
+*╰─╮*
+*╭─╯*
+*┊ Comandos para registrar tu propio Bot* ❖
+*┊* 🤖 *#qr • #code*
+*┊* 🤖 *#bots • #botlist*
+*┊* 🤖 *#status • #estado*
+*┊* 🤖 *#p • #ping*
+*┊* 🤖 *#join* + [Invitacion]
+*┊* 🤖 *#leave • #salir*
+*┊* 🤖 *#logout*
+*┊* 🤖 *#setpfp • #setimage*
+*┊* 🤖 *#setstatus* + [estado]
+*┊* 🤖 *#setusername* + [nombre]
+*╰───────────┅≡*
 
-╭─〔 🧠 UTILIDADES 〕─⬣
-│📘 *#help • #menu • #sc*
-│🧮 *#calcular • #traducir • #wiki*
-│🎨 *#sticker • #toimg • #brat*
-│🔎 *#google • #dalle • #tourl*
-│🗣️ *#say • #ia • #readviewonce*
-│🧾 *#gitclone • #ssweb*
-╰──────────────────⬣
+*╭─────────*
+*│* ⑀✬ \`UTILITIES\`  ︴
+*╰─╮*
+*╭─╯*
+*┊ Comandos de utilidades* ❖
+*┊* 📌 *#help • #menu*
+*┊* 📌 *#sc • #script*
+*┊* 📌 *#reporte • #reportar*
+*┊* 📌 *#sug • #suggest*
+*┊* 📌 *#calcular • #cal*
+*┊* 📌 *#delmeta*
+*┊* 📌 *#getpic • #pfp* + [@usuario]
+*┊* 📌 *#say* + [texto]
+*┊* 📌 *#setmeta* + [autor] | [pack]
+*┊* 📌 *#sticker • #s • #wm* + {citar una imagen/video}
+*┊* 📌 *#toimg • #img* + {citar sticker}
+*┊* 📌 *#brat • #bratv • #qc • #emojimix*︎
+*┊* 📌 *#gitclone* + [Link]
+*┊* 📌 *#enhance • #remini • #hd*
+*┊* 📌 *#letra • #style*
+*┊* 📌 *#read • #readviewonce*
+*┊* 📌 *#ss • #ssweb*
+*┊* 📌 *#translate • #traducir • #trad*
+*┊* 📌 *#ia • #gemini*
+*┊* 📌 *#tourl • #catbox*
+*┊* 📌 *#wiki • #wikipedia*
+*┊* 📌 *#dalle • #flux*
+*┊* 📌 *#npmdl • #nmpjs*
+*┊* 📌 *#google*
+*╰───────────┅≡*
 
-╭─〔 👤 PERFIL 〕─⬣
-│🏆 *#leaderboard • #level*
-│💍 *#marry • #divorce*
-│🧭 *#profile • #setdesc • #setfav*
-│🎂 *#setbirth • #delbirth*
-│🚹 *#setgenre • #delgenre*
-│⭐ *#prem • #vip*
-╰──────────────────⬣
+*╭─────────*
+*│* ⑀✬ \`PERFIL\`  ︴
+*╰─╮*
+*╭─╯*
+*┊ Comandos para ver y configurar tu perfil* ❖
+*┊* 👑 *#leaderboard • #lboard • #top* + <Paginá>
+*┊* 👑 *#level • #lvl* + <@Mencion>
+*┊* 👑 *#marry • #casarse* + <@Mencion>
+*┊* 👑 *#profile* + <@Mencion>
+*┊* 👑 *#setbirth* + [fecha]
+*┊* 👑 *#setdescription • #setdesc* + [Descripcion]
+*┊* 👑 *#setgenre* + Hombre | Mujer
+*┊* 👑 *#delgenre • #delgenero*
+*┊* 👑 *#delbirth* + [fecha]
+*┊* 👑 *#divorce*
+*┊* 👑 *#setfavourite • #setfav* + [Personaje]
+*┊* 👑 *#prem • #vip*
+*┊* 👑 *#deldescription • #deldesc*
+*╰───────────┅≡*
+ 
+*╭─────────*
+*│* ⑀✬ \`GROUPS\`  ︴
+*╰─╮*
+*╭─╯*
+*┊ Comandos para administradores de grupos* ❖
+*┊* 🗣️*#tag • #hidetag • #invocar • #tagall* + [mensaje]
+*┊* 🗣️ *#detect • #alertas* + [enable/disable]
+*┊* 🗣️ *#antilink • #antienlace* + [enable/disable]
+*┊* 🗣️ *#bot* + [enable/disable]
+*┊* 🗣️ *#close • #cerrar*
+*┊* 🗣️ *#demote* + <@usuario> | {mencion}
+*┊* 🗣️ *#economy* [enable/disable]  
+*┊* 🗣️ *#gacha* [enable/disable]  
+*┊* 🗣️ *#welcome • #bienvenida* [enable/disable]  
+*┊* 🗣️ *#setbye* [texto]  
+*┊* 🗣️ *#setprimary* [@bot]  
+*┊* 🗣️ *#setwelcome* [texto]  
+*┊* 🗣️ *#kick <@usuario>* | {mencion}  
+*┊* 🗣️ *#nsfw* [enable/disable]
+*┊* 🗣️ *#onlyadmin* [enable/disable]
+*┊* 🗣️ *#open* • #abrir*
+*┊* 🗣️ *#promote <@usuario>* | {mencion}  
+*┊* 🗣️ *#add • #añadir* • #agregar {número}
+*┊* 🗣️ *#admins • admin* [texto]
+*┊* 🗣️ *#restablecer • #revoke*
+*┊* 🗣️ *#addwarn • #warn* <@usuario> | {mencion}
+*┊* 🗣️ *#unwarn • #delwarn* <@usuario> | {mencion}
+*┊* 🗣️ *#advlist • #listadv*
+*┊* 🗣️ *#inactivos • #kickinactivos*
+*┊* 🗣️ *#listnum • #kicknum* [texto]
+*┊* 🗣️ *#gpbanner • #groupimg*
+*┊* 🗣️ *#gpname • #groupname* [texto]
+*┊* 🗣️ *#gpdesc • #groupdesc* [texto]
+*┊* 🗣️ *#del • #delete* {citar un mensaje}
+*┊* 🗣️ *#linea • #listonline*
+*┊* 🗣️ *#gp • #infogrupo*
+*┊* 🗣️ *#link*
+*╰───────────┅≡*
 
-╭─〔 👥 GRUPOS 〕─⬣
-│📣 *#tagall • #hidetag • #invocar*
-│🛡️ *#antilink • #welcome • #bot* [on/off]
-│🚪 *#kick • #add • #promote • #demote*
-│🔐 *#onlyadmin • #close • #open*
-│📝 *#gpdesc • #gpname • #gpbanner*
-│⚠️ *#warn • #unwarn • #advlist*
-│📋 *#infogrupo • #link • #admins*
-╰──────────────────⬣
-
-╭─〔 🌸 ANIME REACCIONES 〕─⬣
-│😡 *#angry*  │ 😭 *#cry*
-│🥰 *#hug*    │ 😘 *#kiss*
-│😳 *#blush*  │ 🤣 *#laugh*
-│😔 *#sad*    │ 😏 *#facepalm*
-│🤭 *#shy*    │ 😴 *#sleep*
-│👋 *#wave*   │ 🤔 *#think*
-│💢 *#slap*   │ 😍 *#love*
-│🫶 *#handhold* │ ✋ *#highfive*
-│🌸 *#waifu*  │ 🤟 *#ppcouple*
-╰──────────────────⬣
-
-👑 *© Powered by OmarGranda*
-🌐 *MiyukiBot-MD*
+*╭─────────*
+*│* ⑀✬ \`ANIME\`  ︴
+*╰─╮*
+*╭─╯*
+*┊ Comandos de reacciones de anime* ❖
+*┊* 😡 *#angry • #enojado* <mencion>
+*┊* 🧼 *#bath • #bañarse* <mencion>
+*┊* 🫦 *#bite • #morder* <mencion>
+*┊* 😛 *#bleh • #lengua* <mencion 
+*┊* ☺️ *#blush • #sonrojarse* <mencion>
+*┊* 🫩 *#bored • #aburrido* <mencion>
+*┊* 👏 *#clap • #aplaudir* <mencion>
+*┊* ☕ *#coffee • #cafe • #café* <mencion>
+*┊* 😭 *#cry • #llorar* <mencion>
+*┊* 🙂‍↔️ *#cuddle • #acurrucarse* <mencion>
+*┊* 🪩 *#dance • #bailar* <mencion>
+*┊* 😫 *#dramatic • #drama* <mencion>
+*┊* 🍻 *#drunk • #borracho* <mencion>
+*┊* 🍽️ *#eat • #comer* <mencion>
+*┊* 😏 *#facepalm • #palmada* <mencion>
+*┊* 😄 *#happy • #feliz* <mencion>
+*┊* 🫂 *#hug • #abrazar *<mencion>
+*┊* 🤰🏻 *#impregnate • #preg • #preñar • #embarazar* <mencion>
+*┊* 🥷 *#kill • #matar* <mencion>
+*┊* 😘 *#kiss • #muak* <mencion>
+*┊* 💋 *#kisscheek • #beso* <mencion>
+*┊* 😅 *#laugh • #reirse* <mencion>
+*┊* 🤤 *#lick • #lamer* <mencion>
+*┊* 😍 *#love • #amor • #enamorado • #enamorada* <mencion>
+*┊* 🔥 *#pat • #palmadita • #palmada* <mencion>
+*┊* ⛏️ *#poke • #picar* <mencion>
+*┊* 😚 *#pout • #pucheros* <mencion>
+*┊* 👊 *#punch • #pegar • #golpear* <mencion>
+*┊* 🏃 *#run • #correr* <mencion>
+*┊* 😔 *#sad • #triste* <mencion>
+*┊* 😨 *#scared • #asustado • #asustada* <mencion>
+*┊* 🥴 *#seduce • #seducir* <mencion>
+*┊* 🤐 *#shy • #timido • #timida* <mencion>
+*┊* 🥊 *#slap • #bofetada* <mencion>
+*┊* 😴 *#sleep • #dormir* <mencion>
+*┊* 🚬 *#smoke • #fumar* <mencion>
+*┊* 😮‍💨*#spit • #escupir* <mencion>
+*┊* 👣 *#step • #pisar* <mencion>
+*┊* 🤔 *#think • #pensar* <mencion>
+*┊* 🚶 *#walk • #caminar* <mencion>
+*┊* 😉 *#wink • #guiñar* <mencion>
+*┊* 😳 *#cringe • #avergonzarse* <mencion>
+*┊* 🗣️ *#smug • #presumir* <mencion>
+*┊* 😊 *#smile • #sonreir* <mencion>
+*┊* ✋ *#highfive • #5* <mencion>
+*┊* 😌 *#bully • #bullying* <mencion>
+*┊*  *#handhold • #mano* <mencion>
+*┊* 👋 *#wave • #ola • #hola* <mencion>
+*┊* 🌸 *#waifu*  
+*┊* 🤟 *#ppcouple • #ppcp*
+*╰───────────┅≡*ׅ
+👑 © Powered By OmarGranda
 `
+
 export default menu;
     await conn.sendMessage(m.chat, {
       text: menu,
