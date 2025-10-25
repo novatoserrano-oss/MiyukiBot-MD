@@ -11,27 +11,34 @@ import { dirname } from 'path'
 global.__dirname = (url) => dirname(fileURLToPath(url))
 
 global.owner = [
-   ['51908027316', '۪👑 OmarGranda', true],
-   ['51919199620', 'Shadowxyz', true]
+   ['595972314588', '۪〬.࠭⤿ 👑 ⋅ 𝘿𝙖𝙫𝙞𝙙   𝙭𝙯𝙨𝙮', true],
+   ['16503058299', '𝙇𝙚𝙤   𝙭𝙯𝙨𝙮  🦇🩸', true],
+   ['5216641784469', 'BrayanOFC', true],
+   ['15614809253', 'AyeitsRyze', true],
+   ['573133374132', 'YO SOY YO', true],
+   ['51921826291', '𝐒𝐨𝐲𝐌𝐚𝐲𝐜𝐨𝐥 <𝟑', true],
+   ['50493732693', 'Ado 🐢', true],
+   ['51953255954', 'Shiroko Devs', true], 
+   ['5216671548329', 'Legna', true]
 ];
 
-global.mods = ['5127303598', '51908027316', '51919199620']
-global.suittag = ['51927303598', '51908027316', '51919199620']
-global.prems = ['51927303598', '51908027316', '51919199620']
+global.mods = ['16503058299', '595972314588', '51921826291']
+global.suittag = ['16503058299', '595972314588', '51921826291']
+global.prems = ['16503058299', '595972314588', '51921826291']
 
 global.libreria = 'Baileys'
 global.baileys = 'V 6.7.9'
 global.languaje = 'Español'
 global.vs = '4.3.1'
 global.vsJB = '5.0'
-global.nameqr = 'Shirayukiqr'
-global.namebot = 'Shirayuki-IA'
-global.sessions = 'Shirayuki-sessions'
+global.nameqr = 'Itsukiqr'
+global.namebot = 'Itsuki-IA'
+global.sessions = 'Itsuki-sessions'
 global.jadi = 'jadibts'
 global.ItsukiJadibts = true
 global.Choso = true
 
-global.defaultPrefix = ['.', '!', '/', '#']
+global.defaultPrefix = ['.', '!', '/', '#', '%']
 global.prefix = global.defaultPrefix
 try {
   if (global.db?.data?.settings) {
@@ -47,16 +54,16 @@ try {
 }
 
 global.apikey = 'ItsukiNakanoIA'
-global.botNumber = '51919199620'
-global.botname = 'ShirayukiBot-MD 👑✨'
-global.wm = '© Omar Granda'
+global.botNumber = '50578440363'
+global.botname = '𝐈𝐭𝐬𝐮𝐤𝐢 𝐍𝐚𝐤𝐚𝐧𝐨-𝐈𝐀 𝐖𝐚𝐛𝐨𝐭 👑✨'
+global.wm = '© 𝐋𝐞𝐨  𝐗𝐬𝐳𝐲'
 global.wm3 = '⫹⫺  multi-device'
-global.author = 'made by @Omar Granda'
-global.dev = '© powered by Omar Granda'
-global.textbot = 'Shirayuki|IA - Omar Granda'
-global.etiqueta = '@Omar Granda'
-global.gt = '© creado Por Omar Granda'
-global.me = 'Shirayuki-𝐖𝐀𝐁𝐎𝐓'
+global.author = 'made by @Leo Xzsy'
+global.dev = '© powered by Leo Xzsy'
+global.textbot = 'Itsuki|IA- Leo Xzsy'
+global.etiqueta = '@Leo Xzsy'
+global.gt = '© creado Por Leo Xzsy'
+global.me = '𝐈𝐭𝐬𝐮𝐤𝐢-𝐖𝐀𝐁𝐎𝐓'
 global.listo = '*Aqui tiene*'
 global.moneda = 'Yenes'
 global.multiplier = 69
