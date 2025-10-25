@@ -328,7 +328,7 @@ let handler = async (m, { conn }) => {
           mediaType: 1,
           mediaUrl: redes,
           sourceUrl: redes,
-          thumbnailUrl: 'https://qu.ax/ndWOF.jpg',
+          thumbnailUrl: '',
           showAdAttribution: false,
           renderLargerThumbnail: true
         }
