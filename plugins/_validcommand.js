@@ -5,7 +5,7 @@ export async function before(m, { conn }) {
 
   const usedPrefix = global.prefix.exec(m.text)[0];
   const command = m.text.slice(usedPrefix.length).trim().split(' ')[0].toLowerCase();
-/*
+
   const thumbRes = await fetch("https://files.catbox.moe/3nmafy.jpg");
   const thumbBuffer = await thumbRes.buffer();
 
