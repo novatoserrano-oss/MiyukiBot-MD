@@ -152,7 +152,7 @@ Tu registro ha sido completado exitosamente ✅`
           title: '𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿',
           body: 'Verificando registro...',
           mediaType: 1,
-          thumbnailUrl: 'https://qu.ax/lzGrH.jpg',
+          thumbnailUrl: 'https://qu.ax/NtBCa.jpg',
           mediaUrl: redes,
           sourceUrl: redes,
           renderLargerThumbnail: true
