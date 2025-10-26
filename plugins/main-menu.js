@@ -112,9 +112,9 @@ let handler = async (m, { conn, usedPrefix, __dirname, participants }) => {
     const finalText = `${infoUser}\n${menuTexto}`
 
     const videos = [
-      'https://shadow-xyz.vercel.app/videos/shadow1.mp4',
-      '',
-      ''
+      'https://qu.ax/XYRdn.mp4',
+      'https://qu.ax/XYRdn.mp4',
+      'https://qu.ax/XYRdn.mp4'
     ]
     const videoUrl = videos[Math.floor(Math.random() * videos.length)]
 
