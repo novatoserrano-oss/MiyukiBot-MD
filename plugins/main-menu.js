@@ -9,6 +9,18 @@ let handler = async (m, { conn }) => {
 
     let mentionedJid = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
     let totalCommands = Object.keys(global.plugins).length
+const iconos = [
+      'https://qu.ax/TPfmC.jpg',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      ''
+    ]
+    const randomIcono = iconos[Math.floor(Math.random() * iconos.length)]
 
     const vs = global.vs || '1.8.0'
     const libreria = global.libreria || 'Baileys'
@@ -316,7 +328,7 @@ let handler = async (m, { conn }) => {
           mediaType: 1,
           mediaUrl: redes,
           sourceUrl: redes,
-          thumbnailUrl: 'https://qu.ax/TPfmC.jpg',
+          thumbnailUrl: '',
           showAdAttribution: false,
           renderLargerThumbnail: true
         }
