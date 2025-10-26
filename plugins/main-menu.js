@@ -158,53 +158,67 @@ const iconos = [
 ╰──────────────────────────────╯
 🌸 *Reúne a tus waifus, sube en el ranking y domina el Gacha!*
 
-*╭─────────*
-*│* ⑀✬ \`SOCKETS\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos para registrar tu propio Bot* ❖
-*┊* 🤖 *#qr • #code*
-*┊* 🤖 *#bots • #botlist*
-*┊* 🤖 *#status • #estado*
-*┊* 🤖 *#p • #ping*
-*┊* 🤖 *#join* + [Invitacion]
-*┊* 🤖 *#leave • #salir*
-*┊* 🤖 *#logout*
-*┊* 🤖 *#setpfp • #setimage*
-*┊* 🤖 *#setstatus* + [estado]
-*┊* 🤖 *#setusername* + [nombre]
-*╰───────────┅≡*
+╭─━━━🤖 𝐌𝐄𝐍𝐔 𝐒𝐎𝐂𝐊𝐄𝐓𝐒 🤖━━━─╮
+│🧩 Comandos para gestionar y vincular tu propio bot
+│
+│🔐 𝗖𝗢𝗡𝗘𝗫𝗜𝗢𝗡 𝗬 𝗤𝗥
+│• 🪪 #qr | #code
+│• 🧠 #bots | #botlist
+│• 📡 #status | #estado
+│• 🛰️ #p | #ping
+│
+│⚙️ 𝗖𝗢𝗡𝗙𝗜𝗚𝗨𝗥𝗔𝗖𝗜𝗢𝗡 𝗗𝗘 𝗕𝗢𝗧
+│• 🔗 #join + [invitación]
+│• 🚪 #leave | #salir
+│• 🧹 #logout
+│• 🖼️ #setpfp | #setimage
+│• 📝 #setstatus + [estado]
+│• 🧍 #setusername + [nombre]
+│
+╰──────────────────────────────╯
+💠 *Administra, configura y controla tus sesiones desde un solo lugar.*
 
-*╭─────────*
-*│* ⑀✬ \`UTILITIES\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos de utilidades* ❖
-*┊* 📌 *#help • #menu*
-*┊* 📌 *#sc • #script*
-*┊* 📌 *#reporte • #reportar*
-*┊* 📌 *#sug • #suggest*
-*┊* 📌 *#calcular • #cal*
-*┊* 📌 *#delmeta*
-*┊* 📌 *#getpic • #pfp* + [@usuario]
-*┊* 📌 *#say* + [texto]
-*┊* 📌 *#setmeta* + [autor] | [pack]
-*┊* 📌 *#sticker • #s • #wm* + {citar una imagen/video}
-*┊* 📌 *#toimg • #img* + {citar sticker}
-*┊* 📌 *#brat • #bratv • #qc • #emojimix*︎
-*┊* 📌 *#gitclone* + [Link]
-*┊* 📌 *#enhance • #remini • #hd*
-*┊* 📌 *#letra • #style*
-*┊* 📌 *#read • #readviewonce*
-*┊* 📌 *#ss • #ssweb*
-*┊* 📌 *#translate • #traducir • #trad*
-*┊* 📌 *#ia • #gemini*
-*┊* 📌 *#tourl • #catbox*
-*┊* 📌 *#wiki • #wikipedia*
-*┊* 📌 *#dalle • #flux*
-*┊* 📌 *#npmdl • #nmpjs*
-*┊* 📌 *#google*
-*╰───────────┅≡*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+╭─━━━🛠️ 𝐌𝐄𝐍𝐔 𝐔𝐓𝐈𝐋𝐈𝐃𝐀𝐃𝐄𝐒 🛠️━━━─╮
+│⚙️ Herramientas útiles para automatizar, crear y explorar
+│
+│📜 𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗖𝗜𝗢́𝗡 𝗬 𝗔𝗬𝗨𝗗𝗔
+│• 💬 #help | #menu
+│• 🧾 #sc | #script
+│• 🐞 #reporte | #reportar
+│• 💡 #sug | #suggest
+│
+│🧮 𝗛𝗘𝗥𝗥𝗔𝗠𝗜𝗘𝗡𝗧𝗔𝗦 𝗨́𝗧𝗜𝗟𝗘𝗦
+│• ➗ #calcular | #cal
+│• 🧩 #delmeta
+│• 🪪 #getpic | #pfp + [@usuario]
+│• 🗣️ #say + [texto]
+│• ✍️ #setmeta + [autor] | [pack]
+│
+│🎨 𝗦𝗧𝗜𝗖𝗞𝗘𝗥𝗦 𝗬 𝗘𝗗𝗜𝗖𝗜𝗢́𝗡
+│• 🧷 #sticker | #s | #wm {imagen/video}
+│• 🖼️ #toimg | #img {sticker}
+│• 🎭 #brat | #bratv | #qc | #emojimix
+│• ⚡ #enhance | #remini | #hd
+│• 🪶 #letra | #style
+│
+│🌐 𝗡𝗔𝗩𝗘𝗚𝗔𝗖𝗜𝗢́𝗡 𝗬 𝗜𝗡𝗧𝗘𝗟𝗜𝗚𝗘𝗡𝗖𝗜𝗔
+│• 🔍 #google
+│• 🌎 #wiki | #wikipedia
+│• 💭 #ia | #gemini
+│• 🧠 #dalle | #flux
+│• 🧩 #npmdl | #nmpjs
+│
+│📦 𝗗𝗘𝗦𝗖𝗔𝗥𝗚𝗔𝗦 𝗬 𝗧𝗢𝗢𝗟𝗦
+│• 🧰 #gitclone + [link]
+│• 🔗 #tourl | #catbox
+│• 🧭 #ss | #ssweb
+│• 📖 #read | #readviewonce
+│• 🈯 #translate | #traducir | #trad
+│
+╰──────────────────────────────╯
+⚡ *Convierte tu bot en una herramienta versátil, rápida y funcional.*
 
 *╭─────────*
 *│* ⑀✬ \`PERFIL\`  ︴
