@@ -59,7 +59,7 @@ const iconos = [
 │📆 *Fecha:* ${fecha}
 │⏰ *Hora:* ${hora}
 ╰━━━━━━━━━━━━━━━━━━⬣
-╭─━━━💰 𝐌𝐄𝐍𝐔 𝐄𝐂𝐎𝐍𝐎𝐌𝐈́𝐀 💰━━━─╮
+╭─━━━💰 𝐄𝐂𝐎𝐍𝐎𝐌𝐈́𝐀 💰━━━─╮
 │✨ Comandos para ganar y administrar tu dinero
 │
 │🏗️ 𝗧𝗥𝗔𝗕𝗔𝗝𝗢𝗦
@@ -98,53 +98,65 @@ const iconos = [
 ╰──────────────────────────────╯
 💵 *Haz crecer tu fortuna y conviértete en el más rico del servidor!*
 
-*╭─────────*
-*│* ⑀✬ \`DOWNLOAD\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos para descargar archivos de varias fuentes* ❖
-*┊* 📥 *#tiktok • #tt* + [Link] / [busqueda]
-*┊* 📥 *#mediafire • #mf* + [Link]
-*┊*  *#mega • #mg* + [Link]
-*┊* 📥 *#play • #play2* + [Cancion]
-*┊* 📥 *#ytmp3 • #ytmp4* [Link]
-*┊* 📥 *#facebook • #fb* + [Link]
-*┊* 📥 *#twitter • #x* + [Link]
-*┊* 📥 *#ig • #instagram* + [Link]
-*┊* 📥 *#pinterest • #pin* + [busqueda] / [Link]
-*┊* 📥 *#image • #imagen* + [busqueda]
-*┊* 📥 *#apk • #modapk* + [busqueda]
-*┊* 📥 *#ytsearch • #search* + [busqueda]
-*╰───────────┅≡*
+╭─━━━📥 𝐌𝐄𝐍𝐔 𝐃𝐄𝐒𝐂𝐀𝐑𝐆𝐀𝐒 📥━━━─╮
+│✨ Comandos para descargar contenido y archivos
+│
+│🎶 𝗠𝗨́𝗦𝗜𝗖𝗔 𝘆 𝗩𝗜́𝗗𝗘𝗢𝗦
+│• 🎧 #play | #play2 + [canción]
+│• 🎵 #ytmp3 | #ytmp4 + [link]
+│• 🔍 #ytsearch | #search + [búsqueda]
+│
+│📱 𝗥𝗘𝗗𝗘𝗦 𝗬 𝗣𝗟𝗔𝗧𝗔𝗙𝗢𝗥𝗠𝗔𝗦
+│• 🎬 #tiktok | #tt + [link / búsqueda]
+│• 📸 #ig | #instagram + [link]
+│• 🐦 #twitter | #x + [link]
+│• 📘 #facebook | #fb + [link]
+│• 📍 #pinterest | #pin + [búsqueda / link]
+│
+│📂 𝗔𝗥𝗖𝗛𝗜𝗩𝗢𝗦 𝗬 𝗔𝗣𝗞𝗦
+│• 🗂️ #mediafire | #mf + [link]
+│• 📦 #mega | #mg + [link]
+│• 📱 #apk | #modapk + [búsqueda]
+│• 🖼️ #image | #imagen + [búsqueda]
+│
+╰──────────────────────────────╯
+💡 *Descarga música, videos y archivos desde cualquier sitio con estilo.*
 
-*╭─────────*
-*│* ⑀✬ \`GACHA\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos para reclamar y colecciónar personajes* ❖
-*┊* 🎁 *#buycharacter • #buychar • #buyc* + [nombre]
-*┊* 🎁 *#charimage • #waifuimage • #cimage • #wimage* + [nombre]
-*┊* 🎁 *#charinfo • #winfo • #waifuinfo* + [nombre]
-*┊* 🎁 *#claim • #c • #reclamar* + {citar personaje}
-*┊* 🎁 *#delclaimmsg*
-*┊* 🎁 *#deletewaifu • #delwaifu • #delchar* + [nombre]
-*┊* 🎁 *#favoritetop • #favtop*
-*┊* 🎁 *#gachainfo • #ginfo • #infogacha*
-*┊* 🎁 *#giveallharem* + [@usuario]
-*┊* 🎁 *#givechar • #givewaifu • #regalar* + [@usuario] [nombre]
-*┊* 🎁 *#robwaifu • #robarwaifu* + [@usuario]
-*┊* 🎁 *#harem • #waifus • #claims* + <@usuario>
-*┊* 🎁 *#haremshop • #tiendawaifus • #wshop* + <Pagina>
-*┊* 🎁 *#removesale • #removerventa* + [precio] [nombre]
-*┊* 🎁 *#rollwaifu • #rw • #roll*
-*┊* 🎁 *#sell • #vender* + [precio] [nombre]
-*┊* 🎁 *#serieinfo • #ainfo • #animeinfo* + [nombre]
-*┊* 🎁 *#serielist • #slist • #animelist*
-*┊* 🎁 *#setclaimmsg • #setclaim* + [mensaje]
-*┊* 🎁 *#trade • #intercambiar* + [Tu personaje] / [Personaje 2]
-*┊* 🎁 *#vote • #votar* + [nombre]
-*┊* 🎁 *#waifusboard • #waifustop • #topwaifus • #wtop* + [número]
-*╰───────────┅≡*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+╭─━━━🎴 𝐌𝐄𝐍𝐔 𝐆𝐀𝐂𝐇𝐀 🎴━━━─╮
+│✨ Reclama, colecciona y presume tus personajes favoritos
+│
+│💠 𝗖𝗢𝗠𝗣𝗥𝗔 𝗬 𝗖𝗟𝗔𝗜𝗠
+│• 💎 #buycharacter | #buychar | #buyc + [nombre]
+│• 🧧 #claim | #c | #reclamar {citar personaje}
+│• 🗑️ #delclaimmsg | #deletewaifu | #delchar + [nombre]
+│• 💬 #setclaimmsg | #setclaim + [mensaje]
+│
+│🎨 𝗜𝗠𝗔́𝗚𝗘𝗡𝗘𝗦 𝗬 𝗜𝗡𝗙𝗢
+│• 🖼️ #charimage | #waifuimage | #wimage + [nombre]
+│• 📜 #charinfo | #winfo | #waifuinfo + [nombre]
+│• 📚 #serieinfo | #ainfo | #animeinfo + [nombre]
+│• 🗂️ #serielist | #slist | #animelist
+│• 💫 #gachainfo | #ginfo | #infogacha
+│
+│🤝 𝗜𝗡𝗧𝗘𝗥𝗖𝗔𝗠𝗕𝗜𝗢 𝗬 𝗩𝗘𝗡𝗧𝗔
+│• 💰 #sell | #vender + [precio] [nombre]
+│• 🛍️ #removesale | #removerventa + [precio] [nombre]
+│• 🔄 #trade | #intercambiar + [tu personaje] / [personaje 2]
+│• 🎁 #givechar | #givewaifu | #regalar + [@usuario] [nombre]
+│• 💞 #giveallharem + [@usuario]
+│
+│🔥 𝗝𝗨𝗘𝗚𝗢𝗦 𝗬 𝗥𝗔𝗡𝗞𝗜𝗡𝗚𝗦
+│• 🎲 #rollwaifu | #rw | #roll
+│• 💖 #robwaifu | #robarwaifu + [@usuario]
+│• 👑 #favoritetop | #favtop
+│• 🏆 #waifusboard | #waifustop | #topwaifus | #wtop + [número]
+│• 💌 #harem | #waifus | #claims + <@usuario>
+│• 🏪 #haremshop | #tiendawaifus | #wshop + <página>
+│
+╰──────────────────────────────╯
+🌸 *Reúne a tus waifus, sube en el ranking y domina el Gacha!*
 
 *╭─────────*
 *│* ⑀✬ \`SOCKETS\`  ︴
