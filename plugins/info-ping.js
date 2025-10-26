@@ -49,7 +49,7 @@ let handler = async (m, { conn }) => {
         contextInfo: {
           externalAdReply: {
             title: '𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿',
-            body: '',
+            body: 'Infinity Ultra Host',
             thumbnail: thumbBuffer,
             sourceUrl: redes,
             mediaType: 1,
