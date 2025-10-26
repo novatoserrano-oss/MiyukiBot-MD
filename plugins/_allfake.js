@@ -34,7 +34,8 @@ global.fkontak = { key: { participants:"0@s.whatsapp.net", "remoteJid": "status@
 
 global.icono = [
 'https://qu.ax/FKJLs.jpg',
-''
+'https://qu.ax/NMOTS.jpg', 
+'https://qu.ax/SeVjj.jpg' 
 ].getRandom()
 
 
