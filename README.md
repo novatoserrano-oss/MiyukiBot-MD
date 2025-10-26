@@ -3,7 +3,7 @@
 
 <p align="center"> 
   <a href="https://github.com/OmarGranda"><img src="https://readme-typing-svg.herokuapp.com?font=Boldonse&size=20&duration=3000&pause=1000&color=FFC0CB&center=true&width=435&lines=MiyukiBot-MD;%C2%A1El+mejor+bot+de+WhatsApp!" height="500px"></a> 
-<img src="https://files.catbox.moe/xr69o2.jpg" width="500" height="500" />
+<img src="https://qu.ax/jLjVB.jpg" width="500" height="500" />
 
 <a href="https://wa.me/51927303598">
     <img 
