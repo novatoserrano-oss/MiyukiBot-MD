@@ -1,150 +1,125 @@
-import fetch from 'node-fetch'
-import { xpRange } from '../lib/levelling.js'
-import fs from 'fs'
-import PhoneNumber from 'awesome-phonenumber'
+// 🌸 MiyukiBot MD - Menú Mejorado v1.8.2
+// 💫 Diseñado por: Omar Granda
+// 🪷 Omar gay > att: Shadow-xyz
 
-let handler = async (m, { conn, usedPrefix, __dirname, participants }) => {
+import os from 'os'
+import moment from 'moment-timezone'
+
+let handler = async (m, { conn, usedPrefix, __dirname }) => {
   try {
-    await m.react('🌷')
+    await m.react('🌸')
 
     const user = global.db.data.users[m.sender] || {}
     const name = await conn.getName(m.sender)
-    const premium = user.premium ? '💎 Premium' : '🪶 Gratis'
+    const totalUsers = Object.keys(global.db.data.users).length
+    const groups = Object.values(conn.chats).filter(c => c.id.endsWith('@g.us')).length
+    const uptime = clockString(process.uptime() * 1000)
+    const date = moment.tz('America/Lima').format('hh:mm A')
+    const day = moment.tz('America/Lima').format('dddd')
+    const fullDate = moment.tz('America/Lima').format('DD MMMM YYYY')
+    const isPremium = user.premium ? '✨ Premium' : '🪶 Gratis'
     const limit = user.limit || 0
-    const totalreg = Object.keys(global.db.data.users).length
-    const groupUserCount = m.isGroup ? participants.length : '-'
-    const groupsCount = Object.values(conn.chats).filter(v => v.id.endsWith('@g.us')).length
-    const uptime = formatTime(process.uptime() * 1000)
-    const fecha = new Date(Date.now())
-    const locale = 'es-PE'
-    const dia = fecha.toLocaleDateString(locale, { weekday: 'long' })
-    const fechaTxt = fecha.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })
-    const hora = fecha.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })
+    const country = '🇵🇪 Perú'
 
-    const totalCommands = Object.keys(global.plugins).length
+    const menu = `
+╭━━━〔 🌸 𝑴𝑰𝒀𝑼𝑲𝑰ʙᴏᴛ • ᴹᴰ 💫 〕━━⬣
+│👤  Usuario: ${name}
+│💎  Estado: ${isPremium}
+│🌍  País: ${country}
+│⚙️  Límite: ${limit}
+│👥  Usuarios: ${totalUsers}
+│💬  Grupos: ${groups}
+│⏱️  Uptime: ${uptime}
+│🪷  Versión: v1.8.2 | Latest
+│📚  Librería: Baileys Multi Device
+│📆  Fecha: ${date} • ${day}, ${fullDate}
+╰━━━━━━━━━━━━━━━━━━━━━━⬣
 
-    const userId = m.sender.split('@')[0]
-    const phone = PhoneNumber('+' + userId)
-    const pais = phone.getRegionCode() || '🌎 Desconocido'
-    
-    const perfil = await conn.profilePictureUrl(conn.user.jid, 'image')
-      .catch(() => banner)
+🌙  Desarrollador: *Omar Granda*
+───────────────────────────────
+💫 *Menú Principal Disponible ↓*
 
-    const canal = { 
-      id: '120363422169517881@newsletter', 
-      name: '🌸 𝐌𝐢𝐲𝐮𝐤𝐢𝐁𝐨𝐭 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 🌸'
-    }
+╭───〔 🌸 𝙄𝙉𝙁𝙊 〕───⬣
+│💬 .creador
+│⚡ .ping / .p / .estado
+│🧠 .newcommand
+╰────────────────⬣
 
-    const metaMsg = {
-      quoted: global.fakeMetaMsg,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: canal.id,
-          serverMessageId: 77,
-          newsletterName: canal.name
-        },
-        externalAdReply: {
-          title: botname,
-          body: dev,
-          mediaUrl: null,
-          description: null,
-          previewType: "PHOTO",
-          thumbnailUrl: perfil,
-          mediaType: 1,
-          renderLargerThumbnail: false
-        }
-      }
-    }
+╭───〔 🌿 𝙐𝙏𝙄𝙇𝙄𝘿𝘼𝘿𝙀𝙎 〕───⬣
+│🪞 .inspect / .ss / .translate  
+│🧮 .cal / .tamaño <número>  
+│🎨 .dalle / .flux / .ia / .chatgpt / .bard  
+│🎵 .whatmusic <audio> / .lyrics  
+│🔍 .wikipedia / .tourl / .ssweb
+╰────────────────⬣
 
-    const categorias = {
-      'info': '🌼 〢 ɪɴғᴏʀᴍᴀᴄɪᴏɴ',
-      'main': '🍃 〢 ᴍᴇɴᴜ ᴘʀɪɴᴄɪᴘᴀʟ',
-      'fun': '🎭 〢 ᴊᴜᴇɢᴏs & ᴅɪᴠᴇʀsɪᴏɴ',
-      'rpg': '⚔️ 〢 ʀᴘɢ ᴍᴏᴅᴏ',
-      'anime': '🌸 〢 ᴀɴɪᴍᴇ ᴡᴏʀʟᴅ',
-      'download': '🎧 〢 ᴅᴇsᴄᴀʀɢᴀs',
-      'tools': '🧩 〢 ᴛᴏᴏʟs & ᴜᴛɪʟɪᴅᴀᴅᴇs',
-      'sticker': '💮 〢 sᴛɪᴄᴋᴇʀ ᴢᴏɴᴇ',
-      'group': '🏮 〢 ɢʀᴜᴘᴏs & ᴀᴅᴍɪɴs',
-      'owner': '🌹 〢 ᴏᴡɴᴇʀ & sᴛᴀғғ',
-      'ia': '☁️ 〢 ɪɴᴛᴇʟɪɢᴇɴᴄɪᴀ ᴀʀᴛɪғɪᴄɪᴀʟ',
-      'nsfw': '🍑 〢 ᴍᴏᴅᴏ +18'
-    }
+╭───〔 🎮 𝙅𝙐𝙀𝙂𝙊𝙎 & 𝘿𝙄𝙑𝙀𝙍𝙎𝙄𝙊𝙉 〕───⬣
+│🎲 .slot / .slut / .rob  
+│⚔️ .adventure / .cazar / .dungeon  
+│💰 .bal / .baltop / .daily / .weekly  
+│🪙 .depositar / .retirar / .pay  
+│🏆 .lboard / .levelup / .lvl @user  
+│🎵 .pokedex / .letra / .letra2  
+╰────────────────⬣
 
-    const comandos = Object.values(global.plugins)
-      .filter(v => v.help && v.tags)
-      .map(v => ({
-        help: Array.isArray(v.help) ? v.help : [v.help],
-        tags: Array.isArray(v.tags) ? v.tags : [v.tags]
-      }))
+╭───〔 🎮 𝙅𝙐𝙀𝙂𝙊𝙎 & 𝘿𝙄𝙑𝙀𝙍𝙎𝙄𝙊𝙉 〕───⬣
+│🎲 .slot / .slut / .rob  
+│⚔️ .adventure / .cazar / .dungeon  
+│💰 .bal / .baltop / .daily / .weekly  
+│🪙 .depositar / .retirar / .pay  
+│🏆 .lboard / .levelup / .lvl @user  
+│🎵 .pokedex / .letra / .letra2  
+╰────────────────⬣
 
-    let menuTexto = ''
-    for (let cat in categorias) {
-      let cmds = comandos
-        .filter(c => c.tags.includes(cat))
-        .map(c => c.help.map(h => `${usedPrefix}${h}`).join('\n'))
-        .join('\n')
-      if (cmds) {
-        menuTexto += `\n\n*${categorias[cat]}*\n${cmds}`
-      }
-    }
+╭───〔 🌸 𝘼𝙉𝙄𝙈𝙀 𝙒𝙊𝙍𝙇𝘿 〕───⬣
+│💞 .hug / .kiss / .pat / .poke / .love  
+│😂 .laugh / .smile / .cringe / .drama  
+│🥺 .cry / .sad / .shy / .enamorado  
+│🍵 .coffee / .eat / .dance / .sleep  
+│🫶 .waifu / .loli / .harem / .infoanime  
+╰────────────────⬣
 
-    const infoUser = `
-╭━━━〔 ᴍɪʏᴜᴋɪʙᴏᴛ 🌸 〕━━⬣
-│💫 *Usuario:* @${userId}
-│🌷 *Estado:* ${premium}
-│🌎 *País:* ${pais}
-│🍃 *Límite:* ${limit}
-│🧭 *Usuarios:* ${totalreg}
-│🏮 *Grupos:* ${groupsCount}
-│⏰ *Uptime:* ${uptime}
-│🌸 *Versión:* ${vs}
-│⚙️ *Librería:* ${libreria}
-│📆 *Fecha:* ${hora}, ${dia}, ${fechaTxt}
-╰━━━━━━━━━━━━━━━━━━⬣
+╭───〔 🎧 𝘿𝙀𝙎𝘾𝘼𝙍𝙂𝘼𝙎 〕───⬣
+│🎵 .play / .play2 / .spotify  
+│🎬 .mp3 / .mp4 / .twitter  
+│📌 .pinterest / .catbox  
+╰────────────────⬣
 
-🌼 *Desarrollador:* Omar Granda 🌙
-─────────────────────
-🍧 *Menú disponible:*`.trim()
+╭───〔 🩷 𝙎𝙏𝙄𝘾𝙆𝙀𝙍 𝙕𝙊𝙉𝙀 〕───⬣
+│🎠 .sticker / .stickerly / .emojimix  
+│💖 .take / .robar / .wm / .qc  
+│🖼️ .pfp / .brat / .bratv  
+╰────────────────⬣
 
-    const finalText = `${infoUser}\n${menuTexto}`
+╭───〔 🏮 𝙂𝙍𝙐𝙋𝙊𝙎 & 𝘼𝘿𝙈𝙄𝙉𝙎 〕───⬣
+│📢 .invite / .todos / .listonline  
+│🛡️ .autoadmin / .restrict / .restringir  
+│🧾 .backup / .resetuser / .broadcastgroup  
+╰────────────────⬣
 
-    const videos = [
-      'https://qu.ax/XYRdn.mp4',
-      'https://qu.ax/XYRdn.mp4',
-      'https://qu.ax/XYRdn.mp4'
-    ]
-    const videoUrl = videos[Math.floor(Math.random() * videos.length)]
+╭───〔 💠 𝙊𝙒𝙉𝙀𝙍 & 𝙎𝙏𝘼𝙁𝙁 〕───⬣
+│👑 .addprem / .delprem / .listprem  
+│💎 .addcoin / .addxp  
+│💻 .update / .restart / .setppbot  
+│🧩 .saveplugin / .deletefile / .getplugin  
+╰────────────────⬣
 
-    await conn.sendMessage(m.chat, {
-      video: { url: videoUrl },
-      caption: finalText,
-      fileName: '🌙 MiyukiBot | Menú Oficial 🌸',
-      mimetype: 'video/mp4',
-      mentions: [m.sender],
-      ...metaMsg
-    })
+╭───〔 🍑 𝙈𝙊𝘿𝙊 +18 🔞 〕───⬣
+│⚠️ Usa con precaución:  
+│🔹 .nsfw1 / .nsfw2 / .r34 <tag>  
+│🔹 .hentai / .cosplay / .tetas  
+│🔹 .sexo / .follar / .spank / .lesbianas  
+╰────────────────⬣
 
-  } catch (e) {
-    console.error(e)
-    await conn.sendMessage(m.chat, { 
-      text: `💔 Ocurrió un error al mostrar el menú.\n> ${e.message}`,
-      mentions: [m.sender] 
-    })
-  }
-}
+🌸 ʙʏ ᴏᴍᴀʀ ɢʀᴀɴᴅᴀ | ᴠᴇʀꜱɪᴏɴ 1.8.2  
+💮 ᴍɪʏᴜᴋɪʙᴏᴛ ᴍᴅ — ᴇʟ ᴇsᴛɪʟᴏ ᴍᴇᴊᴏʀᴀᴅᴏ 💫
+`;
 
-handler.help = ['menu']
-handler.tags = ['main']
-handler.command = ['menu','help','menú','allmenu']
+  await conn.sendMessage(m.chat, { text: menu }, { quoted: m });
+};
 
-export default handler
+handler.help = ['menu', 'help'];
+handler.tags = ['main'];
+handler.command = ['menu', 'help', 'comandos'];
 
-function formatTime(ms) {
-  const h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
-  const m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
-  const s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
-  return [h, m, s].map(v => v.toString().padStart(2, '0')).join(':')
-}
+export default handler;
