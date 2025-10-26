@@ -8,7 +8,7 @@ const empresa = "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿"
 const numCreador = "51927303598"
 const correo = "omargranda673@gmail.com"
 const web = "https://github.com/OmarGranda"
-const about = " Creador y desarrollodor del bot 🧑‍💻 "
+const about = " Creador y desarrollodor del MiyukiBot 🧑‍💻 "
 const direccion = "Perú"
 
 const vcard = `
