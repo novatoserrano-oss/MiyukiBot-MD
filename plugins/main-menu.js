@@ -320,7 +320,7 @@ const iconos = [
           mediaType: 1,
           mediaUrl: redes,
           sourceUrl: redes,
-          thumbnailUrl: '',
+          thumbnailUrl: 'https://qu.ax/TPfmC.jpg',
           showAdAttribution: false,
           renderLargerThumbnail: true
         }
