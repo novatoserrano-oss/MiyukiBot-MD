@@ -14,75 +14,62 @@ const handler = async (m, { conn, usedPrefix }) => {
       },
       message: {
         contactMessage: {
-          displayName: '𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿',
-          vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;NSFW;;;\nFN:NSFW\nitem1.TEL;waid=0:0\nitem1.X-ABLabel:Bot\nEND:VCARD`
+          displayName: '💋 MiyukiBot-MD',
+          vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;Miyuki;;;\nFN:Miyuki\nitem1.TEL;waid=0:0\nitem1.X-ABLabel:Bot\nEND:VCARD`
         }
       }
     };
 
     const str = `
-╭━〔 🔞 𝙈𝙀𝙉𝙐 +𝟭𝟴 🔞 〕━⬣
-┃ 👋 Hola ${taguser}
-┃ Bienvenido al *Modo Caliente*
-┃ ${invisible}
-╰━━━━━━━━━━━━━━━━━━⬣
+╭─❖ 🌹 𝐌𝐈𝐘𝐔𝐊𝐈𝐁𝐎𝐓 +𝟭𝟴 🌹 ❖─╮
+│✨ Hola ${taguser}
+│🔥 Bienvenido al *Modo Picante*
+│${invisible}
+╰─────────────────────╯
 
-🍑 *Búsquedas calientes:*
-› ${usedPrefix}xnxxsearch
-› ${usedPrefix}pornhubsearch
-› ${usedPrefix}xvsearch
-› ${usedPrefix}r34
-› ${usedPrefix}rule34search
+💞 *BÚSQUEDAS CALIENTES*
+╭───────────────
+│🔍 ${usedPrefix}xnxxsearch
+│🔍 ${usedPrefix}pornhubsearch
+│🔍 ${usedPrefix}xvsearch
+│🔍 ${usedPrefix}rule34search
+╰───────────────
 
+🎬 *DESCARGAS ADULTAS*
+╭───────────────
+│📥 ${usedPrefix}xnxxdl
+│📥 ${usedPrefix}xvideosdl
+│📥 ${usedPrefix}pornhubdl
+╰───────────────
 
-🎥 *Descargas para adultos:*
-› ${usedPrefix}xnxxdl
-› ${usedPrefix}xvideosdl
-› ${usedPrefix}pornhubdl
+💋 *ROLEPLAY +18*
+╭───────────────
+│💞 ${usedPrefix}sixnine @tag
+│🍑 ${usedPrefix}anal @tag
+│👄 ${usedPrefix}blowjob @tag
+│🫦 ${usedPrefix}boobjob @tag
+│💦 ${usedPrefix}cum @tag
+│🖐️ ${usedPrefix}spank @tag
+│🔥 ${usedPrefix}fuck @tag
+│🦶 ${usedPrefix}footjob @tag
+│💢 ${usedPrefix}lickpussy @tag
+│❤️ ${usedPrefix}lesbianas @tag
+╰───────────────
 
+🍓 *PACKS / HENTAI*
+╭───────────────
+│🎁 ${usedPrefix}pack
+│🎁 ${usedPrefix}pack2
+│🎁 ${usedPrefix}pack3
+│🎥 ${usedPrefix}videoxxx
+│🌸 ${usedPrefix}hentai
+╰───────────────
 
-👅 *Acciones roleplay NSFW:*
-› ${usedPrefix}sixnine/69 @tag
-› ${usedPrefix}anal/culiar @tag
-› ${usedPrefix}blowjob/mamada @tag
-› ${usedPrefix}boobjob/rusa @tag
-› ${usedPrefix}cum/leche @tag
-› ${usedPrefix}fap/paja @tag
-› ${usedPrefix}follar @tag
-› ${usedPrefix}footjob/pies @tag
-› ${usedPrefix}fuck/coger @tag
-› ${usedPrefix}grabboobs/agarrartetas @tag
-› ${usedPrefix}grop/manosear @tag
-› ${usedPrefix}pack / loli
-› ${usedPrefix}penetrar @user
-› ${usedPrefix}suckboobs/chupartetas @tag
-› ${usedPrefix}tetas
-› ${usedPrefix}spank/nalgada @tag
-› ${usedPrefix}sexo/sex @tag
-› ${usedPrefix}lickpussy/coño @tag
-› ${usedPrefix}videoxxx
-› ${usedPrefix}violar/perra @tag
-› ${usedPrefix}undress
-› ${usedPrefix}lesbianas/tijeras @tag
+⚠️ *AVISO IMPORTANTE*
+Este contenido es solo para mayores de edad.
+Usa este modo con responsabilidad 🧠
 
-
-🍒 *Packs / Lolis:*
-› ${usedPrefix}pack
-› ${usedPrefix}pack2
-› ${usedPrefix}pack3
-› ${usedPrefix}videoxxx
-› ${usedPrefix}loli
-› ${usedPrefix}hentai
-› ${usedPrefix}tetas
-
-
-🧃 *Contenido lésbico:*
-› ${usedPrefix}lesbianas
-› ${usedPrefix}videoxxxlesbi
-
-⚠️ *Solo mayores de edad. Usa bajo tu responsabilidad.*
-
-> © Powered By OmarGranda
+> 💠 Powered By *OmarGranda*
 `.trim();
 
     await conn.sendMessage(m.chat, {
@@ -91,7 +78,7 @@ const handler = async (m, { conn, usedPrefix }) => {
       mentions: [m.sender]
     }, { quoted: fkontak });
 
-    await conn.sendMessage(m.chat, { react: { text: '🍑', key: m.key } });
+    await conn.sendMessage(m.chat, { react: { text: '🔥', key: m.key } });
 
   } catch (e) {
     conn.reply(m.chat, `⚠️ Error al enviar el menú.\n\n${e}`, m);
