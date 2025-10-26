@@ -59,6 +59,7 @@ const iconos = [
 │📆 *Fecha:* ${fecha}
 │⏰ *Hora:* ${hora}
 ╰━━━━━━━━━━━━━━━━━━⬣
+
 ╭─━━━💰 𝐄𝐂𝐎𝐍𝐎𝐌𝐈́𝐀 💰━━━─╮
 │✨ Comandos para ganar y administrar tu dinero
 │
@@ -220,123 +221,144 @@ const iconos = [
 ╰──────────────────────────────╯
 ⚡ *Convierte tu bot en una herramienta versátil, rápida y funcional.*
 
-*╭─────────*
-*│* ⑀✬ \`PERFIL\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos para ver y configurar tu perfil* ❖
-*┊* 👑 *#leaderboard • #lboard • #top* + <Paginá>
-*┊* 👑 *#level • #lvl* + <@Mencion>
-*┊* 👑 *#marry • #casarse* + <@Mencion>
-*┊* 👑 *#profile* + <@Mencion>
-*┊* 👑 *#setbirth* + [fecha]
-*┊* 👑 *#setdescription • #setdesc* + [Descripcion]
-*┊* 👑 *#setgenre* + Hombre | Mujer
-*┊* 👑 *#delgenre • #delgenero*
-*┊* 👑 *#delbirth* + [fecha]
-*┊* 👑 *#divorce*
-*┊* 👑 *#setfavourite • #setfav* + [Personaje]
-*┊* 👑 *#prem • #vip*
-*┊* 👑 *#deldescription • #deldesc*
-*╰───────────┅≡*
- 
-*╭─────────*
-*│* ⑀✬ \`GROUPS\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos para administradores de grupos* ❖
-*┊* 🗣️*#tag • #hidetag • #invocar • #tagall* + [mensaje]
-*┊* 🗣️ *#detect • #alertas* + [enable/disable]
-*┊* 🗣️ *#antilink • #antienlace* + [enable/disable]
-*┊* 🗣️ *#bot* + [enable/disable]
-*┊* 🗣️ *#close • #cerrar*
-*┊* 🗣️ *#demote* + <@usuario> | {mencion}
-*┊* 🗣️ *#economy* [enable/disable]  
-*┊* 🗣️ *#gacha* [enable/disable]  
-*┊* 🗣️ *#welcome • #bienvenida* [enable/disable]  
-*┊* 🗣️ *#setbye* [texto]  
-*┊* 🗣️ *#setprimary* [@bot]  
-*┊* 🗣️ *#setwelcome* [texto]  
-*┊* 🗣️ *#kick <@usuario>* | {mencion}  
-*┊* 🗣️ *#nsfw* [enable/disable]
-*┊* 🗣️ *#onlyadmin* [enable/disable]
-*┊* 🗣️ *#open* • #abrir*
-*┊* 🗣️ *#promote <@usuario>* | {mencion}  
-*┊* 🗣️ *#add • #añadir* • #agregar {número}
-*┊* 🗣️ *#admins • admin* [texto]
-*┊* 🗣️ *#restablecer • #revoke*
-*┊* 🗣️ *#addwarn • #warn* <@usuario> | {mencion}
-*┊* 🗣️ *#unwarn • #delwarn* <@usuario> | {mencion}
-*┊* 🗣️ *#advlist • #listadv*
-*┊* 🗣️ *#inactivos • #kickinactivos*
-*┊* 🗣️ *#listnum • #kicknum* [texto]
-*┊* 🗣️ *#gpbanner • #groupimg*
-*┊* 🗣️ *#gpname • #groupname* [texto]
-*┊* 🗣️ *#gpdesc • #groupdesc* [texto]
-*┊* 🗣️ *#del • #delete* {citar un mensaje}
-*┊* 🗣️ *#linea • #listonline*
-*┊* 🗣️ *#gp • #infogrupo*
-*┊* 🗣️ *#link*
-*╰───────────┅≡*
+╭─━━━👤 𝐌𝐄𝐍𝐔 𝐏𝐄𝐑𝐅𝐈𝐋 👤━━━─╮
+│💫 Personaliza tu cuenta y muestra tu identidad
+│
+│🏆 𝗣𝗥𝗢𝗚𝗥𝗘𝗦𝗢 𝗬 𝗥𝗔𝗡𝗞𝗜𝗡𝗚
+│• 🏅 #leaderboard | #lboard | #top + <página>
+│• 🎯 #level | #lvl + <@usuario>
+│
+│💞 𝗥𝗘𝗟𝗔𝗖𝗜𝗢𝗡𝗘𝗦 𝗬 𝗣𝗥𝗢𝗙𝗜𝗟𝗘
+│• 💍 #marry | #casarse + <@usuario>
+│• 💔 #divorce
+│• 🪪 #profile + <@usuario>
+│
+│🧩 𝗖𝗢𝗡𝗙𝗜𝗚𝗨𝗥𝗔𝗖𝗜𝗢́𝗡 𝗗𝗘 𝗣𝗘𝗥𝗙𝗜𝗟
+│• 🎂 #setbirth + [fecha]
+│• 🗑️ #delbirth
+│• ✏️ #setdescription | #setdesc + [descripción]
+│• 🧹 #deldescription | #deldesc
+│• ⚧️ #setgenre + Hombre | Mujer
+│• 🚫 #delgenre | #delgenero
+│• 🌟 #setfavourite | #setfav + [personaje]
+│• 💎 #prem | #vip
+│
+╰──────────────────────────────╯
+✨ *Muestra quién eres y deja huella en el servidor.*
 
-*╭─────────*
-*│* ⑀✬ \`ANIME\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos de reacciones de anime* ❖
-*┊* 😡 *#angry • #enojado* <mencion>
-*┊* 🧼 *#bath • #bañarse* <mencion>
-*┊* 🫦 *#bite • #morder* <mencion>
-*┊* 😛 *#bleh • #lengua* <mencion 
-*┊* ☺️ *#blush • #sonrojarse* <mencion>
-*┊* 🫩 *#bored • #aburrido* <mencion>
-*┊* 👏 *#clap • #aplaudir* <mencion>
-*┊* ☕ *#coffee • #cafe • #café* <mencion>
-*┊* 😭 *#cry • #llorar* <mencion>
-*┊* 🙂‍↔️ *#cuddle • #acurrucarse* <mencion>
-*┊* 🪩 *#dance • #bailar* <mencion>
-*┊* 😫 *#dramatic • #drama* <mencion>
-*┊* 🍻 *#drunk • #borracho* <mencion>
-*┊* 🍽️ *#eat • #comer* <mencion>
-*┊* 😏 *#facepalm • #palmada* <mencion>
-*┊* 😄 *#happy • #feliz* <mencion>
-*┊* 🫂 *#hug • #abrazar *<mencion>
-*┊* 🤰🏻 *#impregnate • #preg • #preñar • #embarazar* <mencion>
-*┊* 🥷 *#kill • #matar* <mencion>
-*┊* 😘 *#kiss • #muak* <mencion>
-*┊* 💋 *#kisscheek • #beso* <mencion>
-*┊* 😅 *#laugh • #reirse* <mencion>
-*┊* 🤤 *#lick • #lamer* <mencion>
-*┊* 😍 *#love • #amor • #enamorado • #enamorada* <mencion>
-*┊* 🔥 *#pat • #palmadita • #palmada* <mencion>
-*┊* ⛏️ *#poke • #picar* <mencion>
-*┊* 😚 *#pout • #pucheros* <mencion>
-*┊* 👊 *#punch • #pegar • #golpear* <mencion>
-*┊* 🏃 *#run • #correr* <mencion>
-*┊* 😔 *#sad • #triste* <mencion>
-*┊* 😨 *#scared • #asustado • #asustada* <mencion>
-*┊* 🥴 *#seduce • #seducir* <mencion>
-*┊* 🤐 *#shy • #timido • #timida* <mencion>
-*┊* 🥊 *#slap • #bofetada* <mencion>
-*┊* 😴 *#sleep • #dormir* <mencion>
-*┊* 🚬 *#smoke • #fumar* <mencion>
-*┊* 😮‍💨*#spit • #escupir* <mencion>
-*┊* 👣 *#step • #pisar* <mencion>
-*┊* 🤔 *#think • #pensar* <mencion>
-*┊* 🚶 *#walk • #caminar* <mencion>
-*┊* 😉 *#wink • #guiñar* <mencion>
-*┊* 😳 *#cringe • #avergonzarse* <mencion>
-*┊* 🗣️ *#smug • #presumir* <mencion>
-*┊* 😊 *#smile • #sonreir* <mencion>
-*┊* ✋ *#highfive • #5* <mencion>
-*┊* 😌 *#bully • #bullying* <mencion>
-*┊*  *#handhold • #mano* <mencion>
-*┊* 👋 *#wave • #ola • #hola* <mencion>
-*┊* 🌸 *#waifu*  
-*┊* 🤟 *#ppcouple • #ppcp*
-*╰───────────┅≡*ׅ
-👑 © Powered By OmarGranda
-`
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+╭─━━━💬 𝐌𝐄𝐍𝐔 𝐃𝐄 𝐆𝐑𝐔𝐏𝐎𝐒 💬━━━─╮
+│👑 Comandos exclusivos para administradores
+│
+│📢 𝗠𝗘𝗡𝗦𝗔𝗝𝗘𝗦 𝗬 𝗠𝗘𝗡𝗖𝗜𝗢𝗡𝗘𝗦
+│• 📣 #tag | #hidetag | #invocar | #tagall + [mensaje]
+│• 🪩 #admins | #admin + [texto]
+│• 🗑️ #del | #delete {citar un mensaje}
+│
+│🛡️ 𝗣𝗥𝗢𝗧𝗘𝗖𝗖𝗜𝗢́𝗡 𝗬 𝗠𝗢𝗗𝗘𝗥𝗔𝗖𝗜𝗢́𝗡
+│• 🚫 #antilink | #antienlace [enable/disable]
+│• 🚷 #onlyadmin [enable/disable]
+│• ⚙️ #bot [enable/disable]
+│• ⚔️ #nsfw [enable/disable]
+│• 🪪 #economy [enable/disable]
+│• 🎴 #gacha [enable/disable]
+│• 🎉 #welcome | #bienvenida [enable/disable]
+│• 🔔 #detect | #alertas [enable/disable]
+│
+│⚙️ 𝗖𝗢𝗡𝗙𝗜𝗚𝗨𝗥𝗔𝗖𝗜𝗢𝗡 𝗗𝗘 𝗚𝗥𝗨𝗣𝗢
+│• 🏷️ #gpname | #groupname [texto]
+│• 📜 #gpdesc | #groupdesc [texto]
+│• 🖼️ #gpbanner | #groupimg
+│• 📩 #setwelcome [texto]
+│• 🕊️ #setbye [texto]
+│• 🪄 #setprimary [@bot]
+│• 🔁 #restablecer | #revoke
+│
+│🚪 𝗔𝗗𝗠𝗜𝗡𝗜𝗦𝗧𝗥𝗔𝗖𝗜𝗢𝗡 𝗗𝗘 𝗠𝗜𝗘𝗠𝗕𝗥𝗢𝗦
+│• 🧍 #add | #añadir | #agregar {número}
+│• 🦶 #kick <@usuario> | {mención}
+│• 🏆 #promote <@usuario> | {mención}
+│• ⚠️ #demote <@usuario> | {mención}
+│• 🕵️ #inactivos | #kickinactivos
+│• ☠️ #listnum | #kicknum [texto]
+│
+│⚖️ 𝗔𝗠𝗢𝗡𝗘𝗦𝗧𝗔𝗖𝗜𝗢𝗡𝗘𝗦
+│• ⚠️ #addwarn | #warn <@usuario>
+│• ✅ #unwarn | #delwarn <@usuario>
+│• 📋 #advlist | #listadv
+│
+│📡 𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗖𝗜𝗢𝗡 𝗬 𝗟𝗜𝗡𝗞𝗦
+│• 🔗 #link
+│• 🧭 #gp | #infogrupo
+│• 💻 #linea | #listonline
+│• 🔒 #close | #cerrar
+│• 🔓 #open | #abrir
+│
+╰──────────────────────────────╯
+💬 *Administra, protege y personaliza tu grupo con estilo.*
+
+╭─🌸🌙・゜゜・ 𝐌𝐄𝐍𝐔 𝐀𝐍𝐈𝐌𝐄 ・゜゜・🌙🌸─╮
+│✨ Reacciona, rolea y expresa emociones con estilo ✨
+│
+│🎭 𝗘𝗠𝗢𝗖𝗜𝗢𝗡𝗘𝗦 𝗬 𝗘𝗦𝗧𝗔𝗗𝗢𝗦
+│• 😡 #angry | #enojado <@mención>
+│• ☺️ #blush | #sonrojarse <@mención>
+│• 😭 #cry | #llorar <@mención>
+│• 😅 #laugh | #reirse <@mención>
+│• 😔 #sad | #triste <@mención>
+│• 😳 #cringe | #avergonzarse <@mención>
+│• 🤔 #think | #pensar <@mención>
+│• 😌 #bored | #aburrido <@mención>
+│• 😍 #love | #amor | #enamorado <@mención>
+│
+│💞 𝗔𝗙𝗘𝗖𝗧𝗢 𝗬 𝗖𝗔𝗥𝗜𝗡̃𝗢
+│• 😘 #kiss | #muak <@mención>
+│• 💋 #kisscheek | #beso <@mención>
+│• 🫂 #hug | #abrazar <@mención>
+│• ✋ #highfive | #5 <@mención>
+│• 🤝 #handhold | #mano <@mención>
+│• 🔥 #pat | #palmadita <@mención>
+│• 😉 #wink | #guiñar <@mención>
+│• 🙂‍↔️ #cuddle | #acurrucarse <@mención>
+│
+│😏 𝗔𝗖𝗖𝗜𝗢𝗡𝗘𝗦 𝗗𝗜𝗩𝗘𝗥𝗧𝗜𝗗𝗔𝗦
+│• 🫦 #bite | #morder <@mención>
+│• 🤤 #lick | #lamer <@mención>
+│• 🍽️ #eat | #comer <@mención>
+│• ☕ #coffee | #café <@mención>
+│• 🪩 #dance | #bailar <@mención>
+│• 🧼 #bath | #bañarse <@mención>
+│• 🚶 #walk | #caminar <@mención>
+│• 🏃 #run | #correr <@mención>
+│• 🚬 #smoke | #fumar <@mención>
+│• 😮‍💨 #spit | #escupir <@mención>
+│
+│⚔️ 𝗔𝗖𝗖𝗜𝗢𝗡𝗘𝗦 𝗘𝗡𝗘𝗥𝗚𝗜𝗖𝗔𝗦
+│• 👊 #punch | #golpear <@mención>
+│• 🥊 #slap | #bofetada <@mención>
+│• 😏 #facepalm | #palmada <@mención>
+│• 🥷 #kill | #matar <@mención>
+│• 👣 #step | #pisar <@mención>
+│• ⛏️ #poke | #picar <@mención>
+│• 😌 #bully | #bullying <@mención>
+│
+│💫 𝗥𝗢𝗟𝗘𝗣𝗟𝗔𝗬 𝗬 𝗦𝗧𝗬𝗟𝗘
+│• 🥴 #seduce | #seducir <@mención>
+│• 🤐 #shy | #tímido <@mención>
+│• 😫 #dramatic | #drama <@mención>
+│• 🍻 #drunk | #borracho <@mención>
+│• 🗣️ #smug | #presumir <@mención>
+│• 😄 #happy | #feliz <@mención>
+│• 😚 #pout | #pucheros <@mención>
+│• 🤰 #preg | #embarazar <@mención>
+│
+│🌸 𝗖𝗢𝗠𝗣𝗟𝗘𝗠𝗘𝗡𝗧𝗢𝗦
+│• 🌸 #waifu
+│• 🤟 #ppcouple | #ppcp
+│
+╰──────────────────────────────╯
+👑 © Powered By *OmarGranda*
 
     await conn.sendMessage(m.chat, {
       text: menu,
