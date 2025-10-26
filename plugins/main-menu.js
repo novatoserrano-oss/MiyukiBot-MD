@@ -9,19 +9,11 @@ let handler = async (m, { conn }) => {
 
     let mentionedJid = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
     let totalCommands = Object.keys(global.plugins).length
-const iconos = [
+    const iconos = [
       'https://qu.ax/TPfmC.jpg'
     ]
     const randomIcono = iconos[Math.floor(Math.random() * iconos.length)]
 
-    const vs = global.vs || '1.8.0'
-    const libreria = global.libreria || 'Baileys'
-    const botname = global.botname || 'MiyukiBot-MD'
-    const textbot = global.textbot || 'MiyukiBot-MD 🌸'
-    const redes = global.redes || 'https://github.com/'
-    const channelRD = global.channelRD || { id: '', name: 'Canal Oficial 🌸' }
-
-    // ⏳ Ping
     let timestamp = speed()
     let ping = (speed() - timestamp).toFixed(2)
 
@@ -355,7 +347,8 @@ const iconos = [
 👑 © Powered By *OmarGranda*`
 
     await conn.sendMessage(m.chat, {
-      text: menu,
+      video: { url: 'https://qu.ax/AjjHr.mp4' },
+      caption: menu,
       contextInfo: {
         mentionedJid: [mentionedJid],
         isForwarded: true,
@@ -370,7 +363,7 @@ const iconos = [
           mediaType: 1,
           mediaUrl: redes,
           sourceUrl: redes,
-          thumbnailUrl: 'https://qu.ax/TPfmC.jpg',
+          thumbnailUrl: randomIcono,
           showAdAttribution: false,
           renderLargerThumbnail: true
         }

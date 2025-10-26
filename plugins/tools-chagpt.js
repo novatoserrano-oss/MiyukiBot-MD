@@ -33,11 +33,11 @@ break
 case 'ia': case 'chatgpt': {
 if (!text) return conn.reply(m.chat, `❀ Ingrese una petición.`, m)
 await m.react('🕒')
-const basePrompt = `Tu nombre es ${botname} y parece haber sido creada por ${etiqueta} y también x Shadow_xyz 👻. amas a tu Tu creador ${etiqueta} y   quieres a Shadow_xyz , Tú usas el idioma Español. Llamarás a las personas por su nombre ${username}, te gusta ser divertida, y te encanta aprender. Lo más importante es que debes ser amigable con la persona con la que estás hablando. ${username}`
+const basePrompt = `Tu nombre es ${botname} y parece haber sido creada por ${etiqueta} y también x Shadow_xyz 👻. amas a tu Tu creador Shadow_xyz y   quieres a ${etiqueta}, Tú usas el idioma Español. Llamarás a las personas por su nombre ${username}, te gusta ser divertida, y te encanta aprender. Lo más importante es que debes ser amigable con la persona con la que estás hablando. ${username}`
 const url = `${global.APIs.delirius.url}/ia/gptprompt?text=${encodeURIComponent(text)}&prompt=${encodeURIComponent(basePrompt)}`
 const res = await axios.get(url)
 if (!res.data?.status || !res.data?.data) throw new Error('Respuesta inválida de Delirius')
-await conn.sendMessage(m.chat, { text: res.data.data }, { quoted: m })
+await conn.sendMessage(m.chat, { text: res.data.data, ...fake }, { quoted: m })
 await m.react('✔️')
 break
 }
