@@ -54,7 +54,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
         mediaUrl: null,
         description: null,
         previewType: "PHOTO",
-        thumbnailUrl: "https://files.catbox.moe/crdknj.jpg",
+        thumbnailUrl: "https://qu.ax/gauVK.jpg",
         sourceUrl: "https://whatsapp.com",
         mediaType: 1,
         renderLargerThumbnail: false
