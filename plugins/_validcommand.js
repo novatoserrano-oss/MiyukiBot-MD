@@ -24,7 +24,7 @@ export async function before(m, { conn }) {
     },
     participant: "0@s.whatsapp.net"
   };
-*/
+
   if (!command || command === 'bot') return;
 
   const isValidCommand = (command, plugins) => {
