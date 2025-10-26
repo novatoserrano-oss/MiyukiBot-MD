@@ -48,7 +48,7 @@ let handler = async (m, { conn }) => {
           title: "Contacto De Mi Creador 👑",
           body: "",
           mediaType: 1,
-          thumbnailUrl: 'https://qu.ax/TPfmC.jpg',
+          thumbnailUrl: 'https://qu.ax/KVDzy.jpg',
           renderLargerThumbnail: true,
           sourceUrl: web
       }
