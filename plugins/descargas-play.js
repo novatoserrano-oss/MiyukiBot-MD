@@ -35,7 +35,7 @@ if (!text.trim()) return conn.reply(m.chat, `🔔 *Por favor, ingresa el nombre 
      
 > *🔗 Link:* ${url}
 
-𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`
+𝘔𝘪𝘺𝘶𝘬𝘪𝘉𝘰𝘵-𝘔𝘋 | © 𝘗𝘰𝘸𝘦𝘳𝘦𝘥 𝘉𝘺 𝘖𝘮𝘢𝘳𝘎𝘳𝘢𝘯𝘥𝘢`, m, rcanal
 
     const thumb = (await conn.getFile(thumbnail))?.data
     const external = {
