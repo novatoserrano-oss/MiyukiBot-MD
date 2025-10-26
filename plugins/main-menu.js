@@ -47,7 +47,7 @@ const iconos = [
 │ ⏳ Uptime: *${uptime}*
 ╰───────────────────────╯
 
-╭─╼「 💾 INFORMACIÓN DEL SISTEMA 」
+╭─╼「 💾 ESTADO DEL SISTEMA 」
 │ 💻 RAM Total: *${total} MB*
 │ 📈 RAM En uso: *${used} MB*
 │ 📉 RAM Libre: *${free} MB*
