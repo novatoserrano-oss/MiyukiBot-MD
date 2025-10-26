@@ -38,27 +38,27 @@ const iconos = [
     let hora = moment.tz('America/Lima').format('HH:mm:ss')
     let dia = moment.tz('America/Lima').format('dddd')
     let menu = `
-╭━━━〔 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸 〕━━⬣
-│👤 *Usuario:* @${mentionedJid.split('@')[0]}
-│📚 *Comandos:* ${totalCommands}
-│⚙️ *Versión:* ${vs}
-│🛠️ *Librería:* ${libreria}
-│🤖 *Bot:* ${(conn.user.jid == global.conn.user.jid ? 'Principal' : 'Sub-Bot')}
-│🚀 *Tiempo activo:* ${uptime}
-╰━━━━━━━━━━━━━━━━━━⬣
+╭─╼「 🌸 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 ━ SYSTEM PANEL 」╾─╮
+│ 👤 Usuario: *@${mentionedJid.split('@')[0]}*
+│ 💼 Comandos disponibles: *${totalCommands}*
+│ ⚙️ Versión: *${vs}*
+│ 💠 Librería: *${libreria}*
+│ 🤖 Modo: *${(conn.user.jid == global.conn.user.jid ? 'Principal' : 'Sub-Bot')}*
+│ ⏳ Uptime: *${uptime}*
+╰─────────────────────────────╯
 
-╭─〔 💾 ESTADO DEL SISTEMA 〕─⬣
-│💾 *RAM Total:* ${total} MB
-│📈 *RAM Usada:* ${used} MB
-│📉 *RAM Libre:* ${free} MB
-│🌿 *Ping:* ${ping} ms
-╰━━━━━━━━━━━━━━━━━━⬣
+╭─╼「 💾 ESTADO DEL SISTEMA 」╾─╮
+│ 💻 RAM Total: *${total} MB*
+│ 📈 RAM En uso: *${used} MB*
+│ 📉 RAM Libre: *${free} MB*
+│ ⚡ Ping actual: *${ping} ms*
+╰─────────────────────────────╯
 
-╭─〔 🗓️ FECHA Y HORA 〕─⬣
-│📅 *Día:* ${dia}
-│📆 *Fecha:* ${fecha}
-│⏰ *Hora:* ${hora}
-╰━━━━━━━━━━━━━━━━━━⬣
+╭─╼「 🕓 FECHA Y HORA 」╾─╮
+│ 📅 Día: *${dia}*
+│ 🗓️ Fecha: *${fecha}*
+│ ⏰ Hora actual: *${hora}*
+╰─────────────────────────────╯
 
 ╭─━━━💰 𝐄𝐂𝐎𝐍𝐎𝐌𝐈́𝐀 💰━━━─╮
 │✨ Comandos para ganar y administrar tu dinero
@@ -122,8 +122,6 @@ const iconos = [
 │
 ╰──────────────────────────────╯
 💡 *Descarga música, videos y archivos desde cualquier sitio con estilo.*
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ╭─━━━🎴 𝐌𝐄𝐍𝐔 𝐆𝐀𝐂𝐇𝐀 🎴━━━─╮
 │✨ Reclama, colecciona y presume tus personajes favoritos
