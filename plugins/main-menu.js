@@ -107,7 +107,22 @@ let handler = async (m, { conn, usedPrefix }) => {
 💮 ᴍɪʏᴜᴋɪʙᴏᴛ ᴍᴅ — ᴇʟ ᴇsᴛɪʟᴏ ᴍᴇᴊᴏʀᴀᴅᴏ 💫
 `;
 
-    await conn.reply(m.chat, menu, m);
+    await conn.sendMessage(m.chat, {
+      video: { url: 'https://qu.ax/AjjHr.mp4' },
+      caption: menu,
+      gifPlayback: true,
+      contextInfo: {
+        externalAdReply: {
+          title: '🌸 MiyukiBot MD',
+          body: dev,
+          thumbnailUrl: icono,
+          mediaType: 2,
+          renderLargerThumbnail: true,
+          sourceUrl: 'https://github.com',
+        },
+      },
+    })
+    
   } catch (e) {
     console.error(e)
     conn.reply(m.chat, '⚠️ Error al mostrar el menú. Verifica la consola.', m)
