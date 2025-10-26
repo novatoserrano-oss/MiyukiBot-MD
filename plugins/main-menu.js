@@ -9,18 +9,7 @@ let handler = async (m, { conn }) => {
 
     let mentionedJid = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
     let totalCommands = Object.keys(global.plugins).length
-/*
-    const iconos = [
-      'https://files.catbox.moe/lee8v6.jpg',
-      'https://files.catbox.moe/cut28l.jpg',
-      'https://files.catbox.moe/rut9jj.jpg',
-      'https://files.catbox.moe/lgq7yr.jpg',
-      'https://files.catbox.moe/8pil8x.jpg',
-      'https://files.catbox.moe/6a3vsc.jpg',
-      'https://files.catbox.moe/ltc7g2.jpg',
-      'https://files.catbox.moe/kt7pbi.jpg',
-      'https://files.catbox.moe/vskjfh.jpg'
-    ]
+
     const randomIcono = iconos[Math.floor(Math.random() * iconos.length)]
 */
     const vs = global.vs || '1.8.0'
@@ -329,7 +318,7 @@ let handler = async (m, { conn }) => {
           mediaType: 1,
           mediaUrl: redes,
           sourceUrl: redes,
-          video: 'https://qu.ax/AjjHr.mp4',
+          video: { url: 'https://qu.ax/AjjHr.mp4' },
           showAdAttribution: false,
           renderLargerThumbnail: true
         }
