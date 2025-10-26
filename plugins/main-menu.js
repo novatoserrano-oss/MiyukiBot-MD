@@ -38,7 +38,7 @@ const iconos = [
     let hora = moment.tz('America/Lima').format('HH:mm:ss')
     let dia = moment.tz('America/Lima').format('dddd')
     let menu = `
-╭─╼「 🌸 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 ━ SYSTEM PANEL 」╾─╮
+╭─╼「 🌸 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 」╾─╮
 │ 👤 Usuario: *@${mentionedJid.split('@')[0]}*
 │ 💼 Comandos disponibles: *${totalCommands}*
 │ ⚙️ Versión: *${vs}*
@@ -58,7 +58,7 @@ const iconos = [
 │ 📅 Día: *${dia}*
 │ 🗓️ Fecha: *${fecha}*
 │ ⏰ Hora actual: *${hora}*
-╰─────────────────────────────╯
+╰─────────────────────╯
 
 ╭─━━━💰 𝐄𝐂𝐎𝐍𝐎𝐌𝐈́𝐀 💰━━━─╮
 │✨ Comandos para ganar y administrar tu dinero
