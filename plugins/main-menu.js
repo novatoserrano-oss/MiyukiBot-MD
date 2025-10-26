@@ -59,36 +59,44 @@ const iconos = [
 │📆 *Fecha:* ${fecha}
 │⏰ *Hora:* ${hora}
 ╰━━━━━━━━━━━━━━━━━━⬣
-
-*╭─────────*
-*│* ⑀✬ \`𝐄𝐂𝐎𝐍𝐎𝐌𝐈𝐀\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos de para ganar money* ❖
-*┊* 🤑 #w • #work • #trabajar*
-*┊* 🤑 *#slut • #protituirse*
-*┊* 🤑 *#coinflip • #flip • #cf* + [cantidad] <cara/cruz>
-*┊* 🤑 *#crime • #crimen*
-*┊* 🤑 *#roulette • #rt* + [red/black] [cantidad]
-*┊* 🤑 *#casino • #apostar* • *#slot* + [cantidad]
-*┊* 🤑 *#balance • #bal • #bank* + <usuario>
-*┊* 🤑 *#deposit • #dep • #depositar • #d* + [cantidad] | all
-*┊* 🤑 *#withdraw • #with • #retirar* + [cantidad] | all
-*┊* 🤑 *#economyinfo • #einfo*
-*┊* 🤑 *#givecoins • #pay • #coinsgive* + [usuario] [cantidad]
-*┊* 🤑 *#miming • #minar • #mine*
-*┊* 🤑 *#daily • #diario*
-*┊* 🤑 *#cofre* • *#coffer*
-*┊* 🤑 *#weekly • #semanal*
-*┊* 🤑 *#monthly • #mensual*
-*┊* 🤑 *#steal • #robar • #rob* + [@mencion]
-*┊* 🤑 *#economyboard • #eboard • #baltop* + <pagina>
-*┊* 🤑 *#aventura • #adventure*
-*┊* 🤑 *#curar • #heal*
-*┊* 🤑 *#cazar • #hunt*
-*┊* 🤑 *#fish • #pescar*
-*┊* 🤑 *#mazmorra • #dungeon*
-*╰───────────┅≡*
+╭─━━━💰 𝐌𝐄𝐍𝐔 𝐄𝐂𝐎𝐍𝐎𝐌𝐈́𝐀 💰━━━─╮
+│✨ Comandos para ganar y administrar tu dinero
+│
+│🏗️ 𝗧𝗥𝗔𝗕𝗔𝗝𝗢𝗦
+│• 💼 #work | #w | #trabajar
+│• 💋 #slut | #prostituirse
+│• ⛏️ #miming | #minar | #mine
+│• 🏕️ #aventura | #adventure
+│• 🦌 #cazar | #hunt
+│• 🎣 #fish | #pescar
+│• ⚔️ #mazmorra | #dungeon
+│
+│🎲 𝗔𝗣𝗨𝗘𝗦𝗧𝗔𝗦 𝘆 𝗝𝗨𝗘𝗚𝗢𝗦
+│• 🎰 #casino | #slot [cantidad]
+│• 🪙 #coinflip | #flip | #cf [cantidad] <cara/cruz>
+│• 🎯 #roulette | #rt [red/black] [cantidad]
+│• 🚨 #crime | #crimen
+│
+│🏦 𝗕𝗔𝗡𝗖𝗢 𝘆 𝗚𝗘𝗦𝗧𝗜𝗢́𝗡
+│• 💳 #balance | #bal | #bank <usuario>
+│• 💰 #deposit | #dep | #d [cantidad] | all
+│• 💸 #withdraw | #with | #retirar [cantidad] | all
+│• 💎 #givecoins | #pay | #coinsgive <@usuario> [cantidad]
+│• 🏅 #economyboard | #eboard | #baltop <página>
+│• 📊 #economyinfo | #einfo
+│
+│🎁 𝗥𝗘𝗖𝗢𝗠𝗣𝗘𝗡𝗦𝗔𝗦
+│• ⏰ #daily | #diario
+│• 🗓️ #weekly | #semanal
+│• 📅 #monthly | #mensual
+│• 🧰 #cofre | #coffer
+│
+│💀 𝗔𝗖𝗖𝗜𝗢𝗡𝗘𝗦
+│• 🦹 #steal | #robar | #rob <@usuario>
+│• ❤️‍🩹 #curar | #heal
+│
+╰──────────────────────────────╯
+💵 *Haz crecer tu fortuna y conviértete en el más rico del servidor!*
 
 *╭─────────*
 *│* ⑀✬ \`DOWNLOAD\`  ︴
