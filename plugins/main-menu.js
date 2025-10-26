@@ -1,24 +1,25 @@
 // 🌸 MiyukiBot MD - Menú Mejorado v1.8.2
 // 💫 Diseñado por: Omar Granda
-// 🪷 Omar gay > att: Shadow-xyz
+// 🪷 Modificado por: Shadow-xyz
 
 import os from 'os'
 import moment from 'moment-timezone'
 
-let handler = async (m, { conn, usedPrefix, __dirname }) => {
+let handler = async (m, { conn, usedPrefix }) => {
   try {
     await m.react('🌸')
 
-    const user = global.db.data.users[m.sender] || {}
+    const user = global.db?.data?.users?.[m.sender] || {}
     const name = await conn.getName(m.sender)
-    const totalUsers = Object.keys(global.db.data.users).length
-    const groups = Object.values(conn.chats).filter(c => c.id.endsWith('@g.us')).length
+    const totalUsers = Object.keys(global.db?.data?.users || {}).length
+    const chats = Object.values(conn.chats || {})
+    const groups = chats.filter(c => c.id.endsWith('@g.us')).length
     const uptime = clockString(process.uptime() * 1000)
     const date = moment.tz('America/Lima').format('hh:mm A')
     const day = moment.tz('America/Lima').format('dddd')
     const fullDate = moment.tz('America/Lima').format('DD MMMM YYYY')
     const isPremium = user.premium ? '✨ Premium' : '🪶 Gratis'
-    const limit = user.limit || 0
+    const limit = user.limit ?? 0
     const country = '🇵🇪 Perú'
 
     const menu = `
@@ -40,86 +41,89 @@ let handler = async (m, { conn, usedPrefix, __dirname }) => {
 💫 *Menú Principal Disponible ↓*
 
 ╭───〔 🌸 𝙄𝙉𝙁𝙊 〕───⬣
-│💬 .creador
-│⚡ .ping / .p / .estado
-│🧠 .newcommand
+│💬 ${usedPrefix}creador
+│⚡ ${usedPrefix}ping / ${usedPrefix}p / ${usedPrefix}estado
+│🧠 ${usedPrefix}newcommand
 ╰────────────────⬣
 
 ╭───〔 🌿 𝙐𝙏𝙄𝙇𝙄𝘿𝘼𝘿𝙀𝙎 〕───⬣
-│🪞 .inspect / .ss / .translate  
-│🧮 .cal / .tamaño <número>  
-│🎨 .dalle / .flux / .ia / .chatgpt / .bard  
-│🎵 .whatmusic <audio> / .lyrics  
-│🔍 .wikipedia / .tourl / .ssweb
+│🪞 ${usedPrefix}inspect / ${usedPrefix}ss / ${usedPrefix}translate  
+│🧮 ${usedPrefix}cal / ${usedPrefix}tamaño <número>  
+│🎨 ${usedPrefix}dalle / ${usedPrefix}flux / ${usedPrefix}ia / ${usedPrefix}chatgpt / ${usedPrefix}bard  
+│🎵 ${usedPrefix}whatmusic <audio> / ${usedPrefix}lyrics  
+│🔍 ${usedPrefix}wikipedia / ${usedPrefix}tourl / ${usedPrefix}ssweb
 ╰────────────────⬣
 
-╭───〔 🎮 𝙅𝙐𝙀𝙂𝙊𝙎 & 𝘿𝙄𝙑𝙀𝙍𝙎𝙄𝙊𝙉 〕───⬣
-│🎲 .slot / .slut / .rob  
-│⚔️ .adventure / .cazar / .dungeon  
-│💰 .bal / .baltop / .daily / .weekly  
-│🪙 .depositar / .retirar / .pay  
-│🏆 .lboard / .levelup / .lvl @user  
-│🎵 .pokedex / .letra / .letra2  
-╰────────────────⬣
-
-╭───〔 🎮 𝙅𝙐𝙀𝙂𝙊𝙎 & 𝘿𝙄𝙑𝙀𝙍𝙎𝙄𝙊𝙉 〕───⬣
-│🎲 .slot / .slut / .rob  
-│⚔️ .adventure / .cazar / .dungeon  
-│💰 .bal / .baltop / .daily / .weekly  
-│🪙 .depositar / .retirar / .pay  
-│🏆 .lboard / .levelup / .lvl @user  
-│🎵 .pokedex / .letra / .letra2  
+╭───〔 🎮 𝙅𝙐𝙀𝙂𝙊𝙎 〕───⬣
+│🎲 ${usedPrefix}slot / ${usedPrefix}slut / ${usedPrefix}rob  
+│⚔️ ${usedPrefix}adventure / ${usedPrefix}cazar / ${usedPrefix}dungeon  
+│💰 ${usedPrefix}bal / ${usedPrefix}baltop / ${usedPrefix}daily / ${usedPrefix}weekly  
+│🪙 ${usedPrefix}depositar / ${usedPrefix}retirar / ${usedPrefix}pay  
+│🏆 ${usedPrefix}lboard / ${usedPrefix}levelup / ${usedPrefix}lvl @user  
+│🎵 ${usedPrefix}pokedex / ${usedPrefix}letra / ${usedPrefix}letra2  
 ╰────────────────⬣
 
 ╭───〔 🌸 𝘼𝙉𝙄𝙈𝙀 𝙒𝙊𝙍𝙇𝘿 〕───⬣
-│💞 .hug / .kiss / .pat / .poke / .love  
-│😂 .laugh / .smile / .cringe / .drama  
-│🥺 .cry / .sad / .shy / .enamorado  
-│🍵 .coffee / .eat / .dance / .sleep  
-│🫶 .waifu / .loli / .harem / .infoanime  
+│💞 ${usedPrefix}hug / ${usedPrefix}kiss / ${usedPrefix}pat / ${usedPrefix}poke / ${usedPrefix}love  
+│😂 ${usedPrefix}laugh / ${usedPrefix}smile / ${usedPrefix}cringe / ${usedPrefix}drama  
+│🥺 ${usedPrefix}cry / ${usedPrefix}sad / ${usedPrefix}shy / ${usedPrefix}enamorado  
+│🍵 ${usedPrefix}coffee / ${usedPrefix}eat / ${usedPrefix}dance / ${usedPrefix}sleep  
+│🫶 ${usedPrefix}waifu / ${usedPrefix}loli / ${usedPrefix}harem / ${usedPrefix}infoanime  
 ╰────────────────⬣
 
 ╭───〔 🎧 𝘿𝙀𝙎𝘾𝘼𝙍𝙂𝘼𝙎 〕───⬣
-│🎵 .play / .play2 / .spotify  
-│🎬 .mp3 / .mp4 / .twitter  
-│📌 .pinterest / .catbox  
+│🎵 ${usedPrefix}play / ${usedPrefix}play2 / ${usedPrefix}spotify  
+│🎬 ${usedPrefix}mp3 / ${usedPrefix}mp4 / ${usedPrefix}twitter  
+│📌 ${usedPrefix}pinterest / ${usedPrefix}catbox  
 ╰────────────────⬣
 
 ╭───〔 🩷 𝙎𝙏𝙄𝘾𝙆𝙀𝙍 𝙕𝙊𝙉𝙀 〕───⬣
-│🎠 .sticker / .stickerly / .emojimix  
-│💖 .take / .robar / .wm / .qc  
-│🖼️ .pfp / .brat / .bratv  
+│🎠 ${usedPrefix}sticker / ${usedPrefix}stickerly / ${usedPrefix}emojimix  
+│💖 ${usedPrefix}take / ${usedPrefix}robar / ${usedPrefix}wm / ${usedPrefix}qc  
+│🖼️ ${usedPrefix}pfp / ${usedPrefix}brat / ${usedPrefix}bratv  
 ╰────────────────⬣
 
 ╭───〔 🏮 𝙂𝙍𝙐𝙋𝙊𝙎 & 𝘼𝘿𝙈𝙄𝙉𝙎 〕───⬣
-│📢 .invite / .todos / .listonline  
-│🛡️ .autoadmin / .restrict / .restringir  
-│🧾 .backup / .resetuser / .broadcastgroup  
+│📢 ${usedPrefix}invite / ${usedPrefix}todos / ${usedPrefix}listonline  
+│🛡️ ${usedPrefix}autoadmin / ${usedPrefix}restrict / ${usedPrefix}restringir  
+│🧾 ${usedPrefix}backup / ${usedPrefix}resetuser / ${usedPrefix}broadcastgroup  
 ╰────────────────⬣
 
 ╭───〔 💠 𝙊𝙒𝙉𝙀𝙍 & 𝙎𝙏𝘼𝙁𝙁 〕───⬣
-│👑 .addprem / .delprem / .listprem  
-│💎 .addcoin / .addxp  
-│💻 .update / .restart / .setppbot  
-│🧩 .saveplugin / .deletefile / .getplugin  
+│👑 ${usedPrefix}addprem / ${usedPrefix}delprem / ${usedPrefix}listprem  
+│💎 ${usedPrefix}addcoin / ${usedPrefix}addxp  
+│💻 ${usedPrefix}update / ${usedPrefix}restart / ${usedPrefix}setppbot  
+│🧩 ${usedPrefix}saveplugin / ${usedPrefix}deletefile / ${usedPrefix}getplugin  
 ╰────────────────⬣
 
 ╭───〔 🍑 𝙈𝙊𝘿𝙊 +18 🔞 〕───⬣
 │⚠️ Usa con precaución:  
-│🔹 .nsfw1 / .nsfw2 / .r34 <tag>  
-│🔹 .hentai / .cosplay / .tetas  
-│🔹 .sexo / .follar / .spank / .lesbianas  
+│🔹 ${usedPrefix}nsfw1 / ${usedPrefix}nsfw2 / ${usedPrefix}r34 <tag>  
+│🔹 ${usedPrefix}hentai / ${usedPrefix}cosplay / ${usedPrefix}tetas  
+│🔹 ${usedPrefix}sexo / ${usedPrefix}follar / ${usedPrefix}spank / ${usedPrefix}lesbianas  
 ╰────────────────⬣
 
 🌸 ʙʏ ᴏᴍᴀʀ ɢʀᴀɴᴅᴀ | ᴠᴇʀꜱɪᴏɴ 1.8.2  
 💮 ᴍɪʏᴜᴋɪʙᴏᴛ ᴍᴅ — ᴇʟ ᴇsᴛɪʟᴏ ᴍᴇᴊᴏʀᴀᴅᴏ 💫
 `;
 
-  await conn.sendMessage(m.chat, { text: menu }, { quoted: m });
-};
+    await conn.reply(m.chat, menu, m);
+  } catch (e) {
+    console.error(e)
+    conn.reply(m.chat, '⚠️ Error al mostrar el menú. Verifica la consola.', m)
+  }
+}
 
-handler.help = ['menu', 'help'];
-handler.tags = ['main'];
-handler.command = ['menu', 'help', 'comandos'];
 
-export default handler;
+function clockString(ms) {
+  let h = Math.floor(ms / 3600000)
+  let m = Math.floor(ms / 60000) % 60
+  let s = Math.floor(ms / 1000) % 60
+  return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
+}
+
+handler.help = ['menu', 'help']
+handler.tags = ['main']
+handler.command = ['menu', 'help', 'comandos']
+
+export default handler
