@@ -179,8 +179,6 @@ const iconos = [
 ╰──────────────────────────────╯
 💠 *Administra, configura y controla tus sesiones desde un solo lugar.*
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 ╭─━━━🛠️ 𝐌𝐄𝐍𝐔 𝐔𝐓𝐈𝐋𝐈𝐃𝐀𝐃𝐄𝐒 🛠️━━━─╮
 │⚙️ Herramientas útiles para automatizar, crear y explorar
 │
@@ -245,8 +243,6 @@ const iconos = [
 │
 ╰──────────────────────────────╯
 ✨ *Muestra quién eres y deja huella en el servidor.*
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ╭─━━━💬 𝐌𝐄𝐍𝐔 𝐃𝐄 𝐆𝐑𝐔𝐏𝐎𝐒 💬━━━─╮
 │👑 Comandos exclusivos para administradores
@@ -358,7 +354,7 @@ const iconos = [
 │• 🤟 #ppcouple | #ppcp
 │
 ╰──────────────────────────────╯
-👑 © Powered By *OmarGranda*
+👑 © Powered By *OmarGranda*`
 
     await conn.sendMessage(m.chat, {
       text: menu,
