@@ -314,7 +314,6 @@ let handler = async (m, { conn }) => {
 `
 
     await conn.sendMessage(m.chat, {
-      video: { url: 'https://qu.ax/AjjHr.mp4' },
       text: menu,
       contextInfo: {
         mentionedJid: [mentionedJid],
@@ -330,7 +329,7 @@ let handler = async (m, { conn }) => {
           mediaType: 1,
           mediaUrl: redes,
           sourceUrl: redes,
-          thumbnailUrl: 'https://qu.ax/ndWOF.jpg',
+          thumbnailUrl: 'https://qu.ax/AjjHr.mp4',
           showAdAttribution: false,
           renderLargerThumbnail: true
         }
