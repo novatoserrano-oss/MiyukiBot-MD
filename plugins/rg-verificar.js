@@ -73,7 +73,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
      ];
 
     return await conn.sendMessage(m.chat, {
-      image: { url: 'https://files.catbox.moe/u5b9pp.jpg' },
+      image: { url: 'https://qu.ax/iNweS.jpg' },
       caption: mensaje,
       mentions: [m.sender],
       footer: dev,
