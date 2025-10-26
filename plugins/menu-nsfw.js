@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 const handler = async (m, { conn, usedPrefix }) => {
   try {
-    const img = 'https://files.catbox.moe/0lmzwy.jpg'; 
+    const img = 'https://qu.ax/TCKLQ.jpg'; 
     const taguser = '@' + m.sender.split('@')[0];
     const invisible = String.fromCharCode(8206).repeat(850);
 
