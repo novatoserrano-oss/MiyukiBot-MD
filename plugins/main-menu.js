@@ -1,357 +1,150 @@
-import os from 'os'
-import moment from 'moment-timezone'
-import speed from 'performance-now'
+import fetch from 'node-fetch'
+import { xpRange } from '../lib/levelling.js'
+import fs from 'fs'
+import PhoneNumber from 'awesome-phonenumber'
 
-let handler = async (m, { conn }) => {
+let handler = async (m, { conn, usedPrefix, __dirname, participants }) => {
   try {
-    await m.react('🌸')
-    conn.sendPresenceUpdate('composing', m.chat)
+    await m.react('🌷')
 
-    let mentionedJid = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
-    let totalCommands = Object.keys(global.plugins).length
-/*
-    const iconos = [
-      'https://files.catbox.moe/lee8v6.jpg',
-      'https://files.catbox.moe/cut28l.jpg',
-      'https://files.catbox.moe/rut9jj.jpg',
-      'https://files.catbox.moe/lgq7yr.jpg',
-      'https://files.catbox.moe/8pil8x.jpg',
-      'https://files.catbox.moe/6a3vsc.jpg',
-      'https://files.catbox.moe/ltc7g2.jpg',
-      'https://files.catbox.moe/kt7pbi.jpg',
-      'https://files.catbox.moe/vskjfh.jpg'
-    ]
-    const randomIcono = iconos[Math.floor(Math.random() * iconos.length)]
-*/
-    const vs = global.vs || '1.8.0'
-    const libreria = global.libreria || 'Baileys'
-    const botname = global.botname || 'MiyukiBot-MD'
-    const textbot = global.textbot || 'MiyukiBot-MD 🌸'
-    const redes = global.redes || 'https://github.com/'
-    const channelRD = global.channelRD || { id: '', name: 'Canal Oficial 🌸' }
+    const user = global.db.data.users[m.sender] || {}
+    const name = await conn.getName(m.sender)
+    const premium = user.premium ? '💎 Premium' : '🪶 Gratis'
+    const limit = user.limit || 0
+    const totalreg = Object.keys(global.db.data.users).length
+    const groupUserCount = m.isGroup ? participants.length : '-'
+    const groupsCount = Object.values(conn.chats).filter(v => v.id.endsWith('@g.us')).length
+    const uptime = formatTime(process.uptime() * 1000)
+    const fecha = new Date(Date.now())
+    const locale = 'es-PE'
+    const dia = fecha.toLocaleDateString(locale, { weekday: 'long' })
+    const fechaTxt = fecha.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })
+    const hora = fecha.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })
 
-    // ⏳ Ping
-    let timestamp = speed()
-    let ping = (speed() - timestamp).toFixed(2)
+    const totalCommands = Object.keys(global.plugins).length
 
-    // 🕓 Uptime
-    let uptime = clockString(process.uptime() * 1000)
+    const userId = m.sender.split('@')[0]
+    const phone = PhoneNumber('+' + userId)
+    const pais = phone.getRegionCode() || '🌎 Desconocido'
+    
+    const perfil = await conn.profilePictureUrl(conn.user.jid, 'image')
+      .catch(() => banner)
 
-    // 🖥️ RAM info
-    let total = (os.totalmem() / 1024 / 1024).toFixed(0)
-    let free = (os.freemem() / 1024 / 1024).toFixed(0)
-    let used = total - free
+    const canal = { 
+      id: '120363422169517881@newsletter', 
+      name: '🌸 𝐌𝐢𝐲𝐮𝐤𝐢𝐁𝐨𝐭 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 🌸'
+    }
 
-    // 📅 Fecha y hora
-    let fecha = moment.tz('America/Lima').format('DD/MM/YYYY')
-    let hora = moment.tz('America/Lima').format('HH:mm:ss')
-    let dia = moment.tz('America/Lima').format('dddd')
-    let menu = `
-╭━━━〔 𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸 〕━━⬣
-│👤 *Usuario:* @${mentionedJid.split('@')[0]}
-│📚 *Comandos:* ${totalCommands}
-│⚙️ *Versión:* ${vs}
-│🛠️ *Librería:* ${libreria}
-│🤖 *Bot:* ${(conn.user.jid == global.conn.user.jid ? 'Principal' : 'Sub-Bot')}
-│🚀 *Tiempo activo:* ${uptime}
-╰━━━━━━━━━━━━━━━━━━⬣
-
-╭─〔 💾 ESTADO DEL SISTEMA 〕─⬣
-│💾 *RAM Total:* ${total} MB
-│📈 *RAM Usada:* ${used} MB
-│📉 *RAM Libre:* ${free} MB
-│🌿 *Ping:* ${ping} ms
-╰━━━━━━━━━━━━━━━━━━⬣
-
-╭─〔 🗓️ FECHA Y HORA 〕─⬣
-│📅 *Día:* ${dia}
-│📆 *Fecha:* ${fecha}
-│⏰ *Hora:* ${hora}
-╰━━━━━━━━━━━━━━━━━━⬣
-
-*╭─────────*
-*│* ⑀✬ \`𝐄𝐂𝐎𝐍𝐎𝐌𝐈𝐀\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos de para ganar money* ❖
-*┊* 🤑 #w • #work • #trabajar*
-*┊* 🤑 *#slut • #protituirse*
-*┊* 🤑 *#coinflip • #flip • #cf* + [cantidad] <cara/cruz>
-*┊* 🤑 *#crime • #crimen*
-*┊* 🤑 *#roulette • #rt* + [red/black] [cantidad]
-*┊* 🤑 *#casino • #apostar* • *#slot* + [cantidad]
-*┊* 🤑 *#balance • #bal • #bank* + <usuario>
-*┊* 🤑 *#deposit • #dep • #depositar • #d* + [cantidad] | all
-*┊* 🤑 *#withdraw • #with • #retirar* + [cantidad] | all
-*┊* 🤑 *#economyinfo • #einfo*
-*┊* 🤑 *#givecoins • #pay • #coinsgive* + [usuario] [cantidad]
-*┊* 🤑 *#miming • #minar • #mine*
-*┊* 🤑 *#daily • #diario*
-*┊* 🤑 *#cofre* • *#coffer*
-*┊* 🤑 *#weekly • #semanal*
-*┊* 🤑 *#monthly • #mensual*
-*┊* 🤑 *#steal • #robar • #rob* + [@mencion]
-*┊* 🤑 *#economyboard • #eboard • #baltop* + <pagina>
-*┊* 🤑 *#aventura • #adventure*
-*┊* 🤑 *#curar • #heal*
-*┊* 🤑 *#cazar • #hunt*
-*┊* 🤑 *#fish • #pescar*
-*┊* 🤑 *#mazmorra • #dungeon*
-*╰───────────┅≡*
-
-*╭─────────*
-*│* ⑀✬ \`DOWNLOAD\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos para descargar archivos de varias fuentes* ❖
-*┊* 📥 *#tiktok • #tt* + [Link] / [busqueda]
-*┊* 📥 *#mediafire • #mf* + [Link]
-*┊*  *#mega • #mg* + [Link]
-*┊* 📥 *#play • #play2* + [Cancion]
-*┊* 📥 *#ytmp3 • #ytmp4* [Link]
-*┊* 📥 *#facebook • #fb* + [Link]
-*┊* 📥 *#twitter • #x* + [Link]
-*┊* 📥 *#ig • #instagram* + [Link]
-*┊* 📥 *#pinterest • #pin* + [busqueda] / [Link]
-*┊* 📥 *#image • #imagen* + [busqueda]
-*┊* 📥 *#apk • #modapk* + [busqueda]
-*┊* 📥 *#ytsearch • #search* + [busqueda]
-*╰───────────┅≡*
-
-*╭─────────*
-*│* ⑀✬ \`GACHA\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos para reclamar y colecciónar personajes* ❖
-*┊* 🎁 *#buycharacter • #buychar • #buyc* + [nombre]
-*┊* 🎁 *#charimage • #waifuimage • #cimage • #wimage* + [nombre]
-*┊* 🎁 *#charinfo • #winfo • #waifuinfo* + [nombre]
-*┊* 🎁 *#claim • #c • #reclamar* + {citar personaje}
-*┊* 🎁 *#delclaimmsg*
-*┊* 🎁 *#deletewaifu • #delwaifu • #delchar* + [nombre]
-*┊* 🎁 *#favoritetop • #favtop*
-*┊* 🎁 *#gachainfo • #ginfo • #infogacha*
-*┊* 🎁 *#giveallharem* + [@usuario]
-*┊* 🎁 *#givechar • #givewaifu • #regalar* + [@usuario] [nombre]
-*┊* 🎁 *#robwaifu • #robarwaifu* + [@usuario]
-*┊* 🎁 *#harem • #waifus • #claims* + <@usuario>
-*┊* 🎁 *#haremshop • #tiendawaifus • #wshop* + <Pagina>
-*┊* 🎁 *#removesale • #removerventa* + [precio] [nombre]
-*┊* 🎁 *#rollwaifu • #rw • #roll*
-*┊* 🎁 *#sell • #vender* + [precio] [nombre]
-*┊* 🎁 *#serieinfo • #ainfo • #animeinfo* + [nombre]
-*┊* 🎁 *#serielist • #slist • #animelist*
-*┊* 🎁 *#setclaimmsg • #setclaim* + [mensaje]
-*┊* 🎁 *#trade • #intercambiar* + [Tu personaje] / [Personaje 2]
-*┊* 🎁 *#vote • #votar* + [nombre]
-*┊* 🎁 *#waifusboard • #waifustop • #topwaifus • #wtop* + [número]
-*╰───────────┅≡*
-
-*╭─────────*
-*│* ⑀✬ \`SOCKETS\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos para registrar tu propio Bot* ❖
-*┊* 🤖 *#qr • #code*
-*┊* 🤖 *#bots • #botlist*
-*┊* 🤖 *#status • #estado*
-*┊* 🤖 *#p • #ping*
-*┊* 🤖 *#join* + [Invitacion]
-*┊* 🤖 *#leave • #salir*
-*┊* 🤖 *#logout*
-*┊* 🤖 *#setpfp • #setimage*
-*┊* 🤖 *#setstatus* + [estado]
-*┊* 🤖 *#setusername* + [nombre]
-*╰───────────┅≡*
-
-*╭─────────*
-*│* ⑀✬ \`UTILITIES\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos de utilidades* ❖
-*┊* 📌 *#help • #menu*
-*┊* 📌 *#sc • #script*
-*┊* 📌 *#reporte • #reportar*
-*┊* 📌 *#sug • #suggest*
-*┊* 📌 *#calcular • #cal*
-*┊* 📌 *#delmeta*
-*┊* 📌 *#getpic • #pfp* + [@usuario]
-*┊* 📌 *#say* + [texto]
-*┊* 📌 *#setmeta* + [autor] | [pack]
-*┊* 📌 *#sticker • #s • #wm* + {citar una imagen/video}
-*┊* 📌 *#toimg • #img* + {citar sticker}
-*┊* 📌 *#brat • #bratv • #qc • #emojimix*︎
-*┊* 📌 *#gitclone* + [Link]
-*┊* 📌 *#enhance • #remini • #hd*
-*┊* 📌 *#letra • #style*
-*┊* 📌 *#read • #readviewonce*
-*┊* 📌 *#ss • #ssweb*
-*┊* 📌 *#translate • #traducir • #trad*
-*┊* 📌 *#ia • #gemini*
-*┊* 📌 *#tourl • #catbox*
-*┊* 📌 *#wiki • #wikipedia*
-*┊* 📌 *#dalle • #flux*
-*┊* 📌 *#npmdl • #nmpjs*
-*┊* 📌 *#google*
-*╰───────────┅≡*
-
-*╭─────────*
-*│* ⑀✬ \`PERFIL\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos para ver y configurar tu perfil* ❖
-*┊* 👑 *#leaderboard • #lboard • #top* + <Paginá>
-*┊* 👑 *#level • #lvl* + <@Mencion>
-*┊* 👑 *#marry • #casarse* + <@Mencion>
-*┊* 👑 *#profile* + <@Mencion>
-*┊* 👑 *#setbirth* + [fecha]
-*┊* 👑 *#setdescription • #setdesc* + [Descripcion]
-*┊* 👑 *#setgenre* + Hombre | Mujer
-*┊* 👑 *#delgenre • #delgenero*
-*┊* 👑 *#delbirth* + [fecha]
-*┊* 👑 *#divorce*
-*┊* 👑 *#setfavourite • #setfav* + [Personaje]
-*┊* 👑 *#prem • #vip*
-*┊* 👑 *#deldescription • #deldesc*
-*╰───────────┅≡*
- 
-*╭─────────*
-*│* ⑀✬ \`GROUPS\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos para administradores de grupos* ❖
-*┊* 🗣️*#tag • #hidetag • #invocar • #tagall* + [mensaje]
-*┊* 🗣️ *#detect • #alertas* + [enable/disable]
-*┊* 🗣️ *#antilink • #antienlace* + [enable/disable]
-*┊* 🗣️ *#bot* + [enable/disable]
-*┊* 🗣️ *#close • #cerrar*
-*┊* 🗣️ *#demote* + <@usuario> | {mencion}
-*┊* 🗣️ *#economy* [enable/disable]  
-*┊* 🗣️ *#gacha* [enable/disable]  
-*┊* 🗣️ *#welcome • #bienvenida* [enable/disable]  
-*┊* 🗣️ *#setbye* [texto]  
-*┊* 🗣️ *#setprimary* [@bot]  
-*┊* 🗣️ *#setwelcome* [texto]  
-*┊* 🗣️ *#kick <@usuario>* | {mencion}  
-*┊* 🗣️ *#nsfw* [enable/disable]
-*┊* 🗣️ *#onlyadmin* [enable/disable]
-*┊* 🗣️ *#open* • #abrir*
-*┊* 🗣️ *#promote <@usuario>* | {mencion}  
-*┊* 🗣️ *#add • #añadir* • #agregar {número}
-*┊* 🗣️ *#admins • admin* [texto]
-*┊* 🗣️ *#restablecer • #revoke*
-*┊* 🗣️ *#addwarn • #warn* <@usuario> | {mencion}
-*┊* 🗣️ *#unwarn • #delwarn* <@usuario> | {mencion}
-*┊* 🗣️ *#advlist • #listadv*
-*┊* 🗣️ *#inactivos • #kickinactivos*
-*┊* 🗣️ *#listnum • #kicknum* [texto]
-*┊* 🗣️ *#gpbanner • #groupimg*
-*┊* 🗣️ *#gpname • #groupname* [texto]
-*┊* 🗣️ *#gpdesc • #groupdesc* [texto]
-*┊* 🗣️ *#del • #delete* {citar un mensaje}
-*┊* 🗣️ *#linea • #listonline*
-*┊* 🗣️ *#gp • #infogrupo*
-*┊* 🗣️ *#link*
-*╰───────────┅≡*
-
-*╭─────────*
-*│* ⑀✬ \`ANIME\`  ︴
-*╰─╮*
-*╭─╯*
-*┊ Comandos de reacciones de anime* ❖
-*┊* 😡 *#angry • #enojado* <mencion>
-*┊* 🧼 *#bath • #bañarse* <mencion>
-*┊* 🫦 *#bite • #morder* <mencion>
-*┊* 😛 *#bleh • #lengua* <mencion 
-*┊* ☺️ *#blush • #sonrojarse* <mencion>
-*┊* 🫩 *#bored • #aburrido* <mencion>
-*┊* 👏 *#clap • #aplaudir* <mencion>
-*┊* ☕ *#coffee • #cafe • #café* <mencion>
-*┊* 😭 *#cry • #llorar* <mencion>
-*┊* 🙂‍↔️ *#cuddle • #acurrucarse* <mencion>
-*┊* 🪩 *#dance • #bailar* <mencion>
-*┊* 😫 *#dramatic • #drama* <mencion>
-*┊* 🍻 *#drunk • #borracho* <mencion>
-*┊* 🍽️ *#eat • #comer* <mencion>
-*┊* 😏 *#facepalm • #palmada* <mencion>
-*┊* 😄 *#happy • #feliz* <mencion>
-*┊* 🫂 *#hug • #abrazar *<mencion>
-*┊* 🤰🏻 *#impregnate • #preg • #preñar • #embarazar* <mencion>
-*┊* 🥷 *#kill • #matar* <mencion>
-*┊* 😘 *#kiss • #muak* <mencion>
-*┊* 💋 *#kisscheek • #beso* <mencion>
-*┊* 😅 *#laugh • #reirse* <mencion>
-*┊* 🤤 *#lick • #lamer* <mencion>
-*┊* 😍 *#love • #amor • #enamorado • #enamorada* <mencion>
-*┊* 🔥 *#pat • #palmadita • #palmada* <mencion>
-*┊* ⛏️ *#poke • #picar* <mencion>
-*┊* 😚 *#pout • #pucheros* <mencion>
-*┊* 👊 *#punch • #pegar • #golpear* <mencion>
-*┊* 🏃 *#run • #correr* <mencion>
-*┊* 😔 *#sad • #triste* <mencion>
-*┊* 😨 *#scared • #asustado • #asustada* <mencion>
-*┊* 🥴 *#seduce • #seducir* <mencion>
-*┊* 🤐 *#shy • #timido • #timida* <mencion>
-*┊* 🥊 *#slap • #bofetada* <mencion>
-*┊* 😴 *#sleep • #dormir* <mencion>
-*┊* 🚬 *#smoke • #fumar* <mencion>
-*┊* 😮‍💨*#spit • #escupir* <mencion>
-*┊* 👣 *#step • #pisar* <mencion>
-*┊* 🤔 *#think • #pensar* <mencion>
-*┊* 🚶 *#walk • #caminar* <mencion>
-*┊* 😉 *#wink • #guiñar* <mencion>
-*┊* 😳 *#cringe • #avergonzarse* <mencion>
-*┊* 🗣️ *#smug • #presumir* <mencion>
-*┊* 😊 *#smile • #sonreir* <mencion>
-*┊* ✋ *#highfive • #5* <mencion>
-*┊* 😌 *#bully • #bullying* <mencion>
-*┊*  *#handhold • #mano* <mencion>
-*┊* 👋 *#wave • #ola • #hola* <mencion>
-*┊* 🌸 *#waifu*  
-*┊* 🤟 *#ppcouple • #ppcp*
-*╰───────────┅≡*ׅ
-👑 © Powered By OmarGranda
-`
-
-    await conn.sendMessage(m.chat, {
-      text: menu,
+    const metaMsg = {
+      quoted: global.fakeMetaMsg,
       contextInfo: {
-        mentionedJid: [mentionedJid],
+        mentionedJid: [m.sender],
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
-          newsletterJid: channelRD.id,
-          serverMessageId: '',
-          newsletterName: channelRD.name
+          newsletterJid: canal.id,
+          serverMessageId: 77,
+          newsletterName: canal.name
         },
         externalAdReply: {
           title: botname,
-          body: textbot,
+          body: dev,
+          mediaUrl: null,
+          description: null,
+          previewType: "PHOTO",
+          thumbnailUrl: perfil,
           mediaType: 1,
-          mediaUrl: redes,
-          sourceUrl: redes,
-          thumbnailUrl: 'https://qu.ax/ndWOF.jpg',
-          showAdAttribution: false,
-          renderLargerThumbnail: true
+          renderLargerThumbnail: false
         }
       }
-    }, { quoted: m })
+    }
+
+    const categorias = {
+      'info': '🌼 〢 ɪɴғᴏʀᴍᴀᴄɪᴏɴ',
+      'main': '🍃 〢 ᴍᴇɴᴜ ᴘʀɪɴᴄɪᴘᴀʟ',
+      'fun': '🎭 〢 ᴊᴜᴇɢᴏs & ᴅɪᴠᴇʀsɪᴏɴ',
+      'rpg': '⚔️ 〢 ʀᴘɢ ᴍᴏᴅᴏ',
+      'anime': '🌸 〢 ᴀɴɪᴍᴇ ᴡᴏʀʟᴅ',
+      'download': '🎧 〢 ᴅᴇsᴄᴀʀɢᴀs',
+      'tools': '🧩 〢 ᴛᴏᴏʟs & ᴜᴛɪʟɪᴅᴀᴅᴇs',
+      'sticker': '💮 〢 sᴛɪᴄᴋᴇʀ ᴢᴏɴᴇ',
+      'group': '🏮 〢 ɢʀᴜᴘᴏs & ᴀᴅᴍɪɴs',
+      'owner': '🌹 〢 ᴏᴡɴᴇʀ & sᴛᴀғғ',
+      'ia': '☁️ 〢 ɪɴᴛᴇʟɪɢᴇɴᴄɪᴀ ᴀʀᴛɪғɪᴄɪᴀʟ',
+      'nsfw': '🍑 〢 ᴍᴏᴅᴏ +18'
+    }
+
+    const comandos = Object.values(global.plugins)
+      .filter(v => v.help && v.tags)
+      .map(v => ({
+        help: Array.isArray(v.help) ? v.help : [v.help],
+        tags: Array.isArray(v.tags) ? v.tags : [v.tags]
+      }))
+
+    let menuTexto = ''
+    for (let cat in categorias) {
+      let cmds = comandos
+        .filter(c => c.tags.includes(cat))
+        .map(c => c.help.map(h => `${usedPrefix}${h}`).join('\n'))
+        .join('\n')
+      if (cmds) {
+        menuTexto += `\n\n*${categorias[cat]}*\n${cmds}`
+      }
+    }
+
+    const infoUser = `
+╭━━━〔 ᴍɪʏᴜᴋɪʙᴏᴛ 🌸 〕━━⬣
+│💫 *Usuario:* @${userId}
+│🌷 *Estado:* ${premium}
+│🌎 *País:* ${pais}
+│🍃 *Límite:* ${limit}
+│🧭 *Usuarios:* ${totalreg}
+│🏮 *Grupos:* ${groupsCount}
+│⏰ *Uptime:* ${uptime}
+│🌸 *Versión:* ${vs}
+│⚙️ *Librería:* ${libreria}
+│📆 *Fecha:* ${hora}, ${dia}, ${fechaTxt}
+╰━━━━━━━━━━━━━━━━━━⬣
+
+🌼 *Desarrollador:* Omar Granda 🌙
+─────────────────────
+🍧 *Menú disponible:*`.trim()
+
+    const finalText = `${infoUser}\n${menuTexto}`
+
+    const videos = [
+      'https://shadow-xyz.vercel.app/videos/shadow1.mp4',
+      '',
+      ''
+    ]
+    const videoUrl = videos[Math.floor(Math.random() * videos.length)]
+
+    await conn.sendMessage(m.chat, {
+      video: { url: videoUrl },
+      caption: finalText,
+      fileName: '🌙 MiyukiBot | Menú Oficial 🌸',
+      mimetype: 'video/mp4',
+      mentions: [m.sender],
+      ...metaMsg
+    })
 
   } catch (e) {
     console.error(e)
-    m.reply('Ocurrió un error al generar el menú.')
+    await conn.sendMessage(m.chat, { 
+      text: `💔 Ocurrió un error al mostrar el menú.\n> ${e.message}`,
+      mentions: [m.sender] 
+    })
   }
 }
 
 handler.help = ['menu']
 handler.tags = ['main']
-handler.command = ['menu', 'menú', 'help']
-handler.register = true
+handler.command = ['menu','help','menú','allmenu']
 
 export default handler
 
-function clockString(ms) {
-  let h = Math.floor(ms / 3600000)
-  let m = Math.floor(ms / 60000) % 60
-  let s = Math.floor(ms / 1000) % 60
+function formatTime(ms) {
+  const h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
+  const m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
+  const s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
   return [h, m, s].map(v => v.toString().padStart(2, '0')).join(':')
 }
