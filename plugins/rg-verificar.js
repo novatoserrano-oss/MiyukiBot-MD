@@ -34,7 +34,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
     ];
 
     return await conn.sendMessage(m.chat, {
-      image: { url: 'https://files.catbox.moe/v8at70.jpg' },
+      image: { url: 'https://qu.ax/mCcQs.jpg' },
       caption: texto,
       mentions: [m.sender],
       footer: dev,
@@ -152,7 +152,7 @@ Tu registro ha sido completado exitosamente ✅`
           title: '𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿',
           body: 'Verificando registro...',
           mediaType: 1,
-          thumbnailUrl: 'https://files.catbox.moe/60sbrf.jpg',
+          thumbnailUrl: 'https://qu.ax/lzGrH.jpg',
           mediaUrl: redes,
           sourceUrl: redes,
           renderLargerThumbnail: true
