@@ -163,7 +163,6 @@ ${groupBotsText}
       {
         text: message.trim(),
         ...rcanal
-      },
       { quoted: m }
     )
 
