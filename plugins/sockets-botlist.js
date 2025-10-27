@@ -238,9 +238,7 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
 │ ⚪ Cupos Libres: ${libres}
 │
 ├─〔 *SUBBOTS CONECTADOS* 〕
-
 ${subBots.length > 0 ? subBots.join("\n\n") : "✧ No hay SubBots conectados actualmente."}
-│
 ├─〔 *BOTS EN ESTE GRUPO* 〕
 ${groupBotsText}
 │
