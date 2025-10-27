@@ -224,7 +224,7 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
 
     // ✨ Mensaje final
     const message = `
-╭〔 *🌐 PANEL GLOBAL DE BOTS* 〕╮
+╭─〔 *🌐 PANEL GLOBAL DE BOTS* 〕
 │
 │ 🤖 *BOT PRINCIPAL*
 │ 👤 Nombre: *${mainName}*
@@ -243,7 +243,7 @@ ${subBots.length > 0 ? subBots.join("\n\n") : "✧ No hay SubBots conectados act
 ├─〔 *BOTS EN ESTE GRUPO* 〕
 ${groupBotsText}
 │
-╰──────────────────────────╯
+╰─────────────────────────╯
 `
 
     const mentionList = allBots.map(bot =>
