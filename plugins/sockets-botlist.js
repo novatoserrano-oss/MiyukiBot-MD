@@ -134,7 +134,7 @@ const handler = async (m, { conn, usedPrefix, participants, rcanal }) => {
 
     // ✨ Mensaje visual
     const message = `
-⚜️ 🌐 *PANEL DE CONEXIÓN DE BOTS* ⚜️
+⚜️ *PANEL DE CONEXIÓN DE BOTS* ⚜️
 
 👑 *BOT PRINCIPAL*
 ━━━━━━━━━━━━━━━━━━
@@ -171,9 +171,9 @@ ${groupBotsText}
     rcanal.contextInfo = {
       mentionedJid: mentionList,
       externalAdReply: {
-        title: "Sistema MultiBot Activo ⚡",
-        body: "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸",
-        thumbnailUrl: "https://qu.ax/aAroi.jpg", // 🔹 Imagen de vista previa
+        title: "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸",
+        body: "Sistema MultiBot Activo ⚡",
+        thumbnailUrl: "https://qu.ax/gRJso.jpg", // 🔹 Imagen de vista previa
         sourceUrl: "https://whatsapp.com/channel/0029Vb6wMPa8kyyTpjBG9C2H" // 🔹 Tu canal o link oficial
       }
     }
