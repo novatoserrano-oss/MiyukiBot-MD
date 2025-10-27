@@ -165,7 +165,7 @@ ${groupBotsText}
     await conn.sendMessage(
       m.chat,
       {
-        image: { url: https://qu.ax/TPfmC.jpg },
+        image: { url: 'https://qu.ax/TPfmC.jpg' },
         caption: message.trim(),
         mentions: mentionList,
         fileName: 'sockets.jpg',
