@@ -173,7 +173,7 @@ ${groupBotsText}
         ...rcanal2,
         ...rcanal // 🙂
       },
-      { quoted: shadow_xyz }
+      { quoted: m }
     )
 
   } catch (error) {
