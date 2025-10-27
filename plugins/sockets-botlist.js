@@ -173,8 +173,8 @@ ${groupBotsText}
     await conn.sendMessage(
       m.chat,
       {
-        text: message.trim(),
-        contextInfo: { mentionedJid: mentionList }
+       text: message.trim(),
+       rcanal.contextInfo: { mentionedJid: mentionList }
       },
       { quoted: m }
     )
