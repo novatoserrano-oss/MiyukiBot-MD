@@ -155,10 +155,8 @@ ${groupBotsText}
 `
 
     const mentionList = groupBots.map(bot => bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`)
-    rcanal2 = rcanal2 || {}
-    rcanal2.contextInfo = rcanal2.contextInfo || {}
-    rcanal2.contextInfo.mentionedJid = mentionList
-    await conn.sendMessage(m.chat, { text: message, rcanal2, ...rcanal }, { quoted: m })
+
+    await conn.sendMessage(m.chat, { text: message, ...rcanal }, { quoted: m })
 
   } catch (error) {
     console.error(error)
