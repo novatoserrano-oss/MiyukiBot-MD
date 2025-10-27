@@ -152,7 +152,7 @@ ${subBots.length > 0 ? subBots.join("\n") : "✧ No hay SubBots conectados actua
 ━━━━━━━━━━━━━━━━━━
 ${groupBotsText}
 
-`trim(),
+`
 
  const mentionList = groupBots.map(bot => bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`)
 rcanal.contextInfo.mentionedJid = mentionList
