@@ -1,19 +1,22 @@
 import ws from "ws"
 
-const handler = async (m, { conn, command, usedPrefix, participants }) => {
+const handler = async (m, { conn, usedPrefix, participants }) => {
   try {
-    // Lista de bots conectados (principal + subbots activos)
+    // Asegurar existencia de global.conns
+    global.conns = global.conns || []
+
+    // Lista de bots activos (principal + subbots con conexión abierta)
     const users = [
       global.conn.user.jid,
       ...new Set(
         global.conns
-          .filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED)
-          .map((conn) => conn.user.jid)
+          .filter(c => c.user && c.ws?.socket && c.ws.socket.readyState !== ws.CLOSED)
+          .map(c => c.user.jid)
       )
     ]
 
     // Función para convertir milisegundos a formato legible
-    function convertirMsADiasHorasMinutosSegundos(ms) {
+    const convertirMsADiasHorasMinutosSegundos = (ms) => {
       const segundos = Math.floor(ms / 1000)
       const minutos = Math.floor(segundos / 60)
       const horas = Math.floor(minutos / 60)
@@ -26,48 +29,48 @@ const handler = async (m, { conn, command, usedPrefix, participants }) => {
       if (horasRest) resultado += `${horasRest} horas, `
       if (minRest) resultado += `${minRest} minutos, `
       if (segRest) resultado += `${segRest} segundos`
-      return resultado.trim()
+      return resultado.trim() || "Hace poco"
     }
 
-    // Filtra los bots que están dentro del grupo
-    let groupBots = users.filter((bot) => participants.some((p) => p.id === bot))
-    if (participants.some((p) => p.id === global.conn.user.jid) && !groupBots.includes(global.conn.user.jid)) {
-      groupBots.push(global.conn.user.jid)
+    // Bots presentes en el grupo actual
+    let groupBots = users.filter(bot => participants.some(p => p.id === bot))
+    if (!groupBots.includes(global.conn.user.jid)) groupBots.push(global.conn.user.jid)
+
+    // Si no hay bots en el grupo
+    if (!groupBots.length) {
+      await conn.sendMessage(m.chat, { text: "✧ No hay bots activos en este grupo." }, { quoted: m })
+      return
     }
 
-    // Construir lista detallada
-    const botsGroup = groupBots.length > 0
-      ? groupBots.map((bot, i) => {
-          const isMainBot = bot === global.conn.user.jid
-          const v = global.conns.find((conn) => conn.user.jid === bot)
-          const uptime = isMainBot
-            ? convertirMsADiasHorasMinutosSegundos(Date.now() - global.conn.uptime)
-            : v?.uptime
-              ? convertirMsADiasHorasMinutosSegundos(Date.now() - v.uptime)
-              : "Activo desde ahora"
-          const numero = bot.replace(/[^0-9]/g, '')
-          return `🟢 *${isMainBot ? 'BOT PRINCIPAL'* : `SUBBOT #${i}`}*
+    // Construir mensaje con detalles de cada bot
+    const botsGroup = groupBots.map((bot, index) => {
+      const isMain = bot === global.conn.user.jid
+      const subConn = global.conns.find(c => c.user?.jid === bot)
+      const uptime = isMain
+        ? convertirMsADiasHorasMinutosSegundos(Date.now() - (global.conn.startTime || global.conn.uptime || 0))
+        : subConn?.uptime
+          ? convertirMsADiasHorasMinutosSegundos(Date.now() - subConn.uptime)
+          : "Activo recientemente"
+      const numero = bot.replace(/[^0-9]/g, '')
+      return `🟢 *${isMain ? "BOT PRINCIPAL" : `SUBBOT #${index}`}*
 ✦ Número: +${numero}
-✦ Tipo: ${isMainBot ? 'Principal' : 'Sub-Bot'}
-✦ Tiempo Activo: ${uptime}`
-        }).join("\n\n")
-      : `✧ No hay bots activos en este grupo`
+✦ Tipo: ${isMain ? "Principal" : "Sub-Bot"}
+✦ Uptime: ${uptime}`
+    }).join("\n\n")
 
-    // Mensaje principal
-    const message = `*「 ✦ LISTA DE BOTS ACTIVOS 」*
-
+    const message = `*「 ✦ LISTA DE BOTS ACTIVOS 」*\n
 🧩 *Principal:* 1
 🤖 *Sub-Bots:* ${users.length - 1}
-
-💬 *En este grupo:* ${groupBots.length} bots
-
-────────────────────────
+💬 *En este grupo:* ${groupBots.length}\n
+───────────────────────
 ${botsGroup}
-────────────────────────`
+───────────────────────`
 
-    // Menciones
-    const mentionList = groupBots.map(bot => bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`)
+    const mentionList = groupBots.map(bot =>
+      bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`
+    )
 
+    // Envío del mensaje final
     await conn.sendMessage(
       m.chat,
       {
@@ -78,7 +81,8 @@ ${botsGroup}
     )
 
   } catch (error) {
-    m.reply(`⚠️ Se ha producido un problema.\nUsa *${usedPrefix}report* para informarlo.\n\n${error.message}`)
+    console.error(error)
+    m.reply(`⚠️ Ocurrió un error.\nUsa *${usedPrefix}report* para informarlo.\n\n> ${error.message}`)
   }
 }
 
