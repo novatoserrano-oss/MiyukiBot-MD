@@ -16,8 +16,25 @@ resolve()
 }, ms))
 
 export async function handler(chatUpdate) {
-this.msgqueque = this.msgqueque || []
-this.uptime = this.uptime || Date.now()
+  this.msgqueque = this.msgqueque || []
+  this.uptime = this.uptime || Date.now()
+  if (!chatUpdate) return
+
+  // === FILTRO PARA SUBBOTS CUANDO HAY BOT PRINCIPAL ===
+  for (const sock of [global.conn, ...(global.conns || [])]) {
+    sock.ev.on('messages.upsert', async ({ messages }) => {
+      const m = messages[0]
+      if (!m || !m.chat) return
+      const chat = global.db.data.chats[m.chat] || {}
+      const primaryBot = chat.primaryBot
+      
+      // Evita que subbots respondan si el bot principal está asignado
+      if (m.isGroup && primaryBot && sock.user.jid !== primaryBot) return
+    })
+  }
+  // === FIN DEL FILTRO ===
+
+  this.pushMessage(chatUpdate.messages).catch(console.error)
 if (!chatUpdate)
 return
 this.pushMessage(chatUpdate.messages).catch(console.error)
