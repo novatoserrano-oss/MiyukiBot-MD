@@ -224,7 +224,7 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
 
     // ✨ Mensaje final
     const message = `
-╭─〔 *🌐 PANEL GLOBAL DE BOTS* 〕─╮
+╭〔 *🌐 PANEL GLOBAL DE BOTS* 〕╮
 │
 │ 🤖 *BOT PRINCIPAL*
 │ 👤 Nombre: *${mainName}*
@@ -232,18 +232,18 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
 │ 🌍 País: ${mainCountry}
 │ ⏱ Uptime: ${mainUptime}
 │
-├─〔 *CUPOS DE SUBBOTS* 〕
+├─〔 *CUPOS PARA SUBBOTS* 〕
 │ 🔹 Cupos Activos: ${MAX_SUBBOTS}
 │ 🔸 Cupos Usados: ${usados}
 │ ⚪ Cupos Libres: ${libres}
 │
-├─〔 *LISTA DE SUBBOTS CONECTADOS* 〕
+├─〔 *SUBBOTS CONECTADOS* 〕
 ${subBots.length > 0 ? subBots.join("\n\n") : "✧ No hay SubBots conectados actualmente."}
 │
 ├─〔 *BOTS EN ESTE GRUPO* 〕
 ${groupBotsText}
 │
-╰────────────────────────────╯
+╰──────────────────────────╯
 `
 
     const mentionList = allBots.map(bot =>
