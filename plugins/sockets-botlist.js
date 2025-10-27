@@ -171,7 +171,7 @@ ${groupBotsText}
         fileName: 'sockets.jpg',
         mimetype: 'image/jpeg',
         ...rcanal2,
-        ...rcanal // 🙂
+        ...fake // 🙂
       },
       { quoted: m }
     )
