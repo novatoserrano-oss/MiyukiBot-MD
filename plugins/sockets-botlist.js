@@ -134,7 +134,7 @@ const handler = async (m, { conn, usedPrefix, participants, rcanal }) => {
 
     // ✨ Mensaje visual
     const message = `
-⚜️ *🌐 PANEL DE CONEXIÓN DE BOTS 💠 ⚜️
+⚜️ 🌐 *PANEL DE CONEXIÓN DE BOTS* ⚜️
 
 👑 *BOT PRINCIPAL*
 ━━━━━━━━━━━━━━━━━━
@@ -172,8 +172,8 @@ ${groupBotsText}
       mentionedJid: mentionList,
       externalAdReply: {
         title: "Sistema MultiBot Activo ⚡",
-        body: "Visualiza los SubBots y su estado actual en red global 🌎",
-        thumbnailUrl: "https://i.imgur.com/GB7m7W5.png", // 🔹 Imagen de vista previa
+        body: "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸",
+        thumbnailUrl: "https://qu.ax/aAroi.jpg", // 🔹 Imagen de vista previa
         sourceUrl: "https://whatsapp.com/channel/0029Vb6wMPa8kyyTpjBG9C2H" // 🔹 Tu canal o link oficial
       }
     }
