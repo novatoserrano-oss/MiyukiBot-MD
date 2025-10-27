@@ -137,7 +137,7 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
 
     // ✨ DISEÑO FINAL DEL PANEL
     const message = `
-╔═《 *🤖 PANEL DE BOTS ACTIVOS* 》═╗
+╔═══《 *🌐 PANEL DE BOTS ACTIVOS* 》
 
 🟢 *BOT PRINCIPAL*
 ━━━━━━━━━━━━━━━━━━
@@ -163,7 +163,7 @@ ${subBots.length > 0 ? subBots.join("\n") : "✧ No hay SubBots conectados actua
 ━━━━━━━━━━━━━━━━━━
 ${groupBotsText}
 
-╚══════════════════════════╝
+╚═════════════════════════╝
 `
 
     // 📤 Envío con menciones
