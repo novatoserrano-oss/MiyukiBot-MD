@@ -158,17 +158,6 @@ ${groupBotsText}
       bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`
     )
 
-    if (!rcanal) rcanal = {}
-    rcanal.contextInfo = {
-      mentionedJid: mentionList,
-      externalAdReply: {
-        title: "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸",
-        body: "Sistema MultiBot Activo ⚡",
-        thumbnailUrl: "https://qu.ax/gRJso.jpg",
-        sourceUrl: "https://whatsapp.com/channel/0029Vb6wMPa8kyyTpjBG9C2H"
-      }
-    }
-
     await conn.sendMessage(
       m.chat,
       {
