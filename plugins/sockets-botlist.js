@@ -5,7 +5,6 @@ const handler = async (m, { conn, usedPrefix, participants, rcanal }) => {
     global.conns = global.conns || []
     const MAX_SUBBOTS = 3
 
-    // 🌍 Detección de país
     const detectarPais = (numero) => {
       const codigos = {
         "1": "🇺🇸 EE.UU / 🇨🇦 Canadá",
@@ -71,7 +70,6 @@ const handler = async (m, { conn, usedPrefix, participants, rcanal }) => {
       return "🌎 Desconocido"
     }
 
-    // 🕒 Conversor de tiempo
     const convertirMsADiasHorasMinutosSegundos = (ms) => {
       const segundos = Math.floor(ms / 1000)
       const minutos = Math.floor(segundos / 60)
@@ -88,7 +86,6 @@ const handler = async (m, { conn, usedPrefix, participants, rcanal }) => {
       return resultado.trim() || "recién iniciado"
     }
 
-    // 📡 Todos los bots activos
     const allBots = [
       global.conn.user.jid,
       ...new Set(
@@ -98,13 +95,11 @@ const handler = async (m, { conn, usedPrefix, participants, rcanal }) => {
       )
     ]
 
-    // 👑 Bot principal
     const mainNumber = global.conn.user.jid.replace(/[^0-9]/g, '')
     const mainName = global.conn.user.name || "Bot Principal"
     const mainCountry = detectarPais(mainNumber)
     const mainUptime = convertirMsADiasHorasMinutosSegundos(Date.now() - (global.conn.startTime || global.conn.uptime || 0))
 
-    // 🤖 SubBots activos
     const subBots = global.conns
       .filter(c => c.user && c.ws?.socket && c.ws.socket.readyState !== ws.CLOSED)
       .map((c, i) => {
@@ -123,16 +118,13 @@ const handler = async (m, { conn, usedPrefix, participants, rcanal }) => {
 ╰───────────────`
       })
 
-    // 📊 Cupos
     const usados = subBots.length
     const libres = Math.max(0, MAX_SUBBOTS - usados)
 
-    // 💬 Bots en el grupo
     let groupBots = allBots.filter(bot => participants.some(p => p.id === bot))
     if (!groupBots.includes(global.conn.user.jid)) groupBots.push(global.conn.user.jid)
     const groupBotsText = groupBots.map(bot => `• +${bot.replace(/[^0-9]/g, '')}`).join("\n") || "Ninguno"
 
-    // ✨ Mensaje visual
     const message = `
 ⚜️ *PANEL DE BOTS ACTIVOS* ⚜️
 
@@ -162,7 +154,6 @@ ${groupBotsText}
 
 `
 
-    // 🧩 Menciones y RCANAL extendido
     const mentionList = allBots.map(bot =>
       bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`
     )
@@ -173,8 +164,8 @@ ${groupBotsText}
       externalAdReply: {
         title: "𝙈𝙞𝙮𝙪𝙠𝙞𝘽𝙤𝙩-𝙈𝘿 🌸",
         body: "Sistema MultiBot Activo ⚡",
-        thumbnailUrl: "https://qu.ax/gRJso.jpg", // 🔹 Imagen de vista previa
-        sourceUrl: "https://whatsapp.com/channel/0029Vb6wMPa8kyyTpjBG9C2H" // 🔹 Tu canal o link oficial
+        thumbnailUrl: "https://qu.ax/gRJso.jpg",
+        sourceUrl: "https://whatsapp.com/channel/0029Vb6wMPa8kyyTpjBG9C2H"
       }
     }
 
