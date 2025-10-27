@@ -174,7 +174,7 @@ ${groupBotsText}
       m.chat,
       {
        text: message.trim(),
-       rcanal.contextInfo: { mentionedJid: mentionList }
+       contextInfo: { mentionedJid: mentionList }
       },
       { quoted: m }
     )
