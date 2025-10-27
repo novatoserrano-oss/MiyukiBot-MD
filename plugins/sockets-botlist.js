@@ -134,7 +134,7 @@ const handler = async (m, { conn, usedPrefix, participants, rcanal }) => {
 
     // ✨ Mensaje visual
     const message = `
-⚜️ 🌐 *PANEL De Bots ACTIVOS* ⚜️
+⚜️ 🌐 *PANEL DE BOTS ACTIVOS* ⚜️
 
 👑 *BOT PRINCIPAL*
 ━━━━━━━━━━━━━━━━━━
