@@ -48,21 +48,30 @@ const handler = async (m, { conn, usedPrefix }) => {
     // 🧾 Guardar nuevo bot principal
     chat.primaryBot = who
 
-    // 💬 Mensaje visual mejorado
+    // 🎨 Nuevo diseño de presentación
     const message = `
-╔═══〔 *⚙️ BOT PRINCIPAL CONFIGURADO* 〕═══╗
+╭───────────────────────────────╮
+│ 🤖 *BOT PRINCIPAL CONFIGURADO*
+╰───────────────────────────────╯
+👑 *Nuevo Bot Principal:* @${who.split('@')[0]}
 
-🧠 *Nuevo Bot Primario del Grupo:*
-> @${who.split('@')[0]}
+📡 *Estado:* Activo y sincronizado  
+⚙️ *Modo de grupo:* Solo el bot principal responderá comandos  
 
-📡 *Estado:* Activo y en línea  
-⚙️ *Modo:* Solo el bot principal ejecutará comandos aquí.  
+╭───────────〔📊 Estado de la Red〕───────────╮
+│ 🌐 *SubBots conectados:* ${subBots.length}
+│ 🧩 *Bot principal actual:* 1
+│ 💻 *Cupos activos:* 3
+│ 🔹 *Cupos usados:* 2
+│ 🔸 *Cupos libres:* 1
+╰────────────────────────────────────────────╯
 
-━━━━━━━━━━━━━━━━━━
-💡 *Información:*
-Los SubBots conectados seguirán activos en la red,
-pero no responderán a comandos dentro de este grupo.
-╚═════════════════════════════════╝
+💡 *Nota:*  
+Los demás SubBots seguirán conectados,  
+pero no ejecutarán comandos en este grupo.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+🛠️ *Comando ejecutado por:* ${m.pushName}
 `
 
     await conn.reply(m.chat, message, m, { mentions: [who] })
@@ -70,7 +79,7 @@ pero no responderán a comandos dentro de este grupo.
     console.error(e)
     conn.reply(
       m.chat,
-      `⚠️ Se ha producido un error.\n> Usa *${usedPrefix}report* para informarlo.\n\n${e.message}`,
+      `⚠️ Ocurrió un error inesperado.\n> Usa *${usedPrefix}report* para informarlo.\n\n${e.message}`,
       m
     )
   }
