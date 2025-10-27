@@ -1,11 +1,11 @@
 import ws from "ws"
 
-const handler = async (m, { conn, usedPrefix, participants }) => {
+const handler = async (m, { conn, usedPrefix, participants, rcanal }) => {
   try {
     global.conns = global.conns || []
     const MAX_SUBBOTS = 3
 
-    // 🌍 Detección de país por prefijo
+    // 🌍 Detección de país
     const detectarPais = (numero) => {
       const codigos = {
         "1": "🇺🇸 EE.UU / 🇨🇦 Canadá",
@@ -24,6 +24,7 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
         "49": "🇩🇪 Alemania",
         "51": "🇵🇪 Perú",
         "52": "🇲🇽 México",
+        "53": "🇨🇺 Cuba",
         "54": "🇦🇷 Argentina",
         "55": "🇧🇷 Brasil",
         "56": "🇨🇱 Chile",
@@ -39,7 +40,6 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
         "505": "🇳🇮 Nicaragua",
         "506": "🇨🇷 Costa Rica",
         "507": "🇵🇦 Panamá",
-        "53": "🇨🇺 Cuba",
         "60": "🇲🇾 Malasia",
         "61": "🇦🇺 Australia",
         "62": "🇮🇩 Indonesia",
@@ -53,9 +53,6 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
         "86": "🇨🇳 China",
         "90": "🇹🇷 Turquía",
         "91": "🇮🇳 India",
-        "92": "🇵🇰 Pakistán",
-        "93": "🇦🇫 Afganistán",
-        "94": "🇱🇰 Sri Lanka",
         "212": "🇲🇦 Marruecos",
         "213": "🇩🇿 Argelia",
         "216": "🇹🇳 Túnez",
@@ -66,7 +63,7 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
         "256": "🇺🇬 Uganda",
         "258": "🇲🇿 Mozambique",
         "260": "🇿🇲 Zambia",
-        "263": "🇿🇼 Zimbabue",
+        "263": "🇿🇼 Zimbabue"
       }
       for (const code in codigos) {
         if (numero.startsWith(code)) return codigos[code]
@@ -91,7 +88,7 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
       return resultado.trim() || "recién iniciado"
     }
 
-    // 📡 Lista de bots activos
+    // 📡 Todos los bots activos
     const allBots = [
       global.conn.user.jid,
       ...new Set(
@@ -101,7 +98,7 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
       )
     ]
 
-    // 🧩 Datos del BOT PRINCIPAL
+    // 👑 Bot principal
     const mainNumber = global.conn.user.jid.replace(/[^0-9]/g, '')
     const mainName = global.conn.user.name || "Bot Principal"
     const mainCountry = detectarPais(mainNumber)
@@ -119,10 +116,10 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
           : "Activo recientemente"
         return `
 ╭─『 🤖 SubBot #${i + 1} 』
-│ 👤 Nombre: *${nombre}*
-│ 📞 Número: +${numero}
-│ 🌍 País: ${pais}
-│ ⏱ Activo: ${uptime}
+│ 👤 *${nombre}*
+│ 📞 +${numero}
+│ 🌍 ${pais}
+│ ⏱ ${uptime}
 ╰───────────────`
       })
 
@@ -130,16 +127,16 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
     const usados = subBots.length
     const libres = Math.max(0, MAX_SUBBOTS - usados)
 
-    // 💬 Bots dentro del grupo
+    // 💬 Bots en el grupo
     let groupBots = allBots.filter(bot => participants.some(p => p.id === bot))
     if (!groupBots.includes(global.conn.user.jid)) groupBots.push(global.conn.user.jid)
     const groupBotsText = groupBots.map(bot => `• +${bot.replace(/[^0-9]/g, '')}`).join("\n") || "Ninguno"
 
-    // ✨ DISEÑO FINAL DEL PANEL
+    // ✨ Mensaje visual
     const message = `
-⚜️ *🌐 PANEL DE BOTS ACTIVOS* ⚜️
+╔═══《 *💠 PANEL DE CONEXIÓN DE BOTS 💠* 》═══╗
 
-🟢 *BOT PRINCIPAL*
+👑 *BOT PRINCIPAL*
 ━━━━━━━━━━━━━━━━━━
 👤 Nombre: *${mainName}*
 📞 Número: +${mainNumber}
@@ -163,25 +160,37 @@ ${subBots.length > 0 ? subBots.join("\n") : "✧ No hay SubBots conectados actua
 ━━━━━━━━━━━━━━━━━━
 ${groupBotsText}
 
+╚════════════════════════════╝
 `
 
-    // 📤 Envío con menciones
+    // 🧩 Menciones y RCANAL extendido
     const mentionList = allBots.map(bot =>
       bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`
     )
 
+    if (!rcanal) rcanal = {}
+    rcanal.contextInfo = {
+      mentionedJid: mentionList,
+      externalAdReply: {
+        title: "Sistema MultiBot Activo ⚡",
+        body: "Visualiza los SubBots y su estado actual en red global 🌎",
+        thumbnailUrl: "https://i.imgur.com/GB7m7W5.png", // 🔹 Imagen de vista previa
+        sourceUrl: "https://whatsapp.com/channel/0029VaBotChannel" // 🔹 Tu canal o link oficial
+      }
+    }
+
     await conn.sendMessage(
       m.chat,
       {
-       text: message.trim(),
-       contextInfo: { mentionedJid: mentionList }
+        text: message.trim(),
+        ...rcanal
       },
       { quoted: m }
     )
 
   } catch (error) {
     console.error(error)
-    m.reply(`⚠️ Ocurrió un error.\nUsa *${usedPrefix}report* para informarlo.\n\n> ${error.message}`)
+    m.reply(`⚠️ Se ha producido un error.\n> Usa *${usedPrefix}report* para informarlo.\n\n${error.message}`)
   }
 }
 
