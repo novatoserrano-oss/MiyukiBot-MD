@@ -2,11 +2,11 @@ import ws from "ws"
 
 const handler = async (m, { conn, usedPrefix, participants }) => {
   try {
-    // Asegurar existencia de global.conns
+    // Asegurar que global.conns exista
     global.conns = global.conns || []
 
-    // Lista de bots activos (principal + subbots con conexión abierta)
-    const users = [
+    // Todos los bots activos (Principal + SubBots)
+    const allBots = [
       global.conn.user.jid,
       ...new Set(
         global.conns
@@ -32,45 +32,51 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
       return resultado.trim() || "Hace poco"
     }
 
-    // Bots presentes en el grupo actual
-    let groupBots = users.filter(bot => participants.some(p => p.id === bot))
+    // Determinar bots presentes en el grupo actual
+    let groupBots = allBots.filter(bot => participants.some(p => p.id === bot))
     if (!groupBots.includes(global.conn.user.jid)) groupBots.push(global.conn.user.jid)
 
-    // Si no hay bots en el grupo
-    if (!groupBots.length) {
-      await conn.sendMessage(m.chat, { text: "✧ No hay bots activos en este grupo." }, { quoted: m })
-      return
-    }
+    // Datos del BOT PRINCIPAL
+    const mainBotNumber = global.conn.user.jid.replace(/[^0-9]/g, '')
+    const mainUptime = convertirMsADiasHorasMinutosSegundos(Date.now() - (global.conn.startTime || global.conn.uptime || 0))
 
-    // Construir mensaje con detalles de cada bot
-    const botsGroup = groupBots.map((bot, index) => {
-      const isMain = bot === global.conn.user.jid
-      const subConn = global.conns.find(c => c.user?.jid === bot)
-      const uptime = isMain
-        ? convertirMsADiasHorasMinutosSegundos(Date.now() - (global.conn.startTime || global.conn.uptime || 0))
-        : subConn?.uptime
-          ? convertirMsADiasHorasMinutosSegundos(Date.now() - subConn.uptime)
+    // Datos de los SUBBOTS conectados
+    const subBots = global.conns
+      .filter(c => c.user && c.ws?.socket && c.ws.socket.readyState !== ws.CLOSED)
+      .map((c, i) => {
+        const numero = c.user.jid.replace(/[^0-9]/g, '')
+        const uptime = c.uptime
+          ? convertirMsADiasHorasMinutosSegundos(Date.now() - c.uptime)
           : "Activo recientemente"
-      const numero = bot.replace(/[^0-9]/g, '')
-      return `🟢 *${isMain ? "BOT PRINCIPAL" : `SUBBOT #${index}`}*
+        return `🤖 *SubBot #${i + 1}*
 ✦ Número: +${numero}
-✦ Tipo: ${isMain ? "Principal" : "Sub-Bot"}
 ✦ Uptime: ${uptime}`
-    }).join("\n\n")
+      })
 
+    // Si no hay subbots
+    const subBotsText = subBots.length > 0 ? subBots.join("\n\n") : "✧ No hay SubBots conectados actualmente."
+
+    // Bots dentro del grupo
+    const groupBotsText = groupBots.map(bot => `• +${bot.replace(/[^0-9]/g, '')}`).join("\n") || "Ninguno"
+
+    // Mensaje final
     const message = `*「 ✦ LISTA DE BOTS ACTIVOS 」*\n
-🧩 *Principal:* 1
-🤖 *Sub-Bots:* ${users.length - 1}
-💬 *En este grupo:* ${groupBots.length}\n
-───────────────────────
-${botsGroup}
-───────────────────────`
+🧩 *Bot Principal:*
+✦ Número: +${mainBotNumber}
+✦ Uptime: ${mainUptime}\n
+────────────────────────────
+🤖 *SubBots Conectados:* ${subBots.length}
+${subBotsText}
+────────────────────────────
+💬 *Bots en este grupo:* ${groupBots.length}
+${groupBotsText}
+────────────────────────────`
 
-    const mentionList = groupBots.map(bot =>
+    // Menciones
+    const mentionList = allBots.map(bot =>
       bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`
     )
 
-    // Envío del mensaje final
     await conn.sendMessage(
       m.chat,
       {
