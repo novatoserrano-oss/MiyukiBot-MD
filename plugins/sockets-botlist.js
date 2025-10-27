@@ -152,19 +152,12 @@ ${subBots.length > 0 ? subBots.join("\n") : "✧ No hay SubBots conectados actua
 ━━━━━━━━━━━━━━━━━━
 ${groupBotsText}
 
-`
+`trim(),
 
-    const mentionList = allBots.map(bot =>
-      bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`
-    )
+ const mentionList = groupBots.map(bot => bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`)
+rcanal.contextInfo.mentionedJid = mentionList
+await conn.sendMessage(m.chat, { text: message, ...rcanal }, { quoted: m })
 
-    await conn.sendMessage(
-      m.chat,
-      {
-        text: message.trim(),
-        ...rcanal
-      { quoted: m }
-    )
 
   } catch (error) {
     console.error(error)
