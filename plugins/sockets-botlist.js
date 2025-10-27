@@ -137,9 +137,9 @@ const handler = async (m, { conn, usedPrefix, participants }) => {
 
     // ✨ DISEÑO FINAL DEL PANEL
     const message = `
-━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━
 🌐 *PANEL DE BOTS ACTIVOS*
-━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━
 
 🟢 *BOT PRINCIPAL*
 ━━━━━━━━━━━━━━━━━━
