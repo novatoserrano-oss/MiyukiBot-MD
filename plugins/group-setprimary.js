@@ -50,28 +50,37 @@ const handler = async (m, { conn, usedPrefix }) => {
 
     // 🎨 Nuevo diseño de presentación
     const message = `
-╭────────────────────────────╮
-│ 🤖 *BOT PRINCIPAL CONFIGURADO*
-╰────────────────────────────╯
-👑 *Nuevo Bot Principal:* @${who.split('@')[0]}
+const message = `
+╔════════════════════════════╗
+║ 🤖 *CONFIGURACIÓN DE BOT PRINCIPAL*  
+╚════════════════════════════╝
 
-📡 *Estado:* Activo y sincronizado  
-⚙️ *Modo de grupo:* Solo el bot principal responderá comandos  
+👑 *Nuevo Bot Principal:*  
+» @${who.split('@')[0]}
 
-╭──────〔📊 Estado de la Red〕─────────╮
-│ 🌐 *SubBots conectados:* ${subBots.length}
-│ 🧩 *Bot principal actual:* 1
-│ 💻 *Cupos activos:* 3
-│ 🔹 *Cupos usados:* 2
-│ 🔸 *Cupos libres:* 1
-╰────────────────────────────────────────────╯
-
-💡 *Nota:*  
-Los demás SubBots seguirán conectados,  
-pero no ejecutarán comandos en este grupo.
+📡 *Estado:* Online ✅  
+⚙️ *Modo del Grupo:*  
+» Solo el bot principal responderá comandos.  
 
 ━━━━━━━━━━━━━━━━━━━━━━━
-🛠️ *Comando ejecutado por:* ${m.pushName}
+📊 *ESTADO DE LA RED DE BOTS*
+━━━━━━━━━━━━━━━━━━━━━━━
+🌐 SubBots conectados : ${subBots.length}
+🧩 Bot principal actual : 1
+💻 Cupos activos : 3
+🟦 Cupos usados : 2
+⬜ Cupos libres : 1
+
+━━━━━━━━━━━━━━━━━━━━━━━
+💬 *NOTA IMPORTANTE*
+━━━━━━━━━━━━━━━━━━━━━━━
+Los SubBots seguirán activos y sincronizados  
+pero no responderán a comandos dentro de este grupo.  
+
+──────────────────────────────
+👤 *Acción ejecutada por:* ${m.pushName}
+──────────────────────────────
+💠 *Sistema:* ${global.botname || 'MultiSocket Network'}
 `
 
     await conn.reply(m.chat, message, m, { mentions: [who] })
