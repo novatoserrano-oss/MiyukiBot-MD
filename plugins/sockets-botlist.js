@@ -154,9 +154,27 @@ ${groupBotsText}
 
 `
 
-    const mentionList = groupBots.map(bot => bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`)
-    rcanal.contextInfo.mentionedJid = mentionList
-    await conn.sendMessage(m.chat, { text: message, ...rcanal }, { quoted: m })
+        const mentionList = groupBots.map(bot => (bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`))
+
+    const rcanal2 = {
+      contextInfo: {
+        mentionedJid: mentionList
+      }
+    }
+
+    await conn.sendMessage(
+      m.chat,
+      {
+        image: { url: banner },
+        caption: message.trim(),
+        mentions: mentionList,
+        fileName: 'sockets.jpg',
+        mimetype: 'image/jpeg',
+        ...rcanal2,
+        ...rcanal // 🙂
+      },
+      { quoted: shadow_xyz }
+    )
 
   } catch (error) {
     console.error(error)
