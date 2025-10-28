@@ -183,17 +183,13 @@ npm start
 </details>
 
 ### ☁️ ACTIVAR MIYUKIBOT-MD 24/7 EN SKYULTRAPLUS
-[![YouTube](https://img.shields.io/badge/SkyUltraPlus-Host-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/fZbcCLpSH6Y?si=1sDen7Bzmb7jVpAI)
 
-<a href="https://dash.corinplus.com"><img src="https://qu.ax/wbJoB.png" height="125px"></a>
+<a><img src="https://qu.ax/AUQhM.jpg" height="150"></a>
 
 ### Información sobre Sky
-- **Pagina Oficial:** [`Aqui`](https://skyultraplus.com)
-- **Dashboard:** [`Aquí`](https://dash.skyultraplus.com)
-- **Estado de servicios:** [`Aquí`](https://estado.skyultraplus.com)
-- **Canal de WhatsApp:** [`Aquí`](https://whatsapp.com/channel/0029VakUvreFHWpyWUr4Jr0g)
-- **Comunidad:** [`Aquí`](https://chat.whatsapp.com/E6iWpvGuJ8zJNPbN3zOr0D)
-- **Discord:** [`SkyUltraPlus`](https://discord.gg/6saUm5cw)
+- **Pagina Oficial:** [`Aqui`](https://x-host.cloud)
+- **Canal de WhatsApp:** [`Aquí`](https://whatsapp.com/channel/0029Vb5Vczr7j6g3foFrXM2x)
+- **Grupo de WhatsApp:** [`Aquí`](https://chat.whatsapp.com/FlX08sfKD6c21PPa5EPbuQ)
   
 ### DUEÑO Y EDITOR DEL BOT 👑
 [![Omar Granda](https://avatars.githubusercontent.com/u/230871778?v=4)]()
