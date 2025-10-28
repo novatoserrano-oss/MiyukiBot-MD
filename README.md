@@ -182,11 +182,11 @@ npm start
 ```
 </details>
 
-### ☁️ ACTIVAR MIYUKIBOT-MD 24/7 EN SKYULTRAPLUS
+### ☁️ ACTIVAR MIYUKIBOT-MD 24/7 EN X-HOST
 
-<a><img src="https://qu.ax/AUQhM.jpg" height="150"></a>
+<a><img src="https://qu.ax/AUQhM.jpg" height="200"></a>
 
-### Información sobre Sky
+### Información sobre X-Host
 - **Pagina Oficial:** [`Aqui`](https://x-host.cloud)
 - **Canal de WhatsApp:** [`Aquí`](https://whatsapp.com/channel/0029Vb5Vczr7j6g3foFrXM2x)
 - **Grupo de WhatsApp:** [`Aquí`](https://chat.whatsapp.com/FlX08sfKD6c21PPa5EPbuQ)
