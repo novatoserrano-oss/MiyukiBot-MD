@@ -87,7 +87,8 @@ if (!text.trim()) return conn.reply(m.chat, `🔔 *Por favor, ingresa el nombre 
     
     else if (['playvideo'].includes(command)) {
       try {
-        const res = await fetch(`https://api.stellarwa.xyz/dow/ytmp4?url=${url}&apikey=Diamond`)
+        // 🔥 API ACTUALIZADA AQUÍ
+        const res = await fetch(`https://api.stellarwa.xyz/dl/ytmp4?url=${encodeURIComponent(url)}&key=Shadow_Core`)
         const json = await res.json()
 
         if (!json.status || !json.data?.dl) throw '⚠️ *No se obtuvo enlace de video.*'
@@ -97,7 +98,8 @@ if (!text.trim()) return conn.reply(m.chat, `🔔 *Por favor, ingresa el nombre 
         const sizeStr = size ? await formatSize(size) : 'Desconocido'
 
         let caption = `🎬 *Título:*
-> ${data.title}`
+> ${data.title}
+> *📦 Tamaño:* ${sizeStr}`
        .trim()
 
         await conn.sendFile(
